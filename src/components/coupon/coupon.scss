@@ -1,0 +1,40 @@
+.coupon{
+  text-align: center;
+  h2{
+    color: $or;
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 10px;
+  }
+  input{
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: rgb(131, 131, 131);
+    font-weight: bold;
+    vertical-align: middle;
+  }
+  button{
+    background:$or;
+    color: #fff;
+    border: none;
+    padding: 11.5px 19px 11.5px 15px;
+    vertical-align: middle;
+    margin-left: -6px;
+    font-size: 16px;
+  }
+}
+img{
+  margin: 20px auto;
+  display: block;
+  max-width: 500px;
+}
+.box{
+  border: 2px solid $or;
+  display: inline-block;
+  border-radius: 30px;
+  overflow: hidden;
+}
+p{
+  margin-bottom: 20px;
+}

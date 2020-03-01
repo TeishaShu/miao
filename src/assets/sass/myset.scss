@@ -1,0 +1,20 @@
+*{
+  box-sizing: border-box;
+}
+body {
+  font-size: 16px;
+  font-family: "微軟正黑體", Arial, Helvetica, sans-serif;
+  color: #767676;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+p{
+  margin-bottom: 0;
+}

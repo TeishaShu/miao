@@ -1,0 +1,23 @@
+.pageOut{
+  margin-bottom: 40px;
+  margin-top: 25px;
+  ul{
+    display: flex;
+    justify-content: center;
+  }
+  /deep/li{
+    border-radius: 100%;
+    margin: 0 5px;
+  }
+  /deep/a{
+    padding-top: 6px;
+    padding-bottom: 7px;
+    display: block;
+    width: 37px;
+    text-align: center;
+  }
+  /deep/.active{
+    background: $or;
+    color: #fff;
+  }
+}
