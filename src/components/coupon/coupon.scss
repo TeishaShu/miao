@@ -1,10 +1,17 @@
 .coupon{
   text-align: center;
+  margin: 0 auto;
+  width: 40%;
   h2{
-    color: $or;
+    color: #fff;
     font-weight: bold;
     font-size: 30px;
-    letter-spacing: 10px;
+    background: $or;
+    display: block;
+    line-height: 40px;
+    text-align: center;
+    margin-bottom: 5vh;
+    border-radius: 30px;
   }
   input{
     border: none;
@@ -15,7 +22,7 @@
     vertical-align: middle;
   }
   button{
-    background:$or;
+    background:$red;
     color: #fff;
     border: none;
     padding: 11.5px 19px 11.5px 15px;
@@ -25,16 +32,44 @@
   }
 }
 img{
-  margin: 20px auto;
+  margin:0 auto;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
   display: block;
-  max-width: 500px;
+  width: 50%;
 }
 .box{
-  border: 2px solid $or;
+  border: 2px solid $red;
   display: inline-block;
   border-radius: 30px;
   overflow: hidden;
 }
 p{
   margin-bottom: 20px;
+}
+.cou{
+  display: block
+}
+@media (max-width: 992px) {
+  img{
+    width: 65%;
+  }
+  .coupon{
+    width: 45%;
+  }
+}
+@media (max-width:768px) {
+  img{
+    width: 80%;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+  .coupon{
+    width: calc(100% - 30px);
+    h2{
+      font-size: 22px;
+      line-height: 35px;
+      margin-bottom: 16px;
+    }
+  }
 }

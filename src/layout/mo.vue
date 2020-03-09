@@ -1,6 +1,6 @@
 <template>
-  <div>
-  mo
+  <div class="container">
+    <div class="row">mooo</div>
   </div>
 </template>
 <style lang="scss" scoped>

@@ -10,6 +10,7 @@
     text-align: center;
   }
 }
+
 .proImg{
   background-repeat: no-repeat;
   background-size: cover;
@@ -54,5 +55,13 @@
       color: $red;
     border: 1px solid $red;
     }
+  }
+  .type{
+    background:$pink;
+    color: #fff;
+    font-size: 12px;
+    padding:1px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
   }
 }

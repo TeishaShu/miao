@@ -1,133 +1,70 @@
 <template>
   <div>
-    <div class="container-fluid">
+    <div class="container-fluid headBox">
       <div class="container">
-        <headerPage />
-      </div>
-    </div>
+        <div class="row">
+          <div class="col-md-12 header">
 
-    <banner />
+<nav class="navbar navbar-expand-lg navbar-light ">
+				 
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="navbar-toggler-icon"></span>
+				</button> <router-link to="/" class="logoA">
+                <img src="/logo.png" alt="" class="logo"
+              /></router-link>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="navbar-nav nav">
+						<li class="nav-item">
+							 <router-link to="/"><i class="fas fa-home"></i>首頁</router-link>
+						</li>
+						<li class="nav-item">
+							 <router-link to="/coupon"><i class="fas fa-bell"></i>好康活動</router-link>
+						</li>
+						
+					</ul>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 asideBox">
-          <ul>
-            <li><i class="fas fa-cookie"></i>全部商品</li>
-            <li><i class="fas fa-cookie"></i>乾糧</li>
-            <li><i class="fas fa-cookie"></i>罐頭</li>
-            <li><i class="fas fa-cookie"></i>零食</li>
-            <li><i class="fas fa-cookie"></i>營養品</li>
-          </ul>
-        </div>
-        <div class="col-md-9">
-          <div class="row productStyle">
-            <div class="col-md-4 proCol">
-              <a href="#">
-                <div
-                  class="proImg"
-                  style="background-image: url('/dryFood/dr01.jpg')"
-                ></div>
-                <div class="proTxt">
-                  <h3>
-                    【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)
-                  </h3>
-                  <p><em>NT$1000</em><br />NT$800</p>
-                  <i class="fas fa-shopping-cart"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-md-4 proCol">
-              <a href="#">
-                <div
-                  class="proImg"
-                  style="background-image: url('/dryFood/dr01.jpg')"
-                ></div>
-                <div class="proTxt">
-                  <h3>
-                    【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)
-                  </h3>
-                  <p><em>NT$1000</em><br />NT$800</p>
-                  <i class="fas fa-shopping-cart"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-md-4 proCol">
-              <a href="#">
-                <div
-                  class="proImg"
-                  style="background-image: url('/dryFood/dr01.jpg')"
-                ></div>
-                <div class="proTxt">
-                  <h3>
-                    【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)
-                  </h3>
-                  <p><em>NT$1000</em><br />NT$800</p>
-                  <i class="fas fa-shopping-cart"></i>
-                </div>
-              </a>
-            </div>
-            <div class="col-md-4 proCol">
-              <a href="#">
-                <div
-                  class="proImg"
-                  style="background-image: url('/dryFood/dr01.jpg')"
-                ></div>
-                <div class="proTxt">
-                  <h3>
-                    【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)
-                  </h3>
-                  <p><em>NT$1000</em><br />NT$800</p>
-                  <i class="fas fa-shopping-cart"></i>
-                </div>
-              </a>
-            </div>
+					<ul class="navbar-nav ml-md-auto nav2">
+						<li class="nav-item cartBtn">
+							 <router-link to="/cart">
+                  <i class="fas fa-shopping-cart"></i>購物車
+                  </router-link>
+						</li>
+            <li class="nav-item"><router-link to="/login">管理中心</router-link></li>
+						
+					</ul>
+				</div>
+			</nav>
 
-            <div class="col-md-4">0</div>
 
-            <div class="col-md-12 pageOut">
-              <paginate
-                :page-count="20"
-                :prev-text="'<'"
-                :next-text="'>'"
-                :page-range="3"
-              >
-              </paginate>
-            </div>
+
+
           </div>
         </div>
-
       </div>
     </div>
+    <router-view></router-view>
+
     <div class="container-fluid pd0">
-    <cart/>
-    <footerStyle/>
-    
+      <footerStyle />
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 @import "../assets/sass/variables.scss";
-@import "aside.scss";
-@import "product.scss";
-@import "../assets/sass/page.scss";
+@import "headerPage.scss";
+.pd0 {
+  padding-left: 0;
+  padding-right: 0;
+}
 </style>
 
 <script>
-import headerPage from "../layout/headerPage/headerPage.vue";
-import banner from "../layout/banner/banner.vue";
-import Paginate from "vuejs-paginate";
 import footerStyle from "../layout/footerStyle/footerStyle.vue";
-import cart from "../layout/footerStyle/cart.vue"
 export default {
   name: "home",
   components: {
-    headerPage,
-    banner,
-    Paginate,
-    footerStyle,
-    cart
+    footerStyle
   },
-  methods: {
-  },
+  methods: {}
 };
 </script>

@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
 }
 body {
@@ -15,6 +15,12 @@ a {
     text-decoration: none;
   }
 }
-p{
+p {
   margin-bottom: 0;
+}
+.router-link-exact-active {
+  background: #ef4068;
+  color: #fff !important;
+  padding: 5px 15px;
+  border-radius: 20px;
 }
