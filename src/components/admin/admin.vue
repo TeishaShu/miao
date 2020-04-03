@@ -20,20 +20,20 @@
                   </router-link>
                 </li>
                 <li>
-                  <a href="#">
+                  <router-link :to="{name:'admin_book'}">
                     <i class="fas fa-tasks"></i>
                     訂單管理
-                  </a>
+                  </router-link>
                 </li>
                 <li>
-                  <a href="#">
+                  <router-link to="/admin/admin_coupon">
                     <i class="fas fa-ticket-alt"></i>
                     優惠卷
-                  </a>
+                  </router-link>
                 </li>
               </ul>
 
-              <h6>
+              <!--<h6>
                 模擬功能
               </h6>
               <ul>
@@ -43,7 +43,7 @@
                     模擬訂單
                   </a>
                 </li>
-              </ul>
+              </ul>-->
             </div>
           </nav>
         </div>
@@ -55,7 +55,7 @@
             <div class="name">
               <i class="fas fa-user-tie"></i>
               <p>歡迎，管理員</p>
-              <a href="#">登出</a>
+              <a href="#" @click.prevent="signout">登出</a>
             </div>
             
           </div>
@@ -98,5 +98,17 @@
 </style>
 
 <script>
-export default {};
+export default {
+  methods: {
+    signout(){
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/logout`;
+      this.$http.post(api).then(response => {
+        // console.log(response.data)
+        if(response.data.success){
+          this.$router.push('/login')
+        }
+      });
+    }
+  },
+};
 </script>

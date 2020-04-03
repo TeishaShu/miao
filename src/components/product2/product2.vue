@@ -1,26 +1,29 @@
-<template>
+<template><!--加入購物車後不知道為何會出現紅字-->
   <div class="container out">
+    <!--loading-->
+    <div class="vld-parent">
+      <loading :active.sync="isLoading"></loading>
+    </div>
     <div class="row">
       <div class="col-md-5">
-        <img src="/dryFood/dr01.jpg" alt="" class="img-fluid" />
+        <img :src="dataProdtct.imageUrl" alt="" class="img-fluid" />
       </div>
       <div class="col-md-7 inner">
-      
-        <h3>【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)</h3>
-        <p class="type">乾糧</p>
-        <p class="detail">
-          複合蔬果膳食纖維化毛配方、均衡w3及w6不飽和脂肪酸、低鎂、低灰分配方
-        </p>
-        <p class="price"><em>NT$1000</em><br />NT$820</p>
+        <h3>{{dataProdtct.title}}</h3>
+        <p class="type">{{dataProdtct.category}}</p>
+        <ul class="detail">
+          <li v-for="el in detail(dataProdtct.description)">{{el}}</li>
+        </ul>
+        <p class="price"><em>NT{{dataProdtct.origin_price | currency}}</em><br />NT{{dataProdtct.price | currency}}</p>
         <div class="add">
-          <i class="fas fa-minus"></i>
-          <input type="text" />
-          <i class="fas fa-plus"></i>
+          <i class="fas fa-minus" @click="changeNum(-1)"></i>
+          <input type="text" v-model.trim="selectNum"/>
+          <i class="fas fa-plus" @click="changeNum(1)"></i>
         </div>
-        <a href="#" class="addCart">加入購物車</a>
+        <a href="#" class="addCart" @click.prevent="addCart">加入購物車</a>
       </div>
     </div>
-    <cartBtn/>
+    <cartBtn />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -30,8 +33,57 @@
 <script>
 import cartBtn from "../../layout/footerStyle/cartBtn.vue";
 export default {
-  components:{
+  components: {
     cartBtn
   },
+  data(){
+    return{
+      dataProdtct:{},
+      isLoading:false,
+      addCartSend:{},
+      selectNum:1,
+    }
+  },
+  methods: {
+    getProduct() {
+      this.isLoading = true;
+      const id = this.$route.params.id;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/product/${id}`;
+      this.$http.get(api).then(response => {
+        this.isLoading = false;
+        if (response.data.success) {
+          this.dataProdtct = response.data.product;
+        }
+      });
+    },
+    addCart(){
+      this.isLoading = true;
+      this.addCartSend.product_id = this.dataProdtct.id;
+      this.addCartSend.qty = this.selectNum;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      this.$http.post(api,{data:this.addCartSend}).then(response => {
+        this.isLoading = false;
+        // console.log('11',response.data)
+        if (response.data.success) {
+          this.dataProdtct = response.data.product;
+          this.getProduct() //加入購物車後不知道為何會出現紅字.所以家這段.還是沒消失但是可以跑
+        }
+      });
+    },
+    changeNum(num){
+      let orNum = Number(this.selectNum);
+      if(num<0 && orNum <= 1){
+        this.selectNum = 1;
+      }else{
+        this.selectNum = orNum + num;
+      }
+    },
+    detail(txt){
+      return txt.split("@");
+    }
+  },
+  created() {
+    this.getProduct();
+  }
 };
 </script>

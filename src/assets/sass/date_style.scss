@@ -1,0 +1,15 @@
+// @import 'vue-date-pick/src/vueDatePick.scss';//引用不進去時要注意文檔是否有相關的說明.外部引用的套件記得不要用scoped.作用域的問題
+
+.vdp-datepicker input {
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 3px;
+  width:100%;
+}

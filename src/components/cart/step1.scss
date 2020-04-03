@@ -31,13 +31,14 @@
     }
   }
 }
-h5 {
+th {
   background: #ddd;
   padding: 0 10px;
   margin-bottom: 0;
   font-size: 16px;
   line-height: 35px;
   width: 100%;
+  white-space: nowrap;
 }
 .table {
   img {
@@ -53,8 +54,6 @@ h5 {
       width: 120px;
     }
     &:nth-child(3) {
-      white-space: nowrap;
-      font-size: 14px;
       color: $red;
     }
     &:last-child{
@@ -75,6 +74,9 @@ h5 {
     border: 1.5px solid rgb(173, 173, 173);
     color: $red;
     font-size: 14px;
+  }
+  .couponTr{
+    border-bottom: none;
   }
 }
 .info {
@@ -145,4 +147,47 @@ h5 {
   line-height: 40px;
   margin-bottom: 30px;
   margin-top: 30px;
+}
+
+.coupon {
+  position: relative;
+  border-radius: 30px;
+  border: 1px solid $or;
+  overflow: hidden;
+  padding: 0;
+  margin: 10px 0;
+  text-align: left;
+  input {
+    width: calc(100% - 90px);
+    border: none;
+    display: inline-block;
+    padding: 5px 15px;
+    text-align:left;
+  }
+  a {
+    background: $or;
+    color: #fff;
+    text-align: center;
+    width: 80px;
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    vertical-align: middle;
+    line-height: 32px;
+    right: 0;
+  }
+}
+.total {
+  background: #f1f1f1;
+}
+.cheep {
+  font-size: 18px;
+  color: red;
+}
+span{
+  margin-top: -10px;
+  display: block;
+  font-size: 14px;
+  margin-left: 15px;
+  margin-bottom: -2px;
 }

@@ -1,4 +1,12 @@
-.add{
+ul {
+  margin: 10px 0;
+}
+li{
+  text-align: left;
+  list-style-type: disc;
+  margin-left: 30px;
+}
+.add {
   color: #fff;
   background: $red;
   border-radius: 4px;
@@ -7,38 +15,37 @@
   margin-bottom: 20px;
   font-size: 14px;
 }
-table{
+table {
   width: 100%;
 }
-thead{
+thead {
   background: #ddd;
   font-weight: bold;
   text-align: center;
   line-height: 40px;
 }
-th{
-  &:last-child{
+th {
+  &:last-child {
     width: 135px;
   }
 }
-tbody{
+tbody {
   color: #000;
-  tr{
+  tr {
     border-bottom: 1px solid #ddd;
   }
-  td{
+  td {
     vertical-align: middle;
-    padding: 10px 10px;
+    padding: 0px 10px;
     white-space: nowrap;
-    &:nth-child(3),&:nth-child(4){
-      text-align: right;
-    }
-    &:nth-child(5),&:nth-child(6){
+    &:nth-child(5),
+    &:nth-child(6) {
       text-align: center;
     }
   }
 }
-.edit,.del{
+.edit,
+.del {
   display: inline-block;
   border-radius: 4px;
   padding: 5px 10px;
@@ -46,28 +53,40 @@ tbody{
   margin: 10px 3px;
   font-size: 14px;
 }
-.edit{
+.edit {
   color: blue;
   border: 1px solid blue;
 }
-.del{
+.del {
   color: red;
   border: 1px solid red;
 }
-input{
-  background: $or_light;
+input {
   padding: 3px;
 }
-.state{
-  i{
+.state {
+  i {
     display: inline-block;
     font-size: 30px;
     margin: 0 5px;
-    &:nth-child(1){
-      color: #39d639;
-    }
-    &:nth-child(2){
-      color: red;
-    }
   }
 }
+.okGreen {
+  color: #0ab90a;
+}
+.noRed {
+  color: red;
+}
+.notUse {
+  background: #fbfbfb;
+  color: $txt;
+  .okGreen {
+    color: $txt;
+  }
+}
+.dateStyle {
+  & > div {
+    margin-bottom: 8px;
+  }
+}
+

@@ -43,18 +43,14 @@
               <td>$NT60</td>
             </tr>
             <tr class="total">
-              <td colspan="3">訂單總金額</td>
+              <td colspan="3">總計</td>
+              <td>$NT6000</td>
+            </tr>
+            <tr class="total cheep">
+              <td colspan="3">折扣價</td>
               <td>$NT860</td>
             </tr>
-            <tr class="couponTr">
-              <td colspan="4">
-                <div class="coupon">
-                  <input type="text" placeholder="請輸入優惠碼" /><a href="#"
-                    >送出</a
-                  >
-                </div>
-              </td>
-            </tr>
+
 
           </tbody>
         </table>
@@ -109,3 +105,17 @@
 // @import "step1.scss";
 @import "step2.scss";
 </style>
+<script>
+export default {
+  data() {
+    return {
+      isLoading: false,
+      dataAPI: {},
+      textCoupon: { code: "" }
+    };
+  },
+  methods:{
+    sendCoupon(){}
+  }
+}
+</script>

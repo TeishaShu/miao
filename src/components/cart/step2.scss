@@ -1,101 +1,67 @@
 .out {
   margin-top: 20px;
 }
-.red{
+.red {
   color: red;
   font-weight: bold;
 }
-.green{
+.green {
   color: green;
   font-weight: bold;
 }
-.step2table{
+.step2table {
   margin-bottom: 30px;
 }
-  thead{
-    background: #ddd;
-    color: #767676;
+thead {
+  background: #ddd;
+  color: #767676;
+}
+th {
+  padding: 7px 10px;
+  text-align: center;
+  white-space: nowrap;
+  &:nth-child(1) {
+    text-align: left;
   }
-  th{
-    padding: 7px  10px;
-    text-align: center;
-    white-space: nowrap;
-    &:nth-child(1){
-      text-align: left;
-    }
+}
+img {
+  width: 60px;
+  display: inline-block;
+  margin-right: 10px;
+}
+p {
+  display: inline-block;
+}
+td {
+  text-align: center;
+  vertical-align: middle;
+  border-top: none;
+  &:nth-child(1) {
+    text-align: left;
   }
-  img{
-    width: 60px;
-    display: inline-block;
-    margin-right: 10px;
+  &:nth-child(3) {
+    color: #000;
   }
-  p{
-    display: inline-block;
+  &:last-child {
+    text-align: right;
   }
-  td{
-    text-align: center;
-    vertical-align: middle;
-    border-top: none;
-    &:nth-child(1){
-      text-align: left;
-    }
-    &:nth-child(3){
-      color: #000;
-    }
-    &:last-child{
-      text-align: right;
-    }
-  }
-  tr{
-    border-bottom: 1px solid #dee2e6;
-  }
+}
+tr {
+  border-bottom: 1px solid #dee2e6;
+}
 
-.coupon {
-  position: relative;
-  border-radius: 30px;
-  border: 1px solid $or;
-  overflow: hidden;
-  padding: 0;
-  margin: 10px 0;
-  text-align: left;
-  input {
-    width: calc(100% - 90px);
-    border: none;
-    display: inline-block;
-    padding: 5px 15px;
-  }
-  a {
-    background: $or;
-    color: #fff;
-    text-align: center;
-    width: 80px;
-    display: inline-block;
-    height: 100%;
-    position: absolute;
-    vertical-align: middle;
-    line-height: 32px;
-    right: 0;
-  }
-}
-.total{
+.total {
   background: #f1f1f1;
-  td:nth-child(2){
-    font-size: 20px;
-    color: red;
-  }
 }
-.couponTr{
-  border-bottom: none;
-}
-.two{
-  td{
-    &:nth-child(1){
+.two {
+  td {
+    &:nth-child(1) {
       width: 150px;
     }
     text-align: left;
   }
 }
-.send{
+.send {
   background: $red;
   text-align: center;
   border-radius: 3px;

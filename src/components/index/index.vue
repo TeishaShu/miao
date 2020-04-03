@@ -1,119 +1,191 @@
 <template>
   <div>
-  <banner />
-  <div class="container">
+    <!--loading-->
+    <div class="vld-parent">
+      <loading :active.sync="isLoading"></loading>
+    </div>
+
+    <banner />
+    <div class="container">
       <div class="row">
         <div class="col-md-3 asideBox">
           <ul>
-            <li><i class="fas fa-cookie"></i>全部商品</li>
-            <li><i class="fas fa-cookie"></i>乾糧</li>
-            <li><i class="fas fa-cookie"></i>罐頭</li>
-            <li><i class="fas fa-cookie"></i>零食</li>
-            <li><i class="fas fa-cookie"></i>營養品</li>
+            <li @click="selectCategory('all')">
+              <i class="fas fa-cookie"></i>全部商品
+            </li>
+            <li @click="selectCategory('乾糧')">
+              <i class="fas fa-cookie"></i>乾糧
+            </li>
+            <li @click="selectCategory('罐頭')">
+              <i class="fas fa-cookie"></i>罐頭
+            </li>
+            <li @click="selectCategory('零食')">
+              <i class="fas fa-cookie"></i>零食
+            </li>
+            <li @click="selectCategory('營養品')">
+              <i class="fas fa-cookie"></i>營養品
+            </li>
           </ul>
         </div>
         <div class="col-md-9">
           <div class="row productStyle">
-            <div class="col-md-4 proCol">
-              <router-link to="/product2">
+            <div
+              class="col-md-4 col-sm-6 col-6 proCol"
+              v-for="item in pagination.pageAry[pagination.current_page-1]"
+              :key="item.id"
+            >
+              <a>
+                <!--<pre>{{item}}</pre>-->
                 <div
+                  @click="clickProduct(item)"
                   class="proImg"
-                  style="background-image: url('/dryFood/dr01.jpg')"
+                  :style="{ backgroundImage: `url(${item.imageUrl})` }"
                 ></div>
+                <!--注意這邊style的寫法.backgroundImage、url裡面沒有''-->
                 <div class="proTxt">
-                  <p class="type">乾糧</p>
-                  <h3>
-                    【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)
+                  <p class="type">{{ item.category }}</p>
+                  <h3 @click="clickProduct(item)">
+                    {{ item.title }}
                   </h3>
-                  <p><em>NT$1000</em><br />NT$800</p>
-                  <i class="fas fa-shopping-cart"></i>
+                  <p>
+                    <em>NT{{ item.origin_price | currency }}</em
+                    ><br />NT{{ item.price | currency }}
+                  </p>
+                  <i
+                    class="fas fa-cart-plus"
+                    @click.prevent="addCart(item)"
+                  ></i>
                 </div>
-              </router-link>
+              </a>
             </div>
-            <div class="col-md-4 proCol">
-              <router-link to="/product2">
-                <div
-                  class="proImg"
-                  style="background-image: url('/dryFood/dr01.jpg')"
-                ></div>
-                <div class="proTxt">
-                <p class="type">乾糧</p>
-                  <h3>
-                    【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)
-                  </h3>
-                  <p><em>NT$1000</em><br />NT$800</p>
-                  <i class="fas fa-shopping-cart"></i>
-                </div>
-              </router-link>
-            </div>
-            <div class="col-md-4 proCol">
-              <router-link to="/product2">
-                <div
-                  class="proImg"
-                  style="background-image: url('/dryFood/dr01.jpg')"
-                ></div>
-                <div class="proTxt">
-                <p class="type">乾糧</p>
-                  <h3>
-                    【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)
-                  </h3>
-                  <p><em>NT$1000</em><br />NT$800</p>
-                  <i class="fas fa-shopping-cart"></i>
-                </div>
-              </router-link>
-            </div>
-            <div class="col-md-4 proCol">
-              <router-link to="/product2">
-                <div
-                  class="proImg"
-                  style="background-image: url('/dryFood/dr01.jpg')"
-                ></div>
-                <div class="proTxt">
-                <p class="type">乾糧</p>
-                  <h3>
-                    【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)
-                  </h3>
-                  <p><em>NT$1000</em><br />NT$800</p>
-                  <i class="fas fa-shopping-cart"></i>
-                </div>
-              </router-link>
-            </div>
-
 
             <div class="col-md-12 pageOut">
               <paginate
-                :page-count="20"
+                v-if="pagination.total_pages"
+                :page-count="pagination.total_pages"
                 :prev-text="'<'"
                 :next-text="'>'"
                 :page-range="3"
+                v-model="pagination.current_page"
               >
               </paginate>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
-  <cartBtn/>
-
+    <cartBtn />
   </div>
 </template>
 <style lang="scss" scoped>
-  @import "../../assets/sass/variables.scss";
-  @import "aside.scss";
-  @import "product.scss";
-  @import "../../assets/sass/page.scss";
+@import "../../assets/sass/variables.scss";
+@import "aside.scss";
+@import "product.scss";
+@import "../../assets/sass/page.scss";
 </style>
 <script>
 import banner from "../../layout/banner/banner.vue";
 import cartBtn from "../../layout/footerStyle/cartBtn.vue";
 import Paginate from "vuejs-paginate";
 export default {
-  components:{
+  
+  data() {
+    return {
+      // isLoading: false,
+      allProducts: [],
+      products: [],
+      pagination: {
+        pageAry: [],
+        perPage: 6,
+        total_pages: 1,
+        current_page: 1,
+      }
+    };
+  },
+  components: {
     banner,
     cartBtn,
-    Paginate,
+    Paginate
+  },
+  methods: {
+    getProduct() {
+      // this.isLoading = true;
+      // this.$store.dispatch('updateLoading', true);
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/products/all`;
+      this.$http.get(api).then(response => {
+        // this.isLoading = false;
+        // this.$store.dispatch('updateLoading', false);
+        if (response.data.success) {
+          this.products = response.data.products;
+          this.allProducts = response.data.products;
+          this.page();
+        }
+      });
+    },
+    clickProduct(item) {
+      let id = item.id;
+      this.$router.push({ path: `/product2/${id}` });
+    },
+    addCart(item) {
+      // this.isLoading = true;
+      let addCartSend = {
+        product_id: item.id,
+        qty: 1
+      };
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      this.$http.post(api, { data: addCartSend }).then(response => {
+        // this.isLoading = false;
+      });
+    },
+    selectCategory(style) {
+      this.products = [];
+      this.pagination.current_page = 1;
+
+      if (style === "all") {
+        this.products = this.allProducts;
+      } else {
+        let selectAry = [];
+        this.allProducts.forEach(el => {
+          if (el.category === style) {
+            selectAry.push(el);
+          }
+        });
+        this.products = selectAry;
+      }
+      this.page();
+      
+    },
+    page() {
+      this.pagination.pageAry = [];
+      let newAry = [];
+      for (let i = 0; i < this.products.length; i++) {
+        let onePage = [];
+        for (
+          let n = i * this.pagination.perPage;
+          n < (i + 1) * this.pagination.perPage;
+          n++
+        ) {
+          if (this.products[n] !== undefined) {
+            onePage.push(this.products[n]);
+          }
+        }
+        if (onePage.length !== 0) {
+          newAry.push(onePage);
+        }
+      }
+      this.pagination.pageAry = newAry;
+      this.pagination.total_pages = newAry.length;
+    }
+  },
+  computed:{ //使用vueX
+    isLoading(){
+      return this.$store.state.isLoading;
+    }
+
+  },
+  created() {
+    this.getProduct();
   }
-}
+};
 </script>
