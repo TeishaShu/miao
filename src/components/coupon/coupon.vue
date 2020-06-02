@@ -1,7 +1,7 @@
 <template>
   <div class="row">
   <div class=" col-md-12 cou">
-    <img src="/coupon.png" alt="" />
+    <img src="../../assets/coupon.png" alt="" />
     <div class="coupon">
       <h2>開幕慶優惠</h2>
       <p>輸入以下代碼，即可獲得<b style="font-size:30px;color:red;">全館優惠 {{coupon.percent}}%</b> 折扣</p>
@@ -32,8 +32,12 @@ export default {
         if(response.data.success){
           let couponsData = response.data.coupons;
           couponsData.forEach(e => {
+            const dueDate = 123;
+            const nowDate = 345;
             if(e.is_enabled){
               this.coupon = e
+              console.log('e',e);
+              //這邊要寫日期比較
             }
           })
         }

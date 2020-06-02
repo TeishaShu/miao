@@ -95,13 +95,18 @@
                       <thead>
                         <tr>
                           <th>商品名稱</th>
+                          <th>單價</th>
                           <th>訂購數量</th>
                         </tr>
                       </thead>
                       <tbody class="pro">
                         <tr v-for="item in editItem.products" :key="item.id">
                           <td>{{item.product.title}}</td>
-                          <td>{{item.product.price}} * <input type="number" v-model.trim="item.qty" min="1"/></td>
+                          <td>{{item.product.price}}</td>
+                          <td>
+                            <i class="fas fa-minus" @click="changeNum(-1)"></i>
+                            <input type="text" v-model.trim="item.qty" @change="changeQty"/></td>
+                            <i class="fas fa-plus" @click="changeNum(1)"></i>
                         </tr>
                       </tbody>
                     </table>
@@ -215,7 +220,15 @@ export default {
         // current_page: 1 //這個刪除
       },
       isLoading: false,
-      editItem :{},
+      editItem :{
+        create_at:1585625169,
+        id:"",
+        is_paid:false,
+        num:1,
+        products:{},
+        total:1,
+        user:{},
+      },
       status:{
         fileUpLoading:false
       }
@@ -263,8 +276,9 @@ export default {
       $("#editModal").modal("show");
     },
     updateProduct(){
-      let editt = this.editItem;
       this.isLoading = true;
+      let editt = this.editItem;
+      // editt.total = 
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/order/${editt.id}`;
       this.$http.put(api,{"data":editt}).then(response => {
         this.isLoading = false;
