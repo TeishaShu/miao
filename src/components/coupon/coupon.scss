@@ -46,9 +46,11 @@ img{
 }
 p{
   margin-bottom: 20px;
+  white-space: nowrap;
 }
 .cou{
-  display: block
+  display: block;
+  padding: 0 0;
 }
 @media (max-width: 992px) {
   img{
@@ -71,5 +73,9 @@ p{
       line-height: 35px;
       margin-bottom: 16px;
     }
+  }
+  p{
+    margin-bottom: 20px;
+    white-space: nowrap;
   }
 }
