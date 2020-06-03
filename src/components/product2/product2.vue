@@ -5,7 +5,7 @@
       <loading :active.sync="isLoading"></loading>
     </div>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-5 text-center">
         <img :src="dataProdtct.imageUrl" alt="" class="img-fluid" />
       </div>
       <div class="col-md-7 inner">

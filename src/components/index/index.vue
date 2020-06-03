@@ -31,16 +31,14 @@
           <div class="row productStyle">
             <div
               class="col-md-4 col-sm-6 col-6 proCol"
-              v-for="item in pagination.pageAry[pagination.current_page-1]"
+              v-for="item in pagination.pageAry[pagination.current_page - 1]"
               :key="item.id"
             >
               <a>
                 <!--<pre>{{item}}</pre>-->
-                <div
-                  @click="clickProduct(item)"
-                  class="proImg"
-                  :style="{ backgroundImage: `url(${item.imageUrl})` }"
-                ></div>
+                <div @click="clickProduct(item)" class="proImg">
+                  <img :src="`${item.imageUrl}`" alt="" />
+                </div>
                 <!--注意這邊style的寫法.backgroundImage、url裡面沒有''-->
                 <div class="proTxt">
                   <p class="type">{{ item.category }}</p>
@@ -89,7 +87,6 @@ import banner from "../../layout/banner/banner.vue";
 import cartBtn from "../../layout/footerStyle/cartBtn.vue";
 import Paginate from "vuejs-paginate";
 export default {
-  
   data() {
     return {
       // isLoading: false,
@@ -100,32 +97,32 @@ export default {
         perPage: 6,
         total_pages: 1,
         current_page: 1,
-      }
+      },
     };
   },
   components: {
     banner,
     cartBtn,
-    Paginate
+    Paginate,
   },
   methods: {
     getProduct() {
       // this.isLoading = true;
       // this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/products/all`;
-      this.$http.get(api).then(response => {
+      this.$http.get(api).then((response) => {
         // this.isLoading = false;
         // this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           //過濾未啟用的產品資訊
           const responseProduct = response.data.products;
           const filterProductData = [];
-          responseProduct.forEach(e => {
-            if(!e.is_enabled){
+          responseProduct.forEach((e) => {
+            if (!e.is_enabled) {
               return;
             }
             filterProductData.push(e);
-          })
+          });
           this.products = filterProductData;
           this.allProducts = filterProductData;
           this.page();
@@ -140,10 +137,10 @@ export default {
       // this.isLoading = true;
       let addCartSend = {
         product_id: item.id,
-        qty: 1
+        qty: 1,
       };
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
-      this.$http.post(api, { data: addCartSend }).then(response => {
+      this.$http.post(api, { data: addCartSend }).then((response) => {
         // this.isLoading = false;
       });
     },
@@ -155,7 +152,7 @@ export default {
         this.products = this.allProducts;
       } else {
         let selectAry = [];
-        this.allProducts.forEach(el => {
+        this.allProducts.forEach((el) => {
           if (el.category === style) {
             selectAry.push(el);
           }
@@ -163,7 +160,6 @@ export default {
         this.products = selectAry;
       }
       this.page();
-      
     },
     page() {
       this.pagination.pageAry = [];
@@ -185,16 +181,16 @@ export default {
       }
       this.pagination.pageAry = newAry;
       this.pagination.total_pages = newAry.length;
-    }
+    },
   },
-  computed:{ //使用vueX
-    isLoading(){
+  computed: {
+    //使用vueX
+    isLoading() {
       return this.$store.state.isLoading;
-    }
-
+    },
   },
   created() {
     this.getProduct();
-  }
+  },
 };
 </script>

@@ -4,6 +4,7 @@
 }
 .productStyle{
   h3{
+    height: 84px;
     color: $or;
     font-size: 18px;
     font-weight: bold;
@@ -14,14 +15,10 @@
     }
   }
 }
-.proImg{
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 86%;
-  height: 213px;
-  margin: 0 auto;
-  display: block;
-  background-position: center;
+.proImg img{
+  object-fit: contain;
+  width: 100%;
+  padding: 5px;
   cursor: pointer;
 }
 .proCol{
@@ -69,19 +66,17 @@
   }
 }
 @media(max-width:426px){
-  .proImg{
-    width: 92%;
-    height: 138px;
-  }
-  .proCol{
-    a{
-      // padding:0;
-    }
-  }
   .proTxt{
     padding: 10px;
   }
-  .productStyle h3{
-    height: 84px;
+  .productStyle{
+    padding: 0 5px;
+    h3{
+      height: 70px;
+    }
+  }
+  .proCol{
+    padding: 0 10px;
+    margin: 10px 0;
   }
 }

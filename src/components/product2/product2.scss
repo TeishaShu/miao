@@ -83,5 +83,12 @@ ul{
 @media(max-width:768px){
   .inner{
     padding-left: 15px;
+    h3{
+      text-align: center;
+    }
+    
+  }
+  .type{
+    display: none;
   }
 }
