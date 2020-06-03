@@ -1,28 +1,28 @@
 <template>
-  <div class="row">
+  <div>
     <!--loading-->
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
-    <!--Alert-->
 
-    <div class="col-md-12 cou">
-      <img src="../../assets/coupon.png" alt="" />
-      <div class="coupon">
-        <div v-if="haveCoupon">
+    <img src="../../assets/coupon.png" alt="" />
+    <div class="coupon">
+      <div v-if="haveCoupon">
         <h2>開幕慶優惠</h2>
-          <p>
-            <b style="font-size: 24px; color: red;">{{ dateFormat(coupon.due_date) }} 前</b>輸入以下代碼<br>即可獲得<b style="font-size: 30px; color: red;"
-              >全館優惠 {{ coupon.percent }}%</b>
-            折扣
-          </p>
-          <div class="box">
-            <input :value="coupon.code" id="codyId" />
-            <button @click="copyInput">複製</button>
-          </div>
+        <p>
+          <b style="font-size: 24px; color: red;"
+            >{{ dateFormat(coupon.due_date) }} 前</b
+          >輸入以下代碼<br />即可獲得<b style="font-size: 30px; color: red;"
+            >全館優惠 {{ coupon.percent }}%</b
+          >
+          折扣
+        </p>
+        <div class="box">
+          <input :value="coupon.code" id="codyId" />
+          <button @click="copyInput">複製</button>
         </div>
-        <div v-else>目前尚無優惠劵</div>
       </div>
+      <div v-else>目前尚無優惠劵</div>
     </div>
   </div>
 </template>
@@ -65,22 +65,21 @@ export default {
 
           // 優惠劵顯示在頁面上
           // 一個以上優惠劵可以用.選擇最新建立的
-          if(unexpiredCoupon.length>1){
+          if (unexpiredCoupon.length > 1) {
             this.haveCoupon = true;
-            const filterNewestCoupon = unexpiredCoupon.map(e => e.num);
+            const filterNewestCoupon = unexpiredCoupon.map((e) => e.num);
             // 最小數字最新增加的資料
             // const nimNum = Math.min.apply(null,filterNewestCoupon);
             const nimNum = Math.min(...filterNewestCoupon);
             // 陣列的哪筆資料
             const whichOrder = filterNewestCoupon.indexOf(nimNum);
             this.coupon = unexpiredCoupon[whichOrder];
-          }else if(unexpiredCoupon.length=1){
+          } else if ((unexpiredCoupon.length = 1)) {
             this.haveCoupon = true;
             this.coupon = unexpiredCoupon[0];
-          }else{
+          } else {
             this.haveCoupon = false;
           }
-
         }
       });
     },
@@ -89,10 +88,10 @@ export default {
       document.execCommand("copy");
       alert("已經複製優惠碼:" + this.coupon.code);
     },
-    dateFormat(num){
-      const dd = new Date(num)
+    dateFormat(num) {
+      const dd = new Date(num);
       return `${dd.getFullYear()}年${dd.getMonth()}月${dd.getDate()}日`;
-    }
+    },
   },
   created() {
     this.getAPI();

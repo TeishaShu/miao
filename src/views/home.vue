@@ -14,8 +14,8 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <router-link :to="{ name: 'index' }" class="logoA">
-                <img src="../assets/logo.png" alt="" class="logo"
-              /></router-link>
+                <img src="../assets/logo.png" alt="" class="logo" />
+              </router-link>
               <div
                 class="collapse navbar-collapse"
                 id="bs-example-navbar-collapse-1"
@@ -70,8 +70,8 @@ import footerStyle from "../layout/footerStyle/footerStyle.vue";
 export default {
   name: "home",
   components: {
-    footerStyle
+    footerStyle,
   },
-  methods: {}
+  methods: {},
 };
 </script>
