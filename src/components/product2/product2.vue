@@ -66,7 +66,7 @@ export default {
         // console.log('11',response.data)
         if (response.data.success) {
           this.dataProdtct = response.data.product;
-          this.getProduct() //加入購物車後不知道為何會出現紅字.所以家這段.還是沒消失但是可以跑
+          this.getProduct() //加入購物車後不知道為何會出現紅字.所以加這段.還是沒消失但是可以跑
         }
       });
     },
@@ -79,6 +79,7 @@ export default {
       }
     },
     detail(txt){
+      if(txt === undefined){return}; // 注意傳入的值.不要使function壞掉
       return txt.split("@");
     }
   },
