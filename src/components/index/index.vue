@@ -117,8 +117,17 @@ export default {
         // this.isLoading = false;
         // this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
-          this.products = response.data.products;
-          this.allProducts = response.data.products;
+          //過濾未啟用的產品資訊
+          const responseProduct = response.data.products;
+          const filterProductData = [];
+          responseProduct.forEach(e => {
+            if(!e.is_enabled){
+              return;
+            }
+            filterProductData.push(e);
+          })
+          this.products = filterProductData;
+          this.allProducts = filterProductData;
           this.page();
         }
       });
