@@ -5,7 +5,7 @@
       <loading :active.sync="isLoading"></loading>
     </div>
 
-    <img src="../../assets/coupon.png" alt="" />
+    <img src="https://teishashu.github.io/miao/public/coupon.png" alt="" />
     <div class="coupon">
       <div v-if="haveCoupon">
         <h2>開幕慶優惠</h2>
