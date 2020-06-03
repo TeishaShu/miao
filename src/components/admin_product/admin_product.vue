@@ -2,12 +2,10 @@
   <div>
     <!--loading-->
     <div class="vld-parent">
-      <loading
-        :active.sync="isLoading"
-      ></loading>
+      <loading :active.sync="isLoading"></loading>
     </div>
     <!--Alert-->
-    <Alert/>
+    <!--<Alert/>-->
 
     <!--原本的model是用data-toggle和data-target.後來換成用click來用.因為編輯也需要用到
       <a href="#" class="add" data-toggle="modal" data-target="#productModal">建立新產品</a>-->

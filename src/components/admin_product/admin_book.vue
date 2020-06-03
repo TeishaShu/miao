@@ -5,6 +5,7 @@
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
+    
     <div class="table-responsive">
       <table>
         <thead>

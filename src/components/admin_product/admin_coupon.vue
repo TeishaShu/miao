@@ -2,9 +2,7 @@
   <div>
   <!--loading-->
     <div class="vld-parent">
-      <loading
-        :active.sync="isLoading"
-      ></loading>
+      <loading :active.sync="isLoading"></loading>
     </div>
 
     <a href="#" class="add" @click.prevent="openModel('add')">建立新的優惠卷</a>
@@ -320,7 +318,7 @@ export default {
       this.isLoading = true;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.delId.id}`;
         this.$http.delete(api,{data:this.addNew}).then(response => {
-          console.log(response.data)
+          // console.log(response.data)
           if(response.data.success){
             this.isLoading = false;
             this.couponsData = response.data.coupons;
