@@ -1,6 +1,6 @@
 <template>
   <div>
-  <!--loading-->
+    <!--loading-->
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
@@ -71,9 +71,7 @@
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">
-              <span>{{
-                modalStyle === "add" ? "新增優惠券" : "編輯優惠券"
-              }}</span>
+              <span>{{modalStyle === "add" ? "新增優惠券" : "編輯優惠券"}}</span>
             </h5>
             <button
               type="button"
@@ -130,7 +128,7 @@
                     <div>到期日</div>
                     <datepicker
                       v-model="date"
-                      @selected="selectDate"
+                      
                     ></datepicker>
                   </div>
                 </div>
@@ -201,7 +199,9 @@
             >
               取消
             </button>
-            <button type="button" class="btn btn-danger" @click="delSend">確認刪除</button>
+            <button type="button" class="btn btn-danger" @click="delSend">
+              確認刪除
+            </button>
           </div>
         </div>
       </div>
@@ -219,121 +219,134 @@
 </style>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
+import Datepicker from "vuejs-datepicker";
 import Paginate from "vuejs-paginate";
 import $ from "jquery";
 export default {
-  components:{
+  components: {
     Datepicker,
-    Paginate
+    Paginate,
   },
-  data(){
-    return{
-      couponsData:[],
-      addNew:{
-        title:'',
+  data() {
+    return {
+      couponsData: [],
+      addNew: {
+        title: "",
         is_enabled: 0,
         percent: 0,
         due_date: 0,
-        code:''
+        code: "",
       },
       dataPage: {
         // current_page: 1 //這個刪除
       },
       isLoading: false,
-      date:'',
-      modalStyle:'',
-      delId:{}
-    }
+      date: "",
+      modalStyle: "",
+      delId: {},
+    };
   },
-  methods:{
+  watch: { //這個用function順序會不對.js跟vue會不同.watch可以，裡面是物件
+    date: function (value) {
+      this.addNew.due_date = +new Date(value);
+    },
+  },
+  created() {
+    let today = +new Date();
+    this.addNew.due_date = today;
+    this.date = this.dateForm(today);
+    this.getCoupon();
+  },
+  methods: {
     getCoupon() {
       this.isLoading = true;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupons?page=${this.dataPage.current_page}`;
-      this.$http.get(api).then(response => {
-        if(response.data.success){
+      this.$http.get(api).then((response) => {
+        if (response.data.success) {
           this.isLoading = false;
-          this.couponsData = response.data.coupons
+          this.couponsData = response.data.coupons;
           this.dataPage = response.data.pagination;
         }
       });
     },
-    
-    dateForm(num){
+
+    dateForm(num) {
       let dd = new Date(num);
-      return `${dd.getFullYear()}/${dd.getMonth()+1}/${dd.getDate()}`;
+      return `${dd.getFullYear()}/${dd.getMonth() + 1}/${dd.getDate()}`;
     },
-    openModel(style,item){
+    openModel(style, item) {
       this.modalStyle = style;
-      if(style === 'add'){
-        this.addNew.title = '';
+      if (style === "add") {
+        this.addNew.title = "";
         this.addNew.is_enabled = 0;
         this.addNew.percent = 0;
-        this.addNew.due_date = (+new Date());
-        this.addNew.code = '';
-      }else if(style === 'edit'){
-        this.addNew = Object.assign({},item);
+        this.addNew.due_date = +new Date();
+        this.addNew.code = "";
+      } else if (style === "edit") {
+        this.addNew = Object.assign({}, item);
       }
-      $('#addModal').modal("show");
+      $("#addModal").modal("show");
     },
-    sentCoupon(){
-      if(this.addNew.title === "" || this.addNew.code === "" || this.addNew.percent === 0 ){
-        alert("請填寫資料")
-        return
+    sentCoupon() {
+      if (this.addNew.title === "" || this.addNew.code === "" || this.addNew.percent === 0 ) {
+        alert("請填寫資料");
+        return;
       }
+      const vm = this;
       this.isLoading = true;
-      if(this.modalStyle === 'add'){
+      if (this.modalStyle === "add") {
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon`;
-        this.$http.post(api,{data:this.addNew}).then(response => {
-          if(response.data.success){
-            this.isLoading = false;
-            this.couponsData = response.data.coupons;
-            this.getCoupon()
-          }
-        });
-      }else if(this.modalStyle === 'edit'){
-        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.addNew.id}`;
-        this.$http.put(api,{data:this.addNew}).then(response => {
-          if(response.data.success){
-            this.isLoading = false;
-            this.couponsData = response.data.coupons;
-            this.getCoupon()
-          }
-        });
-      }
-      $('#addModal').modal("hide");
-    },
-    newDateForm(num){
-      return (+new Date(num));
-    },
-    selectDate(){
-      let dateForm = (+new Date(this.date));
-      this.addNew.due_date = dateForm;
-    },
-    delOpen(item){
-      this.delId = item;
-      $('#delCouponModal').modal("show");
-    },
-    delSend(){
-      this.isLoading = true;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.delId.id}`;
-        this.$http.delete(api,{data:this.addNew}).then(response => {
-          // console.log(response.data)
-          if(response.data.success){
+        
+        this.$http.post(api, { data: vm.addNew }).then((response) => {
+          if (response.data.success) {
             this.isLoading = false;
             this.couponsData = response.data.coupons;
             this.getCoupon();
-            $('#delCouponModal').modal("hide");
           }
         });
-    }
-
+      } else if (this.modalStyle === "edit") {
+        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.addNew.id}`;
+        this.$http.put(api, { data: vm.addNew }).then((response) => {
+          if (response.data.success) {
+            this.isLoading = false;
+            this.couponsData = response.data.coupons;
+            this.getCoupon();
+          }
+        });
+      }
+      $("#addModal").modal("hide");
+    },
+    newDateForm(num) {
+      return +new Date(num);
+    },
+    // selectDate() {
+      // 轉換格式
+      // const dateForm = +new Date(this.date);
+      // console.log('dateForm',dateForm.getMilliseconds())
+      // const test = new Date(dateForm)
+      // console.log('test,',test)
+      // console.log('this date',this.date)
+      // // console.log('date,',new Date(+new Date(this.date)),+new Date(this.date))
+      // this.addNew.due_date = +new Date(this.date);
+    // },
+    delOpen(item) {
+      this.delId = item;
+      $("#delCouponModal").modal("show");
+    },
+    delSend() {
+      this.isLoading = true;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.delId.id}`;
+      this.$http.delete(api, { data: this.addNew }).then((response) => {
+        // console.log(response.data)
+        if (response.data.success) {
+          this.isLoading = false;
+          this.couponsData = response.data.coupons;
+          this.getCoupon();
+          $("#delCouponModal").modal("hide");
+        }
+      });
+    },
   },
-  created(){
-    let today = (+new Date());
-    this.addNew.due_date = today;
-    this.date = this.dateForm(today)
-    this.getCoupon();
-  }
+  
 };
 </script>
