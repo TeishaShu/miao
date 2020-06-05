@@ -14,7 +14,7 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <router-link :to="{ name: 'index' }" class="logoA">
-                <img src="../assets/logo.png" alt="" class="logo" />
+                <img src="./../assets/logo.png" alt="" class="logo" />
               </router-link>
               <div
                 class="collapse navbar-collapse"

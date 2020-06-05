@@ -6,7 +6,7 @@
           <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
               <div class="navbar-brand logoA">
-                <img src="/logo.png" alt="" />
+                <img src="./../../../public/logo.png" alt="" /> 
                 <p>後臺設定管理</p>
               </div>
               <h6>
