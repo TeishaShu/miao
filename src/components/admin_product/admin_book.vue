@@ -96,15 +96,21 @@
                           <th>商品名稱</th>
                           <th>單價</th>
                           <th>訂購數量</th>
+                          <th>小計</th>
                         </tr>
                       </thead>
                       <tbody class="pro">
                         <tr v-for="item in editItem.products" :key="item.id">
                           <td>{{item.product.title}}</td>
-                          <td>{{item.product.price}}</td>
+                          <td>${{item.product.price}}</td>
                           <td>
                             <input type="text" v-model.trim="item.qty" />
                           </td>
+                          <td>${{item.price}}</td>
+                        </tr>
+                        <tr>
+                          <td colspan="3">總金額</td>
+                          <td>$ 還需要改.改數量(不能負的).金額也要算過在送出</td>
                         </tr>
                       </tbody>
                     </table>
@@ -235,7 +241,9 @@ export default {
   components: {
     Paginate,
   },
-
+  watch:{
+    
+  },
   methods: {
     getBook() {
       this.isLoading = true;
