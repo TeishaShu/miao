@@ -23,6 +23,7 @@
       </div>
       <div v-else>目前尚無優惠劵</div>
     </div>
+    <couponModal title="複製成功" :content="`已經複製優惠碼: ${coupon.code}`" />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -30,8 +31,12 @@
 @import "coupon.scss";
 </style>
 <script>
+import couponModal from './modelCoupon';
 import $ from "jquery";
 export default {
+  components:{
+    couponModal,
+  },
   data() {
     return {
       coupon: [],
@@ -85,7 +90,8 @@ export default {
     copyInput() {
       const txt = $("#codyId").select();
       document.execCommand("copy");
-      alert("已經複製優惠碼:" + this.coupon.code);
+      // alert("已經複製優惠碼:" + this.coupon.code);
+      $('#couponModal').modal('show');
     },
     dateFormat(num) {
       const dd = new Date(num);
