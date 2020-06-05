@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="minHeight">
     <!--loading-->
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>

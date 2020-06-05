@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="min-vh-100">
     <!--<div id="nav"><router-link to="/">Home</router-link>|</div>-->
     <!--loading.這邊無法跟內頁互用
     <div class="vld-parent">
