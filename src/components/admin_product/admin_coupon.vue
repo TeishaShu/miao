@@ -128,7 +128,6 @@
                     <div>到期日</div>
                     <datepicker
                       v-model="date"
-                      
                     ></datepicker>
                   </div>
                 </div>
@@ -248,6 +247,7 @@ export default {
   },
   watch: { //這個用function順序會不對.js跟vue會不同.watch可以，裡面是物件
     date: function (value) {
+      // console.log('watch');
       this.addNew.due_date = +new Date(value);
     },
   },
@@ -320,6 +320,7 @@ export default {
       return +new Date(num);
     },
     // selectDate() {
+    //   console.log("selected");
       // 轉換格式
       // const dateForm = +new Date(this.date);
       // console.log('dateForm',dateForm.getMilliseconds())

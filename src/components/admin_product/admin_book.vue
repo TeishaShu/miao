@@ -11,11 +11,10 @@
         <thead>
           <tr>
             <th width="30"></th>
-            <th width="120">訂購產品</th>
             <th width="120">購買人資訊</th>
+            <th width="120">訂購產品</th>
             <th width="120">應付金額</th>
             <th width="150">是否付款</th>
-            <th width="220">留言訊息</th>
             <th width="120">購買時間</th>
             <th width="120">修改訂單</th>
           </tr>
@@ -28,22 +27,21 @@
           >
             <td>{{ item.num }}</td>
             <td>
-              <ul><!--訂購產品項目的顯示...-->
-                <li v-for="(pro,key) in item.products" :key="pro.id">
-                {{pro.product.title}} * {{pro.qty}}</li>
-              </ul>
-            </td>
-            <td>
               <ul v-for="person in item.user" :key="person.id">
                 <li>姓名:{{person.name}}</li>
                 <li>地址:{{person.address}}</li>
+              </ul>
+            </td>
+            <td>
+              <ul><!--訂購產品項目的顯示...-->
+                <li v-for="(pro,key) in item.products" :key="pro.id">
+                {{pro.product.title}} * {{pro.qty}}</li>
               </ul>
             </td>
             <td style="text-align:right">{{ item.total | currency }}</td>
             <td :class="{ okGreen: item.is_paid }">
               {{ item.is_paid ? "已付款" : "未付款" }}
             </td>
-            <td style="text-align:left">{{ item.message }}</td>
             <td>{{dateForm(item.create_at)}}</td>
             <td><i class="fas fa-pencil-alt" @click="openModel(item)"></i></td>
           </tr>
@@ -105,9 +103,8 @@
                           <td>{{item.product.title}}</td>
                           <td>{{item.product.price}}</td>
                           <td>
-                            <i class="fas fa-minus" @click="changeNum(-1)"></i>
-                            <input type="text" v-model.trim="item.qty" @change="changeQty"/></td>
-                            <i class="fas fa-plus" @click="changeNum(1)"></i>
+                            <input type="text" v-model.trim="item.qty" />
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -245,7 +242,7 @@ export default {
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/orders?page=${this.dataPage.current_page}`;
       this.$http.get(api).then(response => {
         this.isLoading = false;
-        console.log('getBook',response.data);
+        // console.log('getBook',response.data);
         if (response.data.success) {
           this.tempProduct = response.data.orders;
           this.dataPage = response.data.pagination;
@@ -261,7 +258,7 @@ export default {
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/order/${item.id}`;
       this.$http.put(api,{data}).then(response => {
         this.isLoading = false;
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.success) {
           this.tempProduct = response.data.products;
           this.dataPage = response.data.pagination;
@@ -278,20 +275,19 @@ export default {
     },
     updateProduct(){
       this.isLoading = true;
-      let editt = this.editItem;
+      const editt = this.editItem;
       // editt.total = 
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/order/${editt.id}`;
       this.$http.put(api,{"data":editt}).then(response => {
         this.isLoading = false;
-        console.log('updateProduct',response.data);
+        // console.log('updateProduct',response.data);
         if (response.data.success) {
           this.getBook();
           $("#editModal").modal("hide");
           alert(response.data.message)
         }
       });
-      
-    }
+    },
   },
   created() {
     this.getBook();
