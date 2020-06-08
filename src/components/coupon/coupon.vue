@@ -24,6 +24,7 @@
       <div v-else>目前尚無優惠劵</div>
     </div>
     <couponModal title="複製成功" :content="`已經複製優惠碼: ${coupon.code}`" />
+    <cartBtn />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -31,11 +32,13 @@
 @import "coupon.scss";
 </style>
 <script>
+import cartBtn from "../../layout/footerStyle/cartBtn.vue";
 import couponModal from './modelCoupon';
 import $ from "jquery";
 export default {
   components:{
     couponModal,
+    cartBtn
   },
   data() {
     return {
