@@ -21,6 +21,11 @@ const routes = [
         component: () => import('../components/index/index.vue')
       },
       {
+        path: 'product',
+        name: 'product',
+        component: () => import('../components/product/product.vue')
+      },
+      {
         path: 'product2/:id', //動態路由
         name: 'product2',
         component: () => import('../components/product2/product2.vue')

@@ -15,6 +15,7 @@
               </button>
               <router-link :to="{ name: 'index' }" class="logoA">
                 <img src="./../assets/logo.png" alt="" class="logo" />
+                <div class="logoName">來呷飽貓食堂</div>
               </router-link>
               <div
                 class="collapse navbar-collapse"
@@ -22,14 +23,19 @@
               >
                 <ul class="navbar-nav nav">
                   <li class="nav-item">
-                    <router-link :to="{ name: 'index' }"
-                      ><i class="fas fa-home"></i>首頁</router-link
-                    >
+                    <router-link :to="{ name: 'index' }">
+                      <i class="fas fa-home"></i>首頁
+                    </router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'coupon' }"
-                      ><i class="fas fa-bell"></i>好康活動</router-link
-                    >
+                    <router-link :to="{ name: 'product' }"> 
+                      <i class="fas fa-cookie-bite"></i>商品列表
+                    </router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'coupon' }">
+                      <i class="fas fa-bell"></i>好康活動
+                    </router-link>
                   </li>
                 </ul>
 

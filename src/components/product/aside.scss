@@ -1,0 +1,49 @@
+.asideBox{
+  color: $or;
+  i{
+    font-size: 14px;
+    margin-right: 8px;
+  }
+  li{
+    border-width: 2px;
+    border-style: solid;
+    border-color: $or $or $red $red;
+    border-radius: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px 0;
+    vertical-align: middle;
+    text-align: center;
+    &:hover{
+      background: $or;
+      color: #fff;
+      border-color: #ffd7b4 #ffd7b4 #ffa8a8 #ffa8a8;
+    }
+  }
+}
+@media(max-width:768px){
+  .asideBox{
+    ul{
+      margin-top: 10px;
+      text-align: center;
+    }
+    li{
+      width:calc(100%/4);
+      min-width: 112px;
+      display: inline-block;
+      margin: 10px;
+      margin-bottom: 0;
+    }
+  }
+}
+@media(max-width:426px){
+  .asideBox{
+    li{
+      width:calc((100% - 40px)/2);
+      &:nth-child(1){
+        width: calc(100% - 20px);
+      }
+    }
+  }
+}
