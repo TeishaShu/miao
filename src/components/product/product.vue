@@ -125,6 +125,7 @@ export default {
           this.products = filterProductData;
           this.allProducts = filterProductData;
           this.page();
+          
         }
       });
     },
@@ -133,14 +134,14 @@ export default {
       this.$router.push({ path: `/product2/${id}` });
     },
     addCart(item) {
-      // this.isLoading = true;
+      this.isLoading = true;
       let addCartSend = {
         product_id: item.id,
         qty: 1,
       };
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       this.$http.post(api, { data: addCartSend }).then((response) => {
-        // this.isLoading = false;
+        this.isLoading = false;
       });
     },
     selectCategory(style) {
@@ -184,9 +185,9 @@ export default {
   },
   computed: {
     //使用vueX
-    isLoading() {
-      return this.$store.state.isLoading;
-    },
+    // isLoading() {
+    //   return this.$store.state.isLoading;
+    // },
   },
   created() {
     this.getProduct();
