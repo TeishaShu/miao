@@ -89,7 +89,6 @@
                   <label for="title">*標題</label>
                   <input
                     type="text"
-                    id="title"
                     class="form-control"
                     placeholder="請輸入標題"
                     v-model.trim="addNew.title"
@@ -101,7 +100,6 @@
                     <input
                       class="form-check-input"
                       type="checkbox"
-                      id="is_enabled"
                       v-model="addNew.is_enabled"
                       :true-value="1"
                       :false-value="0"
@@ -117,11 +115,14 @@
                   <div class="form-group col-md-6">
                     <label for="percent">*優惠折扣 (百分比)</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       placeholder="請輸入優惠折扣百分比"
                       v-model.trim="addNew.percent"
-                      id="percent"
+                      max="99"
+                      min="1"
+                      maxlength='2'
+                      @keyup="keyupUpdatePercent(addNew.percent)"
                     />
                   </div>
                   <div class="form-group col-md-6 dateStyle">
@@ -140,7 +141,6 @@
                       class="form-control"
                       placeholder="請輸入優惠卷代碼"
                       v-model.trim="addNew.code"
-                      id="code"
                     />
                   </div>
                 </div>
@@ -250,6 +250,15 @@ export default {
       // console.log('watch');
       this.addNew.due_date = +new Date(value);
     },
+    // percent: function(value) {
+    //   console.log(value);
+    //   const regexp = /^\d{2}$/;
+
+    //   if (!regexp.test(value)) {
+    //     this.percent = 0;
+    //   }
+    //   // this.percent = value.replace(/^\d{2}$/,"")
+    // }
   },
   created() {
     let today = +new Date();
@@ -269,7 +278,13 @@ export default {
         }
       });
     },
+    keyupUpdatePercent(val){  //.......................................正規式這邊卡了一下.然後錯誤值要帶回去
+      const regexp = /^\d{0,2}$/; //最多2位數
 
+      if (!regexp.test(val)) {
+        this.addNew.percent = 0;
+      }
+    },
     dateForm(num) {
       let dd = new Date(num);
       return `${dd.getFullYear()}/${dd.getMonth() + 1}/${dd.getDate()}`;

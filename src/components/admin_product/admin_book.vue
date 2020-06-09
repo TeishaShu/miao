@@ -114,6 +114,7 @@
                               v-model.trim="item.qty"
                               min="1"
                               @change="updateTotal(key, item.qty, item.product.price)"
+                              @keyup="keyupUpdateTotal(item.qty)"
                             />
                           </td>
                           <td>${{ item.total }}</td>
@@ -270,11 +271,15 @@ export default {
   },
   methods: {
     updateTotal(key, qty, price) { //wow!!
-     
-      // valid  "".e.<1
+     	// ^[1-99]$     ^\d{2}$
+      // valid  "".e.<1   要正則判斷-------------------------------------------------------------------------------------------------
       // if (valid) {
 
       // }
+      // qty.match(/[\d]*/)
+      // qty.replace(/e/,'')
+      console.log('qty',qty)
+
       const newEdit_products = this.newEdit.products;
       newEdit_products[key].total = qty * price;
       newEdit_products[key].final_total = qty * price;
@@ -283,6 +288,10 @@ export default {
         newTotal += newEdit_products[prop].total
       }
       this.newEdit.total = newTotal;
+    },
+    keyupUpdateTotal(qty) {//-------------------------------------------------------------------------------------------
+      console.log('keyupUpdateTotal',qty)
+      qty = qty.replace(/[^\d]/g,'')  
     },
     cancelEdit(){
       this.newEdit = {};
