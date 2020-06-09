@@ -54,6 +54,7 @@ export default {
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/admin/signin`;
       this.$http.post(api, this.user).then(response => {
         if(response.data.success){
+          console.log('login route',this)
           this.$router.push('/admin')
         }else{
           alert('帳號密碼錯誤')

@@ -239,48 +239,43 @@ export default {
         this.userStyle[name] = false;
       }
     },
-    sentStep1000() {
-      if (
-        this.user.name === "" ||
-        this.user.email === "" ||
-        this.user.tel === "" ||
-        this.user.address === ""
-      ) {
-        return alert("請填寫資料");
-      }
-
+    sentStep1() {
+      const vm = this;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
-      let userL = this.user;
-      let messageL = this.message;
+      const userL = this.user;
+      const messageL = this.message;
       this.$http
         .post(api, { data: { user: { userL }, messageL } })
         .then((response) => {
           if (response.data.success) {
-            console.log("res", response);
-            console.log(this); //換路由...先做後面的頁面
-            this.$route.push = `/cart/step2/${response.data.orderId}`;
+             //換路由..注意寫法.不是用 "=""
+            vm.$router.push(`/cart/${response.data.orderId}`);
           }
         });
     },
     validateBootstrap() {
+      const vm = this;
       ("use strict");
       window.addEventListener(
         "load",
         function() {
           // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName("needs-validation");
+          const forms = document.getElementsByClassName("needs-validation");
           // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form) {
+          const validation = Array.prototype.filter.call(forms, function(form) {
             form.addEventListener(
               "submit",
               function(event) {
                 if (form.checkValidity() === false) {
                   event.preventDefault();
                   event.stopPropagation();
-                  console.log('0000')
+                  
+                }else{
+                  // 驗證過
+                  vm.sentStep1();
                 }
                 form.classList.add("was-validated");
-                console.log('0')
+                
               },
               false
             );
