@@ -10,6 +10,18 @@
   padding-left: 0;
   padding-right: 0;
 }
+/* Chrome, Safari, Edge, Opera 。。。input type="number" Remove Arrows/Spinners */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox 。。。input type="number" Remove Arrows/Spinners */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .nothing {
   text-align: center;
   p {
@@ -98,7 +110,6 @@ th {
     margin: 10px 0;
   }
 }
-
 .book {
   margin-top: 30px;
   em {
@@ -138,7 +149,7 @@ th {
     }
   }
 }
-.send{
+.send,.send:focus{
   background: $red;
   text-align: center;
   border-radius: 3px;
@@ -147,6 +158,9 @@ th {
   line-height: 40px;
   margin-bottom: 30px;
   margin-top: 30px;
+  border: none;
+  width: 100%;
+  outline-color: unset;
 }
 
 .coupon {
@@ -190,4 +204,12 @@ span{
   font-size: 14px;
   margin-left: 15px;
   margin-bottom: -2px;
+}
+.formInput{
+  input,textarea{
+    width: 100%;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    border-radius: 0.25rem;
+  }
 }
