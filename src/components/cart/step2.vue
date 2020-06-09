@@ -1,57 +1,35 @@
 <template>
   <div class="row">
+  <!--loading-->
+    <div class="vld-parent">
+      <loading :active.sync="isLoading"></loading>
+    </div>
+
     <div class="col-md-12">
       <div class="table-responsive step2table">
         <table class="table">
           <thead>
             <tr>
               <th>商品資訊</th>
-              <th>單價</th>
               <th>數量</th>
-              <th>總價</th>
+              <th>單價</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-for="item in dataAPI.products" :key="item.id">
               <td>
-                <img src="/dryFood/dr01.jpg" alt />
+                <img :src="item.product.imageUrl" alt />
                 <p>
-                  【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)
+                  {{item.product.title}}
                 </p>
               </td>
-              <td>$NT800</td>
-              <td>1</td>
-              <td>$NT800</td>
-            </tr>
-            <tr>
-              <td>
-                <img src="/dryFood/dr01.jpg" alt />
-                <p>
-                  【福壽】貓食-燻雞+茄紅素 20LB（9.07kg） 貓飼料 飼料(A832A02)
-                </p>
-              </td>
-              <td>$NT800</td>
-              <td>1</td>
-              <td>$NT800</td>
-            </tr>
-            <tr>
-              <td colspan="3">小計</td>
-              <td>$NT800</td>
-            </tr>
-            <tr>
-              <td colspan="3">運費</td>
-              <td>$NT60</td>
+              <td>{{item.qty}}</td>
+              <td>NT{{item.product.price | currency }}</td>
             </tr>
             <tr class="total">
-              <td colspan="3">總計</td>
-              <td>$NT6000</td>
+              <td colspan="2">總計</td>
+              <td>NT{{dataAPI.total | currency }}</td>
             </tr>
-            <tr class="total cheep">
-              <td colspan="3">折扣價</td>
-              <td>$NT860</td>
-            </tr>
-
-
           </tbody>
         </table>
       </div>
@@ -68,35 +46,38 @@
               <td>
                 姓名
               </td>
-              <td>123</td>
+              <td>{{dataAPI.user.userL.name}}</td>
             </tr>
             <tr>
               <td>
                 電話
               </td>
-              <td>11111111111111111</td>
+              <td>{{dataAPI.user.userL.tel}}</td>
             </tr>
             <tr>
               <td>E-mail</td>
-              <td>@hjlhjl</td>
+              <td>{{dataAPI.user.userL.email}}</td>
             </tr>
             <tr>
               <td>地址</td>
-              <td>rtttttttttttttttttttttttttttttt</td>
+              <td>{{dataAPI.user.userL.address}}</td>
             </tr>
             <tr>
               <td>備註</td>
-              <td></td>
+              <td>{{dataAPI.user.userL.name}}</td>
             </tr>
             <tr>
               <td>付款狀態</td>
-              <td class="red">尚未付款</td>
+              <td><!--原來這邊這樣-->
+                <span v-if="dataAPI.is_paid && dataAPI.create_at" class="green">已付款</span>
+                <span v-else class="red">尚未付款</span>
+              </td>
             </tr>
 
           </tbody>
         </table>
       </div>
-        <a href="#" class="send">確認付款</a>
+        <a href="#" class="send" @click.prevent="pay">確認付款</a>
     </div>
   </div>
 </template>
@@ -109,13 +90,41 @@
 export default {
   data() {
     return {
+      orderId:'',
       isLoading: false,
-      dataAPI: {},
+      dataAPI: {
+        user:{
+          userL:''
+        }
+      },
       textCoupon: { code: "" }
     };
   },
+  created(){
+    this.orderId = this.$route.params.orderId; //orderId 是對應到 router裡面路由id的名稱
+    this.getApi();
+  },
   methods:{
-    sendCoupon(){}
+    getApi() {
+      this.isLoading = true;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order/${this.orderId}`;
+      this.$http.get(api).then((response) => {
+        this.isLoading = false;
+        if (response.data.success) {
+          this.dataAPI = response.data.order;
+        }
+      });
+    },
+    pay(){
+      this.isLoading = true;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/pay/${this.orderId}`;
+      this.$http.post(api).then((response) => {
+        this.isLoading = false;
+        if (response.data.success) {
+          this.getApi(); //注意要重新刷頁面
+        }
+      });
+    }
   }
 }
 </script>

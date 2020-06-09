@@ -150,7 +150,6 @@
               placeholder="留言備註"
               v-model="message"
             ></textarea>
-            <!--<a href="#" class="send" @click.prevent="sentStep1">送出訂單</a>-->
             <button class="send" type="submit" >送出訂單</button>
           </div>
         </div>
