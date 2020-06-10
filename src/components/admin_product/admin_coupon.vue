@@ -162,49 +162,8 @@
         </div>
       </div>
     </div>
-    <div
-      class="modal fade"
-      id="delCouponModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content border-0">
-          <div class="modal-header bg-danger text-white">
-            <h5 class="modal-title" id="exampleModalLabel">
-              <span>刪除優惠劵</span>
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            是否刪除
-            <strong class="text-danger">「{{ delId.title }}」</strong>
-            的優惠劵(刪除後將無法恢復)。
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              data-dismiss="modal"
-            >
-              取消
-            </button>
-            <button type="button" class="btn btn-danger" @click="delSend">
-              確認刪除
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <DelModal titleType="優惠劵" :api="delApi" :productName="deleteProductName"/>
+
   </div>
 </template>
 
@@ -218,6 +177,7 @@
 </style>
 
 <script>
+import DelModal from "./../modal/DelModal.vue";
 import Datepicker from "vuejs-datepicker";
 import Paginate from "vuejs-paginate";
 import $ from "jquery";
@@ -225,6 +185,7 @@ export default {
   components: {
     Datepicker,
     Paginate,
+    DelModal,
   },
   data() {
     return {
@@ -243,6 +204,8 @@ export default {
       date: "",
       modalStyle: "",
       delId: {},
+      delApi: "",
+      deleteProductName: "",
     };
   },
   watch: { //這個用function順序會不對.js跟vue會不同.watch可以，裡面是物件
@@ -279,7 +242,7 @@ export default {
       });
     },
     keyupUpdatePercent(val){  //.......................................正規式這邊卡了一下.然後錯誤值要帶回去
-      const regexp = /^\d{0,2}$/; //最多2位數
+      const regexp = /^\d{0,2}$/; //最多2位數.可以用console測試
 
       if (!regexp.test(val)) {
         this.addNew.percent = 0;
@@ -346,21 +309,11 @@ export default {
       // this.addNew.due_date = +new Date(this.date);
     // },
     delOpen(item) {
+      console.log(item)
       this.delId = item;
-      $("#delCouponModal").modal("show");
-    },
-    delSend() {
-      this.isLoading = true;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.delId.id}`;
-      this.$http.delete(api, { data: this.addNew }).then((response) => {
-        // console.log(response.data)
-        if (response.data.success) {
-          this.isLoading = false;
-          this.couponsData = response.data.coupons;
-          this.getCoupon();
-          $("#delCouponModal").modal("hide");
-        }
-      });
+      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.delId.id}`;
+      this.deleteProductName = item.title;
+      $("#delModal").modal("show");
     },
   },
   

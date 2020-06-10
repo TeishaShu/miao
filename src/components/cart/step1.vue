@@ -39,7 +39,9 @@
               </td>
               <td>NT{{ (item.product.price * item.qty) | currency }}</td>
               <td>
-                <i class="fas fa-trash-alt" @click="delcart(item.id)"></i>
+                <a href="#" @click.prevent="delOpen(item)"
+                  ><i class="fas fa-trash-alt" @click="delOpen(item)"></i
+                ></a>
               </td>
             </tr>
 
@@ -150,11 +152,13 @@
               placeholder="留言備註"
               v-model="message"
             ></textarea>
-            <button class="send" type="submit" >送出訂單</button>
+            <button class="send" type="submit">送出訂單</button>
           </div>
         </div>
       </form>
     </div>
+
+    <DelModal titleType="產品" :api="delApi" :productName="deleteProductName" />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -162,8 +166,12 @@
 @import "step1.scss";
 </style>
 <script>
+import DelModal from "./../modal/DelModal.vue";
 import $ from "jquery";
 export default {
+  components: {
+    DelModal,
+  },
   data() {
     return {
       isLoading: false,
@@ -190,6 +198,9 @@ export default {
         address: false,
       },
       message: "",
+      delItem: "",
+      delApi: "",
+      deleteProductName: "",
     };
   },
   created() {
@@ -207,18 +218,24 @@ export default {
         }
       });
     },
-    delcart(id) {
-      this.isLoading = true;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart/${id}`;
-      this.$http.delete(api).then((response) => {
-        this.isLoading = false;
-        // console.log(response.data);
-        if (response.data.success) {
-          //   this.dataAPI = response.data.data;
-          this.api();
-        }
-      });
+    delOpen(item) {
+      this.delItem = item;
+      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart/${item.id}`;
+      this.deleteProductName = item.product.title;
+      $("#delModal").modal("show");
     },
+    // delcart(id) {
+    //   this.isLoading = true;
+    //   const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart/${id}`;
+    //   this.$http.delete(api).then((response) => {
+    //     this.isLoading = false;
+    //     // console.log(response.data);
+    //     if (response.data.success) {
+    //       //   this.dataAPI = response.data.data;
+    //       this.api();
+    //     }
+    //   });
+    // },
     sendCoupon() {
       this.isLoading = true;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
@@ -247,7 +264,7 @@ export default {
         .post(api, { data: { user: { userL }, messageL } })
         .then((response) => {
           if (response.data.success) {
-             //換路由..注意寫法.不是用 "=""
+            //換路由..注意寫法.不是用 "=""
             vm.$router.push(`/cart/${response.data.orderId}`);
           }
         });
@@ -268,13 +285,14 @@ export default {
                 if (form.checkValidity() === false) {
                   event.preventDefault();
                   event.stopPropagation();
-                  
-                }else{
+                } else {
                   // 驗證過
+                  //按鈕全部不能按
+                  $("a").addClass("disabled");
+                  $("button").prop("disabled", true);
                   vm.sentStep1();
                 }
                 form.classList.add("was-validated");
-                
               },
               false
             );
@@ -284,6 +302,5 @@ export default {
       );
     },
   },
-  
 };
 </script>

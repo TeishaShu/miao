@@ -1,3 +1,14 @@
+a.disabled{
+  pointer-events: none;
+  i{
+    color: lighten($or, 20%);
+    border: 1px solid lighten($or, 20%);
+  }
+}
+.coupon a.disabled{
+  pointer-events: none;
+  background: lighten($or, 20%);
+}
 .out {
   margin-top: 20px;
 }

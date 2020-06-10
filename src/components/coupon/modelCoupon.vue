@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: "modalCoupon",
+  name: "modalCoupon-component",
   props: {
     title: {
       type: String,

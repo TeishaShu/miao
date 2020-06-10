@@ -24,3 +24,9 @@ p {
   padding: 5px 15px;
   border-radius: 20px;
 }
+a.disabled{
+  pointer-events: none;
+}
+button[disabled]{
+  background: lighten($red, 15%) !important;
+}

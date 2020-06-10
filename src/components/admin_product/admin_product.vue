@@ -59,7 +59,7 @@
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">
-              <span>{{addNew?'建立新產品':'編輯產品資訊'}}</span>
+              <span>{{ addNew ? "建立新產品" : "編輯產品資訊" }}</span>
             </h5>
             <button
               type="button"
@@ -86,7 +86,10 @@
                 <div class="form-group">
                   <label for="customFile"
                     >或 上傳圖片
-                    <i class="fas fa-spinner fa-spin" v-if="status.fileUpLoading"></i>
+                    <i
+                      class="fas fa-spinner fa-spin"
+                      v-if="status.fileUpLoading"
+                    ></i>
                   </label>
                   <input
                     type="file"
@@ -221,47 +224,6 @@
         </div>
       </div>
     </div>
-    <div
-      class="modal fade"
-      id="delProductModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content border-0">
-          <div class="modal-header bg-danger text-white">
-            <h5 class="modal-title" id="exampleModalLabel">
-              <span>刪除產品</span>
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            是否刪除
-            <strong class="text-danger">「{{ delItem.title }}」</strong>
-            商品(刪除後將無法恢復)。
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              data-dismiss="modal"
-            >
-              取消
-            </button>
-            <button type="button" class="btn btn-danger" @click="delSend">確認刪除</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="col-md-12 pageOut">
       <paginate
@@ -275,11 +237,14 @@
       >
       </paginate>
     </div>
+
+    <DelModal titleType="產品" :api="delApi" :productName="deleteProductName" />
   </div>
 </template>
 <script>
 import Paginate from "vuejs-paginate";
-import Alert from "../alert/alertMessage";
+import Alert from "./../alert/alertMessage.vue";
+import DelModal from "./../modal/DelModal.vue";
 // import model_product from "./model_product.vue";
 import $ from "jquery";
 export default {
@@ -297,25 +262,28 @@ export default {
         description: "",
         content: "這是內容",
         is_enabled: 0,
-        imageUrl: ''
+        imageUrl: "",
       }, //新增
       addNew: false, //判斷modal是新增還是編輯
       isLoading: false,
-      status:{
-        fileUpLoading:false
+      status: {
+        fileUpLoading: false,
       },
-      delItem: {}
+      delItem: {},
+      delApi: "",
+      deleteProductName: "",
     };
   },
   components: {
     Paginate,
-    Alert
+    Alert,
+    DelModal,
   },
   methods: {
     api() {
       this.isLoading = true;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/products?page=${this.dataPage.current_page}`;
-      this.$http.get(api).then(response => {
+      this.$http.get(api).then((response) => {
         this.isLoading = false;
         this.dataProdtct = response.data.products;
         this.dataPage = response.data.pagination;
@@ -324,16 +292,16 @@ export default {
     openModel(addNewStatus, item) {
       this.addNew = addNewStatus;
       if (this.addNew) {
-        this.tempProduct.title = "",
-        this.tempProduct.category = "",
-        this.tempProduct.origin_price = 0,
-        this.tempProduct.price = 0,
-        this.tempProduct.unit = "",
-        this.tempProduct.image = "",
-        this.tempProduct.description = "",
-        this.tempProduct.content = "這是內容",
-        this.tempProduct.is_enabled = 0,
-        this.tempProduct.imageUrl = ''
+        (this.tempProduct.title = ""),
+          (this.tempProduct.category = ""),
+          (this.tempProduct.origin_price = 0),
+          (this.tempProduct.price = 0),
+          (this.tempProduct.unit = ""),
+          (this.tempProduct.image = ""),
+          (this.tempProduct.description = ""),
+          (this.tempProduct.content = "這是內容"),
+          (this.tempProduct.is_enabled = 0),
+          (this.tempProduct.imageUrl = "");
       } else {
         // this.tempProduct = item; -->不能這樣寫，因為要把編輯前後的資料分開.所以要避開物件船參考的特性...為了取銷的部分嗎?
         this.tempProduct = Object.assign({}, item);
@@ -341,14 +309,20 @@ export default {
       $("#productModal").modal("show");
     },
     updateProduct() {
-      if(this.tempProduct.title === "" || this.tempProduct.category === "" || this.tempProduct.origin_price === "" || this.tempProduct.price === "" || this.tempProduct.imageUrl === "" ){
-        alert("請填寫資料")
-        return
+      if (
+        this.tempProduct.title === "" ||
+        this.tempProduct.category === "" ||
+        this.tempProduct.origin_price === "" ||
+        this.tempProduct.price === "" ||
+        this.tempProduct.imageUrl === ""
+      ) {
+        alert("請填寫資料");
+        return;
       }
       this.isLoading = true;
       if (this.addNew) {
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product`;
-        this.$http.post(api, { data: this.tempProduct }).then(response => {
+        this.$http.post(api, { data: this.tempProduct }).then((response) => {
           // this.tempProduct.imageUrl = ''; //新增資料會有舊的...兩個都丟圖片會消失.這個是新增的
           this.isLoading = false;
           this.api();
@@ -356,25 +330,27 @@ export default {
       } else {
         ///////////////要改這裡.put的方式  https://blog.csdn.net/qq_31837621/article/details/80688854
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product/${this.tempProduct.id}`;
-        this.$http.put(api, { data: this.tempProduct }).then(response => {
+        this.$http.put(api, { data: this.tempProduct }).then((response) => {
           this.isLoading = false;
           this.api();
         });
       }
       $("#productModal").modal("hide");
-      
     },
     delOpen(item) {
       this.delItem = item;
-      $("#delProductModal").modal("show");
+      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product/${this.delItem.id}`;
+      this.deleteProductName = item.title;
+      $("#delModal").modal("show");
     },
-    delSend() {
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product/${this.delItem.id}`;
-      this.$http.delete(api).then(response => {
-        this.api();
-        $("#delProductModal").modal("hide");
-      });
-    },
+    // delSend() {
+    //   const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product/${this.delItem.id}`;
+    //   this.delApi = api;
+    //   this.$http.delete(api).then(response => {
+    //     this.api();
+    //     $("#delModal").modal("hide");
+    //   });
+    // },
     upImg() {
       //用console查看this.當圖片丟進來時看$refs的files裡面的files是個陣列
       this.status.fileUpLoading = true;
@@ -385,26 +361,25 @@ export default {
       this.$http
         .post(api, formData, {
           header: {
-            "Content-type": "multipart/form-data"
-          }
+            "Content-type": "multipart/form-data",
+          },
         })
-        .then(response => {
+        .then((response) => {
           this.status.fileUpLoading = false;
           if (response.data.success) {
             // this.tempProduct.imageUrl = response.data.imageUrl;
             // console.log(this.tempProduct)//用這個看.發現沒有getter、setter雙向綁定
             this.$set(this.tempProduct, "imageUrl", response.data.imageUrl); //強制寫入
-          }else{
-            this.$bus.$emit('message:push',response.data.message,'danger');
+          } else {
+            this.$bus.$emit("message:push", response.data.message, "danger");
             //和alertMessage.vue、bus.js有關
           }
         });
     },
-
   },
   created() {
     this.api();
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>

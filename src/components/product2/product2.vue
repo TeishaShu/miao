@@ -49,10 +49,13 @@ export default {
       this.isLoading = true;
       const id = this.$route.params.id;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/product/${id}`;
+      console.log('1')
       this.$http.get(api).then(response => {
+        console.log('2')
         this.isLoading = false;
         if (response.data.success) {
           this.dataProdtct = response.data.product;
+          console.log('3')
         }
       });
     },
