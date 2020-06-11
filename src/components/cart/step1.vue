@@ -172,9 +172,9 @@ export default {
   components: {
     DelModal,
   },
-  props: {
-    step: Number, //父層 step 修改
-  },
+  // props: {
+  //   step: Number, //父層 step 修改
+  // },
   data() { 
     return {
       isLoading: false,
@@ -218,6 +218,7 @@ export default {
         this.isLoading = false;
         if (response.data.success) {
           this.dataAPI = response.data.data;
+          this.$emit("nextStep",1); // 父層step更改
         }
       });
     },
@@ -269,7 +270,7 @@ export default {
           if (response.data.success) {
             //換路由..注意寫法.不是用 "=""
             vm.$router.push(`/cart/${response.data.orderId}`);
-            this.$emit('nextStep'); // 父層step更改
+            this.$emit('nextStep',2); // 父層step更改
             // this.step += 1;  不能在子層改父層的值
           }
         });

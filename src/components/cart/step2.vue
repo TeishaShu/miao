@@ -110,9 +110,9 @@ export default {
       textCoupon: { code: "" },
     };
   },
-  props: {
-    step: Number,
-  },
+  // props: {
+  //   step: Number,
+  // },
   created() {
     this.orderId = this.$route.params.orderId; //orderId 是對應到 router裡面路由id的名稱
     this.getApi();
@@ -135,7 +135,7 @@ export default {
         this.isLoading = false;
         if (response.data.success) {
           this.getApi(); //注意要重新刷頁面
-          this.$emit("nextStep"); // 父層step更改
+          this.$emit("nextStep",3); // 父層step更改
         }
       });
     },

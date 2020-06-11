@@ -41,8 +41,8 @@ export default {
     }
   },
   methods: {
-    nextStep() {
-      this.nowStep += 1;
+    nextStep(val) {
+      this.nowStep = val;
     }
   }
 }
