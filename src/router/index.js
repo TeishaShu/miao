@@ -60,7 +60,6 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'admin',
     component: () => import('../components/admin/admin.vue'),
     meta: { requiresAuth: true },
     children:[

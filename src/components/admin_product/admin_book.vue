@@ -274,11 +274,11 @@ export default {
      	// ^[1-99]$     ^\d{2}$
       // valid  "".e.<1   要正則判斷-------------------------------------------------------------------------------------------------
       // if (valid) {
-
       // }
       // qty.match(/[\d]*/)
       // qty.replace(/e/,'')
-      console.log('qty',qty)
+
+      // console.log('qty',qty)
 
       const newEdit_products = this.newEdit.products;
       newEdit_products[key].total = qty * price;
@@ -290,7 +290,7 @@ export default {
       this.newEdit.total = newTotal;
     },
     keyupUpdateTotal(qty) {//-------------------------------------------------------------------------------------------
-      console.log('keyupUpdateTotal',qty)
+      // console.log('keyupUpdateTotal',qty)
       qty = qty.replace(/[^\d]/g,'')  
     },
     cancelEdit(){

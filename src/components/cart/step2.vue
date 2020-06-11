@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-  <!--loading-->
+    <!--loading-->
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
@@ -20,15 +20,15 @@
               <td>
                 <img :src="item.product.imageUrl" alt />
                 <p>
-                  {{item.product.title}}
+                  {{ item.product.title }}
                 </p>
               </td>
-              <td>{{item.qty}}</td>
-              <td>NT{{item.product.price | currency }}</td>
+              <td>{{ item.qty }}</td>
+              <td>NT{{ item.product.price | currency }}</td>
             </tr>
             <tr class="total">
               <td colspan="2">總計</td>
-              <td>NT{{dataAPI.total | currency }}</td>
+              <td>NT{{ dataAPI.total | currency }}</td>
             </tr>
           </tbody>
         </table>
@@ -46,38 +46,48 @@
               <td>
                 姓名
               </td>
-              <td>{{dataAPI.user.userL.name}}</td>
+              <td>{{ dataAPI.user.userL.name }}</td>
             </tr>
             <tr>
               <td>
                 電話
               </td>
-              <td>{{dataAPI.user.userL.tel}}</td>
+              <td>{{ dataAPI.user.userL.tel }}</td>
             </tr>
             <tr>
               <td>E-mail</td>
-              <td>{{dataAPI.user.userL.email}}</td>
+              <td>{{ dataAPI.user.userL.email }}</td>
             </tr>
             <tr>
               <td>地址</td>
-              <td>{{dataAPI.user.userL.address}}</td>
+              <td>{{ dataAPI.user.userL.address }}</td>
             </tr>
-            <tr>
+            <!--<tr>  api沒有送這個資料
               <td>備註</td>
               <td>{{dataAPI.user.userL.name}}</td>
-            </tr>
+            </tr>-->
             <tr>
               <td>付款狀態</td>
-              <td><!--原來這邊這樣-->
-                <span v-if="dataAPI.is_paid && dataAPI.create_at" class="green">已付款</span>
+              <td>
+                <!--原來這邊這樣-->
+                <span v-if="dataAPI.is_paid && dataAPI.create_at" class="green"
+                  >已付款</span
+                >
                 <span v-else class="red">尚未付款</span>
               </td>
             </tr>
-
           </tbody>
         </table>
       </div>
-        <a href="#" class="send" @click.prevent="pay">確認付款</a>
+      <div class="link">
+        <router-link
+          :to="{ name: 'product' }"
+          class="aStyle"
+          v-if="dataAPI.is_paid"
+          >>> 逛逛其他產品</router-link
+        >
+        <a href="#" class="send" @click.prevent="pay" v-else>確認付款</a>
+      </div>
     </div>
   </div>
 </template>
@@ -90,21 +100,24 @@
 export default {
   data() {
     return {
-      orderId:'',
+      orderId: "",
       isLoading: false,
       dataAPI: {
-        user:{
-          userL:''
-        }
+        user: {
+          userL: "",
+        },
       },
-      textCoupon: { code: "" }
+      textCoupon: { code: "" },
     };
   },
-  created(){
+  props: {
+    step: Number,
+  },
+  created() {
     this.orderId = this.$route.params.orderId; //orderId 是對應到 router裡面路由id的名稱
     this.getApi();
   },
-  methods:{
+  methods: {
     getApi() {
       this.isLoading = true;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order/${this.orderId}`;
@@ -115,16 +128,17 @@ export default {
         }
       });
     },
-    pay(){
+    pay() {
       this.isLoading = true;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/pay/${this.orderId}`;
       this.$http.post(api).then((response) => {
         this.isLoading = false;
         if (response.data.success) {
           this.getApi(); //注意要重新刷頁面
+          this.$emit("nextStep"); // 父層step更改
         }
       });
-    }
-  }
-}
+    },
+  },
+};
 </script>
