@@ -1,5 +1,5 @@
 <template>
-  <div class="container out">
+  <div class="container minHeight">
     <div class="row">
       <!--步驟-->
       <div class="col-md-12">
