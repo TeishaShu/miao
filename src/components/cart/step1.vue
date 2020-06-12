@@ -278,9 +278,12 @@ export default {
     validateBootstrap() {
       const vm = this;
       ("use strict");
+      console.log('a')
+      // 因為用router.不是正個頁面刷新所以不能用。可以換成 1.想辦法讓這裡面的function在對的時間呼叫。 2.用router的可以整頁刷新
       window.addEventListener(
         "load",
         function() {
+          console.log('ab')
           // Fetch all the forms we want to apply custom Bootstrap validation styles to
           const forms = document.getElementsByClassName("needs-validation");
           // Loop over them and prevent submission
@@ -291,9 +294,11 @@ export default {
                 if (form.checkValidity() === false) {
                   event.preventDefault();
                   event.stopPropagation();
+                  console.log('0')
                 } else {
                   // 驗證過
                   //按鈕全部不能按
+                  console.log('1')
                   $("a").addClass("disabled");
                   $("button").prop("disabled", true);
                   vm.sentStep1();

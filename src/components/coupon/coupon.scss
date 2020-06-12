@@ -1,5 +1,5 @@
 .minHeight{
-  min-height:calc(100vh - 300px);
+  min-height:calc(100vh - 375px);
 }
 .coupon{
   text-align: center;
@@ -13,7 +13,7 @@
     display: block;
     line-height: 40px;
     text-align: center;
-    margin-bottom: 5vh;
+    margin-bottom: 20px;
     border-radius: 30px;
   }
   input{
@@ -37,9 +37,10 @@
 img{
   margin:0 auto;
   margin-top: 10vh;
-  margin-bottom: 10vh;
+  margin-bottom: 8vh;
   display: block;
   width: 50%;
+  max-width: 800px;
 }
 .box{
   border: 2px solid $red;
