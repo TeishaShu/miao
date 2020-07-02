@@ -32,12 +32,12 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-outline-secondary"
+              class="btn btn-outline-secondary cancelBtn"
               data-dismiss="modal"
             >
               取消
             </button>
-            <button type="button" class="btn btn-danger" @click="delSend()">
+            <button type="button" class="btn btn-danger confirm" @click="delSend()">
               確認刪除
             </button>
           </div>

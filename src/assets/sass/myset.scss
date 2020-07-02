@@ -27,6 +27,9 @@ p {
 a.disabled{
   pointer-events: none;
 }
-button[disabled]{
-  background: lighten($red, 15%) !important;
+.cancelBtn[disabled]{
+  background: #f1f1f1;
+}
+.confirm[disabled]{
+  background: lighten($red, 15%);
 }
