@@ -5,7 +5,7 @@
       <loading :active.sync="isLoading"></loading>
     </div>
     <!--Alert-->
-    <!--<Alert/>-->
+    <!--<Alert/>---------------------範本---->
 
     <!--原本的model是用data-toggle和data-target.後來換成用click來用.因為編輯也需要用到
       <a href="#" class="add" data-toggle="modal" data-target="#productModal">建立新產品</a>-->
@@ -319,7 +319,7 @@ export default {
         alert("請填寫資料");
         return;
       }
-      this.isLoading = true;
+      // $("#productModal button").prop('disabled',true);
       if (this.addNew) {
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product`;
         this.$http.post(api, { data: this.tempProduct }).then((response) => {
@@ -343,14 +343,6 @@ export default {
       this.deleteProductName = item.title;
       $("#delModal").modal("show");
     },
-    // delSend() {
-    //   const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product/${this.delItem.id}`;
-    //   this.delApi = api;
-    //   this.$http.delete(api).then(response => {
-    //     this.api();
-    //     $("#delModal").modal("hide");
-    //   });
-    // },
     upImg() {
       //用console查看this.當圖片丟進來時看$refs的files裡面的files是個陣列
       this.status.fileUpLoading = true;

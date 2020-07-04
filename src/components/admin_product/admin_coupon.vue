@@ -271,6 +271,7 @@ export default {
         return;
       }
       const vm = this;
+      // $("#addModal button").prop('disabled',true);
       this.isLoading = true;
       if (this.modalStyle === "add") {
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon`;
