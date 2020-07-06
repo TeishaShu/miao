@@ -4,6 +4,7 @@
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
+    <AlertMessage/>
     <img src="../../assets/coupon.png" alt="" />
     <div class="coupon">
       <div>
@@ -29,11 +30,13 @@
 <script>
 import cartBtn from "../../layout/footerStyle/cartBtn.vue";
 import couponModal from './modelCoupon';
+import AlertMessage from "./../alert/alertMessage.vue";
 import $ from "jquery";
 export default {
   components:{
     couponModal,
-    cartBtn
+    cartBtn,
+    AlertMessage
   },
   data() {
     return {
@@ -52,6 +55,12 @@ export default {
       const dd = new Date(num);
       return `${dd.getFullYear()}年${dd.getMonth()+1}月${dd.getDate()}日`;
     },
+    alertBus(){
+      this.$bus.$emit('message:push','bbb','danger');
+    }
+  },
+  created() {
+    this.alertBus;
   },
 };
 </script>

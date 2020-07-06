@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'alertMessage',
+  name: 'alertMessage00',
   data() {
     return {
       messages: [],
@@ -40,7 +40,7 @@ export default {
             vm.messages.splice(i, 1);
           }
         });
-      }, 5000);//5秒一到會把自己的訊息移除
+      }, 5000); // 5秒一到會把自己的訊息移除
     },
   },
   created() {
@@ -53,7 +53,7 @@ export default {
     vm.$bus.$on('message:push', (message, status = 'warning') => {
       vm.updateMessage(message, status);
     });
-    vm.$bus.$emit('message:push');
+    // vm.$bus.$emit('message:push','aaaaa','danger');
   },
 };
 </script>
@@ -62,8 +62,8 @@ export default {
 .message-alert {
   position: fixed;
   max-width: 50%;
-  top: 56px;
-  right: 20px;
+  top: 130px;
+  right: 50%;
   z-index: 1100;
 }
 </style>

@@ -4,8 +4,6 @@
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
-    <!--Alert-->
-    <!--<Alert/>---------------------範本---->
 
     <!--原本的model是用data-toggle和data-target.後來換成用click來用.因為編輯也需要用到
       <a href="#" class="add" data-toggle="modal" data-target="#productModal">建立新產品</a>-->
@@ -243,7 +241,6 @@
 </template>
 <script>
 import Paginate from "vuejs-paginate";
-import Alert from "./../alert/alertMessage.vue";
 import DelModal from "./../modal/DelModal.vue";
 // import model_product from "./model_product.vue";
 import $ from "jquery";
@@ -276,7 +273,6 @@ export default {
   },
   components: {
     Paginate,
-    Alert,
     DelModal,
   },
   methods: {
