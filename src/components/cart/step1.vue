@@ -87,8 +87,7 @@
               class="form-control"
               type="text"
               placeholder="*收件人姓名"
-              v-model="user.name"
-              @blur="blurUser('name')"
+              v-model="form.user.name"
               required
             />
             <div class="valid-feedback">
@@ -103,8 +102,7 @@
               class="form-control"
               type="number"
               placeholder="*收件人電話"
-              v-model="user.tel"
-              @blur="blurUser('tel')"
+              v-model="form.user.tel"
               required
             />
             <div class="valid-feedback">
@@ -119,8 +117,7 @@
               class="form-control"
               type="email"
               placeholder="*E-mail"
-              v-model="user.email"
-              @blur="blurUser('email')"
+              v-model="form.user.email"
               required
             />
             <div class="valid-feedback">
@@ -135,8 +132,7 @@
               class="form-control"
               type="text"
               placeholder="*收件人地址"
-              v-model="user.address"
-              @blur="blurUser('address')"
+              v-model="form.user.address"
               required
             />
             <div class="valid-feedback">
@@ -150,7 +146,7 @@
             <textarea
               rows="4"
               placeholder="留言備註"
-              v-model="message"
+              v-model="form.message"
             ></textarea>
             <button class="send" type="submit">送出訂單</button>
           </div>
@@ -172,9 +168,6 @@ export default {
   components: {
     DelModal,
   },
-  // props: {
-  //   step: Number, //父層 step 修改
-  // },
   data() { 
     return {
       isLoading: false,
@@ -188,19 +181,22 @@ export default {
           final_total: 0,
         },
       },
-      user: {
-        name: "",
-        email: "",
-        tel: "",
-        address: "",
-      },
+      
       userStyle: {
         name: false,
         email: false,
         tel: false,
         address: false,
       },
-      message: "",
+      form:{
+        user: {
+          name: "",
+          email: "",
+          tel: "",
+          address: "",
+        },
+        message: "",
+      },
       delItem: "",
       delApi: "",
       deleteProductName: "",
@@ -212,6 +208,7 @@ export default {
   },
   methods: {
     api() {
+      console.log('api')
       this.isLoading = true;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       this.$http.get(api).then((response) => {
@@ -240,9 +237,22 @@ export default {
     //     }
     //   });
     // },
+    // sendCoupon() {
+    //   this.isLoading = true;
+    //   const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
+    //   this.$http.post(api, { data: this.textCoupon }).then((response) => {
+    //     this.isLoading = false;
+    //     if (response.data.success) {
+    //       this.dataCoupon = response.data;
+    //     } else {
+    //       alert(response.data.message);
+    //     }
+    //   });
+    // },
     sendCoupon() {
       this.isLoading = true;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
+      console.log('!!sendCoupon')
+      
       this.$http.post(api, { data: this.textCoupon }).then((response) => {
         this.isLoading = false;
         if (response.data.success) {
@@ -251,13 +261,18 @@ export default {
           alert(response.data.message);
         }
       });
-    },
-    blurUser(name) {
-      if (this.user[name] === "") {
-        this.userStyle[name] = true;
-      } else {
-        this.userStyle[name] = false;
-      }
+
+      axios({
+        method: 'post',
+        url: `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`,
+        data:{ data: form }
+      })
+      .then(function(response){
+        console.log('ok',response)
+      })
+      .catch(function(err){
+        console.log('err',err)
+      });
     },
     sentStep1() {
       const vm = this;
@@ -274,16 +289,32 @@ export default {
             // this.step += 1;  不能在子層改父層的值
           }
         });
+
+      // const form = vm.form;
+      // this.$http.post(api, { data: form })
+      // .then((response) => {
+      //     console.log('000')
+      //     if (response.data.success) {
+      //       //換路由..注意寫法.不是用 "=""
+      //       console.log('response',response)
+      //       debugger
+      //       vm.$router.push(`/cart/${response.data.orderId}`);
+      //       this.$emit('nextStep',2); // 父層step更改
+      //       // this.step += 1;  不能在子層改父層的值
+      //     }else{
+      //       console.log('nnn')
+      //     }
+      //   });
+      // console.log(22,'sentStep22-------') 
+
     },
     validateBootstrap() {
       const vm = this;
       ("use strict");
-      console.log('a')
       // 因為用router.不是正個頁面刷新所以不能用。可以換成 1.想辦法讓這裡面的function在對的時間呼叫。 2.用router的可以整頁刷新
       window.addEventListener(
         "load",
         function() {
-          console.log('ab')
           // Fetch all the forms we want to apply custom Bootstrap validation styles to
           const forms = document.getElementsByClassName("needs-validation");
           // Loop over them and prevent submission
@@ -294,14 +325,14 @@ export default {
                 if (form.checkValidity() === false) {
                   event.preventDefault();
                   event.stopPropagation();
-                  console.log('0')
                 } else {
                   // 驗證過
                   //按鈕全部不能按
-                  console.log('1')
                   $("a").addClass("disabled");
                   $("button").prop("disabled", true);
                   vm.sentStep1();
+                  console.log(1,'validateBootstrap-true')
+                  debugger
                 }
                 form.classList.add("was-validated");
               },
