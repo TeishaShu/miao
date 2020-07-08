@@ -8,67 +8,8 @@
     <banner />
     <div class="container">
       <div class="row">
-        <div class="col-md-3 asideBox">
-          <ul>
-            <li @click="selectCategory('all')">
-              <i class="fas fa-cookie"></i>全部商品
-            </li>
-            <li @click="selectCategory('乾糧')">
-              <i class="fas fa-cookie"></i>乾糧
-            </li>
-            <li @click="selectCategory('罐頭')">
-              <i class="fas fa-cookie"></i>罐頭
-            </li>
-            <li @click="selectCategory('零食')">
-              <i class="fas fa-cookie"></i>零食
-            </li>
-            <li @click="selectCategory('營養品')">
-              <i class="fas fa-cookie"></i>營養品
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-9">
-          <div class="row productStyle">
-            <div
-              class="col-md-4 col-sm-6 col-6 proCol"
-              v-for="item in pagination.pageAry[pagination.current_page - 1]"
-              :key="item.id"
-            >
-              <a>
-                <!--<pre>{{item}}</pre>-->
-                <div @click="clickProduct(item)" class="proImg">
-                  <img :src="`${item.imageUrl}`" alt="" />
-                </div>
-                <!--注意這邊style的寫法.backgroundImage、url裡面沒有''-->
-                <div class="proTxt">
-                  <p class="type">{{ item.category }}</p>
-                  <h3 @click="clickProduct(item)">
-                    {{ item.title }}
-                  </h3>
-                  <p>
-                    <em>NT{{ item.origin_price | currency }}</em
-                    ><br />NT{{ item.price | currency }}
-                  </p>
-                  <i
-                    class="fas fa-cart-plus"
-                    @click.prevent="addCart(item)"
-                  ></i>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-md-12 pageOut">
-              <paginate
-                v-if="pagination.total_pages"
-                :page-count="pagination.total_pages"
-                :prev-text="'<'"
-                :next-text="'>'"
-                :page-range="3"
-                v-model="pagination.current_page"
-              >
-              </paginate>
-            </div>
-          </div>
+        <div class="col-md-12">
+          123
         </div>
       </div>
     </div>

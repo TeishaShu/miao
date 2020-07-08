@@ -84,10 +84,11 @@
           :to="{ name: 'product' }"
           class="aStyle"
           v-if="dataAPI.is_paid"
-          >>> 逛逛其他產品</router-link
+          >>> 繼續購物</router-link
         >
         <a href="#" class="send" @click.prevent="pay" v-else>確認付款</a>
       </div>
+
     </div>
   </div>
 </template>

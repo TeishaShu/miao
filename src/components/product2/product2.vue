@@ -24,7 +24,7 @@
           <input type="text" v-model.trim="selectNum" />
           <i class="fas fa-plus" @click="changeNum(1)"></i>
         </div>
-        <a href="#" class="addCart" @click.prevent="addCart">加入購物車</a>
+        <a href="#" class="addCart" @click.prevent="addCart"><i class="fa fa-heart mr-2" aria-hidden="true"></i>加入購物車</a>
       </div>
     </div>
     <cartBtn />

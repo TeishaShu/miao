@@ -10,7 +10,7 @@
       v-if="dataAPI.carts && dataAPI.carts.length === 0"
     >
       <p>您的購物車內還沒有任何商品!</p>
-      <router-link to="/">>> 快來逛逛</router-link>
+      <router-link :to="{name:'product'}">>> 快來逛逛</router-link>
     </div>
     <!--有東西  v-if="dataAPI.carts.length !== 0"-->
     <div class="col-md-12" v-if="dataAPI.carts && dataAPI.carts.length !== 0">
@@ -87,7 +87,7 @@
               class="form-control"
               type="text"
               placeholder="*收件人姓名"
-              v-model="form.user.name"
+              v-model="user.name"
               required
             />
             <div class="valid-feedback">
@@ -102,7 +102,7 @@
               class="form-control"
               type="number"
               placeholder="*收件人電話"
-              v-model="form.user.tel"
+              v-model="user.tel"
               required
             />
             <div class="valid-feedback">
@@ -117,7 +117,7 @@
               class="form-control"
               type="email"
               placeholder="*E-mail"
-              v-model="form.user.email"
+              v-model="user.email"
               required
             />
             <div class="valid-feedback">
@@ -132,7 +132,7 @@
               class="form-control"
               type="text"
               placeholder="*收件人地址"
-              v-model="form.user.address"
+              v-model="user.address"
               required
             />
             <div class="valid-feedback">
@@ -146,7 +146,7 @@
             <textarea
               rows="4"
               placeholder="留言備註"
-              v-model="form.message"
+              v-model="message"
             ></textarea>
             <button class="send" type="submit">送出訂單</button>
           </div>
@@ -181,22 +181,19 @@ export default {
           final_total: 0,
         },
       },
-      
       userStyle: {
         name: false,
         email: false,
         tel: false,
         address: false,
       },
-      form:{
-        user: {
-          name: "",
-          email: "",
-          tel: "",
-          address: "",
-        },
-        message: "",
+      user: {
+        name: "",
+        email: "",
+        tel: "",
+        address: "",
       },
+      message: "",
       delItem: "",
       delApi: "",
       deleteProductName: "",
@@ -237,22 +234,9 @@ export default {
     //     }
     //   });
     // },
-    // sendCoupon() {
-    //   this.isLoading = true;
-    //   const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
-    //   this.$http.post(api, { data: this.textCoupon }).then((response) => {
-    //     this.isLoading = false;
-    //     if (response.data.success) {
-    //       this.dataCoupon = response.data;
-    //     } else {
-    //       alert(response.data.message);
-    //     }
-    //   });
-    // },
     sendCoupon() {
       this.isLoading = true;
-      console.log('!!sendCoupon')
-      
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
       this.$http.post(api, { data: this.textCoupon }).then((response) => {
         this.isLoading = false;
         if (response.data.success) {
@@ -261,35 +245,44 @@ export default {
           alert(response.data.message);
         }
       });
-
-      axios({
-        method: 'post',
-        url: `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`,
-        data:{ data: form }
-      })
-      .then(function(response){
-        console.log('ok',response)
-      })
-      .catch(function(err){
-        console.log('err',err)
-      });
     },
     sentStep1() {
       const vm = this;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
       const userL = this.user;
       const messageL = this.message;
-      this.$http
-        .post(api, { data: { user: { userL }, messageL } })
-        .then((response) => {
-          if (response.data.success) {
-            //換路由..注意寫法.不是用 "=""
-            vm.$router.push(`/cart/${response.data.orderId}`);
-            this.$emit('nextStep',2); // 父層step更改
-            // this.step += 1;  不能在子層改父層的值
-          }
-        });
+      console.log(0,'sentStep1')
 
+      this.$http
+      .post(api, { data: { user: { userL }, messageL } })
+      .then((response) => {
+        console.log('sent',response)
+
+        if (response.data.success) {
+          //換路由..注意寫法.不是用 "=""
+          vm.$router.push(`/cart/${response.data.orderId}`);
+          this.$emit('nextStep',2); // 父層step更改
+          // this.step += 1;  不能在子層改父層的值
+        }
+      })
+      .catch((error) => {
+        console.log('err',error)
+      });
+
+      console.log('zzz')
+      debugger
+
+      // this.axios({
+      //   method: 'post',
+      //   url: `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`,
+      //   data:{ data: { user: { userL }, messageL } }
+      // })
+      // .then(function(response){
+      //   console.log('step1_ok',response)
+      // })
+      // .catch(function(err){
+      //   console.log('step1_err',err)
+      // });
       // const form = vm.form;
       // this.$http.post(api, { data: form })
       // .then((response) => {
@@ -331,8 +324,6 @@ export default {
                   $("a").addClass("disabled");
                   $("button").prop("disabled", true);
                   vm.sentStep1();
-                  console.log(1,'validateBootstrap-true')
-                  debugger
                 }
                 form.classList.add("was-validated");
               },
