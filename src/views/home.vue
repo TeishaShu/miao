@@ -14,7 +14,7 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <router-link :to="{ name: 'index' }" class="logoA">
-                <img src="./../assets/logo.png" alt="" class="logo" />
+                <img src="/logo.png" alt="" class="logo" />
                 <div class="logoName">來呷飽貓食堂</div>
               </router-link>
               <div

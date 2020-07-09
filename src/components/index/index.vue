@@ -4,7 +4,6 @@
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
-
     <banner />
     <div class="container">
       <div class="row">

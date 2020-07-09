@@ -5,7 +5,7 @@
       <loading :active.sync="isLoading"></loading>
     </div>
     <AlertMessage/>
-    <img src="../../assets/coupon.png" alt="" />
+    <img src="/coupon.png" alt="" />
     <div class="coupon">
       <div>
         <h2>開幕慶優惠 !</h2>
