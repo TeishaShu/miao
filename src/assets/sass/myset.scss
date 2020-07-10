@@ -33,3 +33,6 @@ a.disabled{
 .confirm[disabled]{
   background: lighten($red, 15%);
 }
+button:focus {
+  outline: none;
+}

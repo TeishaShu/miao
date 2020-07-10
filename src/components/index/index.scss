@@ -1,0 +1,29 @@
+.product{
+  background-image: url("../../../public/index/productBg.jpg");
+  width: 100%;
+  max-height: 750px;
+  height: 750px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #eee8e9;
+  // background-attachment:fixed;
+}
+.title{
+  text-align: center;
+  color: $red;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+  &::after{
+    content: "";
+    width: 60%;
+    height: 20px;
+    border: 2px solid $or_light;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    z-index: -1;
+  }
+}

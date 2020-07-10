@@ -4,6 +4,7 @@
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
+    <AlertMessage/>
 
     <!--content-->
     <div class="container mt-4">
@@ -83,10 +84,20 @@
 @import "product.scss";
 @import "../../assets/sass/page.scss";
 </style>
+
 <script>
 import cartBtn from "../../layout/footerStyle/cartBtn.vue";
 import Paginate from "vuejs-paginate";
+import AlertMessage from "./../alert/alertMessage.vue";
 export default {
+  created() {
+    this.getProduct();
+  },
+  components: {
+    cartBtn,
+    Paginate,
+    AlertMessage,
+  },
   data() {
     return {
       isLoading: false,
@@ -99,10 +110,6 @@ export default {
         current_page: 1,
       },
     };
-  },
-  components: {
-    cartBtn,
-    Paginate,
   },
   methods: {
     getProduct() {
@@ -142,6 +149,7 @@ export default {
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       this.$http.post(api, { data: addCartSend }).then((response) => {
         this.isLoading = false;
+        this.$bus.$emit('message:push',`已加入購物車: ${item.title}`,'success');
       });
     },
     selectCategory(style) {
@@ -189,8 +197,6 @@ export default {
     //   return this.$store.state.isLoading;
     // },
   },
-  created() {
-    this.getProduct();
-  },
+  
 };
 </script>

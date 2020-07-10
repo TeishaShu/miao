@@ -1,10 +1,11 @@
-<template
-  ><!--加入購物車後不知道為何會出現紅字-->
+<template>
   <div class="container out">
     <!--loading-->
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
+    <AlertMessage/>
+
     <div class="row">
       <div class="col-md-5 text-center">
         <img :src="dataProdtct.imageUrl" alt="" class="img-fluid" />
@@ -34,11 +35,14 @@
 @import "../../assets/sass/variables.scss";
 @import "product2.scss";
 </style>
+
 <script>
 import cartBtn from "../../layout/footerStyle/cartBtn.vue";
+import AlertMessage from "./../alert/alertMessage.vue";
 export default {
   components: {
     cartBtn,
+    AlertMessage,
   },
   data() {
     return {
@@ -81,9 +85,9 @@ export default {
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       this.$http.post(api, { data: this.addCartSend }).then((response) => {
         this.isLoading = false;
-        // console.log('11',response.data)
         if (response.data.success) {
           this.dataProdtct = response.data.data.product;
+          this.$bus.$emit('message:push','成功加入購物車','success');
         }
       });
     },

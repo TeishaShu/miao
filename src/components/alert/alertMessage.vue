@@ -63,7 +63,9 @@ export default {
   position: fixed;
   max-width: 50%;
   top: 130px;
-  right: 50%;
+  left: 0;
+  right: 0;
+  margin:0 auto;
   z-index: 1100;
 }
 </style>
