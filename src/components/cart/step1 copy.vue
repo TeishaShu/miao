@@ -172,7 +172,7 @@ export default {
     this.api();
   },
   mounted() {
-    this.validateBootstrap2();
+    this.validateBootstrap();
   },
   data() { 
     return {
@@ -242,39 +242,28 @@ export default {
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
       const userL = this.user;
       const messageL = this.message;
-      
+
+      const testApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
+
       console.log(0,'sentStep1')
-      const dataContent = { data: { user: { userL }, messageL } };
-      const dataString = JSON.stringify(dataContent); 
-      const postURL = (dataString)=>{
-        fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
-          method: 'POST',
-          body: dataString,
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          })
-        })
-          .then(res => {
-            return res.json();
-          }).then(res => {
-            console.log(res)
-          });
-      }
-      postURL(dataString);
 
-      // this.$http
-      // .post(api, { data: { user: { userL }, messageL } })
-      // .then((response) => {
-      //   console.log('sent',response)
+      this.$http
+      .post(api, { data: { user: { userL }, messageL } })
+      .then((response) => {
+        console.log('sent',response)
 
-      //   if (response.data.success) {
-      //     //換路由..注意寫法.不是用 "=""
-      //     vm.$router.push(`/cart/${response.data.orderId}`);
-      //     this.$emit('nextStep',2); // 父層step更改
-      //     // this.step += 1;  不能在子層改父層的值
-      //   }
-      // });
+        if (response.data.success) {
+          //換路由..注意寫法.不是用 "=""
+          vm.$router.push(`/cart/${response.data.orderId}`);
+          this.$emit('nextStep',2); // 父層step更改
+          // this.step += 1;  不能在子層改父層的值
+        }
+      })
+      .catch((error) => {
+        console.log('err',error)
+      });
 
+      
 
       // this.axios({
       //   method: 'post',
@@ -308,7 +297,7 @@ export default {
       debugger
 
     },
-    async validateBootstrap2(){
+    validateBootstrap2(){
       const vm = this;
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
       const forms = document.getElementsByClassName("needs-validation");
@@ -332,6 +321,46 @@ export default {
           false
         );
       });
+    },
+    validateBootstrap() {
+      const vm = this;
+      ("use strict");
+      // 因為用router.不是正個頁面刷新所以不能用。可以換成 
+      // 1.想辦法讓這裡面的function在對的時間呼叫。 2.用router的可以整頁刷新。
+
+      // ===> 切換路由並不算是 load 事件，因此原本寫法會造成下面狀況 :
+      // 從別的頁面切換至 結帳頁面(也就是 step1.vue 頁面) load 事件不會觸發，
+      // load 事件如果沒觸發，那麼 load 事件以下的程式碼都沒效果哩。
+      // 可以使用生命週期 mounted() 來觸發 this.validateBootstrap() 函式!!!(第一個問題解決了)
+
+      window.addEventListener(
+        "load",
+        function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          const forms = document.getElementsByClassName("needs-validation");
+          // Loop over them and prevent submission
+          const validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener(
+              "submit",
+              function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                } else {
+                  // 驗證過
+                  //按鈕全部不能按
+                  $("a").addClass("disabled");
+                  $("button").prop("disabled", true);
+                  vm.sentStep1();
+                }
+                form.classList.add("was-validated");
+              },
+              false
+            );
+          });
+        },
+        false
+      );
     },
   },
 };
