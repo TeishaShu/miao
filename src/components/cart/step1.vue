@@ -208,7 +208,6 @@ export default {
   
   methods: {
     api() {
-      console.log('api')
       this.isLoading = true;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       this.$http.get(api).then((response) => {
@@ -237,16 +236,16 @@ export default {
         }
       });
     },
-    sentStep1() {
+    async sentStep1() {
       const vm = this;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
       const userL = this.user;
-      const messageL = this.message;
+      const messageL = await this.message;
       
       console.log(0,'sentStep1')
       const dataContent = { data: { user: { userL }, messageL } };
       const dataString = JSON.stringify(dataContent); 
-      const postURL = (dataString)=>{
+      const postURL = await function(dataString){
         fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
           method: 'POST',
           body: dataString,
@@ -257,7 +256,7 @@ export default {
           .then(res => {
             return res.json();
           }).then(res => {
-            console.log(res)
+            console.log('ok!!!',res)
           });
       }
       postURL(dataString);
@@ -308,15 +307,13 @@ export default {
       debugger
 
     },
-    async validateBootstrap2(){
+    validateBootstrap2(){
       const vm = this;
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
       const forms = document.getElementsByClassName("needs-validation");
       // Loop over them and prevent submission
-      const validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener(
-          "submit",
-          function(event) {
+      const validation =Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener("submit",function(event) {
             if (form.checkValidity() === false) {
               event.preventDefault();
               event.stopPropagation();
