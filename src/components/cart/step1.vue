@@ -148,7 +148,7 @@
               placeholder="留言備註"
               v-model="message"
             ></textarea>
-            <button class="send" type="submit" @click="validateBootstrap2()">送出訂單</button>
+            <button class="send" type="submit" @click="sentStep1()">送出訂單</button>
           </div>
         </div>
       </form>
@@ -237,50 +237,69 @@ export default {
       });
     },
     async sentStep1() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
-      const userL = this.user;
-      const messageL = this.message;
+      // const vm = this;
+      // const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
+      // const userL = this.user;
+      // const messageL = this.message;
 
-      const dataContent = { data: { user: { userL }, messageL } };
-      const dataString = JSON.stringify(dataContent); 
-      alert('out1')
-      // 這邊總是會跳過.
-      const postURL = await function(dataString){
-        fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
-          method: 'POST',
-          body: dataString,
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          })
-        })
-          .then(res => {
-            alert('here')
-            return res.json();
-          })
-          .then(res => {
-            console.log('ok!!!',res)
-            alert('ok')
-
-            if (res.data.success) {
-              //換路由..注意寫法.不是用 "=""
-              console.log('response',response)
-              vm.$router.push(`/cart/${response.data.orderId}`);
-              this.$emit('nextStep',2); // 父層step更改
-              // this.step += 1;  不能在子層改父層的值
-            }
-          })
-          .catch(error => {
-            console.log(error)
-            alert('error')
-          });
-      }
-
-      await postURL(dataString);
-
+      // const dataContent = { data: { user: { userL }, messageL } };
+      // const dataString = JSON.stringify(dataContent); 
+      const dataString = JSON.stringify({
+          data: {
+              user: { name: "1", email: "2@2bhkl", tel: "79", address: "0" },
+              message: 'message'
+          }
+          
+      }); 
       
-      console.log('zzz')
-      debugger
+      await fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
+            method: 'POST',
+            body: dataString,
+            headers: new Headers({ 'Content-Type': 'application/json'})
+        })
+        .then(res => { return res.json(); })
+        .then(res => {
+            console.log('ok!!!', res);
+            if (res.success) {
+                console.log('response',res)
+            }
+        })
+        .catch(error => { console.log(error); alert('error'); });
+
+
+
+      // 這邊總是會跳過.
+      // const postURL = function(dataString){
+      //   fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
+      //     method: 'POST',
+      //     body: dataString,
+      //     headers: new Headers({
+      //       'Content-Type': 'application/json'
+      //     })
+      //   })
+      //     .then(res => {
+      //       alert('here')
+      //       return res.json();
+      //     })
+      //     .then(res => {
+      //       console.log('ok!!!',res)
+      //       alert('ok')
+
+      //       if (res.data.success) {
+      //         //換路由..注意寫法.不是用 "=""
+      //         console.log('response',response)
+      //         vm.$router.push(`/cart/${response.data.orderId}`);
+      //         this.$emit('nextStep',2); // 父層step更改
+      //         // this.step += 1;  不能在子層改父層的值
+      //       }
+      //     })
+      //     .catch(error => {
+      //       console.log(error)
+      //       alert('error')
+      //     });
+      // }
+
+      // await postURL(dataString);
 
     },
     validateBootstrap2(){
