@@ -148,7 +148,7 @@
               placeholder="留言備註"
               v-model="message"
             ></textarea>
-            <button class="send" type="submit" @click="validateBootstrap2()">送出訂單</button>
+            <button class="send" type="submit">送出訂單</button>
           </div>
         </div>
       </form>
@@ -171,9 +171,9 @@ export default {
   created() {
     this.api();
   },
-  // mounted() {
-  //   this.validateBootstrap2();
-  // },
+  mounted() {
+    this.validateBootstrap2();
+  },
   data() { 
     return {
       isLoading: false,
@@ -254,20 +254,12 @@ export default {
           })
         })
           .then(res => {
-            alert('here')
+            alert('1')
             return res.json();
           })
           .then(res => {
+            alert('2')
             console.log('ok!!!',res)
-            alert('ok')
-
-            if (res.data.success) {
-              //換路由..注意寫法.不是用 "=""
-              console.log('response',response)
-              vm.$router.push(`/cart/${response.data.orderId}`);
-              this.$emit('nextStep',2); // 父層step更改
-              // this.step += 1;  不能在子層改父層的值
-            }
           })
           .catch(error => {
             console.log(error)
@@ -277,7 +269,51 @@ export default {
 
       await postURL(dataString);
 
-      
+      // const postURL = await this.$http
+      // .post(api, { data: { user: { userL }, messageL } })
+      // .then((response) => {
+      //   console.log('sent',response)
+
+      //   if (response.data.success) {
+      //     //換路由..注意寫法.不是用 "=""
+      //     vm.$router.push(`/cart/${response.data.orderId}`);
+      //     this.$emit('nextStep',2); // 父層step更改
+      //     // this.step += 1;  不能在子層改父層的值
+      //   }
+      // });
+
+
+      // this.axios({
+      //   method: 'post',
+      //   url: `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`,
+      //   data:{ data: { user: { userL }, messageL } }
+      // })
+      // .then(function(response){
+      //   alert('a00')
+      //   console.log('step1_ok',response)
+      // })
+      // .catch(function(err){
+      //   alert('err'+err)
+      //   console.log('step1_err',err)
+      // });
+
+      // const form = vm.form;
+      // this.$http.post(api, { data: form })
+      // .then((response) => {
+      //     console.log('000')
+      //     if (response.data.success) {
+      //       //換路由..注意寫法.不是用 "=""
+      //       console.log('response',response)
+      //       debugger
+      //       vm.$router.push(`/cart/${response.data.orderId}`);
+      //       this.$emit('nextStep',2); // 父層step更改
+      //       // this.step += 1;  不能在子層改父層的值
+      //     }else{
+      //       console.log('nnn')
+      //     }
+      //   });
+      // console.log(22,'sentStep22-------') 
+
       console.log('zzz')
       debugger
 
@@ -293,11 +329,11 @@ export default {
               event.preventDefault();
               event.stopPropagation();
             } else {
-              event.preventDefault();
               // 驗證過
               //按鈕全部不能按
               $("a").addClass("disabled");
               $("button").prop("disabled", true);
+              alert('validateBootstrap2')
               vm.sentStep1();
             }
             form.classList.add("was-validated");
