@@ -148,7 +148,7 @@
               placeholder="留言備註"
               v-model="message"
             ></textarea>
-            <button class="send" type="button" @click="sentStep1()">送出訂單</button>
+            <button class="send" type="submit">送出訂單</button>
           </div>
         </div>
       </form>
@@ -171,9 +171,9 @@ export default {
   created() {
     this.api();
   },
-  // mounted() {
-  //   this.validateBootstrap2();
-  // },
+  mounted() {
+    this.validateBootstrap2();
+  },
   data() { 
     return {
       isLoading: false,

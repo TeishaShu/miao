@@ -81,4 +81,7 @@ tr {
   margin-bottom: 30px;
   display: inline-block;
   font-weight: bold;
+  &:hover{
+    background: $red;
+  }
 }
