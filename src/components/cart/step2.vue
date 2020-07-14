@@ -93,7 +93,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "../../assets/sass/variables.scss";
+@import "@/assets/sass/variables.scss";
 // @import "step1.scss";
 @import "step2.scss";
 </style>

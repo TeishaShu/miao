@@ -241,7 +241,7 @@
 </template>
 <script>
 import Paginate from "vuejs-paginate";
-import DelModal from "./../modal/DelModal.vue";
+import DelModal from "@/components/modal/DelModal.vue";
 // import model_product from "./model_product.vue";
 import $ from "jquery";
 export default {

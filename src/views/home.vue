@@ -63,7 +63,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "../assets/sass/variables.scss";
+@import "@/assets/sass/variables.scss";
 @import "headerPage.scss";
 .pd0 {
   padding-left: 0;
@@ -72,7 +72,7 @@
 </style>
 
 <script>
-import footerStyle from "../layout/footerStyle/footerStyle.vue";
+import footerStyle from "@/layout/footerStyle/footerStyle.vue";
 export default {
   name: "home",
   components: {

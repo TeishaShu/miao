@@ -158,11 +158,11 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "../../assets/sass/variables.scss";
+@import "@/assets/sass/variables.scss";
 @import "step1.scss";
 </style>
 <script>
-import DelModal from "./../modal/DelModal.vue";
+import DelModal from "@/components/modal/DelModal.vue";
 import $ from "jquery";
 export default {
   components: {

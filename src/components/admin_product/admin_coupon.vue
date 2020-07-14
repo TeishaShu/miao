@@ -168,16 +168,16 @@
 </template>
 
 <style lang="scss">
-@import "../../assets/sass/date_style.scss"; //裡面有date的css連結
+@import "@/assets/sass/date_style.scss"; //裡面有date的css連結
 </style>
 <style lang="scss" scoped>
-@import "../../assets/sass/variables.scss";
-@import "../../assets/sass/page.scss";
+@import "@/assets/sass/variables.scss";
+@import "@/assets/sass/page.scss";
 @import "admin_product.scss";
 </style>
 
 <script>
-import DelModal from "./../modal/DelModal.vue";
+import DelModal from "@/components/modal/DelModal.vue";
 import Datepicker from "vuejs-datepicker";
 import Paginate from "vuejs-paginate";
 import $ from "jquery";

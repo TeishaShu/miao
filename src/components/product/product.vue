@@ -79,10 +79,10 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../../assets/sass/variables.scss";
+@import "@/assets/sass/variables.scss";
 @import "aside.scss";
 @import "product.scss";
-@import "../../assets/sass/page.scss";
+@import "@/assets/sass/page.scss";
 </style>
 
 <script>

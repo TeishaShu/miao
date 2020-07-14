@@ -37,8 +37,8 @@
 </style>
 
 <script>
-import cartBtn from "../../layout/footerStyle/cartBtn.vue";
-import AlertMessage from "./../alert/alertMessage.vue";
+import cartBtn from "@/layout/footerStyle/cartBtn.vue";
+import AlertMessage from "@/components/alert/alertMessage.vue";
 export default {
   components: {
     cartBtn,

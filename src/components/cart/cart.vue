@@ -30,7 +30,7 @@
   </div>
 </template>
 <style lang="scss">
-@import "../../assets/sass/variables.scss";
+@import "@/assets/sass/variables.scss";
 @import "cart.scss";
 </style>
 <script>

@@ -37,7 +37,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "./login.scss";
+@import "login.scss";
 </style>
 <script>
 export default {

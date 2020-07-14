@@ -193,8 +193,8 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../../assets/sass/variables.scss";
-@import "../../assets/sass/page.scss";
+@import "@/assets/sass/variables.scss";
+@import "@/assets/sass/page.scss";
 @import "admin_product.scss";
 th {
   white-space: nowrap;

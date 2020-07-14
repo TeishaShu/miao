@@ -43,12 +43,12 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "../../assets/sass/variables.scss";
-@import "./index.scss";
+@import "@/assets/sass/variables.scss";
+@import "index.scss";
 </style>
 <script>
-import banner from "../../layout/banner/banner.vue";
-import cartBtn from "../../layout/footerStyle/cartBtn.vue";
+import banner from "@/layout/banner/banner.vue";
+import cartBtn from "@/layout/footerStyle/cartBtn.vue";
 export default {
   data() {
     return {
