@@ -2,7 +2,7 @@
   <div>
     <body>
       <form class="form-signin">
-        <img src="/logo.png" alt="" />
+        <img src="@/assets/images/logo.png" alt="" />
         <h4>管理員登入</h4>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input

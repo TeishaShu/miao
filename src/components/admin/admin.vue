@@ -6,7 +6,7 @@
           <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
               <div class="navbar-brand logoA">
-                <img src="./../../../public/logo.png" alt="" /> 
+                <img src="@/assets/images/logo.png" alt="" /> 
                 <p>後臺設定管理</p>
               </div>
               <h6>
@@ -92,7 +92,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../../assets/sass/variables.scss";
+@import "@/assets/sass/variables.scss";
 @import "admin.scss";
 @import "admin_del.scss";
 </style>

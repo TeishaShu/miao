@@ -6,7 +6,7 @@
     </div>
     <AlertMessage/>
     
-    <img src="/coupon.png" alt="" />
+    <img src="@/assets/images/coupon.png" alt="" />
     <div class="coupon">
       <div>
         <h2>開幕慶優惠 !</h2>
