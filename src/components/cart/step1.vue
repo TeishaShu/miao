@@ -148,7 +148,7 @@
               placeholder="留言備註"
               v-model="message"
             ></textarea>
-            <button class="send" type="submit">送出訂單</button>
+            <button class="send" type="submit" @click="test(event)">送出訂單</button>
           </div>
         </div>
       </form>
@@ -171,9 +171,9 @@ export default {
   created() {
     this.api();
   },
-  mounted() {
-    this.validateBootstrap2();
-  },
+  // mounted() {
+  //   this.validateBootstrap2();
+  // },
   data() { 
     return {
       isLoading: false,
@@ -240,39 +240,39 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
       const userL = this.user;
-      const messageL = await this.message;
+      const messageL =  this.message;
       
       console.log(0,'sentStep1')
-      const dataContent = { data: { user: { userL }, messageL } };
-      const dataString = JSON.stringify(dataContent); 
-      const postURL = await function(dataString){
-        fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
-          method: 'POST',
-          body: dataString,
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          })
-        })
-          .then(res => {
-            return res.json();
-          }).then(res => {
-            console.log('ok!!!',res)
-          });
-      }
-      postURL(dataString);
+      // const dataContent = { data: { user: { userL }, messageL } };
+      // const dataString = JSON.stringify(dataContent); 
+      // const postURL = await function(dataString){
+      //   fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
+      //     method: 'POST',
+      //     body: dataString,
+      //     headers: new Headers({
+      //       'Content-Type': 'application/json'
+      //     })
+      //   })
+      //     .then(res => {
+      //       return res.json();
+      //     }).then(res => {
+      //       console.log('ok!!!',res)
+      //     });
+      // }
+      // postURL(dataString);
 
-      // this.$http
-      // .post(api, { data: { user: { userL }, messageL } })
-      // .then((response) => {
-      //   console.log('sent',response)
+      const postURL = await this.$http
+      .post(api, { data: { user: { userL }, messageL } })
+      .then((response) => {
+        console.log('sent',response)
 
-      //   if (response.data.success) {
-      //     //換路由..注意寫法.不是用 "=""
-      //     vm.$router.push(`/cart/${response.data.orderId}`);
-      //     this.$emit('nextStep',2); // 父層step更改
-      //     // this.step += 1;  不能在子層改父層的值
-      //   }
-      // });
+        if (response.data.success) {
+          //換路由..注意寫法.不是用 "=""
+          vm.$router.push(`/cart/${response.data.orderId}`);
+          this.$emit('nextStep',2); // 父層step更改
+          // this.step += 1;  不能在子層改父層的值
+        }
+      });
 
 
       // this.axios({

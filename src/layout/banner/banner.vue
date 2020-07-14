@@ -6,13 +6,13 @@
     >
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="/banner/cat1.jpg" class="d-block w-100" alt="" />
+          <img src="~assets/images/banner/cat1.jpg" class="d-block w-100" alt="" />
         </div>
         <div class="carousel-item">
-          <img src="/banner/cat2.jpg" class="d-block w-100" alt="" />
+          <img src="~assets/images/banner/cat2.jpg" class="d-block w-100" alt="" />
         </div>
         <div class="carousel-item">
-          <img src="/banner/cat3.jpg" class="d-block w-100" alt="" />
+          <img src="~assets/images/banner/cat3.jpg" class="d-block w-100" alt="" />
           <!-- <img src="../../assets/cat/cat3-v1.jpg" class="d-block w-100" alt="" />-->
         </div>
       </div>
