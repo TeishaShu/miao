@@ -210,7 +210,7 @@ export default {
     api() {
       this.isLoading = true;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
-      this.$http.get(api).then((response) => {
+      this.axios.get(api).then((response) => {
         this.isLoading = false;
         if (response.data.success) {
           this.dataAPI = response.data.data;
@@ -245,6 +245,7 @@ export default {
       const dataContent = { data: { user: { userL }, messageL } };
       const dataString = JSON.stringify(dataContent); 
       alert('out1')
+      // 這邊總是會跳過.
       const postURL = await function(dataString){
         fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
           method: 'POST',

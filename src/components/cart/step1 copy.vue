@@ -158,11 +158,11 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "@/assets/sass/variables.scss";
+@import "../../assets/sass/variables.scss";
 @import "step1.scss";
 </style>
 <script>
-import DelModal from "@/components/modal/DelModal.vue";
+import DelModal from "./../modal/DelModal.vue";
 import $ from "jquery";
 export default {
   components: {
@@ -172,7 +172,7 @@ export default {
     this.api();
   },
   mounted() {
-    this.validateBootstrap2();
+    this.validateBootstrap();
   },
   data() { 
     return {
@@ -208,6 +208,7 @@ export default {
   
   methods: {
     api() {
+      console.log('api')
       this.isLoading = true;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       this.$http.get(api).then((response) => {
@@ -236,52 +237,33 @@ export default {
         }
       });
     },
-    async sentStep1() {
+    sentStep1() {
       const vm = this;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
       const userL = this.user;
       const messageL = this.message;
 
-      const dataContent = { data: { user: { userL }, messageL } };
-      const dataString = JSON.stringify(dataContent); 
-      alert('out1')
-      const postURL = await function(dataString){
-        fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
-          method: 'POST',
-          body: dataString,
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          })
-        })
-          .then(res => {
-            alert('1')
-            return res.json();
-          })
-          .then(res => {
-            alert('2')
-            console.log('ok!!!',res)
-          })
-          .catch(error => {
-            console.log(error)
-            alert('error')
-          });
-      }
+      const testApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
 
-      await postURL(dataString);
+      console.log(0,'sentStep1')
 
-      // const postURL = await this.$http
-      // .post(api, { data: { user: { userL }, messageL } })
-      // .then((response) => {
-      //   console.log('sent',response)
+      this.$http
+      .post(api, { data: { user: { userL }, messageL } })
+      .then((response) => {
+        console.log('sent',response)
 
-      //   if (response.data.success) {
-      //     //換路由..注意寫法.不是用 "=""
-      //     vm.$router.push(`/cart/${response.data.orderId}`);
-      //     this.$emit('nextStep',2); // 父層step更改
-      //     // this.step += 1;  不能在子層改父層的值
-      //   }
-      // });
+        if (response.data.success) {
+          //換路由..注意寫法.不是用 "=""
+          vm.$router.push(`/cart/${response.data.orderId}`);
+          this.$emit('nextStep',2); // 父層step更改
+          // this.step += 1;  不能在子層改父層的值
+        }
+      })
+      .catch((error) => {
+        console.log('err',error)
+      });
 
+      
 
       // this.axios({
       //   method: 'post',
@@ -289,14 +271,11 @@ export default {
       //   data:{ data: { user: { userL }, messageL } }
       // })
       // .then(function(response){
-      //   alert('a00')
       //   console.log('step1_ok',response)
       // })
       // .catch(function(err){
-      //   alert('err'+err)
       //   console.log('step1_err',err)
       // });
-
       // const form = vm.form;
       // this.$http.post(api, { data: form })
       // .then((response) => {
@@ -323,8 +302,10 @@ export default {
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
       const forms = document.getElementsByClassName("needs-validation");
       // Loop over them and prevent submission
-      const validation =Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener("submit",function(event) {
+      const validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener(
+          "submit",
+          function(event) {
             if (form.checkValidity() === false) {
               event.preventDefault();
               event.stopPropagation();
@@ -333,7 +314,6 @@ export default {
               //按鈕全部不能按
               $("a").addClass("disabled");
               $("button").prop("disabled", true);
-              alert('validateBootstrap2')
               vm.sentStep1();
             }
             form.classList.add("was-validated");
@@ -341,6 +321,46 @@ export default {
           false
         );
       });
+    },
+    validateBootstrap() {
+      const vm = this;
+      ("use strict");
+      // 因為用router.不是正個頁面刷新所以不能用。可以換成 
+      // 1.想辦法讓這裡面的function在對的時間呼叫。 2.用router的可以整頁刷新。
+
+      // ===> 切換路由並不算是 load 事件，因此原本寫法會造成下面狀況 :
+      // 從別的頁面切換至 結帳頁面(也就是 step1.vue 頁面) load 事件不會觸發，
+      // load 事件如果沒觸發，那麼 load 事件以下的程式碼都沒效果哩。
+      // 可以使用生命週期 mounted() 來觸發 this.validateBootstrap() 函式!!!(第一個問題解決了)
+
+      window.addEventListener(
+        "load",
+        function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          const forms = document.getElementsByClassName("needs-validation");
+          // Loop over them and prevent submission
+          const validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener(
+              "submit",
+              function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                } else {
+                  // 驗證過
+                  //按鈕全部不能按
+                  $("a").addClass("disabled");
+                  $("button").prop("disabled", true);
+                  vm.sentStep1();
+                }
+                form.classList.add("was-validated");
+              },
+              false
+            );
+          });
+        },
+        false
+      );
     },
   },
 };
