@@ -241,14 +241,15 @@ export default {
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
       const userL = this.user;
       const messageL = this.message;
-      const dataContent = { data: { user: { userL }, messageL } };
-      const dataString = JSON.stringify(dataContent); 
+      const dataString = JSON.stringify({ 
+        data: { user: { userL },
+        messageL } }
+      ); 
       // const dataString = JSON.stringify({
       //     data: {
       //         user: { name: "1", email: "2@2bhkl", tel: "79", address: "0" },
       //         message: 'message'
       //     }
-          
       // }); 
       
       await fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
