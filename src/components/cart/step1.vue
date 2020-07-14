@@ -148,7 +148,7 @@
               placeholder="留言備註"
               v-model="message"
             ></textarea>
-            <button class="send" type="submit" @click="sentStep1()">送出訂單</button>
+            <button class="send" type="button" @click="sentStep1()">送出訂單</button>
           </div>
         </div>
       </form>
@@ -237,20 +237,19 @@ export default {
       });
     },
     async sentStep1() {
-      // const vm = this;
-      // const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
-      // const userL = this.user;
-      // const messageL = this.message;
-
-      // const dataContent = { data: { user: { userL }, messageL } };
-      // const dataString = JSON.stringify(dataContent); 
-      const dataString = JSON.stringify({
-          data: {
-              user: { name: "1", email: "2@2bhkl", tel: "79", address: "0" },
-              message: 'message'
-          }
+      const vm = this;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
+      const userL = this.user;
+      const messageL = this.message;
+      const dataContent = { data: { user: { userL }, messageL } };
+      const dataString = JSON.stringify(dataContent); 
+      // const dataString = JSON.stringify({
+      //     data: {
+      //         user: { name: "1", email: "2@2bhkl", tel: "79", address: "0" },
+      //         message: 'message'
+      //     }
           
-      }); 
+      // }); 
       
       await fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
             method: 'POST',
@@ -259,13 +258,15 @@ export default {
         })
         .then(res => { return res.json(); })
         .then(res => {
-            console.log('ok!!!', res);
             if (res.success) {
-                console.log('response',res)
+              console.log('okkk')
+              //換路由..注意寫法.不是用 "=""
+              vm.$router.push(`/cart/${res.orderId}`);
+              this.$emit('nextStep',2); // 父層step更改
+              // this.step += 1;  不能在子層改父層的值
             }
         })
-        .catch(error => { console.log(error); alert('error'); });
-
+        .catch(error => { console.log(error);});
 
 
       // 這邊總是會跳過.
