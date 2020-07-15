@@ -100,7 +100,7 @@
       }
     }
   }
-  @media(max-width:576px){
+  @media(max-width:768px){
     .banner1{
       img:nth-child(2){
         width: 47%;

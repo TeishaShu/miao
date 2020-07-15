@@ -22,8 +22,8 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/sass/variables.scss";
-@import "title.scss";
+  @import "@/assets/sass/variables.scss";
+  @import "title.scss";
   input{
     border: none;
     border-bottom: 3px solid $or;
@@ -56,6 +56,61 @@
   }
   .title{
     margin-top: 20px;
+  }
+  @media(max-width:1200px){
+    .EmailImg{
+      img{
+        width: 85%;
+        bottom: -119px;
+      }
+    }
+    input{
+      min-width: 100%;
+    }
+  }
+  @media(max-width:992px){
+    .EmailImg{
+      img{
+        bottom: -105px;
+      }
+    }
+  }
+  @media(max-width:768px){
+    .title{
+      margin-top:0;
+    }
+    input{
+      font-size: 1rem;
+      min-width: 300px;
+      margin-top: 23px;
+    }
+    button{
+      padding: 3px 25px;
+    }
+    .EmailImg{
+      position: unset;
+      margin-top: -53px;
+      img{
+        position: unset;
+        margin-bottom: -95px;
+        width: 47%;
+      }
+    }
+  }
+  @media(max-width:576px){
+    .EmailImg{
+      margin-top: -50px;
+      img{
+        margin-bottom: -97px;
+      }
+    }
+  }
+  @media(max-width:558px){
+    .EmailImg{
+      img{
+        margin-bottom: -83px;
+      }
+    }
   }
 </style>
 

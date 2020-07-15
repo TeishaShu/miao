@@ -6,11 +6,11 @@
           <h2>
           <div>多項產品</div>挑嘴愛貓吃不膩
           </h2>
-          <img src="@/assets/images/index/productCat.png" alt="" />
+          <img src="@/assets/images/index/productCat.png" class="px-block" alt="" />
         </div>
         <div class="col-md-5 categoryBox">
           <div class="row">
-            <div class="col-md-6 col-sm-6" v-for="(item,index) in productImg" :key="index">
+            <div class="col-md-6 col-sm-6 cell-6" v-for="(item,index) in productImg" :key="index">
               <a href="#" class="category">
                 <img :src="item.img" alt="" />
                 <h4>
@@ -76,6 +76,26 @@
         font-size: 1.3rem;
       }
     }
+  @media(max-width:768px){
+    .categoryBox{
+      padding: 20px;
+      padding-top: 0;
+    }
+    .category{
+      margin: 10px 0;
+      h4{
+        font-size: 1rem;
+        padding: 3px 25px;
+        margin-bottom: 0;
+      }
+    }
+    .cell-6{
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding: 0 10px;
+    }
+  }
+  
 </style>
 
 <script>
