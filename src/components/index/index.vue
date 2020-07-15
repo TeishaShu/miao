@@ -6,7 +6,7 @@
     <productIndex :productImg="productImg" :backgroundImage="productBackgroundImage"/>
 
     <!--Food safety-->
-    <div class="row safty">
+    <div class="row ml-0 mr-0 safty">
       <div class="col-md-5 title">
         <h2>
           <div>食安把關</div>健康營養別擔心

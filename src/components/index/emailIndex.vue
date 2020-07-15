@@ -8,8 +8,8 @@
         <p>
         搶先得到更多新品、貓食訊息
         </p>
-        <input type="email" placeholder="請輸入 E-mail 信箱訂閱電子報" v-model="email" :class="emailStyle ? 'is-valid':'is-invalid'">
-        <div v-show="emailMsg" class="invalid-feedback valid-feedback alert mt-3 " :class="emailStyle ?'alert-success':'alert-danger' " role="alert">
+        <input type="email" placeholder="請輸入 E-mail 信箱訂閱電子報" v-model="email">
+        <div v-show="emailMsg" class="alert mt-3" :class="emailStyle ?'alert-success':'alert-danger' " role="alert">
             {{ emailMsg }}
         </div>
         <button type="button" @click="sendEmail()">送出資料</button>
@@ -72,13 +72,6 @@ export default {
   methods:{
     sendEmail(){
       const vm = this;
-      const pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-      // if(pattern.test(vm.email)){
-      //   console.log('ok')
-      // }else{
-      //   console.log('no')
-      // }
-
       const isMail = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
       if (!isMail.test(this.email)) {
           this.emailStyle = false;
@@ -88,6 +81,9 @@ export default {
           this.emailStyle = true;
           this.emailMsg = '成功訂閱電子報!';
       }
+      setTimeout(() => {
+        vm.emailMsg = "";
+      },5000);
     }
   }
 }

@@ -13,7 +13,6 @@
         </div>
         <div class="carousel-item">
           <img src="@/assets/images/banner/cat3.jpg" class="d-block w-100" alt="" />
-          <!-- <img src="../../assets/cat/cat3-v1.jpg" class="d-block w-100" alt="" />-->
         </div>
       </div>
       <a
