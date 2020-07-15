@@ -193,44 +193,44 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/sass/variables.scss";
-@import "@/assets/sass/page.scss";
-@import "admin_product.scss";
-th {
-  white-space: nowrap;
-  padding: 0 5px;
-}
-td {
-  text-align: center;
-}
-i {
-  cursor: pointer;
-}
-.model {
-  td {
-    text-align: left;
-  }
+  @import "@/assets/sass/variables.scss";
+  @import "@/assets/sass/page.scss";
+  @import "admin_product.scss";
   th {
-    text-align: left;
+    white-space: nowrap;
+    padding: 0 5px;
   }
-  input,
-  ,
-  textarea {
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    margin: 5px 0;
-    width: 100%;
+  td {
+    text-align: center;
   }
-}
-.modelUser {
-  margin-top: 30px;
-}
-.pro {
-  input {
-    width: 50px;
-    text-align: center !important;
+  i {
+    cursor: pointer;
   }
-}
+  .model {
+    td {
+      text-align: left;
+    }
+    th {
+      text-align: left;
+    }
+    input,
+    ,
+    textarea {
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      margin: 5px 0;
+      width: 100%;
+    }
+  }
+  .modelUser {
+    margin-top: 30px;
+  }
+  .pro {
+    input {
+      width: 50px;
+      text-align: center !important;
+    }
+  }
 </style>
 <script>
 import $ from "jquery";
