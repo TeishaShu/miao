@@ -74,13 +74,38 @@
       right: 34%;
     }
   }
+  @media(max-width:992px){
+    .banner1{
+      img:nth-child(2){
+        width: 40%;
+        top: 40px;
+        right: 15%;
+        bottom: unset;
+      }
+    }
+    .banner2{
+      img:nth-child(2){
+        width: 30%;
+        top: 15px;
+        right: 0;
+        left:0;
+        margin: 0 auto;
+      }
+    }
+    .banner3{
+      img:nth-child(2){
+        width: 30%;
+        top: 30px;
+        right: 33%;
+      }
+    }
+  }
   @media(max-width:576px){
     .banner1{
       img:nth-child(2){
         width: 47%;
         top: 50px;
         right: 5%;
-        bottom: unset;
       }
     }
     .banner2{
