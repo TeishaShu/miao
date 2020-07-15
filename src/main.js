@@ -3,6 +3,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import 'bootstrap'; // 4.4
 import Loading from 'vue-loading-overlay';
+import animated from 'animate.css';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
 import App from './App.vue';
@@ -12,7 +13,7 @@ import currencyFilter from './components/filters/currency';
 import './components/alert/bus'; //bus..蓋掉.比較不常這樣用
 
 Vue.config.productionTip = false
-Vue.use(VueAxios, axios);
+Vue.use(VueAxios, axios, animated);
 Vue.filter('currency', currencyFilter); //全域包成不同的資料來放
 
 //跨域.成功的話會有一大段存在cookie

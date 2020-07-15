@@ -5,23 +5,17 @@
       data-ride="carousel"
     >
       <div class="carousel-inner">
-        <div class="carousel-item banner1 active">
+        <div class="carousel-item banner banner1 active">
           <img src="@/assets/images/banner/cat1.jpg" class="d-block w-100" alt="" />
-          <img src="@/assets/images/banner/txt1.png" class="d-block " alt="" />
+          <img src="@/assets/images/banner/txt1.png" class="d-block" alt="" />
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item banner banner2">
           <img src="@/assets/images/banner/cat2.jpg" class="d-block w-100" alt="" />
-          <div class="carousel-caption d-none d-md-block">
-            <h5>First slide label</h5>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </div>
+          <img src="@/assets/images/banner/txt2.png" class="d-block " alt="" />
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item banner banner3">
           <img src="@/assets/images/banner/cat3.jpg" class="d-block w-100" alt="" />
-          <div class="carousel-caption d-none d-md-block">
-            <h5>First slide label</h5>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </div>
+          <img src="@/assets/images/banner/txt3.png" class="d-block" alt="" />
         </div>
       </div>
       <a
@@ -46,5 +40,34 @@
 </template>
 <style lang="scss" scoped>
   @import "@/assets/sass/variables.scss";
-  @import "test.scss";
+  .banner{
+    position: relative;
+    img:nth-child(2){
+      position: absolute;
+      z-index: 20;
+    }
+  }
+  .banner1{
+    img:nth-child(2){
+      width: 25%;
+      top: 0;
+      bottom: 0;
+      right: 20%;
+      margin: auto;
+    }
+  }
+  .banner2{
+    img:nth-child(2){
+      width: 20%;
+      top: 70px;
+      right: 40%;
+    }
+  }
+  .banner3{
+    img:nth-child(2){
+      width: 20%;
+      top: 90px;
+      right: 34%;
+    }
+  }
 </style>
