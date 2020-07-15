@@ -1,0 +1,12 @@
+.banner1{
+  position: relative;
+  img:nth-child(2){
+    width: 29%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 17%;
+    z-index: 20;
+    margin: auto;
+  }
+}
