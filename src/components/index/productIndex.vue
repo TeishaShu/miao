@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-5 categoryBox">
           <div class="row">
-            <div class="col-md-6" v-for="(item,index) in productImg" :key="index">
+            <div class="col-md-6 col-sm-6" v-for="(item,index) in productImg" :key="index">
               <a href="#" class="category">
                 <img :src="item.img" alt="" />
                 <h4>
@@ -26,52 +26,56 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/sass/variables.scss";
-@import "title.scss";
-  .product{
-    width: 100%;
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #eee8e9;
-    background-position-y: bottom;
-  }
-  .title{
-    img{
-    width: 60%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0 auto;
-  }
-  }
-  .categoryBox{
-    padding: 15px 0;
-  }
-  .category{
-    text-align: center;
-    background: white;
-    box-shadow: 0 0 5px #ababab;
-    display: block;
-    padding: 10px;
-    margin: 15px 0;
-    img{
+  @import "@/assets/sass/variables.scss";
+  @import "title.scss";
+    .product{
       width: 100%;
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-color: #eee8e9;
+      background-position-y: bottom;
     }
-    h4{
-      color: white;
-      background-color: #ef9240;
-      padding: 6px 25px;
-      border-radius: 50px;
-      display: inline-block;
-      margin-top: 20px;
-      font-size: 1.3rem;
+    .title{
+      img{
+      width: 60%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0 auto;
+    }
+    }
+    .categoryBox{
+      padding: 15px 0;
+    }
+    .category{
+      text-align: center;
+      background: white;
+      box-shadow: 0 0 5px #ababab;
+      display: block;
+      padding: 10px;
+      margin: 15px 0;
+      img{
+        width: 100%;
+      }
       &:hover{
-        background: $red;
+        border:2px solid $or_light;
+        box-shadow:0 0 5px $or;
+        h4{
+          background: $red;
+        }
+      }
+      h4{
+        color: white;
+        background-color: #ef9240;
+        padding: 6px 25px;
+        border-radius: 50px;
+        display: inline-block;
+        margin-top: 20px;
+        font-size: 1.3rem;
       }
     }
-  }
 </style>
 
 <script>

@@ -36,3 +36,18 @@ a.disabled{
 button:focus {
   outline: none;
 }
+.px-block{
+  display: block;
+}
+.cell-block{
+  display: none;
+}
+
+@media(max-width:576px){
+  .px-block{
+    display: none;
+  }
+  .cell-block{
+    display: block;
+  }
+}

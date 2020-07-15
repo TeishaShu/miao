@@ -6,16 +6,19 @@
     >
       <div class="carousel-inner">
         <div class="carousel-item banner banner1 active">
-          <img src="@/assets/images/banner/cat1.jpg" class="d-block w-100" alt="" />
+          <img src="@/assets/images/banner/cat1.jpg" class="w-100 px-block" alt="" />
           <img src="@/assets/images/banner/txt1.png" class="d-block" alt="" />
+          <img src="@/assets/images/banner/cat_s1.jpg" class="w-100 cell-block" alt="" />
         </div>
         <div class="carousel-item banner banner2">
-          <img src="@/assets/images/banner/cat2.jpg" class="d-block w-100" alt="" />
+          <img src="@/assets/images/banner/cat2.jpg" class="w-100 px-block" alt="" />
           <img src="@/assets/images/banner/txt2.png" class="d-block " alt="" />
+          <img src="@/assets/images/banner/cat_s2.jpg" class="w-100 cell-block" alt="" />
         </div>
         <div class="carousel-item banner banner3">
-          <img src="@/assets/images/banner/cat3.jpg" class="d-block w-100" alt="" />
+          <img src="@/assets/images/banner/cat3.jpg" class="w-100 px-block" alt="" />
           <img src="@/assets/images/banner/txt3.png" class="d-block" alt="" />
+          <img src="@/assets/images/banner/cat_s3.jpg" class="w-100 cell-block" alt="" />
         </div>
       </div>
       <a
@@ -38,6 +41,7 @@
       </a>
     </div>
 </template>
+
 <style lang="scss" scoped>
   @import "@/assets/sass/variables.scss";
   .banner{
@@ -70,4 +74,31 @@
       right: 34%;
     }
   }
+  @media(max-width:576px){
+    .banner1{
+      img:nth-child(2){
+        width: 47%;
+        top: 50px;
+        right: 5%;
+        bottom: unset;
+      }
+    }
+    .banner2{
+      img:nth-child(2){
+        width: 40%;
+        top: 30px;
+        right: 0;
+        left:0;
+        margin: 0 auto;
+      }
+    }
+    .banner3{
+      img:nth-child(2){
+        width: 40%;
+        top: 40px;
+        right: 37%;
+      }
+    }
+}
 </style>
+
