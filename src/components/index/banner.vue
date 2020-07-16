@@ -7,17 +7,17 @@
       <div class="carousel-inner">
         <div class="carousel-item banner banner1 active">
           <img src="@/assets/images/banner/cat1.jpg" class="w-100 px-block" alt="" />
-          <img src="@/assets/images/banner/txt1.png" class="d-block" alt="" />
+          <img src="@/assets/images/banner/txt1.png" class="animate__animated animate__slideInRight d-block" alt="" />
           <img src="@/assets/images/banner/cat_s1.jpg" class="w-100 cell-block" alt="" />
         </div>
         <div class="carousel-item banner banner2">
           <img src="@/assets/images/banner/cat2.jpg" class="w-100 px-block" alt="" />
-          <img src="@/assets/images/banner/txt2.png" class="d-block " alt="" />
+          <img src="@/assets/images/banner/txt2.png" class="animate__animated animate__tada d-block" alt="" />
           <img src="@/assets/images/banner/cat_s2.jpg" class="w-100 cell-block" alt="" />
         </div>
         <div class="carousel-item banner banner3">
           <img src="@/assets/images/banner/cat3.jpg" class="w-100 px-block" alt="" />
-          <img src="@/assets/images/banner/txt3.png" class="d-block" alt="" />
+          <img src="@/assets/images/banner/txt3.png" class="animate__animated animate__tada d-block" alt="" />
           <img src="@/assets/images/banner/cat_s3.jpg" class="w-100 cell-block" alt="" />
         </div>
       </div>
@@ -58,6 +58,7 @@
       bottom: 0;
       right: 20%;
       margin: auto;
+      animation-duration: 2s;
     }
   }
   .banner2{
@@ -65,6 +66,7 @@
       width: 20%;
       top: 70px;
       right: 40%;
+      animation-duration: 1.5s;
     }
   }
   .banner3{
@@ -72,6 +74,8 @@
       width: 20%;
       top: 90px;
       right: 34%;
+      animation-duration: 1.5s;
+      animation-iteration-count:2;
     }
   }
   @media(max-width:992px){
