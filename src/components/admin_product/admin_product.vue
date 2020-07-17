@@ -4,6 +4,7 @@
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
+    <AlertMessage/>
 
     <!--原本的model是用data-toggle和data-target.後來換成用click來用.因為編輯也需要用到
       <a href="#" class="add" data-toggle="modal" data-target="#productModal">建立新產品</a>-->
@@ -242,9 +243,15 @@
 <script>
 import Paginate from "vuejs-paginate";
 import DelModal from "@/components/modal/DelModal.vue";
+import AlertMessage from "@/components/alert/alertMessage.vue";
 // import model_product from "./model_product.vue";
 import $ from "jquery";
 export default {
+  components: {
+    Paginate,
+    DelModal,
+    AlertMessage,
+  },
   data() {
     return {
       dataProdtct: [],
@@ -270,10 +277,6 @@ export default {
       delApi: "",
       deleteProductName: "",
     };
-  },
-  components: {
-    Paginate,
-    DelModal,
   },
   methods: {
     api() {
@@ -305,6 +308,7 @@ export default {
       $("#productModal").modal("show");
     },
     updateProduct() {
+      this.isLoading = true;
       if (
         this.tempProduct.title === "" ||
         this.tempProduct.category === "" ||
@@ -312,7 +316,7 @@ export default {
         this.tempProduct.price === "" ||
         this.tempProduct.imageUrl === ""
       ) {
-        alert("請填寫資料");
+        this.$bus.$emit('message:push',"請填寫資料",'danger','fa-times');
         return;
       }
       // $("#productModal button").prop('disabled',true);
@@ -327,6 +331,7 @@ export default {
         ///////////////要改這裡.put的方式  https://blog.csdn.net/qq_31837621/article/details/80688854
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product/${this.tempProduct.id}`;
         this.$http.put(api, { data: this.tempProduct }).then((response) => {
+          this.$bus.$emit('message:push',response.data.message,'success','fa-check');
           this.isLoading = false;
           this.api();
         });
@@ -360,7 +365,6 @@ export default {
             this.$set(this.tempProduct, "imageUrl", response.data.imageUrl); //強制寫入
           } else {
             this.$bus.$emit("message:push", response.data.message, "danger");
-            //和alertMessage.vue、bus.js有關
           }
         });
     },

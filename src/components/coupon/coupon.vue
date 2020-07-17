@@ -6,7 +6,7 @@
     </div>
     <AlertMessage/>
     
-    <img src="@/assets/images/coupon.png" alt="" />
+    <img src="@/assets/images/coupon.png" class="animate__animated animate__bounceIn" alt="" />
     <div class="coupon">
       <div>
         <h2>開幕慶優惠 !</h2>
@@ -50,14 +50,14 @@ export default {
     copyInput() {
       const txt = $("#codyId").select();
       document.execCommand("copy");
-      this.alertBus(`已經複製優惠碼:${this.couponCode}`);
+      this.alertBus(`已經複製優惠碼: ${this.couponCode}`);
     },
     dateFormat(num) {
       const dd = new Date(num);
       return `${dd.getFullYear()}年${dd.getMonth()+1}月${dd.getDate()}日`;
     },
     alertBus(content){
-      this.$bus.$emit('message:push',content,'warning');
+      this.$bus.$emit('message:push',content,'success','fa-check');
     }
   },
 };

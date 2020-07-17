@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-5 categoryBox">
           <div class="row">
-            <div class="col-md-6 col-sm-6 cell-6" v-for="(item,index) in productImg" :key="index">
+            <div class="col-md-6 col-sm-6 cell-6 animate__animated animate__zoomIn" v-for="(item,index) in productImg" :key="index">
               <a href="#" class="category">
                 <img :src="item.img" alt="" />
                 <h4>

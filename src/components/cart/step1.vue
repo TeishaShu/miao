@@ -4,6 +4,7 @@
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
+    <AlertMessage/>
     <!--沒東西-->
     <div
       class="col-md-12 nothing"
@@ -162,11 +163,13 @@
 @import "step1.scss";
 </style>
 <script>
+import AlertMessage from "@/components/alert/alertMessage.vue";
 import DelModal from "@/components/modal/DelModal.vue";
 import $ from "jquery";
 export default {
   components: {
     DelModal,
+    AlertMessage,
   },
   created() {
     this.api();
@@ -232,7 +235,7 @@ export default {
         if (response.data.success) {
           this.dataCoupon = response.data;
         } else {
-          alert(response.data.message);
+          this.$bus.$emit('message:push',response.data.message,'danger','fa-times');
         }
       });
     },

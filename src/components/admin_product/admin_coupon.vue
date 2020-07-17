@@ -4,6 +4,7 @@
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
+    <AlertMessage/>
 
     <a href="#" class="add" @click.prevent="openModel('add')">建立新的優惠卷</a>
     <div class="table-responsive">
@@ -180,12 +181,20 @@
 import DelModal from "@/components/modal/DelModal.vue";
 import Datepicker from "vuejs-datepicker";
 import Paginate from "vuejs-paginate";
+import AlertMessage from "@/components/alert/alertMessage.vue";
 import $ from "jquery";
 export default {
   components: {
     Datepicker,
     Paginate,
     DelModal,
+    AlertMessage
+  },
+  created() {
+    let today = +new Date();
+    this.addNew.due_date = today;
+    this.date = this.dateForm(today);
+    this.getCoupon();
   },
   data() {
     return {
@@ -222,12 +231,6 @@ export default {
     //   }
     //   // this.percent = value.replace(/^\d{2}$/,"")
     // }
-  },
-  created() {
-    let today = +new Date();
-    this.addNew.due_date = today;
-    this.date = this.dateForm(today);
-    this.getCoupon();
   },
   methods: {
     getCoupon() {
@@ -267,7 +270,7 @@ export default {
     },
     sentCoupon() {
       if (this.addNew.title === "" || this.addNew.code === "" || this.addNew.percent === 0 ) {
-        alert("請填寫資料");
+        this.$bus.$emit('message:push',"請正確填寫資料",'danger','fa-times');
         return;
       }
       const vm = this;
@@ -289,6 +292,7 @@ export default {
           if (response.data.success) {
             this.isLoading = false;
             this.couponsData = response.data.coupons;
+            this.$bus.$emit('message:push',response.data.message,'success','fa-check');
             this.getCoupon();
           }
         });

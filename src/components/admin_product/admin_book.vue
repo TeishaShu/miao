@@ -5,6 +5,7 @@
     <div class="vld-parent">
       <loading :active.sync="isLoading"></loading>
     </div>
+    <AlertMessage/>
 
     <div class="table-responsive">
       <table>
@@ -233,9 +234,14 @@
   }
 </style>
 <script>
+import AlertMessage from "@/components/alert/alertMessage.vue";
 import $ from "jquery";
 import Paginate from "vuejs-paginate";
 export default {
+  components:{
+    Paginate,
+    AlertMessage,
+  },
   data() {
     return {
       tempProduct: [],
@@ -265,9 +271,6 @@ export default {
         fileUpLoading: false,
       },
     };
-  },
-  components: {
-    Paginate,
   },
   methods: {
     updateTotal(key, qty, price) { //wow!!
@@ -346,7 +349,8 @@ export default {
         if (response.data.success) {
           this.getBook();
           $("#editModal").modal("hide");
-          alert(response.data.message);
+
+          this.$bus.$emit('message:push',response.data.message,'success','fa-check');
         }
       });
     },

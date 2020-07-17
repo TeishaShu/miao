@@ -1,6 +1,8 @@
 <template>
   <div>
     <body>
+      <AlertMessage/>
+
       <form class="form-signin">
         <img src="@/assets/images/logo.png" alt="" />
         <h4>管理員登入</h4>
@@ -40,7 +42,11 @@
 @import "login.scss";
 </style>
 <script>
+import AlertMessage from "@/components/alert/alertMessage.vue";
 export default {
+  components: {
+    AlertMessage,
+  },
   data() {
     return {
       user: {
@@ -57,7 +63,7 @@ export default {
           // console.log('login route',this)
           this.$router.push('/admin')
         }else{
-          alert('帳號密碼錯誤')
+          this.$bus.$emit('message:push',`${response.data.message}: ${response.data.error.message}`,'danger','fa-times');
         }
       });
     }

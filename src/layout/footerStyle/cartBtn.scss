@@ -1,6 +1,6 @@
 .cart {
-  color: $or;
-  border: 2px solid $or;
+  color: $or_light;
+  border: 2px solid $or_light;
   padding: 16px 17px 10px 18px;
   border-radius: 100%;
   cursor: pointer;
@@ -11,6 +11,12 @@
   vertical-align: middle;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 3px #fff;
+  &:hover{
+    color: $or;
+    border: 2px solid $or;
+    transition-property: color, border;
+    transition-duration: 1s, 1s;
+  }
 }
 i {
   font-size: 27px;

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-6 title">
+      <div class="col-md-6 title animate__animated animate__fadeInUp animate__slow">
         <h2>
           掌握貓關鍵
         </h2>

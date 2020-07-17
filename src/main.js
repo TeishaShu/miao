@@ -10,7 +10,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import currencyFilter from './components/filters/currency';
-import './components/alert/bus'; //bus..蓋掉.比較不常這樣用
+import '@/components/alert/bus'; //bus..蓋掉.比較不常這樣用
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios, animated);
