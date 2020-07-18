@@ -11,12 +11,15 @@
         <div class="col-md-5 categoryBox">
           <div class="row">
             <div class="col-md-6 col-sm-6 cell-6 animate__animated animate__zoomIn" v-for="(item,index) in productImg" :key="index">
-              <a href="#" class="category">
+              <router-link 
+                class="category"
+                :to={ path:`/product${item.en}`}
+              >
                 <img :src="item.img" alt="" />
                 <h4>
-                    {{item.category}}
+                  {{item.category}}
                 </h4>
-              </a>
+              </router-link>
             </div>
           </div>
         </div>
@@ -62,8 +65,12 @@
       &:hover{
         border:2px solid $or_light;
         box-shadow:0 0 5px $or;
+        transition-property: border, box-shadow;
+        transition-duration: 0.1s, 0.1s;
+        transition-timing-function: ease, ease-in;
         h4{
           background: $red;
+          transition: background 0.5s ease;
         }
       }
       h4{

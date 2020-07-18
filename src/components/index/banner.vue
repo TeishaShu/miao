@@ -76,6 +76,7 @@
       right: 34%;
       animation-duration: 1.5s;
       animation-iteration-count:2;
+      animation-direction: alternate;
     }
   }
   @media(max-width:992px){

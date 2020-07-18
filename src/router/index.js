@@ -19,8 +19,14 @@ const routes = [
         name: 'index',
         component: () => import('../components/index/index.vue')
       },
+      // {
+      //   path: 'product',
+      //   name: 'product',
+        // component: () => import('../components/product/product.vue')
+        // redirect: 'product/all',
+      // },
       {
-        path: 'product',
+        path: 'product/:id?',
         name: 'product',
         component: () => import('../components/product/product.vue')
       },

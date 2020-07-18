@@ -11,21 +11,21 @@
       <div class="row">
         <div class="col-md-3 asideBox">
           <ul>
-            <li @click="selectCategory('all')">
-              <i class="fas fa-cookie"></i>全部商品
-            </li>
-            <li @click="selectCategory('乾糧')">
-              <i class="fas fa-cookie"></i>乾糧
-            </li>
-            <li @click="selectCategory('罐頭')">
+            <!--<li v-for="(item,index) in categoryItem" @click="selectCategory('all', true)" :key="index">
+              <i class="fas fa-cookie"></i>{{item.}}
+            </li>-->
+            <li @click="selectCategory('can', true)">
               <i class="fas fa-cookie"></i>罐頭
             </li>
-            <li @click="selectCategory('零食')">
+            <li @click="selectCategory('dryFood', true)">
+              <i class="fas fa-cookie"></i>乾糧
+            </li>
+            <li @click="selectCategory('snacks', true)">
               <i class="fas fa-cookie"></i>零食
             </li>
-            <li @click="selectCategory('營養品')">
+            <li @click="selectCategory('nutrition', true)">
               <i class="fas fa-cookie"></i>營養品
-            </li>
+            </li>-->
           </ul>
         </div>
         <div class="col-md-9">
@@ -90,14 +90,12 @@ import cartBtn from "../../layout/footerStyle/cartBtn.vue";
 import Paginate from "vuejs-paginate";
 import AlertMessage from "./../alert/alertMessage.vue";
 export default {
-  created() {
-    this.getProduct();
-  },
   components: {
     cartBtn,
     Paginate,
     AlertMessage,
   },
+  
   data() {
     return {
       isLoading: false,
@@ -109,6 +107,21 @@ export default {
         total_pages: 1,
         current_page: 1,
       },
+      categoryItem000:{
+        'all': '全部商品',
+        'can': '罐頭',
+        'dryFood': '乾糧',
+        'snacks': '零食',
+        'nutrition': '營養品',
+      },
+      categoryItem: [
+        {'all': '全部商品'},
+        {'can': '罐頭'},
+        {'dryFood': '乾糧'},
+        {'snack': '零食'},
+        {'nutrition': '營養品'},
+      ],
+
     };
   },
   methods: {
@@ -129,10 +142,11 @@ export default {
             }
             filterProductData.push(e);
           });
-          this.products = filterProductData;
+          //全部的原始資料
           this.allProducts = filterProductData;
-          this.page();
-          
+          //當前的顯示資料
+          const categoryStyle = this.$route.params.id; //當前的產品分類
+          this.selectCategory(categoryStyle, false)
         }
       });
     },
@@ -152,16 +166,26 @@ export default {
         this.$bus.$emit('message:push',`已加入購物車: ${item.title}`,'success');
       });
     },
-    selectCategory(style) {
+    selectCategory(style,isPageClick) {
       this.products = [];
       this.pagination.current_page = 1;
 
+      //產品頁切換的話要換路由
+      if(isPageClick){
+        this.$router.push(`/product/${style}`);
+      }
+
+      //換內容
       if (style === "all") {
         this.products = this.allProducts;
-      } else {
-        let selectAry = [];
+      }
+      else {
+        const selectAry = [];
         this.allProducts.forEach((el) => {
-          if (el.category === style) {
+          // 英文換中文
+          // const key = Object.keys(this.categoryItem000);
+          // console.log('key',key)
+          if (el.category === this.categoryItem[style]) {
             selectAry.push(el);
           }
         });
@@ -191,12 +215,8 @@ export default {
       this.pagination.total_pages = newAry.length;
     },
   },
-  computed: {
-    //使用vueX
-    // isLoading() {
-    //   return this.$store.state.isLoading;
-    // },
+  created() {
+    this.getProduct();
   },
-  
 };
 </script>
