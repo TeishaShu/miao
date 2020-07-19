@@ -1,6 +1,8 @@
 import Vue from 'vue';
 Vue.prototype.$bus = new Vue(); 
 
+//在原型的記憶體位置更改---資料
+
 //蓋掉.....如果資料很多通常是用vueX
 
 //prototype掛在原形下

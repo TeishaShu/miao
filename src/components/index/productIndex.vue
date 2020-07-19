@@ -13,7 +13,7 @@
             <div class="col-md-6 col-sm-6 cell-6 animate__animated animate__zoomIn" v-for="(item,index) in productImg" :key="index">
               <router-link 
                 class="category"
-                :to={ path:`/product${item.en}`}
+                :to="{ path:`/product/${item.en}`}"
               >
                 <img :src="item.img" alt="" />
                 <h4>

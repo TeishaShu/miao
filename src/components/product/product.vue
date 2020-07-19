@@ -11,10 +11,11 @@
       <div class="row">
         <div class="col-md-3 asideBox">
           <ul>
-            <!--<li v-for="(item,index) in categoryItem" @click="selectCategory('all', true)" :key="index">
-              <i class="fas fa-cookie"></i>{{item.}}
-            </li>-->
-            <li @click="selectCategory('can', true)">
+            <li v-for="(item,index) in categoryItem" 
+            @click="selectCategory(`${item.value}`, true)" :key="index">
+              <i class="fas fa-cookie"></i>{{item.label}}
+            </li>
+            <!--<li @click="selectCategory('can', true)">
               <i class="fas fa-cookie"></i>罐頭
             </li>
             <li @click="selectCategory('dryFood', true)">
@@ -44,7 +45,7 @@
                 <div class="proTxt">
                   <p class="type">{{ item.category }}</p>
                   <h3 @click="clickProduct(item)">
-                    {{ item.title }}
+                    {{ item.title }} 
                   </h3>
                   <p>
                     <em>NT{{ item.origin_price | currency }}</em
@@ -89,6 +90,7 @@
 import cartBtn from "../../layout/footerStyle/cartBtn.vue";
 import Paginate from "vuejs-paginate";
 import AlertMessage from "./../alert/alertMessage.vue";
+import _ from 'lodash';
 export default {
   components: {
     cartBtn,
@@ -107,22 +109,23 @@ export default {
         total_pages: 1,
         current_page: 1,
       },
-      categoryItem000:{
-        'all': '全部商品',
-        'can': '罐頭',
-        'dryFood': '乾糧',
-        'snacks': '零食',
-        'nutrition': '營養品',
-      },
       categoryItem: [
-        {'all': '全部商品'},
-        {'can': '罐頭'},
-        {'dryFood': '乾糧'},
-        {'snack': '零食'},
-        {'nutrition': '營養品'},
+        {'value': 'all', 'label': '全部商品'},
+        {'value': 'can', 'label': '罐頭'},
+        {'value': 'dryFood', 'label': '乾糧'},
+        {'value': 'snack', 'label': '零食'},
+        {'value': 'nutrition', 'label': '營養品'},
       ],
 
     };
+  },
+  computed: { //不適合太複雜的處理
+    categoryItem2() {
+      return _.zipObject(
+        _.map(this.categoryItem, 'value'),
+        _.map(this.categoryItem, 'label')
+      );
+    },
   },
   methods: {
     getProduct() {
@@ -176,21 +179,23 @@ export default {
       }
 
       //換內容
-      if (style === "all") {
-        this.products = this.allProducts;
-      }
-      else {
-        const selectAry = [];
-        this.allProducts.forEach((el) => {
-          // 英文換中文
-          // const key = Object.keys(this.categoryItem000);
-          // console.log('key',key)
-          if (el.category === this.categoryItem[style]) {
-            selectAry.push(el);
-          }
-        });
-        this.products = selectAry;
-      }
+      this.products = (style === "all")
+        ? this.allProducts
+        : _.filter(this.allProducts, ['category', this.categoryItem2[style]]);
+
+      // if (style === "all") {
+      //   this.products = this.allProducts;
+      // }
+      // else {
+      //   this.products = _.filter(this.allProducts, ['category', this.categoryItem2[style]]);
+        // const selectAry = [];
+        // this.allProducts.forEach((el) => {
+        //   if (el.category === this.categoryItem2[style]) {
+        //     selectAry.push(el);
+        //   }
+        // });
+        // this.products = selectAry;
+      // }
       this.page();
     },
     page() {
