@@ -60,18 +60,18 @@ export default {
     productIndex,
     emailIndex,
   },
-  methods: {
-    addCart(item) {
-      // this.isLoading = true;
-      let addCartSend = {
-        product_id: item.id,
-        qty: 1,
-      };
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
-      this.$http.post(api, { data: addCartSend }).then((response) => {
-        // this.isLoading = false;
-      });
-    },
-  },
+  // methods: {
+  //   addCart(item) {
+  //     // this.isLoading = true;
+  //     let addCartSend = {
+  //       product_id: item.id,
+  //       qty: 1,
+  //     };
+  //     const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+  //     this.$http.post(api, { data: addCartSend }).then((response) => {
+  //       // this.isLoading = false;
+  //     });
+  //   },
+  // },
 };
 </script>

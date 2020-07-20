@@ -1,9 +1,5 @@
 <template>
   <div class="minHeight">
-    <!--loading-->
-    <div class="vld-parent">
-      <loading :active.sync="isLoading"></loading>
-    </div>
     <AlertMessage/>
     
     <img src="@/assets/images/coupon.png" class="animate__animated animate__bounceIn" alt="" />
@@ -39,7 +35,6 @@ export default {
   data() {
     return {
       couponCode: 'DTJ00001',
-      isLoading: false,
     };
   },
   mounted(){

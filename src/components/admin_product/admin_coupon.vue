@@ -1,9 +1,5 @@
 <template>
   <div>
-    <!--loading-->
-    <div class="vld-parent">
-      <loading :active.sync="isLoading"></loading>
-    </div>
     <AlertMessage/>
 
     <a href="#" class="add" @click.prevent="openModel('add')">建立新的優惠卷</a>
@@ -209,7 +205,6 @@ export default {
       dataPage: {
         // current_page: 1 //這個刪除
       },
-      isLoading: false,
       date: "",
       modalStyle: "",
       delId: {},
@@ -234,11 +229,11 @@ export default {
   },
   methods: {
     getCoupon() {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupons?page=${this.dataPage.current_page}`;
       this.$http.get(api).then((response) => {
         if (response.data.success) {
-          this.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
           this.couponsData = response.data.coupons;
           this.dataPage = response.data.pagination;
         }
@@ -275,13 +270,13 @@ export default {
       }
       const vm = this;
       // $("#addModal button").prop('disabled',true);
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       if (this.modalStyle === "add") {
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon`;
         
         this.$http.post(api, { data: vm.addNew }).then((response) => {
           if (response.data.success) {
-            this.isLoading = false;
+            this.$store.dispatch('updateLoading', false);
             this.couponsData = response.data.coupons;
             this.getCoupon();
           }
@@ -290,7 +285,7 @@ export default {
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.addNew.id}`;
         this.$http.put(api, { data: vm.addNew }).then((response) => {
           if (response.data.success) {
-            this.isLoading = false;
+            this.$store.dispatch('updateLoading', false);
             this.couponsData = response.data.coupons;
             this.$bus.$emit('message:push',response.data.message,'success','fa-check');
             this.getCoupon();
@@ -314,7 +309,7 @@ export default {
       // this.addNew.due_date = +new Date(this.date);
     // },
     delOpen(item) {
-      console.log(item)
+      // console.log(item)
       this.delId = item;
       this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.delId.id}`;
       this.deleteProductName = item.title;

@@ -1,9 +1,5 @@
 <template>
   <div class="container out">
-    <!--loading-->
-    <div class="vld-parent">
-      <loading :active.sync="isLoading"></loading>
-    </div>
     <AlertMessage/>
 
     <div class="row">
@@ -60,18 +56,17 @@ export default {
         title: "",
         unit: "",
       },
-      isLoading: false,
       addCartSend: {},
       selectNum: 1,
     };
   },
   methods: {
     getProduct() {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true)
       const id = this.$route.params.id;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/product/${id}`;
       this.$http.get(api).then((response) => {
-        this.isLoading = false;
+        this.$store.dispatch('updateLoading', false)
         if (response.data.success) {
           this.dataProdtct = response.data.product;
         }
@@ -79,12 +74,12 @@ export default {
     },
     addCart() {
       const vm = this;
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true)
       this.addCartSend.product_id = this.dataProdtct.id;
       this.addCartSend.qty = this.selectNum;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       this.$http.post(api, { data: this.addCartSend }).then((response) => {
-        this.isLoading = false;
+        this.$store.dispatch('updateLoading', false)
         if (response.data.success) {
           this.dataProdtct = response.data.data.product;
           this.$bus.$emit('message:push','成功加入購物車','success');

@@ -1,10 +1,6 @@
 <template>
   <div>
     <!--這頁的page有紅字、日期的部分-->
-    <!--loading-->
-    <div class="vld-parent">
-      <loading :active.sync="isLoading"></loading>
-    </div>
     <AlertMessage/>
 
     <div class="table-responsive">
@@ -248,7 +244,6 @@ export default {
       dataPage: {
         // current_page: 1 //這個刪除
       },
-      isLoading: false,
       editItem: {
         create_at: 1585625169,
         id: "",
@@ -301,11 +296,10 @@ export default {
       this.editItem = {};
     },
     getBook() {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/orders?page=${this.dataPage.current_page}`;
       this.$http.get(api).then((response) => {
-        this.isLoading = false;
-        // console.log('getBook',response.data);
+        this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.tempProduct = response.data.orders;
           this.dataPage = response.data.pagination;
@@ -320,8 +314,7 @@ export default {
       this.editItem = item;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/order/${item.id}`;
       this.$http.put(api, { data }).then((response) => {
-        this.isLoading = false;
-        // console.log(response.data);
+        this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.tempProduct = response.data.products;
           this.dataPage = response.data.pagination;
@@ -339,13 +332,12 @@ export default {
       $("#editModal").modal("show");
     },
     updateProduct() {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       const editt = this.newEdit;
       // editt.total =
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/order/${editt.id}`;
       this.$http.put(api, { data: editt }).then((response) => {
-        this.isLoading = false;
-        // console.log('updateProduct',response.data);
+        this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.getBook();
           $("#editModal").modal("hide");

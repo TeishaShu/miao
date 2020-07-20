@@ -1,9 +1,5 @@
 <template>
   <div>
-    <!--loading-->
-    <div class="vld-parent">
-      <loading :active.sync="isLoading"></loading>
-    </div>
     <AlertMessage/>
 
     <!--content-->
@@ -15,18 +11,6 @@
             @click="selectCategory(`${item.value}`, true)" :key="index">
               <i class="fas fa-cookie"></i>{{item.label}}
             </li>
-            <!--<li @click="selectCategory('can', true)">
-              <i class="fas fa-cookie"></i>罐頭
-            </li>
-            <li @click="selectCategory('dryFood', true)">
-              <i class="fas fa-cookie"></i>乾糧
-            </li>
-            <li @click="selectCategory('snacks', true)">
-              <i class="fas fa-cookie"></i>零食
-            </li>
-            <li @click="selectCategory('nutrition', true)">
-              <i class="fas fa-cookie"></i>營養品
-            </li>-->
           </ul>
         </div>
         <div class="col-md-9">
@@ -37,7 +21,6 @@
               :key="item.id"
             >
               <a>
-                <!--<pre>{{item}}</pre>-->
                 <div @click="clickProduct(item)" class="proImg">
                   <img :src="`${item.imageUrl}`" alt="" />
                 </div>
@@ -80,10 +63,10 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/sass/variables.scss";
-@import "aside.scss";
-@import "product.scss";
-@import "@/assets/sass/page.scss";
+  @import "@/assets/sass/variables.scss";
+  @import "aside.scss";
+  @import "product.scss";
+  @import "@/assets/sass/page.scss";
 </style>
 
 <script>
@@ -100,7 +83,6 @@ export default {
   
   data() {
     return {
-      isLoading: false,
       allProducts: [],
       products: [],
       pagination: {
@@ -119,7 +101,7 @@ export default {
 
     };
   },
-  computed: { //不適合太複雜的處理
+  computed: { //不適合太複雜的處理.資料處理
     categoryItem2() {
       return _.zipObject(
         _.map(this.categoryItem, 'value'),
@@ -129,12 +111,10 @@ export default {
   },
   methods: {
     getProduct() {
-      this.isLoading = true;
-      // this.$store.dispatch('updateLoading', true);
+      this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/products/all`;
       this.$http.get(api).then((response) => {
-        this.isLoading = false;
-        // this.$store.dispatch('updateLoading', false);
+        this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           //過濾未啟用的產品資訊
           const responseProduct = response.data.products;
@@ -158,14 +138,14 @@ export default {
       this.$router.push({ path: `/product2/${id}` });
     },
     addCart(item) {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       let addCartSend = {
         product_id: item.id,
         qty: 1,
       };
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       this.$http.post(api, { data: addCartSend }).then((response) => {
-        this.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         this.$bus.$emit('message:push',`已加入購物車: ${item.title}`,'success');
       });
     },

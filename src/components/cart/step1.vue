@@ -1,9 +1,5 @@
 <template>
   <div class="row">
-    <!--loading-->
-    <div class="vld-parent">
-      <loading :active.sync="isLoading"></loading>
-    </div>
     <AlertMessage/>
     <!--沒東西-->
     <div
@@ -179,7 +175,6 @@ export default {
   },
   data() { 
     return {
-      isLoading: false,
       dataAPI: {
         //carts:[] 加這個或是上面的v-if要多一個條件
       },
@@ -211,10 +206,10 @@ export default {
   
   methods: {
     api() {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       this.axios.get(api).then((response) => {
-        this.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataAPI = response.data.data;
           this.$emit("nextStep",1); // 父層step更改
@@ -228,10 +223,10 @@ export default {
       $("#delModal").modal("show");
     },
     sendCoupon() {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
       this.$http.post(api, { data: this.textCoupon }).then((response) => {
-        this.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataCoupon = response.data;
         } else {

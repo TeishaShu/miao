@@ -1,10 +1,5 @@
 <template>
   <div class="row">
-    <!--loading-->
-    <div class="vld-parent">
-      <loading :active.sync="isLoading"></loading>
-    </div>
-
     <div class="col-md-12">
       <div class="table-responsive step2table">
         <table class="table">
@@ -102,7 +97,6 @@ export default {
   data() {
     return {
       orderId: "",
-      isLoading: false,
       dataAPI: {
         user: {
           userL: "",
@@ -120,20 +114,20 @@ export default {
   },
   methods: {
     getApi() {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order/${this.orderId}`;
       this.$http.get(api).then((response) => {
-        this.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataAPI = response.data.order;
         }
       });
     },
     pay() {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/pay/${this.orderId}`;
       this.$http.post(api).then((response) => {
-        this.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.getApi(); //注意要重新刷頁面
           this.$emit("nextStep",3); // 父層step更改

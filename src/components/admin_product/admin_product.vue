@@ -1,9 +1,5 @@
 <template>
   <div>
-    <!--loading-->
-    <div class="vld-parent">
-      <loading :active.sync="isLoading"></loading>
-    </div>
     <AlertMessage/>
 
     <!--原本的model是用data-toggle和data-target.後來換成用click來用.因為編輯也需要用到
@@ -269,7 +265,6 @@ export default {
         imageUrl: "",
       }, //新增
       addNew: false, //判斷modal是新增還是編輯
-      isLoading: false,
       status: {
         fileUpLoading: false,
       },
@@ -280,10 +275,10 @@ export default {
   },
   methods: {
     api() {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/products?page=${this.dataPage.current_page}`;
       this.$http.get(api).then((response) => {
-        this.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         this.dataProdtct = response.data.products;
         this.dataPage = response.data.pagination;
       });
@@ -308,7 +303,7 @@ export default {
       $("#productModal").modal("show");
     },
     updateProduct() {
-      this.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       if (
         this.tempProduct.title === "" ||
         this.tempProduct.category === "" ||
@@ -316,7 +311,8 @@ export default {
         this.tempProduct.price === "" ||
         this.tempProduct.imageUrl === ""
       ) {
-        this.$bus.$emit('message:push',"請填寫資料",'danger','fa-times');
+        this.$bus.$emit('message:push',"請正確填寫資料",'danger','fa-times');
+        this.$store.dispatch('updateLoading', false);
         return;
       }
       // $("#productModal button").prop('disabled',true);
@@ -324,7 +320,7 @@ export default {
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product`;
         this.$http.post(api, { data: this.tempProduct }).then((response) => {
           // this.tempProduct.imageUrl = ''; //新增資料會有舊的...兩個都丟圖片會消失.這個是新增的
-          this.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
           this.api();
         });
       } else {
@@ -332,7 +328,7 @@ export default {
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product/${this.tempProduct.id}`;
         this.$http.put(api, { data: this.tempProduct }).then((response) => {
           this.$bus.$emit('message:push',response.data.message,'success','fa-check');
-          this.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
           this.api();
         });
       }
