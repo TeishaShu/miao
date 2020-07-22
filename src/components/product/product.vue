@@ -138,16 +138,7 @@ export default {
       this.$router.push({ path: `/product2/${id}` });
     },
     addCart(item) {
-      this.$store.dispatch('updateLoading', true);
-      let addCartSend = {
-        product_id: item.id,
-        qty: 1,
-      };
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
-      this.$http.post(api, { data: addCartSend }).then((response) => {
-        this.$store.dispatch('updateLoading', false);
-        this.$bus.$emit('message:push',`已加入購物車: ${item.title}`,'success');
-      });
+      this.$store.dispatch('addCart', item);
     },
     selectCategory(style,isPageClick) {
       this.products = [];

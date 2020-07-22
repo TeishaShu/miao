@@ -4,24 +4,24 @@
 
     <div class="row">
       <div class="col-md-5 text-center">
-        <img :src="dataProdtct.imageUrl" alt="" class="img-fluid" />
+        <img :src="dataProduct2.imageUrl" alt="" class="img-fluid" />
       </div>
       <div class="col-md-7 inner">
-        <h3>{{ dataProdtct.title }}</h3>
-        <p class="type">{{ dataProdtct.category }}</p>
+        <h3>{{ dataProduct2.title }}</h3>
+        <p class="type">{{ dataProduct2.category }}</p>
         <ul class="detail">
-          <li v-for="el in detail(dataProdtct.description)">{{ el }}</li>
+          <li v-for="el in detail(dataProduct2.description)">{{ el }}</li>
         </ul>
         <p class="price">
-          <em>NT{{ dataProdtct.origin_price | currency }}</em
-          ><br />NT{{ dataProdtct.price | currency }}
+          <em>NT{{ dataProduct2.origin_price | currency }}</em
+          ><br />NT{{ dataProduct2.price | currency }}
         </p>
         <div class="add">
           <i class="fas fa-minus" @click="changeNum(-1)"></i>
-          <input type="text" v-model.trim="selectNum" />
+          <input type="text" v-model.trim="selectNum2" />
           <i class="fas fa-plus" @click="changeNum(1)"></i>
         </div>
-        <a href="#" class="addCart" @click.prevent="addCart"><i class="fa fa-heart mr-2" aria-hidden="true"></i>加入購物車</a>
+        <a href="#" class="addCart" @click.prevent="addCartProductIn"><i class="fa fa-heart mr-2" aria-hidden="true"></i>加入購物車</a>
       </div>
     </div>
     <cartBtn />
@@ -42,57 +42,26 @@ export default {
   },
   data() {
     return {
-      dataProdtct: {
-        category: "",
-        content: "",
-        description: "",
-        id: "",
-        image: "",
-        imageUrl: "",
-        is_enabled: 0,
-        num: 0,
-        origin_price: "",
-        price: "",
-        title: "",
-        unit: "",
-      },
-      addCartSend: {},
-      selectNum: 1,
     };
   },
-  methods: {
-    getProduct() {
-      this.$store.dispatch('updateLoading', true)
-      const id = this.$route.params.id;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/product/${id}`;
-      this.$http.get(api).then((response) => {
-        this.$store.dispatch('updateLoading', false)
-        if (response.data.success) {
-          this.dataProdtct = response.data.product;
-        }
-      });
+  computed: {
+    dataProduct2(){
+      return this.$store.state.dataProduct2;
     },
-    addCart() {
-      const vm = this;
-      this.$store.dispatch('updateLoading', true)
-      this.addCartSend.product_id = this.dataProdtct.id;
-      this.addCartSend.qty = this.selectNum;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
-      this.$http.post(api, { data: this.addCartSend }).then((response) => {
-        this.$store.dispatch('updateLoading', false)
-        if (response.data.success) {
-          this.dataProdtct = response.data.data.product;
-          this.$bus.$emit('message:push','成功加入購物車','success');
-        }
-      });
+    selectNum2(){
+      return this.$store.state.selectNum2;
+    }
+  },
+  methods: {
+    getProduct2() {
+      const id = this.$route.params.id;
+      this.$store.dispatch('getProduct2', id);
+    },
+    addCartProductIn() {
+      this.$store.dispatch('addCartProductIn');
     },
     changeNum(num) {
-      let orNum = Number(this.selectNum);
-      if (num < 0 && orNum <= 1) {
-        this.selectNum = 1;
-      } else {
-        this.selectNum = orNum + num;
-      }
+      this.$store.dispatch('changeNum', num)
     },
     detail(txt) {
       if (txt === undefined) {
@@ -102,7 +71,7 @@ export default {
     },
   },
   created() {
-    this.getProduct();
+    this.getProduct2();
   },
 };
 </script>

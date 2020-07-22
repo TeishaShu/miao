@@ -20,10 +20,6 @@ export default {
     isLoading(){
       return this.$store.state.isLoading;
     }
-
   },
-  created(){
-    // this.$store.state.isLoading = true;
-  }
 }
 </script>

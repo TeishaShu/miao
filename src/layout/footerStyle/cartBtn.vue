@@ -15,17 +15,22 @@
 export default {
   data(){
     return{
-      num:0
+    }
+  },
+  computed: {
+    num(){
+      return this.$store.state.cartBtnNum;
     }
   },
   methods:{
     api(){
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
-      this.$http.get(api).then(response => {
-        if (response.data.success) {
-          this.num = response.data.data.carts.length;
-        }
-      });
+      // const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      // this.$http.get(api).then(response => {
+      //   if (response.data.success) {
+      //     this.num = response.data.data.carts.length;
+      //   }
+      // });
+      this.$store.dispatch('cartBtnApi');
     },
   },
   created(){

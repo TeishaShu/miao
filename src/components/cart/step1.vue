@@ -258,7 +258,6 @@ export default {
         .then(res => { return res.json(); })
         .then(res => {
             if (res.success) {
-              console.log('okkk')
               //換路由..注意寫法.不是用 "=""
               vm.$router.push(`/cart/${res.orderId}`);
               this.$emit('nextStep',2); // 父層step更改

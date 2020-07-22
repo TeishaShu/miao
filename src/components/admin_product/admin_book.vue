@@ -334,7 +334,6 @@ export default {
     updateProduct() {
       this.$store.dispatch('updateLoading', true);
       const editt = this.newEdit;
-      // editt.total =
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/order/${editt.id}`;
       this.$http.put(api, { data: editt }).then((response) => {
         this.$store.dispatch('updateLoading', false);
