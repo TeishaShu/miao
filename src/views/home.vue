@@ -23,17 +23,17 @@
               >
                 <ul class="navbar-nav nav">
                   <li class="nav-item">
-                    <router-link :to="{ name: 'index' }">
+                    <router-link to="/index">
                       <i class="fas fa-home"></i>首頁
                     </router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'product' }"> 
+                    <router-link to="/product/all"> 
                       <i class="fas fa-cookie-bite"></i>商品列表
                     </router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'coupon' }">
+                    <router-link to="/coupon">
                       <i class="fas fa-bell"></i>好康活動
                     </router-link>
                   </li>

@@ -49,10 +49,10 @@
             <tr class="total cheep" v-show="dataCoupon.success">
               <td colspan="3">折扣價</td>
               <td colspan="2" style="text-align:right; white-space:nowrap;">
-                (省了 NT{{ dataCoupon.data.final_total | currency }})
+                (省了 NT{{ dataAPI.total - dataCoupon.data.final_total | currency }})
               </td>
               <td>
-                NT{{ (dataAPI.total - dataCoupon.data.final_total) | currency }}
+                NT{{ (dataCoupon.data.final_total) | currency }}
               </td>
             </tr>
             <tr class="couponTr">
@@ -229,6 +229,7 @@ export default {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataCoupon = response.data;
+          console.log('sendCoupon',response.data)
         } else {
           this.$bus.$emit('message:push',response.data.message,'danger','fa-times');
         }

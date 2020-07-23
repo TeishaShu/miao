@@ -10,7 +10,7 @@
             <th width="90">排序</th>
             <th>名稱</th>
             <th>優惠碼</th>
-            <th width="120">折扣比 (off)</th>
+            <th width="120">折扣比</th>
             <th width="150">到期日</th>
             <th width="150">是否啟用</th>
             <th width="120">編輯</th>

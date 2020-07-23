@@ -75,12 +75,16 @@
         </table>
       </div>
       <div class="link">
-        <router-link
-          :to="{ name: 'product' }"
+        <!--<router-link
+          to="/product/all"
           class="aStyle"
           v-if="dataAPI.is_paid"
           >>> 繼續購物</router-link
-        >
+        >-->
+        <div class="aStyle" v-if="dataAPI.is_paid">
+          <router-link :to="{name:'product'}"> 繼續購物</router-link>
+        </div>
+        
         <a href="#" class="send" @click.prevent="pay" v-else>確認付款</a>
       </div>
 

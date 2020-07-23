@@ -74,6 +74,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color:darken($txt,30%);
+
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&1+0,0+100;White+to+Transparent */
+    background: -moz-linear-gradient(left,  rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  rgba(255,255,255,0.5) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  rgba(255,255,255,0.5) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
+
     h2{
       margin-top: 0;
     }
@@ -103,9 +111,8 @@
   @media(max-width:768px){
     .title{
       height: 510px;
-      margin-top: 35px;
+      padding-top: 35px;
       justify-content:flex-start;
-      color:darken($txt,30%);
     }
     .saftyCatBg{
       height: 370px;
