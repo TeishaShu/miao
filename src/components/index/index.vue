@@ -2,29 +2,11 @@
   <div>
     <banner />
 
-<!--Food safety-->
-    <div class="row ml-0 mr-0 safty">
-      <div class="col-md-5 title">
-        <h2>
-          <div>食安把關</div>健康營養別擔心
-        </h2>
-        <p>
-        嚴選產品嚴格控管<br>
-        多元創意貓口味<br>
-        天然原料檢驗超放心<br>
-        任君搭配貓開心!<br>
-        </p>
-      </div>
-      <div class="col-md-6">
-        123
-      </div>
-    </div>
+    <!--Food safety-->
+    <foodSafty/>
 
     <!--product-->
     <productIndex :productImg="productImg" :backgroundImage="productBackgroundImage"/>
-
-    
-    
 
     <!--Email-->
     <emailIndex/>
@@ -34,15 +16,24 @@
 </template>
 <style lang="scss" scoped>
 @import "@/assets/sass/variables.scss";
-@import "title.scss";
-@import "index.scss";
 </style>
 <script>
-import banner from "./banner.vue";
 import cartBtn from "@/layout/footerStyle/cartBtn.vue";
+import banner from "./banner.vue";
+import foodSafty from "./foodSafty.vue";
 import productIndex from "./productIndex.vue";
 import emailIndex from "./emailIndex.vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 export default {
+  components: {
+    banner,
+    cartBtn,
+    productIndex,
+    emailIndex,
+    foodSafty
+  },
   data() {
     return {
       productImg: [
@@ -54,24 +45,5 @@ export default {
       productBackgroundImage: "'@/assets/images/index/productBg.jpg",
     };
   },
-  components: {
-    banner,
-    cartBtn,
-    productIndex,
-    emailIndex,
-  },
-  // methods: {
-  //   addCart(item) {
-  //     // this.isLoading = true;
-  //     let addCartSend = {
-  //       product_id: item.id,
-  //       qty: 1,
-  //     };
-  //     const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
-  //     this.$http.post(api, { data: addCartSend }).then((response) => {
-  //       // this.isLoading = false;
-  //     });
-  //   },
-  // },
 };
 </script>

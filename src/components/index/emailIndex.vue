@@ -97,15 +97,36 @@
       }
     }
   }
-  @media(max-width:576px){
+  @media(max-width:600px){
     .EmailImg{
       margin-top: -50px;
       img{
-        margin-bottom: -97px;
+        margin-bottom: -96px;
       }
     }
   }
-  @media(max-width:558px){
+  @media(max-width:471px){
+    .EmailImg{
+      img{
+        margin-bottom: -90px;
+      }
+    }
+  }
+  @media(max-width:450px){
+    .EmailImg{
+      img{
+        margin-bottom: -89px;
+      }
+    }
+  }
+  @media(max-width:420px){
+    .EmailImg{
+      img{
+        margin-bottom: -86px;
+      }
+    }
+  }
+  @media(max-width:370px){
     .EmailImg{
       img{
         margin-bottom: -83px;
