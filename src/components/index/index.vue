@@ -14,18 +14,17 @@
     <cartBtn />
   </div>
 </template>
-<style lang="scss" scoped>
-@import "@/assets/sass/variables.scss";
-</style>
+
 <script>
 import cartBtn from "@/layout/footerStyle/cartBtn.vue";
 import banner from "./banner.vue";
 import foodSafty from "./foodSafty.vue";
 import productIndex from "./productIndex.vue";
 import emailIndex from "./emailIndex.vue";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import $ from "jquery";
+import { gsap, ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
+gsap.config({nullTargetWarn:false});  // gsap 警告關掉
 export default {
   components: {
     banner,
@@ -45,5 +44,74 @@ export default {
       productBackgroundImage: "'@/assets/images/index/productBg.jpg",
     };
   },
+  mounted(){
+    const t1 = gsap.timeline({
+      scrollTrigger:{
+        trigger: ".product_animate",
+        start: "top 90%",
+        toggleActions: "restart none none none",
+        marker: true,
+      },
+    });
+
+    // 特效-首頁產品
+    t1.from(".product_animate", {
+      x: 400,
+      y: 400,
+      option: .5,
+      duration: 1,
+      scale:0.5
+    });
+
+    // 特效-首頁email
+    t1.from("#email", {
+      y: 400,
+      duration: 0.8
+    });
+
+
+    // 特效-餅乾移動
+    $.fn.parallax = function(resistance, mouse, num, negative, negative2) {
+      const $el = $(this);
+      gsap.to($el, num, {
+        x: -((mouse.clientX - window.innerWidth / 4) / resistance) * negative,
+        y: -((mouse.clientY - window.innerHeight / 2) / resistance) * negative2
+      });
+    };
+    $(document).mousemove(function(e) {
+      $(".parallax_level_1").parallax(50, e, 0.8, 1, -1);
+      $(".parallax_level_2").parallax(20, e, 0.3, 1, 1);
+      $(".parallax_level_3").parallax(80, e, 0.9, -1, 1);
+      $(".parallax_level_4").parallax(120, e, 0.9, 1, 1);
+    });
+    // $.fn.parallax = function(resistance, mouse, num, negative, negative2) {
+    //   const $el = $(this);
+    //   gsap.to($el, num, {
+    //     x: -((mouse.clientX - window.innerWidth / 4) / resistance) * negative,
+    //     y: -((mouse.clientY - window.innerHeight / 2) / resistance) * negative2
+    //   });
+    // };
+
+    // function parallax (resistance, mouse, num, negative, negative2) {
+    //   const $el = $(this);
+    //   gsap.to($el, num, {
+    //     x: -((mouse.clientX - window.innerWidth / 4) / resistance) * negative,
+    //     y: -((mouse.clientY - window.innerHeight / 2) / resistance) * negative2
+    //   });
+    // };
+
+    // document.onmousemove = function(e){
+    //   const level1 = document.querySelector(".parallax_level_1");
+    //   const level2 = document.querySelector(".parallax_level_2");
+    //   const level3 = document.querySelector(".parallax_level_3");
+    //   const level4 = document.querySelector(".parallax_level_4");
+    //   level1.parallax(50, e, 0.8, 1, -1);
+    //   level2.parallax(20, e, 0.3, 1, 1);
+    //   level3.parallax(80, e, 0.9, -1, 1);
+    //   level4.parallax(120, e, 0.9, 1, 1);
+    // }
+    
+
+  }
 };
 </script>

@@ -9,8 +9,11 @@
           <img src="@/assets/images/index/productCat.png" class="px-block" alt="" />
         </div>
         <div class="col-md-5 categoryBox">
-          <div class="row">
-            <div class="col-md-6 col-sm-6 cell-6 animate__animated animate__zoomIn" v-for="(item,index) in productImg" :key="index">
+          <div class="row"><!-- animate__animated animate__zoomIn-->
+            <div class="col-md-6 col-sm-6 cell-6 product_animate"
+                  v-for="(item,index) in productImg" 
+                  :key="index"
+                  >
               <router-link 
                 class="category"
                 :to="{ path:`/product/${item.en}`}"
@@ -38,6 +41,7 @@
       background-repeat: no-repeat;
       background-color: #eee8e9;
       background-position-y: bottom;
+      overflow: hidden;
     }
     .title{
       img{
@@ -81,6 +85,7 @@
         display: inline-block;
         margin-top: 20px;
         font-size: 1.3rem;
+        white-space: nowrap;
       }
     }
   @media(max-width:768px){

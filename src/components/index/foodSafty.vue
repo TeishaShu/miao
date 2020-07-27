@@ -13,9 +13,9 @@
         </p>
       </div>
       <div class="col-md-6 cookieImg">
-        <img src="@/assets/images/index/cookie1.png" alt="">
-        <img src="@/assets/images/index/cookie2.png" alt="">
-        <img src="@/assets/images/index/cookie3.png" alt="">
+        <img src="@/assets/images/index/cookie1.png" class="parallax_level_1" alt="">
+        <img src="@/assets/images/index/cookie2.png" class="parallax_level_4" alt="">
+        <img src="@/assets/images/index/cookie3.png" class="parallax_level_3" alt="">
       </div>
     </div>
     <img src="@/assets/images/index/cookie_cat.png" class="saftyCatBg" alt="">
