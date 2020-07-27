@@ -7,7 +7,7 @@
       v-if="dataAPI.carts && dataAPI.carts.length === 0"
     >
       <p>您的購物車內還沒有任何商品!</p>
-      <router-link :to="{name:'product'}">>> 快來逛逛</router-link>
+      <router-link :to="{name:'product'}"><i class="fa fa-angle-double-right pr-2" aria-hidden="true"></i> 快來逛逛</router-link>
     </div>
     <!--有東西  v-if="dataAPI.carts.length !== 0"-->
     <div class="col-md-12" v-if="dataAPI.carts && dataAPI.carts.length !== 0">
@@ -36,7 +36,7 @@
               </td>
               <td>NT{{ (item.product.price * item.qty) | currency }}</td>
               <td>
-                <a href="#" @click.prevent="delOpen(item)"
+                <a href="#" class="aBtn" @click.prevent="delOpen(item)"
                   ><i class="fas fa-trash-alt" @click="delOpen(item)"></i
                 ></a>
               </td>
@@ -229,7 +229,6 @@ export default {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataCoupon = response.data;
-          console.log('sendCoupon',response.data)
         } else {
           this.$bus.$emit('message:push',response.data.message,'danger','fa-times');
         }
@@ -238,19 +237,16 @@ export default {
     async sentStep1() {
       const vm = this;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
-      const userL = this.user;
-      const messageL = this.message;
-      const dataString = JSON.stringify({ 
-        data: { user: { userL },
-        messageL } }
-      ); 
-      // const dataString = JSON.stringify({
-      //     data: {
-      //         user: { name: "1", email: "2@2bhkl", tel: "79", address: "0" },
-      //         message: 'message'
-      //     }
-      // }); 
-      
+      // const dataString = JSON.stringify({  不能這樣寫
+      //   data: { user: { userL },
+      //   messageL } }
+      // ); 
+      const dataString = JSON.stringify({
+          data: {
+              user: this.user,
+              message: this.message
+          }
+      }); 
       await fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
             method: 'POST',
             body: dataString,
@@ -316,7 +312,7 @@ export default {
               event.preventDefault();
               // 驗證過
               //按鈕全部不能按
-              $("a").addClass("disabled");
+              $(".aBtn").addClass("disabled");
               $("button").prop("disabled", true);
               vm.sentStep1();
             }

@@ -32,7 +32,7 @@ th {
 tbody {
   color: #000;
   tr {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e8e8e8;
   }
   td {
     vertical-align: middle;
@@ -88,6 +88,7 @@ input {
   }
   i{
     color: #000;
+    cursor: pointer;
   }
 }
 .dateStyle {

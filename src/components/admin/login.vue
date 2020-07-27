@@ -38,9 +38,11 @@
     </body>
   </div>
 </template>
+
 <style lang="scss" scoped>
-@import "login.scss";
+  @import "login.scss";
 </style>
+
 <script>
 import AlertMessage from "@/components/alert/alertMessage.vue";
 export default {
@@ -60,7 +62,6 @@ export default {
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/admin/signin`;
       this.$http.post(api, this.user).then(response => {
         if(response.data.success){
-          // console.log('login route',this)
           this.$router.push('/admin')
         }else{
           this.$bus.$emit('message:push',`${response.data.message}: ${response.data.error.message}`,'danger','fa-times');

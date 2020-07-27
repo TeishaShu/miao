@@ -41,26 +41,26 @@
               <td>
                 姓名
               </td>
-              <td>{{ dataAPI.user.userL.name }}</td>
+              <td>{{ dataAPI.user.name }}</td>
             </tr>
             <tr>
               <td>
                 電話
               </td>
-              <td>{{ dataAPI.user.userL.tel }}</td>
+              <td>{{ dataAPI.user.tel }}</td>
             </tr>
             <tr>
               <td>E-mail</td>
-              <td>{{ dataAPI.user.userL.email }}</td>
+              <td>{{ dataAPI.user.email }}</td>
             </tr>
             <tr>
               <td>地址</td>
-              <td>{{ dataAPI.user.userL.address }}</td>
+              <td>{{ dataAPI.user.address }}</td>
             </tr>
-            <!--<tr>  api沒有送這個資料
+            <tr>
               <td>備註</td>
-              <td>{{dataAPI.user.userL.name}}</td>
-            </tr>-->
+              <td>{{dataAPI.message}}</td>
+            </tr>
             <tr>
               <td>付款狀態</td>
               <td>
@@ -75,14 +75,8 @@
         </table>
       </div>
       <div class="link">
-        <!--<router-link
-          to="/product/all"
-          class="aStyle"
-          v-if="dataAPI.is_paid"
-          >>> 繼續購物</router-link
-        >-->
         <div class="aStyle" v-if="dataAPI.is_paid">
-          <router-link :to="{name:'product'}"> 繼續購物</router-link>
+          <router-link :to="{name:'product'}"><i class="fa fa-angle-double-right pr-2" aria-hidden="true"></i>繼續購物</router-link>
         </div>
         
         <a href="#" class="send" @click.prevent="pay" v-else>確認付款</a>
@@ -93,7 +87,6 @@
 </template>
 <style lang="scss" scoped>
 @import "@/assets/sass/variables.scss";
-// @import "step1.scss";
 @import "step2.scss";
 </style>
 <script>

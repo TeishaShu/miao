@@ -92,9 +92,9 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/sass/variables.scss";
-@import "admin.scss";
-@import "admin_del.scss";
+  @import "@/assets/sass/variables.scss";
+  @import "admin.scss";
+  @import "admin_del.scss";
 </style>
 
 <script>
@@ -103,7 +103,6 @@ export default {
     signout(){
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/logout`;
       this.$http.post(api).then(response => {
-        // console.log(response.data)
         if(response.data.success){
           this.$router.push('/login')
         }

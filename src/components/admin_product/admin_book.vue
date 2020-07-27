@@ -24,9 +24,12 @@
           >
             <td>{{ item.num }}</td>
             <td>
-              <ul v-for="person in item.user" :key="person.id">
-                <li>姓名:{{ person.name }}</li>
-                <li>地址:{{ person.address }}</li>
+              <ul>
+                <li>姓名: {{ item.user.name }}</li>
+                <li>電話: {{ item.user.tel }}</li>
+                <li>信箱: {{ item.user.email }}</li>
+                <li>地址: {{ item.user.address }}</li>
+                <li>備註: {{ item.message }}</li>
               </ul>
             </td>
             <td><i class="fas fa-pencil-alt" @click="openModel(item)"></i></td>
@@ -134,29 +137,29 @@
                           <th colspan="2">購買人資訊</th>
                         </tr>
                       </thead>
-                      <tbody v-for="person in newEdit.user" :key="person.id">
+                      <tbody>
                         <tr>
                           <td>姓名</td>
-                          <td>{{ person.name }}</td>
+                          <td>
+                            <input type="text" v-model.trim="newEdit.user.name" />
+                          </td>
                         </tr>
                         <tr>
                           <td>電話</td>
-                          <td>{{ person.tel }}</td>
+                          <td>
+                            <input type="text" v-model.trim="newEdit.user.tel" />
+                          </td>
                         </tr>
                         <tr>
                           <td>E-mail</td>
-                          <td>{{ person.email }}</td>
+                          <td>
+                            <input type="text" v-model.trim="newEdit.user.email" />
+                          </td>
                         </tr>
                         <tr>
                           <td>地址</td>
                           <td>
-                            <input type="text" v-model.trim="person.address" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>留言</td>
-                          <td>
-                            <textarea row="4" v-model="person.name"></textarea>
+                            <input type="text" v-model.trim="newEdit.user.address" />
                           </td>
                         </tr>
                       </tbody>
@@ -201,7 +204,7 @@
     text-align: center;
   }
   i {
-    cursor: pointer;
+    cursor: not-allowed;
   }
   .model {
     td {
@@ -289,7 +292,7 @@ export default {
     },
     keyupUpdateTotal(qty) {//-------------------------------------------------------------------------------------------
       // console.log('keyupUpdateTotal',qty)
-      qty = qty.replace(/[^\d]/g,'')  
+      qty = qty.replace(/[^\d]/g,'');
     },
     cancelEdit(){
       this.newEdit = {};
@@ -298,7 +301,7 @@ export default {
     getBook() {
       this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/orders?page=${this.dataPage.current_page}`;
-      this.$http.get(api).then((response) => {
+      this.axios.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.tempProduct = response.data.orders;
@@ -313,7 +316,7 @@ export default {
     edit(item) {
       this.editItem = item;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/order/${item.id}`;
-      this.$http.put(api, { data }).then((response) => {
+      this.axios.put(api, { data }).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.tempProduct = response.data.products;
@@ -335,7 +338,7 @@ export default {
       this.$store.dispatch('updateLoading', true);
       const editt = this.newEdit;
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/order/${editt.id}`;
-      this.$http.put(api, { data: editt }).then((response) => {
+      this.axios.put(api, { data: editt }).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.getBook();
