@@ -8,6 +8,7 @@ export default new Vuex.Store({
   strict: true,
   state: {
     isLoading:false,
+    backSmToggle: false,
     cartBtnNum:0,
     dataProduct2: {
       category: "",
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     LOADING(state,status){
       state.isLoading = status;
     },
+    BACKSMTOGGLE(state, payload){
+      state.backSmToggle = payload;
+    },
     CARTBRNNUM(state, payload){
       state.cartBtnNum = payload;
     },
@@ -38,10 +42,14 @@ export default new Vuex.Store({
     SELECTNUM2(state, payload){
       state.selectNum2 = payload;
     },
+    
   },
   actions: { //透過 dispatch 操作 actions 的值
-    updateLoading(context,status){
+    updateLoading(context, status){
       context.commit('LOADING',status);
+    },
+    backSmToggle(context, status){
+      context.commit('BACKSMTOGGLE', status);
     },
     cartBtnApi(context){ // 購物車圓形按鈕
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;

@@ -234,6 +234,7 @@ export default {
       this.$http.get(api).then((response) => {
         if (response.data.success) {
           this.$store.dispatch('updateLoading', false);
+          this.$store.dispatch('backSmToggle', false);
           this.couponsData = response.data.coupons;
           this.dataPage = response.data.pagination;
         }
@@ -297,17 +298,7 @@ export default {
     newDateForm(num) {
       return +new Date(num);
     },
-    // selectDate() {
-    //   console.log("selected");
-      // 轉換格式
-      // const dateForm = +new Date(this.date);
-      // console.log('dateForm',dateForm.getMilliseconds())
-      // const test = new Date(dateForm)
-      // console.log('test,',test)
-      // console.log('this date',this.date)
-      // // console.log('date,',new Date(+new Date(this.date)),+new Date(this.date))
-      // this.addNew.due_date = +new Date(this.date);
-    // },
+
     delOpen(item) {
       // console.log(item)
       this.delId = item;

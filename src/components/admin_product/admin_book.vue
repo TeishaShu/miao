@@ -197,7 +197,6 @@
   @import "@/assets/sass/page.scss";
   @import "admin_product.scss";
   th {
-    white-space: nowrap;
     padding: 0 5px;
   }
   td {
@@ -232,6 +231,7 @@
     }
   }
 </style>
+
 <script>
 import AlertMessage from "@/components/alert/alertMessage.vue";
 import $ from "jquery";
@@ -303,6 +303,7 @@ export default {
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/orders?page=${this.dataPage.current_page}`;
       this.axios.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
+        this.$store.dispatch('backSmToggle', false);
         if (response.data.success) {
           this.tempProduct = response.data.orders;
           this.dataPage = response.data.pagination;

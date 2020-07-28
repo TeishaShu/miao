@@ -279,6 +279,7 @@ export default {
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/products?page=${this.dataPage.current_page}`;
       this.$http.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
+        this.$store.dispatch('backSmToggle', false);
         this.dataProdtct = response.data.products;
         this.dataPage = response.data.pagination;
       });

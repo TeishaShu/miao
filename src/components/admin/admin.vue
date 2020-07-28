@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-2">
-          <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <nav class="col-md-2 d-none d-md-block sidebar" :class="{'sm-set':backSmToggle}">
             <div class="sidebar-sticky">
               <div class="navbar-brand logoA">
                 <img src="@/assets/images/logo.png" alt="" /> 
@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-10 main">
           <div class="top">
-            <div class="toggle">
+            <div class="toggle" @click="smToggle">
               <i class="fas fa-bars"></i>
             </div>
             <div class="name">
@@ -99,6 +99,15 @@
 
 <script>
 export default {
+  data(){
+    return{
+    }
+  },
+  computed:{
+    backSmToggle(){
+      return this.$store.state.backSmToggle;
+    }
+  },
   methods: {
     signout(){
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/logout`;
@@ -107,6 +116,9 @@ export default {
           this.$router.push('/login')
         }
       });
+    },
+    smToggle(){
+      this.$store.dispatch('backSmToggle',!this.backSmToggle)
     }
   },
 };

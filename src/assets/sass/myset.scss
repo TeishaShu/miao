@@ -42,6 +42,9 @@ button:focus {
 .cell-block{
   display: none;
 }
+th{
+  white-space: nowrap;
+}
 
 @media(max-width:768px){
   .px-block{

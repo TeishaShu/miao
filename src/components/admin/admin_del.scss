@@ -1,6 +1,4 @@
-/*
-   * Menu_top
-   */
+/* Menu_top */
 .inner {
   margin: 60px 80px;
   padding: 0 15px;
@@ -15,6 +13,9 @@
   font-size: 16px;
   padding: 10px;
   height: 49px;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
   a {
     border-radius: 4px;
     font-size: 12px;
@@ -37,9 +38,7 @@
   float: right;
 }
 
-/*
-   * aside
-   */
+/*  aside */
 .router-link-exact-active {
   background: $red;
   color: #fff;
@@ -107,6 +106,7 @@ i {
   z-index: 100; /* Behind the navbar */
   padding: 0; /* Height of navbar */
   border-right: 1px solid #c5c5c5;
+  background-color: #f8f9fa;
   h6 {
     width: 100%;
     text-align: center;
@@ -124,7 +124,7 @@ i {
 .sidebar-sticky {
   position: relative;
   top: 0;
-  height: calc(100vh - 48px);
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
@@ -207,6 +207,28 @@ i {
   }
   .toggleUl {
     display: block;
+  }
+  .sm-set{
+    top:49px;
+    background-color: rgba(0, 0, 0, 0.5) ;
+    display: block !important;
+    .sidebar-sticky{
+      width:300px;
+      background-color: #fff;
+    }
+    h6{
+      display: none;
+    }
+  }
+  .logoA{
+    border-bottom: 2px dotted #ddd;
+    img{
+      width: 150px;
+      margin-bottom: 5px;
+    }
+    p{
+      font-size: 20px;
+    }
   }
   
 }
