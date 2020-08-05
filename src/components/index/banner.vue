@@ -43,7 +43,7 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "@/assets/sass/variables.scss";
+  @import "@/assets/scss/variables.scss";
   .banner{
     position: relative;
     img:nth-child(2){

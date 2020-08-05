@@ -32,8 +32,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "@/assets/sass/variables.scss";
-  @import "title.scss";
+  @import "@/assets/scss/variables.scss";
+  @import "@/assets/scss/indexTitle.scss";
     .product{
       width: 100%;
       background-size: cover;

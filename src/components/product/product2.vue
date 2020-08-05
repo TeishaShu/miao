@@ -28,8 +28,102 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "../../assets/sass/variables.scss";
-@import "product2.scss";
+  @import "@/assets/scss/variables.scss";
+  .out {
+    margin-top: 20px;
+    min-height:calc(100vh - 300px);
+  }
+  .inner{
+    padding-left: 60px;
+  }
+  img {
+    box-shadow: 0 0 5px #c3c3c3;
+    width: 90%;
+    padding: 5%;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  h3 {
+    color: $or;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 25px;
+  }
+  i{
+    cursor: pointer;
+  }
+  .type {
+    background: $pink;
+    color: #fff;
+    font-size: 16px;
+    padding: 1px 10px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    display: inline-block;
+  }
+  ul{
+    padding-top: 20px;
+  }
+  .detail {
+    border-top: 1px solid #ddd;
+    margin-bottom: 30px;
+  }
+  .price {
+    color: $txt;
+    line-height: 30px;
+    display: inline-block;
+    font-size: 27px;
+    font-weight: bold;
+    vertical-align: middle;
+    margin-right: 30px;
+    color: $red;
+    em {
+      font-size: 18px;
+      text-decoration: line-through;
+      color:$txt;
+    }
+  }
+  .add{
+    border:1px solid $light_gray;
+    border-radius: 20px;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-top: 20px;
+    i{
+      padding: 10px;
+      font-size: 14px;
+      text-align: center;
+      color: #fff;
+      background: $light_gray;
+    }
+    input{
+      border: none;
+      text-align: center;
+    }
+  }
+  .addCart{
+    background: $or;
+    border-radius: 20px;
+    color: #fff;
+    display: block;
+    text-align: center;
+    padding: 9px;
+    margin-top: 30px;
+  }
+  @media(max-width:768px){
+    .inner{
+      padding-left: 15px;
+      h3{
+        text-align: center;
+      }
+      
+    }
+    .type{
+      display: none;
+    }
+  }
 </style>
 
 <script>
@@ -56,6 +150,7 @@ export default {
     getProduct2() {
       const id = this.$route.params.id;
       this.$store.dispatch('getProduct2', id);
+      this.$store.dispatch('resetNum');
     },
     addCartProductIn() {
       this.$store.dispatch('addCartProductIn');

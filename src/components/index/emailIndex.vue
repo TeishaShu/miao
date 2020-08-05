@@ -22,8 +22,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "@/assets/sass/variables.scss";
-  @import "title.scss";
+  @import "@/assets/scss/variables.scss";
+  @import "@/assets/scss/indexTitle.scss";
   input{
     border: none;
     border-bottom: 3px solid $or;

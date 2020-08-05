@@ -11,7 +11,7 @@
 
 
 <style lang="scss">
-@import "./assets/sass/all.scss";
+@import "./assets/scss/all.scss";
 </style>
 
 <script>

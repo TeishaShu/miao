@@ -155,8 +155,231 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "@/assets/sass/variables.scss";
-@import "step1.scss";
+  @import "@/assets/scss/variables.scss";
+  a.disabled{
+    pointer-events: none;
+    i{
+      color: lighten($or, 20%);
+      border: 1px solid lighten($or, 20%);
+    }
+  }
+  .coupon a.disabled{
+    pointer-events: none;
+    background: lighten($or, 20%);
+  }
+  .out {
+    margin-top: 20px;
+  }
+  .red{
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .pd0{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Chrome, Safari, Edge, Opera 。。。input type="number" Remove Arrows/Spinners */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox 。。。input type="number" Remove Arrows/Spinners */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .nothing {
+    text-align: center;
+    p {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 60px;
+      margin-bottom: 20px;
+    }
+    a {
+      background: $pink;
+      padding: 10px 20px;
+      border-radius: 30px;
+      color: #fff;
+      margin-bottom: 30px;
+      display: inline-block;
+      font-weight: bold;
+      &:hover {
+        background: $red;
+      }
+    }
+  }
+  th {
+    background: #ddd;
+    padding: 0 10px;
+    margin-bottom: 0;
+    font-size: 16px;
+    line-height: 35px;
+    width: 100%;
+  }
+  .table {
+    img {
+      width: 100px;
+      border: 1px solid #ddd;
+    }
+    tr {
+      border-bottom: 2px solid #ddd;
+    }
+    td {
+      vertical-align: middle;
+      &:nth-child(1) {
+        width: 120px;
+      }
+      &:nth-child(3) {
+        color: $red;
+      }
+      &:last-child{
+        text-align: center;
+      }
+    }
+    i {
+      color: $or;
+      border: 1px solid $or;
+      padding: 6px 7px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input {
+      border-radius: 5px;
+      text-align: center;
+      width: 30px;
+      border: 1.5px solid rgb(173, 173, 173);
+      font-size: 14px;
+    }
+    .couponTr{
+      border-bottom: none;
+    }
+  }
+  .info {
+    margin-top:30px;
+    input {
+      width: 100%;
+      display: block;
+      border-radius: 30px;
+      border: 1px solid #ddd;
+      padding: 5px 15px;
+      margin: 10px 0;
+    }
+    textarea {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      padding: 10px 15px;
+      margin: 10px 0;
+    }
+  }
+  .book {
+    margin-top: 30px;
+    em {
+      text-align: right;
+    }
+    li {
+      width: 100%;
+      border-bottom: 1px dotted #ddd;
+      padding: 10px;
+    }
+    .coupon {
+      position: relative;
+      display: block;
+      border-radius: 30px;
+      border: 1px solid $or;
+      overflow: hidden;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      padding: 0;
+      input {
+        width: calc(100% - 90px);
+        border: none;
+        display: inline-block;
+        padding: 5px 15px;
+      }
+      a {
+        background: $or;
+        color: #fff;
+        text-align: center;
+        width: 80px;
+        display: inline-block;
+        height: 100%;
+        position: absolute;
+        vertical-align: middle;
+        line-height: 32px;
+        right: 0;
+      }
+    }
+  }
+  .send,.send:focus{
+    background: $red;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    line-height: 40px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border: none;
+    width: 100%;
+    outline-color: unset;
+  }
+
+  .coupon {
+    position: relative;
+    border-radius: 30px;
+    border: 1px solid $or;
+    overflow: hidden;
+    padding: 0;
+    margin: 10px 0;
+    text-align: left;
+    input {
+      width: calc(100% - 90px);
+      border: none;
+      display: inline-block;
+      padding: 5px 15px;
+      text-align:left;
+    }
+    a {
+      background: $or;
+      color: #fff;
+      text-align: center;
+      width: 80px;
+      display: inline-block;
+      height: 100%;
+      position: absolute;
+      vertical-align: middle;
+      line-height: 32px;
+      right: 0;
+    }
+  }
+  .total {
+    background: #f1f1f1;
+  }
+  .cheep {
+    font-size: 18px;
+    color: red;
+  }
+  span{
+    margin-top: -10px;
+    display: block;
+    font-size: 14px;
+    margin-left: 15px;
+    margin-bottom: -2px;
+  }
+  .formInput{
+    input,textarea{
+      width: 100%;
+      border: 1px solid #ced4da;
+      padding: 10px;
+      border-radius: 0.25rem;
+    }
+  }
 </style>
 <script>
 import AlertMessage from "@/components/alert/alertMessage.vue";

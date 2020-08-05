@@ -23,8 +23,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "@/assets/sass/variables.scss";
-  @import "title.scss";
+  @import "@/assets/scss/variables.scss";
+  @import "@/assets/scss/indexTitle.scss";
   .safty{
     background-size: contain;
     background-position: right bottom;

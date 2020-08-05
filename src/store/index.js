@@ -97,6 +97,9 @@ export default new Vuex.Store({
         context.commit('SELECTNUM2',orNum + num);
       }
     },
+    resetNum(context){
+      context.commit('SELECTNUM2',1);
+    },
     getProduct2(context, id) {
       context.commit('LOADING', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/product/${id}`;

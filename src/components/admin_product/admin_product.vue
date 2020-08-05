@@ -372,7 +372,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../../assets/sass/variables.scss";
-@import "../../assets/sass/page.scss";
-@import "admin_product.scss";
+@import "@/assets/scss/variables.scss";
+@import "@/assets/scss/page.scss";
+@import "@/assets/scss/adminPage.scss";
 </style>

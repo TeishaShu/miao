@@ -32,7 +32,7 @@ const routes = [
       {
         path: 'product2/:id', //動態路由
         name: 'product2',
-        component: () => import('../components/product2/product2.vue')
+        component: () => import('../components/product/product2.vue')
       },
       {
         path: 'coupon',

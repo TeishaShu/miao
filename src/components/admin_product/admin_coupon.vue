@@ -165,12 +165,12 @@
 </template>
 
 <style lang="scss">
-@import "@/assets/sass/date_style.scss"; //裡面有date的css連結
+@import "@/assets/scss/date.scss"; //裡面有date的css連結
 </style>
 <style lang="scss" scoped>
-@import "@/assets/sass/variables.scss";
-@import "@/assets/sass/page.scss";
-@import "admin_product.scss";
+@import "@/assets/scss/variables.scss";
+@import "@/assets/scss/page.scss";
+@import "@/assets/scss/adminPage.scss";
 </style>
 
 <script>

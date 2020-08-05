@@ -13,7 +13,7 @@
             <th width="120">訂購產品</th>
             <th width="120">應付金額</th>
             <th width="150">是否付款</th>
-            <th width="120">購買時間</th>
+            <!--<th width="120">購買時間</th>-->
           </tr>
         </thead>
         <tbody>
@@ -45,7 +45,7 @@
             <td :class="{ okGreen: item.is_paid }">
               {{ item.is_paid ? "已付款" : "未付款" }}
             </td>
-            <td>{{ dateForm(item.create_at) }}</td>
+            <!--<td>{{ dateForm(item.create_at) }}</td>-->
           </tr>
         </tbody>
       </table>
@@ -193,9 +193,9 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "@/assets/sass/variables.scss";
-  @import "@/assets/sass/page.scss";
-  @import "admin_product.scss";
+  @import "@/assets/scss/variables.scss";
+  @import "@/assets/scss/page.scss";
+  @import "@/assets/scss/adminPage.scss";
   th {
     padding: 0 5px;
   }

@@ -63,8 +63,8 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "@/assets/sass/variables.scss";
-@import "headerPage.scss";
+@import "@/assets/scss/variables.scss";
+@import "@/assets/scss/headerPage.scss";
 .pd0 {
   padding-left: 0;
   padding-right: 0;

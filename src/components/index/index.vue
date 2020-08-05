@@ -65,7 +65,8 @@ export default {
 
     // 特效-首頁email
     t1.from("#email", {
-      y: 400,
+      x: -1000,
+      scale:0.5,
       duration: 0.8
     });
 
@@ -84,34 +85,6 @@ export default {
       $(".parallax_level_3").parallax(80, e, 0.9, -1, 1);
       $(".parallax_level_4").parallax(120, e, 0.9, 1, 1);
     });
-    // $.fn.parallax = function(resistance, mouse, num, negative, negative2) {
-    //   const $el = $(this);
-    //   gsap.to($el, num, {
-    //     x: -((mouse.clientX - window.innerWidth / 4) / resistance) * negative,
-    //     y: -((mouse.clientY - window.innerHeight / 2) / resistance) * negative2
-    //   });
-    // };
-
-    // function parallax (resistance, mouse, num, negative, negative2) {
-    //   const $el = $(this);
-    //   gsap.to($el, num, {
-    //     x: -((mouse.clientX - window.innerWidth / 4) / resistance) * negative,
-    //     y: -((mouse.clientY - window.innerHeight / 2) / resistance) * negative2
-    //   });
-    // };
-
-    // document.onmousemove = function(e){
-    //   const level1 = document.querySelector(".parallax_level_1");
-    //   const level2 = document.querySelector(".parallax_level_2");
-    //   const level3 = document.querySelector(".parallax_level_3");
-    //   const level4 = document.querySelector(".parallax_level_4");
-    //   level1.parallax(50, e, 0.8, 1, -1);
-    //   level2.parallax(20, e, 0.3, 1, 1);
-    //   level3.parallax(80, e, 0.9, -1, 1);
-    //   level4.parallax(120, e, 0.9, 1, 1);
-    // }
-    
-
   }
 };
 </script>

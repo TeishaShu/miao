@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     delSend() {
-      $("#delModal button").prop('disabled',true)
+      $("#delModal button").prop('disabled',true);
       const vm = this;
       vm.$http.delete(vm.api).then((response) => {
         window.location.reload(); //可以這樣重刷頁面
