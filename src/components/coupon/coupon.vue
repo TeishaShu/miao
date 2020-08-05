@@ -19,6 +19,7 @@
     <cartBtn />
   </div>
 </template>
+
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   .minHeight{
@@ -108,6 +109,7 @@
     }
   }
 </style>
+
 <script>
 import cartBtn from "@/components/index/CartBtn.vue";
 import AlertMessage from "@/alert/AlertMessage.vue";
@@ -142,3 +144,4 @@ export default {
   },
 };
 </script>
+
