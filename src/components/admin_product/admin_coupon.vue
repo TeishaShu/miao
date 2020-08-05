@@ -230,7 +230,7 @@ export default {
   methods: {
     getCoupon() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/coupons?page=${this.dataPage.current_page}`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupons?page=${this.dataPage.current_page}`;
       this.$http.get(api).then((response) => {
         if (response.data.success) {
           this.$store.dispatch('updateLoading', false);
@@ -273,7 +273,7 @@ export default {
       // $("#addModal button").prop('disabled',true);
       vm.$store.dispatch('updateLoading', true);
       if (vm.modalStyle === "add") {
-        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/coupon`;
+        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon`;
         
         vm.$http.post(api, { data: vm.addNew }).then((response) => {
           if (response.data.success) {
@@ -283,7 +283,7 @@ export default {
           }
         });
       } else if (vm.modalStyle === "edit") {
-        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/coupon/${vm.addNew.id}`;
+        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${vm.addNew.id}`;
         vm.$http.put(api, { data: vm.addNew }).then((response) => {
           if (response.data.success) {
             vm.$store.dispatch('updateLoading', false);
@@ -302,7 +302,7 @@ export default {
     delOpen(item) {
       // console.log(item)
       this.delId = item;
-      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/coupon/${this.delId.id}`;
+      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.delId.id}`;
       this.deleteProductName = item.title;
       $("#delModal").modal("show");
     },

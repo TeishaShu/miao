@@ -429,7 +429,7 @@ export default {
   methods: {
     api() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/cart`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       this.axios.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
@@ -440,13 +440,13 @@ export default {
     },
     delOpen(item) {
       this.delItem = item;
-      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/cart/${item.id}`;
+      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart/${item.id}`;
       this.deleteProductName = item.product.title;
       $("#delModal").modal("show");
     },
     sendCoupon() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/coupon`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
       this.$http.post(api, { data: this.textCoupon }).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
@@ -458,7 +458,7 @@ export default {
     },
     async sentStep1() {
       const vm = this;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/order`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
       const dataString = JSON.stringify({
           data: {
               user: this.user,
