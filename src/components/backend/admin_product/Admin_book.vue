@@ -244,9 +244,7 @@ export default {
   data() {
     return {
       tempProduct: [],
-      dataPage: {
-        // current_page: 1 //這個刪除
-      },
+      dataPage: {},
       editItem: {
         create_at: 1585625169,
         id: "",
@@ -271,16 +269,7 @@ export default {
     };
   },
   methods: {
-    updateTotal(key, qty, price) { //wow!!
-     	// ^[1-99]$     ^\d{2}$
-      // valid  "".e.<1   要正則判斷-------------------------------------------------------------------------------------------------
-      // if (valid) {
-      // }
-      // qty.match(/[\d]*/)
-      // qty.replace(/e/,'')
-
-      // console.log('qty',qty)
-
+    updateTotal(key, qty, price) { //wow!!正則判斷
       const newEdit_products = this.newEdit.products;
       newEdit_products[key].total = qty * price;
       newEdit_products[key].final_total = qty * price;
@@ -290,8 +279,7 @@ export default {
       }
       this.newEdit.total = newTotal;
     },
-    keyupUpdateTotal(qty) {//-------------------------------------------------------------------------------------------
-      // console.log('keyupUpdateTotal',qty)
+    keyupUpdateTotal(qty) {
       qty = qty.replace(/[^\d]/g,'');
     },
     cancelEdit(){

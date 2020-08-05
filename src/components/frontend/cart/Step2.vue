@@ -187,9 +187,6 @@ export default {
       textCoupon: { code: "" },
     };
   },
-  // props: {
-  //   step: Number,
-  // },
   created() {
     this.orderId = this.$route.params.orderId; //orderId 是對應到 router裡面路由id的名稱
     this.getApi();

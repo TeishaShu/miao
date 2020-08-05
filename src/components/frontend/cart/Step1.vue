@@ -479,42 +479,9 @@ export default {
               // this.step += 1;  不能在子層改父層的值
             }
         })
-        .catch(error => { console.log(error);});
+        .catch(error => { console.log('api error');});
 
-
-      // 這邊總是會跳過.
-      // const postURL = function(dataString){
-      //   fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
-      //     method: 'POST',
-      //     body: dataString,
-      //     headers: new Headers({
-      //       'Content-Type': 'application/json'
-      //     })
-      //   })
-      //     .then(res => {
-      //       alert('here')
-      //       return res.json();
-      //     })
-      //     .then(res => {
-      //       console.log('ok!!!',res)
-      //       alert('ok')
-
-      //       if (res.data.success) {
-      //         //換路由..注意寫法.不是用 "=""
-      //         console.log('response',response)
-      //         vm.$router.push(`/cart/${response.data.orderId}`);
-      //         this.$emit('nextStep',2); // 父層step更改
-      //         // this.step += 1;  不能在子層改父層的值
-      //       }
-      //     })
-      //     .catch(error => {
-      //       console.log(error)
-      //       alert('error')
-      //     });
-      // }
-
-      // await postURL(dataString);
-
+      // 之前這邊總是會跳過.後來解決了
     },
     validateBootstrap2(){
       const vm = this;

@@ -244,6 +244,7 @@ export default {
         ? this.allProducts
         : _.filter(this.allProducts, ['category', this.categoryItem2[style]]);
 
+      // 比較前後
       // if (style === "all") {
       //   this.products = this.allProducts;
       // }

@@ -165,12 +165,12 @@
 </template>
 
 <style lang="scss">
-@import "@/assets/scss/date.scss"; //裡面有date的css連結
+  @import "@/assets/scss/date.scss"; //裡面有date的css連結
 </style>
 <style lang="scss" scoped>
-@import "@/assets/scss/variables.scss";
-@import "@/assets/scss/page.scss";
-@import "@/assets/scss/adminPage.scss";
+  @import "@/assets/scss/variables.scss";
+  @import "@/assets/scss/page.scss";
+  @import "@/assets/scss/adminPage.scss";
 </style>
 
 <script>
@@ -214,18 +214,8 @@ export default {
   },
   watch: { //這個用function順序會不對.js跟vue會不同.watch可以，裡面是物件
     date: function (value) {
-      // console.log('watch');
       this.addNew.due_date = +new Date(value);
     },
-    // percent: function(value) {
-    //   console.log(value);
-    //   const regexp = /^\d{2}$/;
-
-    //   if (!regexp.test(value)) {
-    //     this.percent = 0;
-    //   }
-    //   // this.percent = value.replace(/^\d{2}$/,"")
-    // }
   },
   methods: {
     getCoupon() {
@@ -240,8 +230,8 @@ export default {
         }
       });
     },
-    keyupUpdatePercent(val){  //.......................................正規式這邊卡了一下.然後錯誤值要帶回去
-      const regexp = /^\d{0,2}$/; //最多2位數.可以用console測試
+    keyupUpdatePercent(val){  //正規式卡了一下.錯誤值要帶回去
+      const regexp = /^\d{0,2}$/;
 
       if (!regexp.test(val)) {
         this.addNew.percent = 0;
@@ -270,7 +260,6 @@ export default {
         vm.$bus.$emit('message:push',"請正確填寫資料",'danger','fa-times');
         return;
       }
-      // $("#addModal button").prop('disabled',true);
       vm.$store.dispatch('updateLoading', true);
       if (vm.modalStyle === "add") {
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon`;
@@ -298,9 +287,7 @@ export default {
     newDateForm(num) {
       return +new Date(num);
     },
-
     delOpen(item) {
-      // console.log(item)
       this.delId = item;
       this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.delId.id}`;
       this.deleteProductName = item.title;

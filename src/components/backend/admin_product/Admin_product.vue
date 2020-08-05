@@ -166,16 +166,6 @@
                     style="height:100px"
                   ></textarea>
                 </div>
-                <!--<div class="form-group">
-                  <label for="content">說明內容</label>
-                  <textarea
-                    type="text"
-                    class="form-control"
-                    id="content"
-                    placeholder="請輸入產品說明內容"
-                    v-model.trim="tempProduct.content"
-                  ></textarea>
-                </div>--> 
                 <div class="form-group">
                   <div class="form-check">
                     <input
@@ -293,7 +283,7 @@ export default {
           (this.tempProduct.is_enabled = 0),
           (this.tempProduct.imageUrl = "");
       } else {
-        // this.tempProduct = item; -->不能這樣寫，因為要把編輯前後的資料分開.所以要避開物件船參考的特性...為了取銷的部分嗎?
+        // 把編輯前後的資料分開.注意物件特性
         this.tempProduct = Object.assign({}, item);
       }
       $("#productModal").modal("show");
@@ -311,7 +301,6 @@ export default {
         this.$store.dispatch('updateLoading', false);
         return;
       }
-      // $("#productModal button").prop('disabled',true);
       if (this.addNew) {
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product`;
         this.$http.post(api, { data: this.tempProduct }).then((response) => {
@@ -320,7 +309,6 @@ export default {
           this.api();
         });
       } else {
-        ///////////////要改這裡.put的方式  https://blog.csdn.net/qq_31837621/article/details/80688854
         const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product/${this.tempProduct.id}`;
         this.$http.put(api, { data: this.tempProduct }).then((response) => {
           this.$bus.$emit('message:push',response.data.message,'success','fa-check');
@@ -337,7 +325,7 @@ export default {
       $("#delModal").modal("show");
     },
     upImg() {
-      //用console查看this.當圖片丟進來時看$refs的files裡面的files是個陣列
+      //用 console 查看 this.當圖片丟進來時看 $refs 的 files 裡面的 files 是個陣列
       this.status.fileUpLoading = true;
       let imgUrl = this.$refs.files.files[0];
       const formData = new FormData(); //web api:這是一個物件要用formData傳送。用formData模擬傳統
@@ -352,7 +340,6 @@ export default {
         .then((response) => {
           this.status.fileUpLoading = false;
           if (response.data.success) {
-            // this.tempProduct.imageUrl = response.data.imageUrl;
             // console.log(this.tempProduct)//用這個看.發現沒有getter、setter雙向綁定
             this.$set(this.tempProduct, "imageUrl", response.data.imageUrl); //強制寫入
           } else {
