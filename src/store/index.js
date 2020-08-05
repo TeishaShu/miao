@@ -52,7 +52,7 @@ export default new Vuex.Store({
       context.commit('BACKSMTOGGLE', status);
     },
     cartBtnApi(context){ // 購物車圓形按鈕
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/cart`;
       axios.get(api).then(response => {
         if (response.data.success) {
           context.commit('CARTBRNNUM', response.data.data.carts.length)
@@ -65,7 +65,7 @@ export default new Vuex.Store({
         qty: 1,
       };
       context.commit('LOADING', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/cart`;
       axios.post(api, { data: addCartSend }).then((response) => {
         context.commit('LOADING', false);
         context.dispatch('cartBtnApi');
@@ -78,7 +78,7 @@ export default new Vuex.Store({
         product_id : context.state.dataProduct2.id,
         qty :  context.state.selectNum2,
       };
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/cart`;
       axios.post(api, { data: addCartSend2 }).then((response) => {
         context.commit('LOADING', false);
         if (response.data.success) {
@@ -102,7 +102,7 @@ export default new Vuex.Store({
     },
     getProduct2(context, id) {
       context.commit('LOADING', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/product/${id}`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/product/${id}`;
       axios.get(api).then((response) => {
         context.commit('LOADING', false);
         if (response.data.success) {

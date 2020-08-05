@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import cartBtn from "@/layout/footerStyle/cartBtn.vue";
-import banner from "./banner.vue";
-import foodSafty from "./foodSafty.vue";
-import productIndex from "./productIndex.vue";
-import emailIndex from "./emailIndex.vue";
+import cartBtn from "@/components/index/CartBtn.vue";
+import banner from "./Banner.vue";
+import foodSafty from "./FoodSafty.vue";
+import productIndex from "./ProductIndex.vue";
+import emailIndex from "./EmailIndex.vue";
 import $ from "jquery";
 import { gsap, ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);

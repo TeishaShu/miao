@@ -10,7 +10,7 @@
         <h3>{{ dataProduct2.title }}</h3>
         <p class="type">{{ dataProduct2.category }}</p>
         <ul class="detail">
-          <li v-for="el in detail(dataProduct2.description)">{{ el }}</li>
+          <li v-for="(el,index) in detail(dataProduct2.description)" :key="index">{{ el }}</li>
         </ul>
         <p class="price">
           <em>NT{{ dataProduct2.origin_price | currency }}</em
@@ -127,8 +127,8 @@
 </style>
 
 <script>
-import cartBtn from "@/layout/footerStyle/cartBtn.vue";
-import AlertMessage from "@/components/alert/alertMessage.vue";
+import cartBtn from "@/components/index/CartBtn.vue";
+import AlertMessage from "@/alert/AlertMessage.vue";
 export default {
   components: {
     cartBtn,

@@ -3,8 +3,8 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-2">
-          <nav class="col-md-2 d-none d-md-block sidebar" :class="{'sm-set':backSmToggle}">
-            <div class="sidebar-sticky">
+          <nav class="col-md-2 d-none d-md-block sidebar" :class="{'smSet':backSmToggle}">
+            <div class="sidebarSticky">
               <div class="navbar-brand logoA">
                 <img src="@/assets/images/logo.png" alt="" /> 
                 <p>後臺設定管理</p>
@@ -32,18 +32,6 @@
                   </router-link>
                 </li>
               </ul>
-
-              <!--<h6>
-                模擬功能
-              </h6>
-              <ul>
-                <li>
-                  <a href="#">
-                    <i class="fas fa-shopping-cart"></i>
-                    模擬訂單
-                  </a>
-                </li>
-              </ul>-->
             </div>
           </nav>
         </div>
@@ -247,7 +235,7 @@
     }
   }
 
-  .sidebar-sticky {
+  .sidebarSticky {
     position: relative;
     top: 0;
     height: 100vh;
@@ -255,9 +243,8 @@
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   }
 
-  @supports ((position: -webkit-sticky) or (position: sticky)) {
-    .sidebar-sticky {
-      position: -webkit-sticky;
+  @supports (position: sticky) {
+    .sidebarSticky {
       position: sticky;
     }
   }
@@ -334,11 +321,11 @@
     .toggleUl {
       display: block;
     }
-    .sm-set{
+    .smSet{
       top:49px;
       background-color: rgba(0, 0, 0, 0.5) ;
       display: block !important;
-      .sidebar-sticky{
+      .sidebarSticky{
         width:300px;
         background-color: #fff;
       }

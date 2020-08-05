@@ -5,14 +5,17 @@
     <!--content-->
     <div class="container mt-4">
       <div class="row">
-        <div class="col-md-3 asideBox">
+        <div class="col-md-3">
+          <Aside :categoryItem = "categoryItem" @click/>
+        </div>
+        <!--<div class="col-md-3 asideBox">
           <ul>
-            <li v-for="(item,index) in categoryItem" 
-            @click="selectCategory(`${item.value}`, true)" :key="index">
+            <li v-for="(item,index) in categoryItem" :key="index"
+            @click="selectCategory(`${item.value}`, true)">
               <i class="fas fa-cookie"></i>{{item.label}}
             </li>
           </ul>
-        </div>
+        </div>-->
         <div class="col-md-9">
           <div class="row productStyle">
             <div
@@ -157,17 +160,18 @@
 </style>
 
 <script>
-import cartBtn from "../../layout/footerStyle/cartBtn.vue";
+import cartBtn from "@/components/index/CartBtn.vue";
 import Paginate from "vuejs-paginate";
-import AlertMessage from "./../alert/alertMessage.vue";
+import AlertMessage from "@/alert/AlertMessage.vue";
+import Aside from "./Aside.vue";
 import _ from 'lodash';
 export default {
   components: {
     cartBtn,
     Paginate,
     AlertMessage,
+    Aside,
   },
-  
   data() {
     return {
       allProducts: [],
@@ -185,7 +189,6 @@ export default {
         {'value': 'snack', 'label': '零食'},
         {'value': 'nutrition', 'label': '營養品'},
       ],
-
     };
   },
   computed: { //不適合太複雜的處理.資料處理

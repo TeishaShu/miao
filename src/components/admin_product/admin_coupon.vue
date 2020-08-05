@@ -68,7 +68,7 @@
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">
-              <span>{{modalStyle === "add" ? "新增優惠券" : "編輯優惠券"}}</span>
+              <span>{{ modalStyle === "add" ? "新增優惠券" : "編輯優惠券" }}</span>
             </h5>
             <button
               type="button"
@@ -177,7 +177,7 @@
 import DelModal from "@/components/modal/DelModal.vue";
 import Datepicker from "vuejs-datepicker";
 import Paginate from "vuejs-paginate";
-import AlertMessage from "@/components/alert/alertMessage.vue";
+import AlertMessage from "@/alert/AlertMessage.vue";
 import $ from "jquery";
 export default {
   components: {
@@ -230,7 +230,7 @@ export default {
   methods: {
     getCoupon() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupons?page=${this.dataPage.current_page}`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/coupons?page=${this.dataPage.current_page}`;
       this.$http.get(api).then((response) => {
         if (response.data.success) {
           this.$store.dispatch('updateLoading', false);
@@ -265,31 +265,31 @@ export default {
       $("#addModal").modal("show");
     },
     sentCoupon() {
-      if (this.addNew.title === "" || this.addNew.code === "" || this.addNew.percent === 0 ) {
-        this.$bus.$emit('message:push',"請正確填寫資料",'danger','fa-times');
+      const vm = this;
+      if (vm.addNew.title === "" || vm.addNew.code === "" || vm.addNew.percent === 0 ) {
+        vm.$bus.$emit('message:push',"請正確填寫資料",'danger','fa-times');
         return;
       }
-      const vm = this;
       // $("#addModal button").prop('disabled',true);
-      this.$store.dispatch('updateLoading', true);
-      if (this.modalStyle === "add") {
-        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon`;
+      vm.$store.dispatch('updateLoading', true);
+      if (vm.modalStyle === "add") {
+        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/coupon`;
         
-        this.$http.post(api, { data: vm.addNew }).then((response) => {
+        vm.$http.post(api, { data: vm.addNew }).then((response) => {
           if (response.data.success) {
-            this.$store.dispatch('updateLoading', false);
-            this.couponsData = response.data.coupons;
-            this.getCoupon();
+            vm.$store.dispatch('updateLoading', false);
+            vm.couponsData = response.data.coupons;
+            vm.getCoupon();
           }
         });
-      } else if (this.modalStyle === "edit") {
-        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.addNew.id}`;
-        this.$http.put(api, { data: vm.addNew }).then((response) => {
+      } else if (vm.modalStyle === "edit") {
+        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/coupon/${vm.addNew.id}`;
+        vm.$http.put(api, { data: vm.addNew }).then((response) => {
           if (response.data.success) {
-            this.$store.dispatch('updateLoading', false);
-            this.couponsData = response.data.coupons;
-            this.$bus.$emit('message:push',response.data.message,'success','fa-check');
-            this.getCoupon();
+            vm.$store.dispatch('updateLoading', false);
+            vm.couponsData = response.data.coupons;
+            vm.$bus.$emit('message:push',response.data.message,'success','fa-check');
+            vm.getCoupon();
           }
         });
       }
@@ -302,7 +302,7 @@ export default {
     delOpen(item) {
       // console.log(item)
       this.delId = item;
-      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/coupon/${this.delId.id}`;
+      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/coupon/${this.delId.id}`;
       this.deleteProductName = item.title;
       $("#delModal").modal("show");
     },

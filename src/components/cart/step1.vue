@@ -382,7 +382,7 @@
   }
 </style>
 <script>
-import AlertMessage from "@/components/alert/alertMessage.vue";
+import AlertMessage from "@/alert/AlertMessage.vue";
 import DelModal from "@/components/modal/DelModal.vue";
 import $ from "jquery";
 export default {
@@ -426,11 +426,10 @@ export default {
       deleteProductName: "",
     };
   },
-  
   methods: {
     api() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/cart`;
       this.axios.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
@@ -441,13 +440,13 @@ export default {
     },
     delOpen(item) {
       this.delItem = item;
-      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart/${item.id}`;
+      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/cart/${item.id}`;
       this.deleteProductName = item.product.title;
       $("#delModal").modal("show");
     },
     sendCoupon() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/coupon`;
       this.$http.post(api, { data: this.textCoupon }).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
@@ -459,18 +458,14 @@ export default {
     },
     async sentStep1() {
       const vm = this;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
-      // const dataString = JSON.stringify({  不能這樣寫
-      //   data: { user: { userL },
-      //   messageL } }
-      // ); 
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/order`;
       const dataString = JSON.stringify({
           data: {
               user: this.user,
               message: this.message
           }
       }); 
-      await fetch('https://vue-course-api.hexschool.io/api/teisha/order', {
+      await fetch(api, {
             method: 'POST',
             body: dataString,
             headers: new Headers({ 'Content-Type': 'application/json'})

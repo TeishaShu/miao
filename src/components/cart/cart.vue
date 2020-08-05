@@ -4,19 +4,19 @@
       <!--步驟-->
       <div class="col-md-12">
         <div class="step">
-          <div class="line" :class="{'active-round active-step' : nowStep===1}" >  <!--拿到step------- 是用route拿值。(不是component方式.因為切換畫面方式')-->
+          <div class="line" :class="{'activeRound activeStep' : nowStep===1}" >  <!--拿到step------- 是用route拿值。(不是component方式.因為切換畫面方式')-->
             <span>1</span>
             <p>
               訂單資料
             </p>
           </div>
-          <div class="line" :class="{'active-round active-step' : nowStep===2 }" > 
+          <div class="line" :class="{'activeRound activeStep' : nowStep===2 }" > 
             <span>2</span>
             <p>
               確認訂單並付款
             </p>
           </div>
-          <div :class="{'active-step' : nowStep===3}">
+          <div :class="{'activeStep' : nowStep===3}">
             <span>3</span>
             <p>
               完成訂單
@@ -61,7 +61,7 @@
       color: #a7a7a7;
     }
   }
-  .active-step{
+  .activeStep{
     span{
       border: 2px solid #ffd2aa;
       color: #fff;
@@ -83,7 +83,7 @@
       z-index: -2;
     }
   }
-  .active-round {
+  .activeRound {
     &::after{
       border-bottom: 2px solid $red;
     }

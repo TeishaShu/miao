@@ -14,7 +14,7 @@
         <div class="modal-content border-0">
           <div class="modal-header bg-danger text-white">
             <h5 class="modal-title" id="exampleModalLabel">
-              <b>刪除{{titleType}}</b>
+              <b>刪除{{ titleType }}</b>
             </h5>
             <button
               type="button"
@@ -26,7 +26,7 @@
             </button>
           </div>
           <div class="modal-body">
-            是否刪除{{titleType}} (刪除後將無法恢復)<br />
+            是否刪除{{ titleType }} (刪除後將無法恢復)<br />
             <strong class="text-danger">「{{ productName }}」</strong>
           </div>
           <div class="modal-footer">
@@ -67,8 +67,8 @@ export default {
   },
   methods: {
     delSend() {
-      $("#delModal button").prop('disabled',true);
       const vm = this;
+      $("#delModal button").prop('disabled',true);
       vm.$http.delete(vm.api).then((response) => {
         window.location.reload(); //可以這樣重刷頁面
         $("#delModal").modal("hide");

@@ -122,7 +122,7 @@
                         <tr>
                           <td colspan="3">總金額</td>
                           <td>
-                            $ {{newEdit.total}}
+                            $ {{ newEdit.total }}
                           </td>
                         </tr>
                       </tbody>
@@ -233,7 +233,7 @@
 </style>
 
 <script>
-import AlertMessage from "@/components/alert/alertMessage.vue";
+import AlertMessage from "@/alert/AlertMessage.vue";
 import $ from "jquery";
 import Paginate from "vuejs-paginate";
 export default {
@@ -300,7 +300,7 @@ export default {
     },
     getBook() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/orders?page=${this.dataPage.current_page}`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/orders?page=${this.dataPage.current_page}`;
       this.axios.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         this.$store.dispatch('backSmToggle', false);
@@ -316,7 +316,7 @@ export default {
     },
     edit(item) {
       this.editItem = item;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/order/${item.id}`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/order/${item.id}`;
       this.axios.put(api, { data }).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
@@ -338,7 +338,7 @@ export default {
     updateProduct() {
       this.$store.dispatch('updateLoading', true);
       const editt = this.newEdit;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/order/${editt.id}`;
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/${process.env.VUE_APP_DEFAULT_NAME}/admin/order/${editt.id}`;
       this.axios.put(api, { data: editt }).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {

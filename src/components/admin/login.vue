@@ -106,7 +106,7 @@
 </style>
 
 <script>
-import AlertMessage from "@/components/alert/alertMessage.vue";
+import AlertMessage from "@/alert/AlertMessage.vue";
 export default {
   components: {
     AlertMessage,

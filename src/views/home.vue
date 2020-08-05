@@ -175,7 +175,7 @@
 </style>
 
 <script>
-import footerStyle from "@/layout/footerStyle/footerStyle.vue";
+import footerStyle from "@/components/index/FooterStyle.vue";
 export default {
   name: "home",
   components: {

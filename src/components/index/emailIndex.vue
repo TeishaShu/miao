@@ -9,7 +9,7 @@
         搶先得到更多新品、貓食訊息
         </p>
         <input type="email" placeholder="請輸入 E-mail 信箱訂閱電子報" v-model="email">
-        <div v-show="emailMsg" class="alert mt-3" :class="emailStyle ?'alert-success':'alert-danger' " role="alert">
+        <div v-show="emailMsg" class="alert mt-3" :class="emailStyle ? 'alert-success':'alert-danger' " role="alert">
             {{ emailMsg }}
         </div>
         <button type="button" @click="sendEmail()">送出資料</button>
@@ -149,13 +149,13 @@ export default {
     sendEmail(){
       const vm = this;
       const isMail = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-      if (!isMail.test(this.email)) {
-          this.emailStyle = false;
-          this.emailMsg = 'email格式錯誤';
+      if (!isMail.test(vm.email)) {
+          vm.emailStyle = false;
+          vm.emailMsg = 'email格式錯誤';
       }
       else {
-          this.emailStyle = true;
-          this.emailMsg = '成功訂閱電子報!';
+          vm.emailStyle = true;
+          vm.emailMsg = '成功訂閱電子報!';
       }
       setTimeout(() => {
         vm.emailMsg = "";

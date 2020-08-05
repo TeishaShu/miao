@@ -20,7 +20,7 @@
               >
                 <img :src="item.img" alt="" />
                 <h4>
-                  {{item.category}}
+                  {{ item.category }}
                 </h4>
               </router-link>
             </div>
