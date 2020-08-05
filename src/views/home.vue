@@ -63,12 +63,115 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "@/assets/scss/variables.scss";
-@import "@/assets/scss/headerPage.scss";
-.pd0 {
-  padding-left: 0;
-  padding-right: 0;
-}
+  @import "@/assets/scss/variables.scss";
+  .header {
+    color: $or;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    .logo {
+      display: inline-block;
+      width: 70%;
+    }
+    ul {
+      display: inline-block;
+      &:last-child {
+        float: right;
+      }
+    }
+    li {
+      display: inline-block;
+      padding: 5px;
+      cursor: pointer;
+    }
+  }
+  .logoA {
+    background: transparent;
+    padding: 0;
+  }
+  .logoName{
+    color: $or;
+    letter-spacing: 8px;
+  }
+  .nav {
+    a {
+      color: $or;
+      display: block;
+      padding: 5px 15px;
+      border-radius: 20px;
+      &:hover {
+        background: $pink;
+        color: #fff;
+        transition-property:background, color;
+        transition-duration: 0.9s, 0.4s;
+        transition-timing-function: ease, ease;
+      }
+    }
+  }
+  .nav2 {
+    margin-top: 5px;
+    li {
+      padding: 5px 10px;
+      &:nth-child(2) {
+        a {
+          background: $or;
+          color: #fff;
+          border-radius: 20px;
+          padding: 5px 15px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  i {
+    margin-right: 5px;
+  }
+  .headBox {
+    padding: 0;
+    box-shadow: 0 0 5px $or;
+  }
+  .cartBtn {
+    a {
+      background: #fff;
+      color: $or !important;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .navbar {
+      justify-content: center;
+    }
+    .navbar-toggler {
+      margin-right: 20px;
+      font-size: 14px;
+    }
+    .header {
+      li {
+        display: block;
+      }
+      ul {
+        display: block;
+        &:last-child {
+          float: unset;
+        }
+      }
+    }
+    .nav a {
+      padding: 5px 10px;
+    }
+    .nav2 {
+      margin-top: 0;
+      li{
+        padding: 10px 15px;
+      }
+    }
+  }
+
+  .pd0 {
+    padding-left: 0;
+    padding-right: 0;
+  }
 </style>
 
 <script>
