@@ -174,7 +174,7 @@
 </style>
 
 <script>
-import DelModal from "@/components/modal/DelModal.vue";
+import DelModal from "@/components/frontend/modal/DelModal.vue";
 import Datepicker from "vuejs-datepicker";
 import Paginate from "vuejs-paginate";
 import AlertMessage from "@/alert/AlertMessage.vue";

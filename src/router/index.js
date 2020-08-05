@@ -17,7 +17,7 @@ const routes = [
       {
         path: '',
         name: 'index',
-        component: () => import('../components/index/Index.vue')
+        component: () => import('../components/frontend/index/Index.vue')
       },
       {
         path: 'product',
@@ -27,31 +27,31 @@ const routes = [
       {
         path: 'product/:id',
         name: 'product0',
-        component: () => import('../components/product/Product.vue')
+        component: () => import('../components/frontend/product/Product.vue')
       },
       {
         path: 'product2/:id', //動態路由
         name: 'product2',
-        component: () => import('../components/product/Product2.vue')
+        component: () => import('../components/frontend/product/Product2.vue')
       },
       {
         path: 'coupon',
         name: 'coupon',
-        component: () => import('../components/coupon/Coupon.vue')
+        component: () => import('../components/frontend/coupon/Coupon.vue')
       },
       {
         path: 'cart',
-        component: () => import('../components/cart/Cart.vue'),
+        component: () => import('../components/frontend/cart/Cart.vue'),
         children:[
           {
             path: '',
             name: 'step1',
-            component: () => import('../components/cart/Step1.vue')
+            component: () => import('../components/frontend/cart/Step1.vue')
           },
           {
             path: ':orderId',
             name: 'step2',
-            component: () => import('../components/cart/Step2.vue')
+            component: () => import('../components/frontend/cart/Step2.vue')
           },
         ]
       },
@@ -61,29 +61,29 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('../components/admin/Login.vue')
+    component: () => import('../components/backend/admin/Login.vue')
   },
   {
     path: '/admin',
-    component: () => import('../components/admin/Admin.vue'),
+    component: () => import('../components/backend/admin/Admin.vue'),
     meta: { requiresAuth: true },
     children:[
       {
         path: '',
         name: 'admin_product',
-        component: () => import('../components/admin_product/Admin_product.vue'),
+        component: () => import('../components/backend/admin_product/Admin_product.vue'),
         meta: { requiresAuth: true }
       },
       {
         path: 'admin_book',
         name: 'admin_book',
-        component: () => import('../components/admin_product/Admin_book.vue'),
+        component: () => import('../components/backend/admin_product/Admin_book.vue'),
         meta: { requiresAuth: true }
       },
       {
         path: 'admin_coupon',
         name: 'admin_coupon',
-        component: () => import('../components/admin_product/Admin_coupon.vue'),
+        component: () => import('../components/backend/admin_product/Admin_coupon.vue'),
         meta: { requiresAuth: true }
       },
     ]

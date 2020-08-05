@@ -111,7 +111,7 @@
 </style>
 
 <script>
-import cartBtn from "@/components/index/CartBtn.vue";
+import cartBtn from "@/components/frontend/index/CartBtn.vue";
 import AlertMessage from "@/alert/AlertMessage.vue";
 import $ from "jquery";
 export default {

@@ -160,7 +160,7 @@
 </style>
 
 <script>
-import cartBtn from "@/components/index/CartBtn.vue";
+import cartBtn from "@/components/frontend/index/CartBtn.vue";
 import Paginate from "vuejs-paginate";
 import AlertMessage from "@/alert/AlertMessage.vue";
 import Aside from "./Aside.vue";

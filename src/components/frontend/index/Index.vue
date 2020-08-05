@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import cartBtn from "@/components/index/CartBtn.vue";
+import cartBtn from "@/components/frontend/index/CartBtn.vue";
 import banner from "./Banner.vue";
 import foodSafty from "./FoodSafty.vue";
 import productIndex from "./ProductIndex.vue";

@@ -42,7 +42,7 @@ export default {
             vm.messages.splice(i, 1);
           }
         });
-      }, 5000); // 5秒一到會把自己的訊息移除
+      }, 5000); 
     },
   },
   created() {

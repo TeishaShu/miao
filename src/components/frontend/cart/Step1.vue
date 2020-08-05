@@ -383,7 +383,7 @@
 </style>
 <script>
 import AlertMessage from "@/alert/AlertMessage.vue";
-import DelModal from "@/components/modal/DelModal.vue";
+import DelModal from "@/components/frontend/modal/DelModal.vue";
 import $ from "jquery";
 export default {
   components: {

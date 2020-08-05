@@ -233,7 +233,7 @@
 </template>
 <script>
 import Paginate from "vuejs-paginate";
-import DelModal from "@/components/modal/DelModal.vue";
+import DelModal from "@/components/frontend/modal/DelModal.vue";
 import AlertMessage from "@/alert/AlertMessage.vue";
 import $ from "jquery";
 export default {
@@ -245,7 +245,8 @@ export default {
   data() {
     return {
       dataProdtct: [],
-      dataPage: {},
+      dataPage: {
+      },
       tempProduct: {
         title: "",
         category: "",
@@ -271,7 +272,6 @@ export default {
     api() {
       this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/products?page=${this.dataPage.current_page}`;
-      console.log()
       this.$http.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         this.$store.dispatch('backSmToggle', false);

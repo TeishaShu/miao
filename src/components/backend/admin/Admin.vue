@@ -14,7 +14,7 @@
               </h6>
               <ul>
                 <li>
-                  <router-link to="/admin">
+                  <router-link :to="{name:'admin_product'}">
                     <i class="fas fa-boxes"></i>
                     產品列表
                   </router-link>
@@ -26,7 +26,7 @@
                   </router-link>
                 </li>
                 <li>
-                  <router-link to="/admin/admin_coupon">
+                  <router-link :to="{name:'admin_coupon'}">
                     <i class="fas fa-ticket-alt"></i>
                     優惠卷
                   </router-link>
@@ -50,7 +50,7 @@
           <div class="toggleUl" style="display:none">
             <ul>
               <li>
-                <router-link to="admin_product">
+                <router-link :to="{name:'admin_product'}">
                   <i class="fas fa-boxes"></i>
                   產品列表
                 </router-link>
