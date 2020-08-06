@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row justify-content-center">
     <AlertMessage/>
     <!--沒東西-->
     <div
@@ -10,7 +10,7 @@
       <router-link :to="{name:'product'}"><i class="fa fa-angle-double-right pr-2" aria-hidden="true"></i> 快來逛逛</router-link>
     </div>
     <!--有東西  v-if="dataAPI.carts.length !== 0"-->
-    <div class="col-md-12" v-if="dataAPI.carts && dataAPI.carts.length !== 0">
+    <div class="col-md-10" v-if="dataAPI.carts && dataAPI.carts.length !== 0">
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -55,24 +55,22 @@
                 NT{{ (dataCoupon.data.final_total) | currency }}
               </td>
             </tr>
-            <tr class="couponTr">
-              <td colspan="6">
-                <div class="coupon">
-                  <input
-                    type="text"
-                    placeholder="請輸入優惠碼"
-                    v-model.trim="textCoupon.code"
-                    @keyup.13="sendCoupon"
-                  /><a href="#" @click.prevent="sendCoupon">送出</a>
-                </div>
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <div class="col-md-6" v-if="dataAPI.carts && dataAPI.carts.length !== 0">
+      <div class="coupon">
+        <input
+          type="text"
+          placeholder="請輸入優惠碼"
+          v-model.trim="textCoupon.code"
+          @keyup.13="sendCoupon"
+        /><a href="#" @click.prevent="sendCoupon">送出</a>
+      </div>
+    </div>
     <!--v-if="dataAPI.carts.length !== 0"-->
-    <div class="col-md-12 mt-3">
+    <div class="col-md-10 mt-3">
       <form class="needs-validation formInput" novalidate>
         <div
           class="form-row"
@@ -163,9 +161,11 @@
       border: 1px solid lighten($or, 20%);
     }
   }
-  .coupon a.disabled{
+  .coupon{
+    a.disabled{
     pointer-events: none;
     background: lighten($or, 20%);
+    }
   }
   .out {
     margin-top: 20px;
@@ -254,9 +254,6 @@
       border: 1.5px solid rgb(173, 173, 173);
       font-size: 14px;
     }
-    .couponTr{
-      border-bottom: none;
-    }
   }
   .info {
     margin-top:30px;
@@ -275,45 +272,6 @@
       border: 1px solid #ddd;
       padding: 10px 15px;
       margin: 10px 0;
-    }
-  }
-  .book {
-    margin-top: 30px;
-    em {
-      text-align: right;
-    }
-    li {
-      width: 100%;
-      border-bottom: 1px dotted #ddd;
-      padding: 10px;
-    }
-    .coupon {
-      position: relative;
-      display: block;
-      border-radius: 30px;
-      border: 1px solid $or;
-      overflow: hidden;
-      margin-top: 10px;
-      margin-bottom: 5px;
-      padding: 0;
-      input {
-        width: calc(100% - 90px);
-        border: none;
-        display: inline-block;
-        padding: 5px 15px;
-      }
-      a {
-        background: $or;
-        color: #fff;
-        text-align: center;
-        width: 80px;
-        display: inline-block;
-        height: 100%;
-        position: absolute;
-        vertical-align: middle;
-        line-height: 32px;
-        right: 0;
-      }
     }
   }
   .send,.send:focus{
@@ -336,7 +294,8 @@
     border: 1px solid $or;
     overflow: hidden;
     padding: 0;
-    margin: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 15px;
     text-align: left;
     input {
       width: calc(100% - 90px);

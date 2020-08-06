@@ -23,26 +23,7 @@
               v-for="item in pagination.pageAry[pagination.current_page - 1]"
               :key="item.id"
             >
-              <a>
-                <div @click="clickProduct(item)" class="proImg">
-                  <img :src="`${item.imageUrl}`" alt="" />
-                </div>
-                <!--注意這邊style的寫法.backgroundImage、url裡面沒有''-->
-                <div class="proTxt">
-                  <p class="type">{{ item.category }}</p>
-                  <h3 @click="clickProduct(item)">
-                    {{ item.title }} 
-                  </h3>
-                  <p>
-                    <em>NT{{ item.origin_price | currency }}</em
-                    ><br />NT{{ item.price | currency }}
-                  </p>
-                  <i
-                    class="fas fa-cart-plus"
-                    @click.prevent="addCart(item)"
-                  ></i>
-                </div>
-              </a>
+              <ProductModal :item = "item"/>
             </div>
 
             <div class="col-md-12 pageOut">
@@ -69,89 +50,18 @@
   @import "@/assets/scss/variables.scss";
   @import "@/assets/scss/page.scss";
   @import "@/assets/scss/aside.scss";
-  .pd0{
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .productStyle{
-    h3{
-      height: 84px;
-      color: $or;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-    }
-  }
-  .proImg img{
-    object-fit: contain;
-    width: 100%;
-    padding: 5px;
-    cursor: pointer;
+  h3{
+    height: 84px;
+    color: $or;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
   }
   .proCol{
     margin: 15px 0;
-    a{
-      box-shadow: 0 0 5px #ababab;
-      display: block;
-      padding: 10px 0;
-      &:hover{
-        border: 2px solid $or_light;
-        box-shadow: 0 0 5px $or;
-        transition-property: border, box-shadow;
-        transition-duration: 0.1s, 0.1s;
-        transition-timing-function: ease, ease-in;
-        h3{
-          color: $red;
-          transition: color 0.5s ease;
-        }
-      }
-    }
   }
-  .proTxt{
-    padding: 15px;
-    p{
-      color: $txt;
-      line-height: 20px;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    em{
-      font-size: 12px;
-      text-decoration: line-through;
-      
-    }
-    i{
-      color: $pink;
-      border: 1px solid $pink;
-      padding: 11px 12px 11px 9px;
-      border-radius: 100%;
-      float: right;
-      vertical-align: middle;
-      cursor: pointer;
-      &:hover{
-        color: $red;
-        border: 1px solid $red;
-      }
-    }
-    .type{
-      background:$pink;
-      color: #fff;
-      font-size: 12px;
-      padding:1px 10px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-  }
+  
   @media(max-width:426px){
-    .proTxt{
-      padding: 10px;
-    }
-    .productStyle{
-      padding: 0 5px;
-      h3{
-        height: 70px;
-      }
-    }
     .proCol{
       padding: 0 10px;
       margin: 10px 0;
@@ -160,6 +70,7 @@
 </style>
 
 <script>
+import ProductModal from "@/components/frontend/modal/ProductModal.vue";
 import cartBtn from "@/components/frontend/index/CartBtn.vue";
 import Paginate from "vuejs-paginate";
 import AlertMessage from "@/alert/AlertMessage.vue";
@@ -167,6 +78,7 @@ import Aside from "./Aside.vue";
 import _ from 'lodash';
 export default {
   components: {
+    ProductModal,
     cartBtn,
     Paginate,
     AlertMessage,

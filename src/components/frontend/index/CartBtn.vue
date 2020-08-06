@@ -1,6 +1,6 @@
 <template>
   <div class="cart">
-  <em>{{ num }}</em>
+  <em v-show="num!==0">{{ num }}</em>
   <router-link :to="{name:'step1'}">
     <i class="fas fa-shopping-cart"></i>
     <p>購物車</p>

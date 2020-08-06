@@ -23,6 +23,32 @@
         </div>
         <a href="#" class="addCart" @click.prevent="addCartProductIn"><i class="fa fa-heart mr-2" aria-hidden="true"></i>加入購物車</a>
       </div>
+      <div class="col-md-12 mt-5">
+        <h3>類似商品</h3>
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div>
+                <ProductModal :item = "item"/>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <!--<img src="..." class="d-block w-100" alt="...">-->456
+            </div>
+            <div class="carousel-item">
+              <!--<img src="..." class="d-block w-100" alt="...">-->789
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
     </div>
     <cartBtn />
   </div>
@@ -127,15 +153,19 @@
 </style>
 
 <script>
+import ProductModal from "@/components/frontend/modal/ProductModal.vue";
 import cartBtn from "@/components/frontend/index/CartBtn.vue";
 import AlertMessage from "@/alert/AlertMessage.vue";
 export default {
   components: {
+    ProductModal,
     cartBtn,
     AlertMessage,
   },
   data() {
     return {
+      similarProductAll:[],
+      similarProductFilter:[],
     };
   },
   computed: {
@@ -147,6 +177,29 @@ export default {
     }
   },
   methods: {
+    similarProduct() {//這邊要修改
+      this.$store.dispatch('updateLoading', true);
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/products/all`;
+      this.$http.get(api).then((response) => {
+        this.$store.dispatch('updateLoading', false);
+        if (response.data.success) {
+          //過濾未啟用的產品資訊
+          const responseProduct = response.data.products;
+          const filterProductData = [];
+          responseProduct.forEach((e) => {
+            if (!e.is_enabled) {
+              return;
+            }
+            filterProductData.push(e);
+          });
+          //全部的原始資料
+          this.allProducts = filterProductData;
+          //當前的顯示資料
+          const categoryStyle = this.$route.params.id; //當前的產品分類
+          this.selectCategory(categoryStyle, false)
+        }
+      });
+    },
     getProduct2() {
       const id = this.$route.params.id;
       this.$store.dispatch('getProduct2', id);

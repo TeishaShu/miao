@@ -1,6 +1,12 @@
 <template>
-  <div class="row">
-    <div class="col-md-12">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="link" v-if="dataAPI.is_paid">
+        <img src="@/assets/images/finished.png" alt="">
+        <div class="aStyle">
+          <router-link :to="{name:'product'}"><i class="fa fa-angle-double-right pr-2" aria-hidden="true"></i>繼續購物</router-link>
+        </div>
+      </div>
       <div class="table-responsive step2table">
         <table class="table">
           <thead>
@@ -74,12 +80,8 @@
           </tbody>
         </table>
       </div>
-      <div class="link">
-        <div class="aStyle" v-if="dataAPI.is_paid">
-          <router-link :to="{name:'product'}"><i class="fa fa-angle-double-right pr-2" aria-hidden="true"></i>繼續購物</router-link>
-        </div>
-        
-        <a href="#" class="send" @click.prevent="pay" v-else>確認付款</a>
+      <div class="link">        
+        <a href="#" class="send" @click.prevent="pay" v-if="!dataAPI.is_paid">確認付款</a>
       </div>
 
     </div>
@@ -101,6 +103,13 @@
   .step2table {
     margin-bottom: 30px;
   }
+  table{
+    img {
+      width: 60px;
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
   thead {
     background: #ddd;
     color: #767676;
@@ -111,11 +120,6 @@
     &:nth-child(1) {
       text-align: left;
     }
-  }
-  img {
-    width: 60px;
-    display: inline-block;
-    margin-right: 10px;
   }
   p {
     display: inline-block;
@@ -160,6 +164,10 @@
   }
   .link{
     text-align: center;
+    img{
+      width: 30%;
+      margin-bottom: 20px;
+    }
   }
   .aStyle a{
     background: #ff7e9c;
@@ -171,6 +179,13 @@
     font-weight: bold;
     &:hover{
       background: $red;
+    }
+  }
+  @media(max-width:768px){
+    .link{
+      img{
+        width: 200px;
+      }
     }
   }
 </style>
