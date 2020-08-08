@@ -29,7 +29,7 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div>
-                <ProductModal :item = "item"/>
+                <!--<ProductModal :item = "item"/>-->
               </div>
             </div>
             <div class="carousel-item">
@@ -153,12 +153,13 @@
 </style>
 
 <script>
-import ProductModal from "@/components/frontend/modal/ProductModal.vue";
+import { mapGetters, mapActions } from 'vuex';
+// import ProductModal from "@/components/frontend/modal/ProductModal.vue";
 import cartBtn from "@/components/frontend/index/CartBtn.vue";
 import AlertMessage from "@/alert/AlertMessage.vue";
 export default {
   components: {
-    ProductModal,
+    // ProductModal,
     cartBtn,
     AlertMessage,
   },
@@ -169,12 +170,7 @@ export default {
     };
   },
   computed: {
-    dataProduct2(){
-      return this.$store.state.dataProduct2;
-    },
-    selectNum2(){
-      return this.$store.state.selectNum2;
-    }
+    ...mapGetters('productModules',['dataProduct2', 'selectNum2']),
   },
   methods: {
     similarProduct() {//這邊要修改
@@ -205,9 +201,9 @@ export default {
       this.$store.dispatch('getProduct2', id);
       this.$store.dispatch('resetNum');
     },
-    addCartProductIn() {
-      this.$store.dispatch('addCartProductIn');
-    },
+    // addCartProductIn() {
+    //   this.$store.dispatch('addCartProductIn');
+    // },
     changeNum(num) {
       this.$store.dispatch('changeNum', num)
     },
@@ -217,6 +213,7 @@ export default {
       } // 注意傳入的值.不要使function壞掉
       return txt.split("@");
     },
+    ...mapActions('productModules',['addCartProductIn']),
   },
   created() {
     this.getProduct2();

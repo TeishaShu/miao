@@ -79,7 +79,7 @@ export default {
   },
   methods:{
     api(){
-      this.$store.dispatch('cartBtnApi');
+      this.$store.dispatch('products/cartBtnApi');
     },
   },
   created(){

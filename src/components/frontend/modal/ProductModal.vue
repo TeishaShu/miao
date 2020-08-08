@@ -51,6 +51,7 @@
         h3{
           color: $red;
           transition: color 0.5s ease;
+          cursor: pointer;
         }
       }
     }
