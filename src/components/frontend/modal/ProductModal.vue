@@ -110,11 +110,12 @@ export default {
   },
   methods:{
     clickProduct(item){
-
+      let id = item.id;
+      this.$router.push({ path: `/product2/${id}` });
     },
-    addCart(){
-
-    }
+    addCart(item) {
+      this.$store.dispatch('addCart', item);
+    },
   }
 }
 </script>

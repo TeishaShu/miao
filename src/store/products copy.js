@@ -5,6 +5,7 @@ export default {
   strict: true,
   namespaced: true,
   state: {
+    cartBtnNum:0,
     dataProduct2: {
       category: "",
       content: "",
@@ -38,6 +39,9 @@ export default {
     categoryItemObject:{},
   },
   mutations: {
+    CARTBRNNUM(state, payload){
+      state.cartBtnNum = payload;
+    },
     DATAPRODUCT2(state, payload){
       state.dataProduct2 = payload;
     },
@@ -58,7 +62,28 @@ export default {
     },
   },
   actions: {
-    async addCartProductIn(context) {//
+    async cartBtnApi(context){ // 購物車圓形按鈕
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      await axios.get(api).then(response => {
+        if (response.data.success) {
+          context.commit('CARTBRNNUM', response.data.data.carts.length)
+        }
+      });
+    },
+    async addCart(context, item) {
+      const addCartSend = {
+        product_id: item.id,
+        qty: 1,
+      };
+      context.commit('LOADING', true, {root: true});
+      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      await axios.post(api, { data: addCartSend }).then((response) => {
+        context.commit('LOADING', false, {root: true});
+        context.dispatch('cartBtnApi');
+        // this.$bus.$emit('message:push',`已加入購物車: ${item.title}`,'success');
+      });
+    },
+    async addCartProductIn(context) {
       context.commit('LOADING', true, {root: true});
       const addCartSend2 = {
         product_id : context.state.dataProduct2.id,
@@ -87,11 +112,10 @@ export default {
       context.commit('SELECTNUM2',1);
     },
     async getProduct2(context, id) { // Product2.vue
-      
       context.commit('LOADING', true, {root: true});
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/product/${id}`;
       await axios.get(api).then((response) => {
-        context.commit('LOADING', false, {root: true});
+        context.commit('LOADING', false);
         if (response.data.success) {
           context.commit('DATAPRODUCT2', response.data.product)
         }

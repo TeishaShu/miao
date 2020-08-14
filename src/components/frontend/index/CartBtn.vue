@@ -68,18 +68,14 @@
 
 <script>
 export default {
-  data(){
-    return{
-    }
-  },
   computed: {
     num(){
-      return this.$store.state.cartBtnNum;
+      return this.$store.state.addCartModules.cartBtnNum;
     }
   },
   methods:{
     api(){
-      this.$store.dispatch('products/cartBtnApi');
+      this.$store.dispatch('addCartModules/cartBtnApi');
     },
   },
   created(){

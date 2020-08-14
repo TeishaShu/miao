@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios';
 
 import productModules from "./products";
+import addCartModules from "./addCart";
 
 Vue.use(Vuex)  //上面2段掛載.這邊啟用
 
@@ -31,5 +32,6 @@ export default new Vuex.Store({
 
   modules: { //放其他類別
     productModules,
+    addCartModules
   }
 })

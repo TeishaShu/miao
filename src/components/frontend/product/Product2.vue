@@ -198,14 +198,11 @@ export default {
     },
     getProduct2() {
       const id = this.$route.params.id;
-      this.$store.dispatch('getProduct2', id);
-      this.$store.dispatch('resetNum');
+      this.$store.dispatch('productModules/getProduct2', id);
+      this.$store.dispatch('productModules/resetNum');
     },
-    // addCartProductIn() {
-    //   this.$store.dispatch('addCartProductIn');
-    // },
     changeNum(num) {
-      this.$store.dispatch('changeNum', num)
+      this.$store.dispatch('productModules/changeNum', num)
     },
     detail(txt) {
       if (txt === undefined) {
@@ -213,7 +210,7 @@ export default {
       } // 注意傳入的值.不要使function壞掉
       return txt.split("@");
     },
-    ...mapActions('productModules',['addCartProductIn']),
+    ...mapActions('addCartModules',['addCartProductIn']),
   },
   created() {
     this.getProduct2();
