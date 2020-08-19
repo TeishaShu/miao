@@ -33,21 +33,16 @@ export default {
         // this.$bus.$emit('message:push',`已加入購物車: ${item.title}`,'success');
       });
     },
-    async addCartProductIn(context, rootState) {
+    async addCartProductIn(context) {
       context.commit('LOADING', true, {root: true});
-      console.log('a',rootState)
       const addCartSend2 = {
-        product_id : rootState['dataProduct2/id'],
-        qty :  rootState['dataProduct2/selectNum2'],
-        // product_id : context.state.dataProduct2.id,//id
-        // qty :  context.state.selectNum2,
+        product_id : context.rootState.productModules.dataProduct2.id,
+        qty :  context.rootState.productModules.selectNum2,
       };
-      console.log('addCartSend2',addCartSend2)
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       await axios.post(api, { data: addCartSend2 }).then((response) => {
         context.commit('LOADING', false, {root: true});
         if (response.data.success) {
-          console.log( response.data.data.product)
           context.commit('productModules/DATAPRODUCT2',  response.data.data.product, {root: true})
           context.dispatch('cartBtnApi');
           // this.$bus.$emit('message:push','成功加入購物車','success');
@@ -55,5 +50,9 @@ export default {
       });
     },
   },
-
+  getters: {
+    product2Id(state, getters, rootState, rootGetters){
+      return rootState.products.dataProduct2.id;
+    },
+  },
 }

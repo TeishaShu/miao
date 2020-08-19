@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-md-10">
       <div class="link" v-if="dataAPI.is_paid">
-        <img src="@/assets/images/finished.png" alt="">
+        <img src="@/assets/images/finished_g.png" alt="">
         <div class="aStyle">
           <router-link :to="{name:'product'}"><i class="fa fa-angle-double-right pr-2" aria-hidden="true"></i>繼續購物</router-link>
         </div>
