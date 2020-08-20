@@ -26,7 +26,7 @@
       </div>
     </div>
     <!--內容-->
-    <router-view :step="nowStep" @nextStep="nextStep"></router-view>
+    <router-view :step="nowStep"></router-view>
   </div>
 </template>
 <style lang="scss">
@@ -113,15 +113,10 @@
 </style>
 <script>
 export default {
-  data(){
-    return{
-      nowStep:1
+  computed: {
+    nowStep(){
+      return this.$store.state.cartStepModules.nowStep;
     }
   },
-  methods: {
-    nextStep(val) {
-      this.nowStep = val;
-    }
-  }
 }
 </script>

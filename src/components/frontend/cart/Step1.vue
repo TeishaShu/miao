@@ -393,7 +393,7 @@ export default {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataAPI = response.data.data;
-          this.$emit("nextStep",1); // 父層step更改
+          this.$store.commit('cartStepModules/NOWSTEP',1);
         }
       });
     },
@@ -434,12 +434,12 @@ export default {
             if (res.success) {
               //換路由..注意寫法.不是用 "=""
               vm.$router.push(`/cart/${res.orderId}`);
-              this.$emit('nextStep',2); // 父層step更改
               // this.step += 1;  不能在子層改父層的值
+              // this.$emit('nextStep',2); // 父層step更改
+              this.$store.commit('cartStepModules/NOWSTEP',2);
             }
         })
         .catch(error => { console.log('api error');});
-
       // 之前這邊總是會跳過.後來解決了
     },
     validateBootstrap2(){

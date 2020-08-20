@@ -154,12 +154,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-// import ProductModal from "@/components/frontend/modal/ProductModal.vue";
 import cartBtn from "@/components/frontend/index/CartBtn.vue";
 import AlertMessage from "@/alert/AlertMessage.vue";
 export default {
   components: {
-    // ProductModal,
     cartBtn,
     AlertMessage,
   },

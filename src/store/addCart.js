@@ -7,12 +7,12 @@ export default {
     cartBtnNum:0,
   },
   mutations: {
-    CARTBRNNUM(state, payload){
+    CARTBRNNUM (state, payload) {
       state.cartBtnNum = payload;
     },
   },
   actions: {
-    async cartBtnApi(context){ // 購物車圓形按鈕
+    async cartBtnApi (context) { // 購物車圓形按鈕
       const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
       await axios.get(api).then(response => {
         if (response.data.success) {
@@ -20,7 +20,7 @@ export default {
         }
       });
     },
-    async addCart(context, item) {
+    async addCart (context, item) {
       const addCartSend = {
         product_id: item.id,
         qty: 1,
@@ -33,7 +33,7 @@ export default {
         // this.$bus.$emit('message:push',`已加入購物車: ${item.title}`,'success');
       });
     },
-    async addCartProductIn(context) {
+    async addCartProductIn (context) {
       context.commit('LOADING', true, {root: true});
       const addCartSend2 = {
         product_id : context.rootState.productModules.dataProduct2.id,
@@ -48,11 +48,6 @@ export default {
           // this.$bus.$emit('message:push','成功加入購物車','success');
         }
       });
-    },
-  },
-  getters: {
-    product2Id(state, getters, rootState, rootGetters){
-      return rootState.products.dataProduct2.id;
     },
   },
 }

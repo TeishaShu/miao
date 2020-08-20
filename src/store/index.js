@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios';
 
 import productModules from "./products";
 import addCartModules from "./addCart";
+import cartStepModules from "./cartStep";
 
 Vue.use(Vuex)  //上面2段掛載.這邊啟用
 
@@ -29,9 +29,9 @@ export default new Vuex.Store({
       context.commit('BACKSMTOGGLE', status);
     },
   },
-
   modules: { //放其他類別
     productModules,
-    addCartModules
+    addCartModules,
+    cartStepModules
   }
 })
