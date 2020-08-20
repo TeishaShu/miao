@@ -76,18 +76,6 @@ export default {
     AlertMessage,
     Aside,
   },
-  data() {
-    return {
-      // allProducts: [],//
-      // products: [],
-      // pagination: {//
-      //   pageAry: [],
-      //   perPage: 6,
-      //   total_pages: 1,
-      //   current_page: 1,
-      // },
-    };
-  },
   computed: { //不適合太複雜的處理.資料處理
     products() {
       return this.$store.state.productModules.products;
@@ -107,8 +95,7 @@ export default {
     categoryItemObject() {
       this.$store.dispatch('productModules/categoryItemObjectCount');
     },
-    selectCategory(style,isPageClick) {//
-    console.log('99999')
+    selectCategory(style,isPageClick) {
       this.$store.dispatch('productModules/selectCategory', {style,isPageClick});
       // 產品頁切換的話要換路由
       if(isPageClick) {
