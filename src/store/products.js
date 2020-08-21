@@ -35,7 +35,6 @@ export default {
       {'value': 'snack', 'label': '零食'},
       {'value': 'nutrition', 'label': '營養品'},
     ],
-    categoryItemObject:{},
   },
   mutations: {
     DATAPRODUCT2(state, payload){
@@ -52,9 +51,6 @@ export default {
     },
     PAGINATION(state, payload){
       state.pagination = payload;
-    },
-    CATEGORYITEMOBJECT(state, payload){
-      state.categoryItemObject = payload;
     },
   },
   actions: {
@@ -87,7 +83,6 @@ export default {
       context.commit('SELECTNUM2',1);
     },
     async getProduct2(context, id) { // Product2.vue
-      
       context.commit('LOADING', true, {root: true});
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
       await axios.get(api).then((response) => {
@@ -96,13 +91,6 @@ export default {
           context.commit('DATAPRODUCT2', response.data.product)
         }
       });
-    },
-    categoryItemObjectCount(context){
-      const sort = _.zipObject(
-        _.map(context.state.categoryItem, 'value'),
-        _.map(context.state.categoryItem, 'label')
-        );
-      context.commit('CATEGORYITEMOBJECT',sort)
     },
     async getProduct(context,categoryStyle) { // Product.vue
       context.commit('LOADING', true, {root: true});
@@ -143,9 +131,8 @@ export default {
       // 換內容
       const changeData = (style === "all")
       ? context.state.allProducts
-      : _.filter(context.state.allProducts, ['category', context.state.categoryItemObject[style]]);
+      : _.filter(context.state.allProducts, ['category', context.getters.categoryItemObject[style]]);
       context.commit('PRODUCTS',changeData); 
-
       context.dispatch('productPage');
     
       // 留著筆記-----------------------------------------------------------
@@ -185,22 +172,39 @@ export default {
         }
       }
 
-      // this.pagination.pageAry = newAry;
-      // this.pagination.total_pages = newAry.length;
-      context.commit('PAGINATION',{
-        pageAry: newAry,
-        total_pages: newAry.length,
-        perPage: 6,
-        current_page: 1,
-      });
+      const newObject = Object.assign({},context.state.pagination);
+      newObject.pageAry = newAry;
+      newObject.total_pages = newAry.length;
+      context.commit('PAGINATION', newObject);
+    },
+    clickPage(context, num){
+      const newObject = Object.assign({},context.state.pagination);
+      newObject.current_page = num;
+      context.commit('PAGINATION', newObject);
     },
   },
   getters:{
-    dataProduct2(state){
+    dataProduct2(state) {
       return state.dataProduct2;
     },
-    selectNum2(state){
+    selectNum2(state) {
       return state.selectNum2;
-    }
+    },
+    categoryItemObject(state) {
+      const sort = _.zipObject(
+        _.map(state.categoryItem, 'value'),
+        _.map(state.categoryItem, 'label')
+      );
+      return sort;
+    },
+    products(state) {
+      return state.products;
+    },
+    categoryItem(state) {
+      return state.categoryItem;
+    },
+    pagination(state) {
+      return state.pagination;
+    },
   },
 }

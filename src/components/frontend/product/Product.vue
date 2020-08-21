@@ -25,7 +25,8 @@
                 :prev-text="'<'"
                 :next-text="'>'"
                 :page-range="3"
-                v-model="pagination.current_page"
+                :value="pagination.current_page"
+                @input="clickPage"
               >
               </paginate>
             </div>
@@ -68,6 +69,7 @@ import Paginate from "vuejs-paginate";
 import AlertMessage from "@/alert/AlertMessage.vue";
 import Aside from "./Aside.vue";
 import _ from 'lodash';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     ProductModal,
@@ -77,23 +79,12 @@ export default {
     Aside,
   },
   computed: { //不適合太複雜的處理.資料處理
-    products() {
-      return this.$store.state.productModules.products;
-    },
-    categoryItem(){
-      return this.$store.state.productModules.categoryItem;
-    },
-    pagination() {
-      return this.$store.state.productModules.pagination;
-    },
+    ...mapGetters('productModules',['products', 'categoryItem', 'pagination']),
   },
   methods: {
     getProduct() {//
       const categoryStyle = this.$route.params.id; //當前的產品分類
       this.$store.dispatch('productModules/getProduct',categoryStyle);
-    },
-    categoryItemObject() {
-      this.$store.dispatch('productModules/categoryItemObjectCount');
     },
     selectCategory(style,isPageClick) {
       this.$store.dispatch('productModules/selectCategory', {style,isPageClick});
@@ -102,10 +93,12 @@ export default {
         this.$router.push(`/product/${style}`);
       }
     },
+    clickPage(event) {
+      this.$store.dispatch('productModules/clickPage',event);
+    },
   },
   created() {
     this.getProduct();
-    this.categoryItemObject();
   },
 };
 </script>
