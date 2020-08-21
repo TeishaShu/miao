@@ -236,6 +236,8 @@ export default {
     return {
       dataProdtct: [],
       dataPage: {
+        current_page:1,
+        total_pages:1
       },
       tempProduct: {
         title: "",
@@ -261,7 +263,7 @@ export default {
   methods: {
     api() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/products?page=${this.dataPage.current_page}`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/products?page=${this.dataPage.current_page}`;
       this.$http.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         this.$store.dispatch('backSmToggle', false);
@@ -302,14 +304,14 @@ export default {
         return;
       }
       if (this.addNew) {
-        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product`;
+        const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product`;
         this.$http.post(api, { data: this.tempProduct }).then((response) => {
           // this.tempProduct.imageUrl = ''; //新增資料會有舊的...兩個都丟圖片會消失.這個是新增的
           this.$store.dispatch('updateLoading', false);
           this.api();
         });
       } else {
-        const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product/${this.tempProduct.id}`;
+        const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product/${this.tempProduct.id}`;
         this.$http.put(api, { data: this.tempProduct }).then((response) => {
           this.$bus.$emit('message:push',response.data.message,'success','fa-check');
           this.$store.dispatch('updateLoading', false);
@@ -320,7 +322,7 @@ export default {
     },
     delOpen(item) {
       this.delItem = item;
-      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/product/${this.delItem.id}`;
+      this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product/${this.delItem.id}`;
       this.deleteProductName = item.title;
       $("#delModal").modal("show");
     },
@@ -330,7 +332,7 @@ export default {
       let imgUrl = this.$refs.files.files[0];
       const formData = new FormData(); //web api:這是一個物件要用formData傳送。用formData模擬傳統
       formData.append("file-to-upload", imgUrl); 
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/admin/upload`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/upload`;
       this.$http
         .post(api, formData, {
           header: {

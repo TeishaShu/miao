@@ -13,7 +13,7 @@ export default {
   },
   actions: {
     async cartBtnApi (context) { // 購物車圓形按鈕
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
       await axios.get(api).then(response => {
         if (response.data.success) {
           context.commit('CARTBRNNUM', response.data.data.carts.length)
@@ -26,7 +26,7 @@ export default {
         qty: 1,
       };
       context.commit('LOADING', true, {root: true});
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
       await axios.post(api, { data: addCartSend }).then((response) => {
         context.commit('LOADING', false, {root: true});
         context.dispatch('cartBtnApi');
@@ -39,7 +39,7 @@ export default {
         product_id : context.rootState.productModules.dataProduct2.id,
         qty :  context.rootState.productModules.selectNum2,
       };
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
       await axios.post(api, { data: addCartSend2 }).then((response) => {
         context.commit('LOADING', false, {root: true});
         if (response.data.success) {

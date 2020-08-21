@@ -388,7 +388,7 @@ export default {
   methods: {
     api() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
       this.axios.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
@@ -399,13 +399,13 @@ export default {
     },
     delOpen(item) {
       this.delItem = item;
-      this.delApi = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart/${item.id}`;
+      this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${item.id}`;
       this.deleteProductName = item.product.title;
       $("#delModal").modal("show");
     },
     sendCoupon() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/coupon`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/coupon`;
       this.$http.post(api, { data: this.textCoupon }).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
@@ -417,7 +417,7 @@ export default {
     },
     async sentStep1() {
       const vm = this;
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order`;
       const dataString = JSON.stringify({
           data: {
               user: this.user,
@@ -439,7 +439,7 @@ export default {
               this.$store.commit('cartStepModules/NOWSTEP',2);
             }
         })
-        .catch(error => { console.log('api error');});
+        .catch(error => { console.error('api error');});
       // 之前這邊總是會跳過.後來解決了
     },
     validateBootstrap2(){

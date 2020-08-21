@@ -32,14 +32,14 @@ new Vue({
 router.beforeEach((to, from, next) => {
   if(to.meta.requiresAuth){
     //這裡需要驗證
-    const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/user/check`;
+    const api = `${process.env.VUE_APP_API_PATH}/api/user/check`;
       //因為在router裡面所以下面this不是在vue下.換成上面的axios就好。
       // this.$http.post(api).then(response => {
         axios.post(api).then(response => {
-        if(response.data.success){
-          next()
+        if(response.data.success) {
+          next();
         }else{
-          alert('請先登入')
+          alert('請先登入');
           //如果不是登錄的狀態回登錄的頁面..next裡面包個物件
           next({
             path:'/login'

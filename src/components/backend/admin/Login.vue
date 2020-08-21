@@ -121,7 +121,7 @@ export default {
   },
   methods: {
     send() {
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/admin/signin`;
+      const api = `${process.env.VUE_APP_API_PATH}/admin/signin`;
       this.$http.post(api, this.user).then(response => {
         if(response.data.success){
           this.$router.push('/admin')

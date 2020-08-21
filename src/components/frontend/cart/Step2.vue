@@ -209,7 +209,7 @@ export default {
   methods: {
     getApi() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/order/${this.orderId}`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order/${this.orderId}`;
       this.$http.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
@@ -224,7 +224,7 @@ export default {
     },
     pay() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/pay/${this.orderId}`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/pay/${this.orderId}`;
       this.$http.post(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {

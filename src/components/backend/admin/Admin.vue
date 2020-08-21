@@ -361,7 +361,7 @@ export default {
   },
   methods: {
     signout(){
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/logout`;
+      const api = `${process.env.VUE_APP_API_PATH}/logout`;
       this.$http.post(api).then(response => {
         if(response.data.success){
           this.$router.push('/login')

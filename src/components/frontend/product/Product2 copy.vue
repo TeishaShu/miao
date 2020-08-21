@@ -23,6 +23,32 @@
         </div>
         <a href="#" class="addCart" @click.prevent="addCartProductIn"><i class="fa fa-heart mr-2" aria-hidden="true"></i>加入購物車</a>
       </div>
+      <div class="col-md-12 mt-5">
+        <h3>類似商品</h3>
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div>
+                <!--<ProductModal :item = "item"/>-->
+              </div>
+            </div>
+            <div class="carousel-item">
+              <!--<img src="..." class="d-block w-100" alt="...">-->456
+            </div>
+            <div class="carousel-item">
+              <!--<img src="..." class="d-block w-100" alt="...">-->789
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
     </div>
     <cartBtn />
   </div>

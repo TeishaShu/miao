@@ -64,7 +64,7 @@ export default {
         product_id : context.state.dataProduct2.id,
         qty :  context.state.selectNum2,
       };
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/cart`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
       await axios.post(api, { data: addCartSend2 }).then((response) => {
         context.commit('LOADING', false, {root: true});
         if (response.data.success) {
@@ -89,7 +89,7 @@ export default {
     async getProduct2(context, id) { // Product2.vue
       
       context.commit('LOADING', true, {root: true});
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/product/${id}`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
       await axios.get(api).then((response) => {
         context.commit('LOADING', false, {root: true});
         if (response.data.success) {
@@ -106,7 +106,7 @@ export default {
     },
     async getProduct(context,categoryStyle) { // Product.vue
       context.commit('LOADING', true, {root: true});
-      const api = `${process.env.VUE_APP_DEFAULT_SRC}/api/teisha/products/all`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/products/all`;
       await axios.get(api).then((response) => {
         context.commit('LOADING', false, {root: true});
         if (response.data.success) {

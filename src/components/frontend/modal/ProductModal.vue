@@ -41,7 +41,7 @@
   a{
       box-shadow: 0 0 5px #ababab;
       display: block;
-      padding: 10px 0;
+      padding: 0;
       border: 2px solid #fff;
       &:hover{
         border: 2px solid $or_light;
