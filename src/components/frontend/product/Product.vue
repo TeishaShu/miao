@@ -78,12 +78,12 @@ export default {
     AlertMessage,
     Aside,
   },
-  computed: { //不適合太複雜的處理.資料處理
+  computed: { // 不適合太複雜的處理.資料處理
     ...mapGetters('productModules',['products', 'categoryItem', 'pagination']),
   },
   methods: {
-    getProduct() {//
-      const categoryStyle = this.$route.params.id; //當前的產品分類
+    getProduct() {
+      const categoryStyle = this.$route.params.id; // 當前的產品分類
       this.$store.dispatch('productModules/getProduct',categoryStyle);
     },
     selectCategory(style,isPageClick) {
