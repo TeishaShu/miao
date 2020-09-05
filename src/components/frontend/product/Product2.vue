@@ -24,11 +24,27 @@
         <a href="#" class="addCart" @click.prevent="addCartProductIn"><i class="fa fa-heart mr-2" aria-hidden="true"></i>加入購物車</a>
       </div>
     </div>
+
+    <div class="row recommend">
+      <div class="col-md-12">
+        <h3>相關產品推薦</h3>
+      </div>
+      <div class="col-md-3 col-sm-6 box" v-for="(item,index) in similarProduct" :key="index">
+        <ProductModal :item = "item" />
+      </div>
+    </div>
+
     <cartBtn />
   </div>
 </template>
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
+  .recommend{
+    margin: 60px 0;
+  }
+  .box{
+    margin-bottom: 30px;
+  }
   .out {
     margin-top: 20px;
     min-height:calc(100vh - 300px);
@@ -129,11 +145,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import cartBtn from "@/components/frontend/index/CartBtn.vue";
+import ProductModal from "@/components/frontend/modal/ProductModal.vue";
 import AlertMessage from "@/alert/AlertMessage.vue";
 export default {
   components: {
     cartBtn,
     AlertMessage,
+    ProductModal,
   },
   data() {
     return {
@@ -142,39 +160,17 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('productModules',['dataProduct2', 'selectNum2']),
+    ...mapGetters('productModules',['dataProduct2', 'selectNum2','similarProduct']),
   },
   methods: {
-    similarProduct() {//這邊要修改
-      this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/products/all`;
-      this.$http.get(api).then((response) => {
-        this.$store.dispatch('updateLoading', false);
-        if (response.data.success) {
-          //過濾未啟用的產品資訊
-          const responseProduct = response.data.products;
-          const filterProductData = [];
-          responseProduct.forEach((e) => {
-            if (!e.is_enabled) {
-              return;
-            }
-            filterProductData.push(e);
-          });
-          //全部的原始資料
-          this.allProducts = filterProductData;
-          //當前的顯示資料
-          const categoryStyle = this.$route.params.id; //當前的產品分類
-          this.selectCategory(categoryStyle, false)
-        }
-      });
-    },
     getProduct2() {
       const id = this.$route.params.id;
       this.$store.dispatch('productModules/getProduct2', id);
       this.$store.dispatch('productModules/resetNum');
+      this.$store.dispatch('productModules/getProduct', 'all');
     },
     changeNum(num) {
-      this.$store.dispatch('productModules/changeNum', num)
+      this.$store.dispatch('productModules/changeNum', num);
     },
     detail(txt) {
       if (txt === undefined) {

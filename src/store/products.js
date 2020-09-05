@@ -206,5 +206,15 @@ export default {
     pagination(state) {
       return state.pagination;
     },
+    similarProduct(state) {
+      const style = state.dataProduct2.category;
+      const filterData = [];
+      state.allProducts.forEach(e => {
+        if(e.id !== state.dataProduct2.id && e.category === style && filterData.length<4){
+          filterData.push(e);
+        }
+      });
+      return filterData;
+    },
   },
 }
