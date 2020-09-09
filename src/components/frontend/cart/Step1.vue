@@ -77,11 +77,12 @@
           v-if="dataAPI.carts && dataAPI.carts.length !== 0"
         >
           <div class="col-md-12 mb-3">
-            <h5 class="mb-4">收件人資訊</h5>
+            <h5>收件人資訊</h5>
+            <label for="name">*收件人姓名</label>
             <input
+              id="name"
               class="form-control"
               type="text"
-              placeholder="*收件人姓名"
               v-model="user.name"
               required
             />
@@ -93,10 +94,11 @@
             </div>
           </div>
           <div class="col-md-12 mb-3">
+            <label for="phone">*收件人電話</label>
             <input
+              id="phone"
               class="form-control"
               type="number"
-              placeholder="*收件人電話"
               v-model="user.tel"
               required
             />
@@ -108,10 +110,11 @@
             </div>
           </div>
           <div class="col-md-12 mb-3">
+            <label for="email">*E-mail</label>
             <input
+              id="email"
               class="form-control"
               type="email"
-              placeholder="*E-mail"
               v-model="user.email"
               required
             />
@@ -123,10 +126,11 @@
             </div>
           </div>
           <div class="col-md-12 mb-3">
+            <label for="address">*收件人地址</label>
             <input
+              id="address"
               class="form-control"
               type="text"
-              placeholder="*收件人地址"
               v-model="user.address"
               required
             />
@@ -138,9 +142,9 @@
             </div>
           </div>
           <div class="col-md-12 mb-3">
+            <label>留言備註</label>
             <textarea
               rows="4"
-              placeholder="留言備註"
               v-model="message"
             ></textarea>
             <button class="send" type="submit">送出訂單</button>
@@ -154,6 +158,11 @@
 </template>
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
+  h5{
+    margin-bottom: 25px;
+    margin-top: 30px;
+    font-weight: 600;
+  }
   a.disabled{
     pointer-events: none;
     i{
@@ -331,12 +340,16 @@
     margin-left: 15px;
     margin-bottom: -2px;
   }
+  label{
+    width: 130px;
+  }
   .formInput{
     input,textarea{
-      width: 100%;
+      width: calc(100% - 130px);
       border: 1px solid #ced4da;
       padding: 10px;
       border-radius: 0.25rem;
+      display: inline-block;
     }
   }
 </style>
