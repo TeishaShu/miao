@@ -8,7 +8,7 @@
       <div class="proTxt">
         <p class="type">{{ item.category }}</p>
         <h3 @click="clickProduct(item)">
-          {{ item.title }} 
+          {{ item.title }}
         </h3>
         <p>
           <em>NT{{ item.origin_price | currency }}</em
@@ -67,7 +67,7 @@
     em{
       font-size: 12px;
       text-decoration: line-through;
-      
+
     }
     i{
       color: $pink;
@@ -103,20 +103,20 @@
 
 <script>
 export default {
-  props:{
-    item:{
+  props: {
+    item: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
-  methods:{
-    clickProduct(item){
-      let id = item.id;
+  methods: {
+    clickProduct(item) {
+      const { id } = item;
       this.$router.push({ path: `/product2/${id}` });
     },
     addCart(item) {
       this.$store.dispatch('addCartModules/addCart', item);
     },
-  }
-}
+  },
+};
 </script>

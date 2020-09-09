@@ -80,7 +80,7 @@
           </tbody>
         </table>
       </div>
-      <div class="link">        
+      <div class="link">
         <a href="#" class="send" @click.prevent="pay" v-if="!dataAPI.is_paid">確認付款</a>
       </div>
 
@@ -193,17 +193,17 @@
 export default {
   data() {
     return {
-      orderId: "",
+      orderId: '',
       dataAPI: {
         user: {
-          userL: "",
+          userL: '',
         },
       },
-      textCoupon: { code: "" },
+      textCoupon: { code: '' },
     };
   },
   created() {
-    this.orderId = this.$route.params.orderId; //orderId 是對應到 router裡面路由id的名稱
+    this.orderId = this.$route.params.orderId; // orderId 是對應到 router裡面路由id的名稱
     this.getApi();
   },
   methods: {
@@ -214,10 +214,10 @@ export default {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataAPI = response.data.order;
-          if(!response.data.order.is_paid){
-            this.$store.commit('cartStepModules/NOWSTEP',2);
-          }else{
-            this.$store.commit('cartStepModules/NOWSTEP',3);
+          if (!response.data.order.is_paid) {
+            this.$store.commit('cartStepModules/NOWSTEP', 2);
+          } else {
+            this.$store.commit('cartStepModules/NOWSTEP', 3);
           }
         }
       });
@@ -228,8 +228,8 @@ export default {
       this.$http.post(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
-          this.getApi(); //注意要重新刷頁面
-          this.$store.commit('cartStepModules/NOWSTEP',3);
+          this.getApi(); // 注意要重新刷頁面
+          this.$store.commit('cartStepModules/NOWSTEP', 3);
         }
       });
     },

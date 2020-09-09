@@ -1,7 +1,7 @@
 <template>
   <div class="minHeight">
     <AlertMessage/>
-    
+
     <img src="@/assets/images/coupon.png" class="animate__animated animate__bounceIn" alt="" />
     <div class="coupon">
       <div>
@@ -111,37 +111,37 @@
 </style>
 
 <script>
-import cartBtn from "@/components/frontend/index/CartBtn.vue";
-import AlertMessage from "@/alert/AlertMessage.vue";
-import $ from "jquery";
+import cartBtn from '@/components/frontend/index/CartBtn.vue';
+import AlertMessage from '@/alert/AlertMessage.vue';
+import $ from 'jquery';
+
 export default {
-  components:{
+  components: {
     cartBtn,
-    AlertMessage
+    AlertMessage,
   },
   data() {
     return {
       couponCode: 'DTJ00001',
     };
   },
-  mounted(){
+  mounted() {
     // 這個無法用 created 測試是因為 created 時.子元件還沒掛進來
     // this.alertBus('yhhh');
   },
   methods: {
     copyInput() {
-      const txt = $("#codyId").select();
-      document.execCommand("copy");
+      const txt = $('#codyId').select();
+      document.execCommand('copy');
       this.alertBus(`已經複製優惠碼: ${this.couponCode}`);
     },
     dateFormat(num) {
       const dd = new Date(num);
-      return `${dd.getFullYear()}年${dd.getMonth()+1}月${dd.getDate()}日`;
+      return `${dd.getFullYear()}年${dd.getMonth() + 1}月${dd.getDate()}日`;
     },
-    alertBus(content){
-      this.$bus.$emit('message:push',content,'success','fa-check');
-    }
+    alertBus(content) {
+      this.$bus.$emit('message:push', content, 'success', 'fa-check');
+    },
   },
 };
 </script>
-

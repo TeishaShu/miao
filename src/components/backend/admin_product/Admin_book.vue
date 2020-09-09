@@ -233,11 +233,12 @@
 </style>
 
 <script>
-import AlertMessage from "@/alert/AlertMessage.vue";
-import $ from "jquery";
-import Paginate from "vuejs-paginate";
+import AlertMessage from '@/alert/AlertMessage.vue';
+import $ from 'jquery';
+import Paginate from 'vuejs-paginate';
+
 export default {
-  components:{
+  components: {
     Paginate,
     AlertMessage,
   },
@@ -247,7 +248,7 @@ export default {
       dataPage: {},
       editItem: {
         create_at: 1585625169,
-        id: "",
+        id: '',
         is_paid: false,
         num: 1,
         products: {},
@@ -256,7 +257,7 @@ export default {
       },
       newEdit: {
         create_at: 1585625169,
-        id: "",
+        id: '',
         is_paid: false,
         num: 1,
         products: {},
@@ -269,20 +270,20 @@ export default {
     };
   },
   methods: {
-    updateTotal(key, qty, price) { //wow!!正則判斷
+    updateTotal(key, qty, price) { // wow!!正則判斷
       const newEdit_products = this.newEdit.products;
       newEdit_products[key].total = qty * price;
       newEdit_products[key].final_total = qty * price;
       let newTotal = 0;
-      for (let prop in newEdit_products){
-        newTotal += newEdit_products[prop].total
+      for (const prop in newEdit_products) {
+        newTotal += newEdit_products[prop].total;
       }
       this.newEdit.total = newTotal;
     },
     keyupUpdateTotal(qty) {
-      qty = qty.replace(/[^\d]/g,'');
+      qty = qty.replace(/[^\d]/g, '');
     },
-    cancelEdit(){
+    cancelEdit() {
       this.newEdit = {};
       this.editItem = {};
     },
@@ -299,7 +300,7 @@ export default {
       });
     },
     dateForm(num) {
-      let dd = new Date(num);
+      const dd = new Date(num);
       return `${dd.getFullYear()}/${dd.getMonth() + 1}/${dd.getDate()}`;
     },
     edit(item) {
@@ -320,8 +321,8 @@ export default {
       this.editItem = {};
       this.newEdit = {};
       this.editItem = item; // 保留原本的
-      this.newEdit =  JSON.parse(JSON.stringify(item));
-      $("#editModal").modal("show");
+      this.newEdit = JSON.parse(JSON.stringify(item));
+      $('#editModal').modal('show');
     },
     updateProduct() {
       this.$store.dispatch('updateLoading', true);
@@ -331,9 +332,9 @@ export default {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.getBook();
-          $("#editModal").modal("hide");
+          $('#editModal').modal('hide');
 
-          this.$bus.$emit('message:push',response.data.message,'success','fa-check');
+          this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check');
         }
       });
     },

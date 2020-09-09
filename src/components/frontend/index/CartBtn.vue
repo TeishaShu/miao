@@ -69,17 +69,17 @@
 <script>
 export default {
   computed: {
-    num(){
+    num() {
       return this.$store.state.addCartModules.cartBtnNum;
-    }
+    },
   },
-  methods:{
-    api(){
+  methods: {
+    api() {
       this.$store.dispatch('addCartModules/cartBtnApi');
     },
   },
-  created(){
-    this.api()
-  }
+  created() {
+    this.api();
+  },
 };
 </script>

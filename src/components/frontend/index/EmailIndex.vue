@@ -137,30 +137,29 @@
 
 <script>
 export default {
-  name:"email-index",
-  data(){
-    return{
-      email:"",
-      emailStyle : true,
-      emailMsg: ""
-    }
+  name: 'email-index',
+  data() {
+    return {
+      email: '',
+      emailStyle: true,
+      emailMsg: '',
+    };
   },
-  methods:{
-    sendEmail(){
+  methods: {
+    sendEmail() {
       const vm = this;
       const isMail = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
       if (!isMail.test(vm.email)) {
-          vm.emailStyle = false;
-          vm.emailMsg = 'email格式錯誤';
-      }
-      else {
-          vm.emailStyle = true;
-          vm.emailMsg = '成功訂閱電子報!';
+        vm.emailStyle = false;
+        vm.emailMsg = 'email格式錯誤';
+      } else {
+        vm.emailStyle = true;
+        vm.emailMsg = '成功訂閱電子報!';
       }
       setTimeout(() => {
-        vm.emailMsg = "";
-      },5000);
-    }
-  }
-}
+        vm.emailMsg = '';
+      }, 5000);
+    },
+  },
+};
 </script>

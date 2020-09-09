@@ -32,7 +32,7 @@ export default {
       this.removeMessageWithTiming(timestamp);
     },
     removeMessage(num) {
-      this.messages.splice(num, 1); //自己手動按關掉
+      this.messages.splice(num, 1); // 自己手動按關掉
     },
     removeMessageWithTiming(timestamp) {
       const vm = this;
@@ -42,7 +42,7 @@ export default {
             vm.messages.splice(i, 1);
           }
         });
-      }, 5000); 
+      }, 5000);
     },
   },
   created() {

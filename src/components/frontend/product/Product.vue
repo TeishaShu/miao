@@ -53,7 +53,7 @@
   .proCol{
     margin: 15px 0;
   }
-  
+
   @media(max-width:426px){
     .proCol{
       padding: 0 10px;
@@ -63,13 +63,14 @@
 </style>
 
 <script>
-import ProductModal from "@/components/frontend/modal/ProductModal.vue";
-import cartBtn from "@/components/frontend/index/CartBtn.vue";
-import Paginate from "vuejs-paginate";
-import AlertMessage from "@/alert/AlertMessage.vue";
-import Aside from "./Aside.vue";
+import ProductModal from '@/components/frontend/modal/ProductModal.vue';
+import cartBtn from '@/components/frontend/index/CartBtn.vue';
+import Paginate from 'vuejs-paginate';
+import AlertMessage from '@/alert/AlertMessage.vue';
 import _ from 'lodash';
 import { mapGetters } from 'vuex';
+import Aside from './Aside.vue';
+
 export default {
   components: {
     ProductModal,
@@ -79,22 +80,22 @@ export default {
     Aside,
   },
   computed: { // 不適合太複雜的處理.資料處理
-    ...mapGetters('productModules',['products', 'categoryItem', 'pagination']),
+    ...mapGetters('productModules', ['products', 'categoryItem', 'pagination']),
   },
   methods: {
     getProduct() {
       const categoryStyle = this.$route.params.id; // 當前的產品分類
-      this.$store.dispatch('productModules/getProduct',categoryStyle);
+      this.$store.dispatch('productModules/getProduct', categoryStyle);
     },
-    selectCategory(style,isPageClick) {
-      this.$store.dispatch('productModules/selectCategory', {style,isPageClick});
+    selectCategory(style, isPageClick) {
+      this.$store.dispatch('productModules/selectCategory', { style, isPageClick });
       // 產品頁切換的話要換路由
-      if(isPageClick) {
+      if (isPageClick) {
         this.$router.push(`/product/${style}`);
       }
     },
     clickPage(event) {
-      this.$store.dispatch('productModules/clickPage',event);
+      this.$store.dispatch('productModules/clickPage', event);
     },
   },
   created() {

@@ -106,7 +106,8 @@
 </style>
 
 <script>
-import AlertMessage from "@/alert/AlertMessage.vue";
+import AlertMessage from '@/alert/AlertMessage.vue';
+
 export default {
   components: {
     AlertMessage,
@@ -114,22 +115,22 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        password: ""
-      }
+        username: '',
+        password: '',
+      },
     };
   },
   methods: {
     send() {
       const api = `${process.env.VUE_APP_API_PATH}/admin/signin`;
-      this.$http.post(api, this.user).then(response => {
-        if(response.data.success){
-          this.$router.push('/admin')
-        }else{
-          this.$bus.$emit('message:push',`${response.data.message}: ${response.data.error.message}`,'danger','fa-times');
+      this.$http.post(api, this.user).then((response) => {
+        if (response.data.success) {
+          this.$router.push('/admin');
+        } else {
+          this.$bus.$emit('message:push', `${response.data.message}: ${response.data.error.message}`, 'danger', 'fa-times');
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>

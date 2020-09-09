@@ -16,20 +16,20 @@
 
 <script>
 export default {
-  props:{
-    categoryItem:{
+  props: {
+    categoryItem: {
       type: Array,
       default: () => [],
     },
   },
   methods: {
-    selectCategory(style,isPageClick){
-      this.$store.dispatch('productModules/selectCategory', {style,isPageClick});
+    selectCategory(style, isPageClick) {
+      this.$store.dispatch('productModules/selectCategory', { style, isPageClick });
       // 產品頁切換的話要換路由
-      if(isPageClick) {
+      if (isPageClick) {
         this.$router.push(`/product/${style}`);
       }
-    }
+    },
   },
-}
+};
 </script>

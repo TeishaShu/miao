@@ -48,11 +48,12 @@
 </template>
 
 <script>
-import $ from "jquery";
+import $ from 'jquery';
+
 export default {
-  name: "delModal-component",
+  name: 'delModal-component',
   props: {
-    titleType:{
+    titleType: {
       type: String,
       required: true,
     },
@@ -68,10 +69,10 @@ export default {
   methods: {
     delSend() {
       const vm = this;
-      $("#delModal button").prop('disabled',true);
+      $('#delModal button').prop('disabled', true);
       vm.$http.delete(vm.api).then((response) => {
-        window.location.reload(); //可以這樣重刷頁面
-        $("#delModal").modal("hide");
+        window.location.reload(); // 可以這樣重刷頁面
+        $('#delModal').modal('hide');
       });
     },
   },

@@ -174,20 +174,21 @@
 </style>
 
 <script>
-import DelModal from "@/components/frontend/modal/DelModal.vue";
-import Datepicker from "vuejs-datepicker";
-import Paginate from "vuejs-paginate";
-import AlertMessage from "@/alert/AlertMessage.vue";
-import $ from "jquery";
+import DelModal from '@/components/frontend/modal/DelModal.vue';
+import Datepicker from 'vuejs-datepicker';
+import Paginate from 'vuejs-paginate';
+import AlertMessage from '@/alert/AlertMessage.vue';
+import $ from 'jquery';
+
 export default {
   components: {
     Datepicker,
     Paginate,
     DelModal,
-    AlertMessage
+    AlertMessage,
   },
   created() {
-    let today = +new Date();
+    const today = +new Date();
     this.addNew.due_date = today;
     this.date = this.dateForm(today);
     this.getCoupon();
@@ -196,24 +197,24 @@ export default {
     return {
       couponsData: [],
       addNew: {
-        title: "",
+        title: '',
         is_enabled: 0,
         percent: 0,
         due_date: 0,
-        code: "",
+        code: '',
       },
       dataPage: {
         // current_page: 1 //這個刪除
       },
-      date: "",
-      modalStyle: "",
+      date: '',
+      modalStyle: '',
       delId: {},
-      delApi: "",
-      deleteProductName: "",
+      delApi: '',
+      deleteProductName: '',
     };
   },
-  watch: { //這個用function順序會不對.js跟vue會不同.watch可以，裡面是物件
-    date: function (value) {
+  watch: { // 這個用function順序會不對.js跟vue會不同.watch可以，裡面是物件
+    date(value) {
       this.addNew.due_date = +new Date(value);
     },
   },
@@ -230,7 +231,7 @@ export default {
         }
       });
     },
-    keyupUpdatePercent(val){  //正規式卡了一下.錯誤值要帶回去
+    keyupUpdatePercent(val) { // 正規式卡了一下.錯誤值要帶回去
       const regexp = /^\d{0,2}$/;
 
       if (!regexp.test(val)) {
@@ -238,32 +239,32 @@ export default {
       }
     },
     dateForm(num) {
-      let dd = new Date(num);
+      const dd = new Date(num);
       return `${dd.getFullYear()}/${dd.getMonth() + 1}/${dd.getDate()}`;
     },
     openModel(style, item) {
       this.modalStyle = style;
-      if (style === "add") {
-        this.addNew.title = "";
+      if (style === 'add') {
+        this.addNew.title = '';
         this.addNew.is_enabled = 0;
         this.addNew.percent = 0;
         this.addNew.due_date = +new Date();
-        this.addNew.code = "";
-      } else if (style === "edit") {
-        this.addNew = Object.assign({}, item);
+        this.addNew.code = '';
+      } else if (style === 'edit') {
+        this.addNew = { ...item };
       }
-      $("#addModal").modal("show");
+      $('#addModal').modal('show');
     },
     sentCoupon() {
       const vm = this;
-      if (vm.addNew.title === "" || vm.addNew.code === "" || vm.addNew.percent === 0 ) {
-        vm.$bus.$emit('message:push',"請正確填寫資料",'danger','fa-times');
+      if (vm.addNew.title === '' || vm.addNew.code === '' || vm.addNew.percent === 0) {
+        vm.$bus.$emit('message:push', '請正確填寫資料', 'danger', 'fa-times');
         return;
       }
       vm.$store.dispatch('updateLoading', true);
-      if (vm.modalStyle === "add") {
+      if (vm.modalStyle === 'add') {
         const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon`;
-        
+
         vm.$http.post(api, { data: vm.addNew }).then((response) => {
           if (response.data.success) {
             vm.$store.dispatch('updateLoading', false);
@@ -271,18 +272,18 @@ export default {
             vm.getCoupon();
           }
         });
-      } else if (vm.modalStyle === "edit") {
+      } else if (vm.modalStyle === 'edit') {
         const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon/${vm.addNew.id}`;
         vm.$http.put(api, { data: vm.addNew }).then((response) => {
           if (response.data.success) {
             vm.$store.dispatch('updateLoading', false);
             vm.couponsData = response.data.coupons;
-            vm.$bus.$emit('message:push',response.data.message,'success','fa-check');
+            vm.$bus.$emit('message:push', response.data.message, 'success', 'fa-check');
             vm.getCoupon();
           }
         });
       }
-      $("#addModal").modal("hide");
+      $('#addModal').modal('hide');
     },
     newDateForm(num) {
       return +new Date(num);
@@ -291,9 +292,9 @@ export default {
       this.delId = item;
       this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon/${this.delId.id}`;
       this.deleteProductName = item.title;
-      $("#delModal").modal("show");
+      $('#delModal').modal('show');
     },
   },
-  
+
 };
 </script>

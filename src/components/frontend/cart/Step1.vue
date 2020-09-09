@@ -341,9 +341,10 @@
   }
 </style>
 <script>
-import AlertMessage from "@/alert/AlertMessage.vue";
-import DelModal from "@/components/frontend/modal/DelModal.vue";
-import $ from "jquery";
+import AlertMessage from '@/alert/AlertMessage.vue';
+import DelModal from '@/components/frontend/modal/DelModal.vue';
+import $ from 'jquery';
+
 export default {
   components: {
     DelModal,
@@ -355,12 +356,12 @@ export default {
   mounted() {
     this.validateBootstrap2();
   },
-  data() { 
+  data() {
     return {
       dataAPI: {
-        //carts:[] 加這個或是上面的v-if要多一個條件
+        // carts:[] 加這個或是上面的v-if要多一個條件
       },
-      textCoupon: { code: "" },
+      textCoupon: { code: '' },
       dataCoupon: {
         success: false,
         data: {
@@ -374,15 +375,15 @@ export default {
         address: false,
       },
       user: {
-        name: "",
-        email: "",
-        tel: "",
-        address: "",
+        name: '',
+        email: '',
+        tel: '',
+        address: '',
       },
-      message: "",
-      delItem: "",
-      delApi: "",
-      deleteProductName: "",
+      message: '',
+      delItem: '',
+      delApi: '',
+      deleteProductName: '',
     };
   },
   methods: {
@@ -393,7 +394,7 @@ export default {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataAPI = response.data.data;
-          this.$store.commit('cartStepModules/NOWSTEP',1);
+          this.$store.commit('cartStepModules/NOWSTEP', 1);
         }
       });
     },
@@ -401,7 +402,7 @@ export default {
       this.delItem = item;
       this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${item.id}`;
       this.deleteProductName = item.product.title;
-      $("#delModal").modal("show");
+      $('#delModal').modal('show');
     },
     sendCoupon() {
       this.$store.dispatch('updateLoading', true);
@@ -411,7 +412,7 @@ export default {
         if (response.data.success) {
           this.dataCoupon = response.data;
         } else {
-          this.$bus.$emit('message:push',response.data.message,'danger','fa-times');
+          this.$bus.$emit('message:push', response.data.message, 'danger', 'fa-times');
         }
       });
     },
@@ -419,51 +420,50 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order`;
       const dataString = JSON.stringify({
-          data: {
-              user: this.user,
-              message: this.message
-          }
-      }); 
+        data: {
+          user: this.user,
+          message: this.message,
+        },
+      });
       await fetch(api, {
-            method: 'POST',
-            body: dataString,
-            headers: new Headers({ 'Content-Type': 'application/json'})
+        method: 'POST',
+        body: dataString,
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.success) {
+            // 換路由..注意寫法.不是用 "=""
+            vm.$router.push(`/cart/${res.orderId}`);
+            // this.step += 1;  不能在子層改父層的值
+            // this.$emit('nextStep',2); // 父層step更改
+            this.$store.commit('cartStepModules/NOWSTEP', 2);
+          }
         })
-        .then(res => { return res.json(); })
-        .then(res => {
-            if (res.success) {
-              //換路由..注意寫法.不是用 "=""
-              vm.$router.push(`/cart/${res.orderId}`);
-              // this.step += 1;  不能在子層改父層的值
-              // this.$emit('nextStep',2); // 父層step更改
-              this.$store.commit('cartStepModules/NOWSTEP',2);
-            }
-        })
-        .catch(error => { console.error('api error');});
+        .catch((error) => { console.error('api error'); });
       // 之前這邊總是會跳過.後來解決了
     },
-    validateBootstrap2(){
+    validateBootstrap2() {
       const vm = this;
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      const forms = document.getElementsByClassName("needs-validation");
+      const forms = document.getElementsByClassName('needs-validation');
       // Loop over them and prevent submission
-      const validation =Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener("submit",function(event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            } else {
-              event.preventDefault();
-              // 驗證過
-              //按鈕全部不能按
-              $(".aBtn").addClass("disabled");
-              $("button").prop("disabled", true);
-              vm.sentStep1();
-            }
-            form.classList.add("was-validated");
-          },
-          false
-        );
+      const validation = Array.prototype.filter.call(forms, (form) => {
+        form.addEventListener('submit', (event) => {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          } else {
+            event.preventDefault();
+            // 驗證過
+            // 按鈕全部不能按
+            $('.aBtn').addClass('disabled');
+            $('button').prop('disabled', true);
+            vm.sentStep1();
+          }
+          form.classList.add('was-validated');
+        },
+        false);
       });
     },
   },

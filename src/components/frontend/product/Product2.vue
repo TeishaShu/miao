@@ -134,7 +134,7 @@
       h3{
         text-align: center;
       }
-      
+
     }
     .type{
       display: none;
@@ -144,9 +144,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import cartBtn from "@/components/frontend/index/CartBtn.vue";
-import ProductModal from "@/components/frontend/modal/ProductModal.vue";
-import AlertMessage from "@/alert/AlertMessage.vue";
+import cartBtn from '@/components/frontend/index/CartBtn.vue';
+import ProductModal from '@/components/frontend/modal/ProductModal.vue';
+import AlertMessage from '@/alert/AlertMessage.vue';
+
 export default {
   components: {
     cartBtn,
@@ -155,16 +156,24 @@ export default {
   },
   data() {
     return {
-      similarProductAll:[],
-      similarProductFilter:[],
+      similarProductAll: [],
+      similarProductFilter: [],
     };
   },
   computed: {
-    ...mapGetters('productModules',['dataProduct2', 'selectNum2','similarProduct']),
+    ...mapGetters('productModules', ['dataProduct2', 'selectNum2', 'similarProduct']),
+  },
+  watch: {
+    $route (to, from) {
+      const id = to.params.id;
+      this.$store.dispatch('productModules/getProduct2', id);
+      this.$store.dispatch('productModules/resetNum');
+      this.$store.dispatch('productModules/getProduct', 'all');
+    }
   },
   methods: {
     getProduct2() {
-      const id = this.$route.params.id;
+      const {id} = this.$route.params;
       this.$store.dispatch('productModules/getProduct2', id);
       this.$store.dispatch('productModules/resetNum');
       this.$store.dispatch('productModules/getProduct', 'all');
@@ -176,9 +185,9 @@ export default {
       if (txt === undefined) {
         return;
       } // 注意傳入的值.不要使function壞掉
-      return txt.split("@");
+      return txt.split('@');
     },
-    ...mapActions('addCartModules',['addCartProductIn']),
+    ...mapActions('addCartModules', ['addCartProductIn']),
   },
   created() {
     this.getProduct2();

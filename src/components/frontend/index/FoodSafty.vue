@@ -1,5 +1,5 @@
 <template>
-  <div class="bg">  
+  <div class="bg">
     <div class="row ml-0 mr-0 safty">
       <div class="col-md-5 title">
         <h2>
@@ -38,7 +38,7 @@
   }
   .bg{
     position: relative;
-    
+
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#cdc7c7+0,c9c9c9+37,bdb6b3+43,bdb6b3+47,c9c9c9+52,fbfefc+100 */
     background: #cdc7c7; /* Old browsers */
     background: linear-gradient(to bottom,  #cdc7c7 0%,#c9c9c9 37%,#bdb6b3 43%,#bdb6b3 47%,#c9c9c9 52%,#fbfefc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -83,7 +83,7 @@
   }
   @media(max-width:1200px){
     .title{
-      height: 400px;  
+      height: 400px;
     }
     .cookieImg{
       img{
@@ -150,9 +150,3 @@
     }
   }
 </style>
-
-<script>
-export default {
-  
-}
-</script>

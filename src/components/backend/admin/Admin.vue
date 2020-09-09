@@ -6,7 +6,7 @@
           <nav class="col-md-2 d-none d-md-block sidebar" :class="{'smSet':backSmToggle}">
             <div class="sidebarSticky">
               <div class="navbar-brand logoA">
-                <img src="@/assets/images/logo.png" alt="" /> 
+                <img src="@/assets/images/logo.png" alt="" />
                 <p>後臺設定管理</p>
               </div>
               <h6>
@@ -45,7 +45,7 @@
               <p>歡迎，管理員</p>
               <a href="#" @click.prevent="signout">登出</a>
             </div>
-            
+
           </div>
           <div class="toggleUl" style="display:none">
             <ul>
@@ -92,20 +92,16 @@
     border-width: 0;
     border-radius: 0;
   }
-
   .form-control-dark {
     color: #fff;
     background-color: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.1);
   }
-
   .form-control-dark:focus {
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
   }
-
   /* Content */
-
   @media (min-width: 768px) {
     [role="main"] {
       padding-top: 48px; /* Space for fixed navbar */
@@ -151,7 +147,6 @@
     align-items: center;
     float: right;
   }
-
   /*  aside */
   .router-link-exact-active {
     background: $red;
@@ -211,7 +206,6 @@
   i {
     padding-right: 10px;
   }
-
   .sidebar {
     position: fixed;
     top: 0;
@@ -234,7 +228,6 @@
       }
     }
   }
-
   .sidebarSticky {
     position: relative;
     top: 0;
@@ -248,26 +241,21 @@
       position: sticky;
     }
   }
-
   .sidebar .nav-link {
     font-weight: 500;
     color: #333;
   }
-
   .sidebar .nav-link .feather {
     margin-right: 4px;
     color: #999;
   }
-
   .sidebar .nav-link.active {
     color: #007bff;
   }
-
   .sidebar .nav-link:hover .feather,
   .sidebar .nav-link.active .feather {
     color: inherit;
   }
-
   .sidebar-heading {
     text-transform: uppercase;
   }
@@ -302,7 +290,6 @@
       border-radius: 5px;
     }
   }
-
   @media (max-width: 992px) {
     .inner {
       margin: 35px 0;
@@ -343,34 +330,28 @@
         font-size: 20px;
       }
     }
-    
   }
-
 </style>
 
 <script>
 export default {
-  data(){
-    return{
-    }
-  },
-  computed:{
-    backSmToggle(){
+  computed: {
+    backSmToggle() {
       return this.$store.state.backSmToggle;
-    }
+    },
   },
   methods: {
-    signout(){
+    signout() {
       const api = `${process.env.VUE_APP_API_PATH}/logout`;
-      this.$http.post(api).then(response => {
-        if(response.data.success){
-          this.$router.push('/login')
+      this.$http.post(api).then((response) => {
+        if (response.data.success) {
+          this.$router.push('/login');
         }
       });
     },
-    smToggle(){
-      this.$store.dispatch('backSmToggle',!this.backSmToggle)
-    }
+    smToggle() {
+      this.$store.dispatch('backSmToggle', !this.backSmToggle);
+    },
   },
 };
 </script>

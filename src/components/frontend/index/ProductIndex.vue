@@ -11,10 +11,10 @@
         <div class="col-md-5 categoryBox">
           <div class="row"><!-- animate__animated animate__zoomIn-->
             <div class="col-md-6 col-sm-6 cell-6 product_animate"
-                  v-for="(item,index) in productImg" 
+                  v-for="(item,index) in productImg"
                   :key="index"
                   >
-              <router-link 
+              <router-link
                 class="category"
                 :to="{ path:`/product/${item.en}`}"
               >
@@ -107,21 +107,21 @@
       padding: 0 10px;
     }
   }
-  
+
 </style>
 
 <script>
 export default {
-  name: "product-index",//注意不能大寫
+  name: 'product-index', // 注意不能大寫
   props: {
-    productImg:{
+    productImg: {
       type: Array,
       default: () => [],
     },
-    backgroundImage:{
+    backgroundImage: {
       type: String,
-      default:""
-    }
-  }
-}
+      default: '',
+    },
+  },
+};
 </script>

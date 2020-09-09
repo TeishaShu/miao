@@ -10,7 +10,7 @@
               訂單資料
             </p>
           </div>
-          <div class="line" :class="{'activeRound activeStep' : nowStep===2 }" > 
+          <div class="line" :class="{'activeRound activeStep' : nowStep===2 }" >
             <span>2</span>
             <p>
               確認訂單並付款
@@ -114,9 +114,9 @@
 <script>
 export default {
   computed: {
-    nowStep(){
+    nowStep() {
       return this.$store.state.cartStepModules.nowStep;
-    }
+    },
   },
-}
+};
 </script>

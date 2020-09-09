@@ -129,10 +129,5 @@
         right: 37%;
       }
     }
-}
+  }
 </style>
-<script>
-export default {
-  
-}
-</script>

@@ -222,10 +222,11 @@
   </div>
 </template>
 <script>
-import Paginate from "vuejs-paginate";
-import DelModal from "@/components/frontend/modal/DelModal.vue";
-import AlertMessage from "@/alert/AlertMessage.vue";
-import $ from "jquery";
+import Paginate from 'vuejs-paginate';
+import DelModal from '@/components/frontend/modal/DelModal.vue';
+import AlertMessage from '@/alert/AlertMessage.vue';
+import $ from 'jquery';
+
 export default {
   components: {
     Paginate,
@@ -236,28 +237,28 @@ export default {
     return {
       dataProdtct: [],
       dataPage: {
-        current_page:1,
-        total_pages:1
+        current_page: 1,
+        total_pages: 1,
       },
       tempProduct: {
-        title: "",
-        category: "",
+        title: '',
+        category: '',
         origin_price: 0,
         price: 0,
-        unit: "",
-        image: "",
-        description: "",
-        content: "這是內容",
+        unit: '',
+        image: '',
+        description: '',
+        content: '這是內容',
         is_enabled: 0,
-        imageUrl: "",
-      }, //新增
-      addNew: false, //判斷modal是新增還是編輯
+        imageUrl: '',
+      }, // 新增
+      addNew: false, // 判斷modal是新增還是編輯
       status: {
         fileUpLoading: false,
       },
       delItem: {},
-      delApi: "",
-      deleteProductName: "",
+      delApi: '',
+      deleteProductName: '',
     };
   },
   methods: {
@@ -265,8 +266,8 @@ export default {
       this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/products?page=${this.dataPage.current_page}`;
       this.$http.get(api).then((response) => {
-        console.log('api',api)
-        console.log('api',response)
+        console.log('api', api);
+        console.log('api', response);
         // if(!response.data.success){
         //   return this.$router.push('/admin');
         // }
@@ -279,32 +280,32 @@ export default {
     openModel(addNewStatus, item) {
       this.addNew = addNewStatus;
       if (this.addNew) {
-        (this.tempProduct.title = ""),
-          (this.tempProduct.category = ""),
-          (this.tempProduct.origin_price = 0),
-          (this.tempProduct.price = 0),
-          (this.tempProduct.unit = ""),
-          (this.tempProduct.image = ""),
-          (this.tempProduct.description = ""),
-          (this.tempProduct.content = "這是內容"),
-          (this.tempProduct.is_enabled = 0),
-          (this.tempProduct.imageUrl = "");
+        (this.tempProduct.title = ''),
+        (this.tempProduct.category = ''),
+        (this.tempProduct.origin_price = 0),
+        (this.tempProduct.price = 0),
+        (this.tempProduct.unit = ''),
+        (this.tempProduct.image = ''),
+        (this.tempProduct.description = ''),
+        (this.tempProduct.content = '這是內容'),
+        (this.tempProduct.is_enabled = 0),
+        (this.tempProduct.imageUrl = '');
       } else {
         // 把編輯前後的資料分開.注意物件特性
-        this.tempProduct = Object.assign({}, item);
+        this.tempProduct = { ...item };
       }
-      $("#productModal").modal("show");
+      $('#productModal').modal('show');
     },
     updateProduct() {
       this.$store.dispatch('updateLoading', true);
       if (
-        this.tempProduct.title === "" ||
-        this.tempProduct.category === "" ||
-        this.tempProduct.origin_price === "" ||
-        this.tempProduct.price === "" ||
-        this.tempProduct.imageUrl === ""
+        this.tempProduct.title === ''
+        || this.tempProduct.category === ''
+        || this.tempProduct.origin_price === ''
+        || this.tempProduct.price === ''
+        || this.tempProduct.imageUrl === ''
       ) {
-        this.$bus.$emit('message:push',"請正確填寫資料",'danger','fa-times');
+        this.$bus.$emit('message:push', '請正確填寫資料', 'danger', 'fa-times');
         this.$store.dispatch('updateLoading', false);
         return;
       }
@@ -318,39 +319,39 @@ export default {
       } else {
         const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product/${this.tempProduct.id}`;
         this.$http.put(api, { data: this.tempProduct }).then((response) => {
-          this.$bus.$emit('message:push',response.data.message,'success','fa-check');
+          this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check');
           this.$store.dispatch('updateLoading', false);
           this.api();
         });
       }
-      $("#productModal").modal("hide");
+      $('#productModal').modal('hide');
     },
     delOpen(item) {
       this.delItem = item;
       this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product/${this.delItem.id}`;
       this.deleteProductName = item.title;
-      $("#delModal").modal("show");
+      $('#delModal').modal('show');
     },
     upImg() {
-      //用 console 查看 this.當圖片丟進來時看 $refs 的 files 裡面的 files 是個陣列
+      // 用 console 查看 this.當圖片丟進來時看 $refs 的 files 裡面的 files 是個陣列
       this.status.fileUpLoading = true;
-      let imgUrl = this.$refs.files.files[0];
-      const formData = new FormData(); //web api:這是一個物件要用formData傳送。用formData模擬傳統
-      formData.append("file-to-upload", imgUrl); 
+      const imgUrl = this.$refs.files.files[0];
+      const formData = new FormData(); // web api:這是一個物件要用formData傳送。用formData模擬傳統
+      formData.append('file-to-upload', imgUrl);
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/upload`;
       this.$http
         .post(api, formData, {
           header: {
-            "Content-type": "multipart/form-data",
+            'Content-type': 'multipart/form-data',
           },
         })
         .then((response) => {
           this.status.fileUpLoading = false;
           if (response.data.success) {
             // console.log(this.tempProduct)//用這個看.發現沒有getter、setter雙向綁定
-            this.$set(this.tempProduct, "imageUrl", response.data.imageUrl); //強制寫入
+            this.$set(this.tempProduct, 'imageUrl', response.data.imageUrl); // 強制寫入
           } else {
-            this.$bus.$emit("message:push", response.data.message, "danger");
+            this.$bus.$emit('message:push', response.data.message, 'danger');
           }
         });
     },

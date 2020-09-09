@@ -28,7 +28,7 @@
                     </router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link to="/product/all"> 
+                    <router-link to="/product/all">
                       <i class="fas fa-cookie-bite"></i>商品列表
                     </router-link>
                   </li>
@@ -176,9 +176,10 @@
 </style>
 
 <script>
-import footerStyle from "@/components/frontend/index/FooterStyle.vue";
+import footerStyle from '@/components/frontend/index/FooterStyle.vue';
+
 export default {
-  name: "home",
+  name: 'home',
   components: {
     footerStyle,
   },

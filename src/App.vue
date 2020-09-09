@@ -7,17 +7,16 @@
   </div>
 </template>
 
-
 <style lang="scss">
 @import "./assets/scss/all.scss";
 </style>
 
 <script>
 export default {
-  computed:{ 
-    isLoading(){
+  computed: {
+    isLoading() {
       return this.$store.state.isLoading;
-    }
+    },
   },
-}
+};
 </script>
