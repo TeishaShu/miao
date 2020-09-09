@@ -266,11 +266,6 @@ export default {
       this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/products?page=${this.dataPage.current_page}`;
       this.$http.get(api).then((response) => {
-        console.log('api', api);
-        console.log('api', response);
-        // if(!response.data.success){
-        //   return this.$router.push('/admin');
-        // }
         this.$store.dispatch('updateLoading', false);
         this.$store.dispatch('backSmToggle', false);
         this.dataProdtct = response.data.products;
