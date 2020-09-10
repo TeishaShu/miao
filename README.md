@@ -8,3 +8,4 @@ https://teishashu.github.io/miao/
 - SCSS
 - Bootstrap
 - Vue cli
+- GSAP
