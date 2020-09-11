@@ -334,6 +334,8 @@
 </style>
 
 <script>
+import {signOut} from "@/api/api.js"; 
+
 export default {
   computed: {
     backSmToggle() {
@@ -342,12 +344,15 @@ export default {
   },
   methods: {
     signout() {
-      const api = `${process.env.VUE_APP_API_PATH}/logout`;
-      this.$http.post(api).then((response) => {
-        if (response.data.success) {
+      signOut()
+      .then((res) => {
+        if (res.data.success) {
           this.$router.push('/login');
         }
-      });
+      })
+      .catch((err) => {
+        console.error('err api');
+      })
     },
     smToggle() {
       this.$store.dispatch('backSmToggle', !this.backSmToggle);

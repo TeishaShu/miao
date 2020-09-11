@@ -352,6 +352,16 @@
       display: inline-block;
     }
   }
+  @media(max-width: 768px) {
+    label{
+      width: 100px;
+    }
+    .formInput{
+    input,textarea{
+        width: calc(100% - 100px);
+      }
+    }
+  }
 </style>
 <script>
 import AlertMessage from '@/alert/AlertMessage.vue';

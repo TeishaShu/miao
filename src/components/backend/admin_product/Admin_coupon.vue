@@ -179,6 +179,7 @@ import Datepicker from 'vuejs-datepicker';
 import Paginate from 'vuejs-paginate';
 import AlertMessage from '@/alert/AlertMessage.vue';
 import $ from 'jquery';
+import {couponGet, couponAdd, couponEdit, couponDel} from '@/api/api.js'
 
 export default {
   components: {
@@ -221,15 +222,18 @@ export default {
   methods: {
     getCoupon() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupons?page=${this.dataPage.current_page}`;
-      this.$http.get(api).then((response) => {
+      couponGet(this.dataPage.current_page)
+      .then((response) => {
         if (response.data.success) {
           this.$store.dispatch('updateLoading', false);
           this.$store.dispatch('backSmToggle', false);
           this.couponsData = response.data.coupons;
           this.dataPage = response.data.pagination;
         }
-      });
+      })
+      .catch((err) => {
+        console.error('getCoupon api err')
+      })
     },
     keyupUpdatePercent(val) { // 正規式卡了一下.錯誤值要帶回去
       const regexp = /^\d{0,2}$/;
@@ -263,25 +267,31 @@ export default {
       }
       vm.$store.dispatch('updateLoading', true);
       if (vm.modalStyle === 'add') {
-        const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon`;
-
-        vm.$http.post(api, { data: vm.addNew }).then((response) => {
+        couponAdd({ data: vm.addNew })
+        .then((response) => {
           if (response.data.success) {
             vm.$store.dispatch('updateLoading', false);
             vm.couponsData = response.data.coupons;
             vm.getCoupon();
           }
-        });
+        })
+        .catch((err) => {
+          console.error('addNew api err',err)
+        })
       } else if (vm.modalStyle === 'edit') {
-        const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon/${vm.addNew.id}`;
-        vm.$http.put(api, { data: vm.addNew }).then((response) => {
+        couponEdit(vm.addNew.id, { data: vm.addNew })
+        .then((response) => {
+          console.log('ok',response)
           if (response.data.success) {
             vm.$store.dispatch('updateLoading', false);
             vm.couponsData = response.data.coupons;
             vm.$bus.$emit('message:push', response.data.message, 'success', 'fa-check');
             vm.getCoupon();
           }
-        });
+        })
+        .catch((err) => {
+          console.error('edit api err',err)
+        })
       }
       $('#addModal').modal('hide');
     },
@@ -289,7 +299,9 @@ export default {
       return +new Date(num);
     },
     delOpen(item) {
+      console.log('del')
       this.delId = item;
+      // this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon/${this.delId.id}`;
       this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon/${this.delId.id}`;
       this.deleteProductName = item.title;
       $('#delModal').modal('show');

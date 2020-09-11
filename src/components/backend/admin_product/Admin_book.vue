@@ -52,13 +52,13 @@
     </div>
     <div class="col-md-12 pageOut">
       <paginate
-        :pageCount="dataPage.total_pages"
+        v-if="dataPage.current_page"
+        :page-count="dataPage.total_pages"
         :prev-text="'<'"
         :next-text="'>'"
         :page-range="3"
-        v-if="dataPage.current_page"
-        v-model="dataPage.current_page"
-        :clickHandler="getBook"
+        :value="dataPage.current_page"
+        @input="changePage"
       >
       </paginate>
     </div>
@@ -236,6 +236,7 @@
 import AlertMessage from '@/alert/AlertMessage.vue';
 import $ from 'jquery';
 import Paginate from 'vuejs-paginate';
+import {bookGet, bookUpdate} from '@/api/api.js';
 
 export default {
   components: {
@@ -283,36 +284,37 @@ export default {
     keyupUpdateTotal(qty) {
       qty = qty.replace(/[^\d]/g, '');
     },
-    cancelEdit() {
+    cancelEdit() {//have red
       this.newEdit = {};
       this.editItem = {};
     },
-    getBook() {
+    getBook(style, num) {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/orders?page=${this.dataPage.current_page}`;
-      this.axios.get(api).then((response) => {
+      let currentPage = 1;
+      if(style === 'changePage') {
+        currentPage = num;
+      }
+      bookGet(currentPage)
+      .then((res) => {
         this.$store.dispatch('updateLoading', false);
         this.$store.dispatch('backSmToggle', false);
-        if (response.data.success) {
-          this.tempProduct = response.data.orders;
-          this.dataPage = response.data.pagination;
+        if (res.data.success) {
+          this.tempProduct = res.data.orders;
+          this.dataPage = res.data.pagination;
+          // console.log(num,res.data)
         }
-      });
+      })
+      .catch((err) => {
+        console.error('bookGet api err')
+      })
+    },
+    changePage(event) {
+      this.dataPage.current_page = event;
+      this.getBook('changePage', event);
     },
     dateForm(num) {
       const dd = new Date(num);
       return `${dd.getFullYear()}/${dd.getMonth() + 1}/${dd.getDate()}`;
-    },
-    edit(item) {
-      this.editItem = item;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/order/${item.id}`;
-      this.axios.put(api, { data }).then((response) => {
-        this.$store.dispatch('updateLoading', false);
-        if (response.data.success) {
-          this.tempProduct = response.data.products;
-          this.dataPage = response.data.pagination;
-        }
-      });
     },
     openModel(item) {
       if (item.is_paid) {
@@ -324,19 +326,20 @@ export default {
       this.newEdit = JSON.parse(JSON.stringify(item));
       $('#editModal').modal('show');
     },
-    updateProduct() {
+    async updateProduct() {
       this.$store.dispatch('updateLoading', true);
-      const editt = this.newEdit;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/order/${editt.id}`;
-      this.axios.put(api, { data: editt }).then((response) => {
+      bookUpdate(this.newEdit.id, { data: this.newEdit })
+      .then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.getBook();
           $('#editModal').modal('hide');
-
           this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check');
         }
-      });
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
   },
   created() {

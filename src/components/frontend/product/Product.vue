@@ -67,7 +67,6 @@ import ProductModal from '@/components/frontend/modal/ProductModal.vue';
 import cartBtn from '@/components/frontend/index/CartBtn.vue';
 import Paginate from 'vuejs-paginate';
 import AlertMessage from '@/alert/AlertMessage.vue';
-import _ from 'lodash';
 import { mapGetters } from 'vuex';
 import Aside from './Aside.vue';
 

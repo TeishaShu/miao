@@ -107,6 +107,7 @@
 
 <script>
 import AlertMessage from '@/alert/AlertMessage.vue';
+import {signIn} from '@/api/api.js';
 
 export default {
   components: {
@@ -121,15 +122,21 @@ export default {
     };
   },
   methods: {
-    send() {
+    async send() {
+      this.$store.dispatch('updateLoading', true);
       const api = `${process.env.VUE_APP_API_PATH}/admin/signin`;
-      this.$http.post(api, this.user).then((response) => {
+      signIn(this.user)
+      .then((response) => {
+        this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.$router.push('/admin');
         } else {
           this.$bus.$emit('message:push', `${response.data.message}: ${response.data.error.message}`, 'danger', 'fa-times');
         }
-      });
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
   },
 };

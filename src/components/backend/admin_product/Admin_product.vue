@@ -226,6 +226,7 @@ import Paginate from 'vuejs-paginate';
 import DelModal from '@/components/frontend/modal/DelModal.vue';
 import AlertMessage from '@/alert/AlertMessage.vue';
 import $ from 'jquery';
+import {adminGet, adminProduct, adminEdit, adminDel, adminUpload} from '@/api/api.js';
 
 export default {
   components: {
@@ -264,13 +265,16 @@ export default {
   methods: {
     api() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/products?page=${this.dataPage.current_page}`;
-      this.$http.get(api).then((response) => {
+      adminGet(this.dataPage.current_page)
+      .then((response) => {
         this.$store.dispatch('updateLoading', false);
         this.$store.dispatch('backSmToggle', false);
         this.dataProdtct = response.data.products;
         this.dataPage = response.data.pagination;
-      });
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
     openModel(addNewStatus, item) {
       this.addNew = addNewStatus;
@@ -305,25 +309,32 @@ export default {
         return;
       }
       if (this.addNew) {
-        const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product`;
-        this.$http.post(api, { data: this.tempProduct }).then((response) => {
+        adminProduct({ data: this.tempProduct })
+        .then((response) => {
           // this.tempProduct.imageUrl = ''; //新增資料會有舊的...兩個都丟圖片會消失.這個是新增的
           this.$store.dispatch('updateLoading', false);
           this.api();
-        });
+        })
+        .catch((err) => {
+          console.error('api err')
+        })
       } else {
-        const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product/${this.tempProduct.id}`;
-        this.$http.put(api, { data: this.tempProduct }).then((response) => {
-          this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check');
-          this.$store.dispatch('updateLoading', false);
-          this.api();
-        });
+        adminEdit(this.tempProduct.id, { data: this.tempProduct })
+        .then((response) => {
+          if(response.data.success) {
+            this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check');
+            this.$store.dispatch('updateLoading', false);
+            this.api();
+          }
+        })
+        .catch((err) => {
+          console.error('api err')
+        })
       }
       $('#productModal').modal('hide');
     },
     delOpen(item) {
-      this.delItem = item;
-      this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product/${this.delItem.id}`;
+      this.delApi = adminDel(item.id);
       this.deleteProductName = item.title;
       $('#delModal').modal('show');
     },
@@ -333,22 +344,20 @@ export default {
       const imgUrl = this.$refs.files.files[0];
       const formData = new FormData(); // web api:這是一個物件要用formData傳送。用formData模擬傳統
       formData.append('file-to-upload', imgUrl);
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/upload`;
-      this.$http
-        .post(api, formData, {
-          header: {
-            'Content-type': 'multipart/form-data',
-          },
-        })
-        .then((response) => {
-          this.status.fileUpLoading = false;
-          if (response.data.success) {
-            // console.log(this.tempProduct)//用這個看.發現沒有getter、setter雙向綁定
-            this.$set(this.tempProduct, 'imageUrl', response.data.imageUrl); // 強制寫入
-          } else {
-            this.$bus.$emit('message:push', response.data.message, 'danger');
-          }
-        });
+
+      adminUpload(formData)
+      .then((response) => {
+        this.status.fileUpLoading = false;
+        if (response.data.success) {
+          // console.log(this.tempProduct)//用這個看.發現沒有getter、setter雙向綁定
+          this.$set(this.tempProduct, 'imageUrl', response.data.imageUrl); // 強制寫入
+        } else {
+          this.$bus.$emit('message:push', response.data.message, 'danger');
+        }
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
   },
   created() {
