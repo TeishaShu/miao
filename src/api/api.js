@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// api
 const base = {
   shortUrl: `${process.env.VUE_APP_API_PATH}`,
   longUrl: `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}`
@@ -89,6 +88,39 @@ export function adminUpload(data) {
   })
 }
 
+// frontend cart step1
+export function cart() {
+  return axios({
+    url: `${base.longUrl}/cart`,
+    method: 'get',
+  })
+}
+export const cartDel = (id) => `${base.longUrl}/cart/${id}`;
+export function cartCoupon(data) {
+  return axios({
+    url: `${base.longUrl}/coupon`,
+    method: 'post',
+    data: data
+  })
+}
+export function cartOrder(data) {
+  return axios({
+    url: `${base.longUrl}/order`,
+    method: 'post',
+    data: data
+  })
+}
 
-
-
+// frontend cart step2
+export function cart2Order(id) {
+  return axios({
+    url: `${base.longUrl}/order/${id}`,
+    method: 'get',
+  })
+}
+export function cart2Pay(id) {
+  return axios({
+    url: `${base.longUrl}/pay/${id}`,
+    method: 'post',
+  })
+}

@@ -190,6 +190,8 @@
   }
 </style>
 <script>
+import {cart2Order, cart2Pay} from '@/api/api.js';
+
 export default {
   data() {
     return {
@@ -209,8 +211,8 @@ export default {
   methods: {
     getApi() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order/${this.orderId}`;
-      this.$http.get(api).then((response) => {
+      cart2Order(this.orderId)
+      .then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataAPI = response.data.order;
@@ -220,18 +222,24 @@ export default {
             this.$store.commit('cartStepModules/NOWSTEP', 3);
           }
         }
-      });
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
     pay() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/pay/${this.orderId}`;
-      this.$http.post(api).then((response) => {
+      cart2Pay(this.orderId)
+      .then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.getApi(); // 注意要重新刷頁面
           this.$store.commit('cartStepModules/NOWSTEP', 3);
         }
-      });
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
   },
 };

@@ -367,6 +367,7 @@
 import AlertMessage from '@/alert/AlertMessage.vue';
 import DelModal from '@/components/frontend/modal/DelModal.vue';
 import $ from 'jquery';
+import {cart, cartDel, cartCoupon, cartOrder} from '@/api/api.js';
 
 export default {
   components: {
@@ -412,59 +413,59 @@ export default {
   methods: {
     api() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
-      this.axios.get(api).then((response) => {
+      cart()
+      .then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataAPI = response.data.data;
           this.$store.commit('cartStepModules/NOWSTEP', 1);
         }
-      });
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
     delOpen(item) {
-      this.delItem = item;
-      this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${item.id}`;
+      this.delApi = cartDel(item.id);
       this.deleteProductName = item.product.title;
       $('#delModal').modal('show');
     },
     sendCoupon() {
       this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/coupon`;
-      this.$http.post(api, { data: this.textCoupon }).then((response) => {
+      cartCoupon({ data: this.textCoupon })
+      .then((response) => {
         this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           this.dataCoupon = response.data;
+          this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check');
         } else {
           this.$bus.$emit('message:push', response.data.message, 'danger', 'fa-times');
         }
-      });
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
     async sentStep1() {
       const vm = this;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order`;
-      const dataString = JSON.stringify({
+      await cartOrder({
         data: {
-          user: this.user,
-          message: this.message,
+          user: vm.user,
+          message: vm.message,
         },
-      });
-      await fetch(api, {
-        method: 'POST',
-        body: dataString,
-        headers: new Headers({ 'Content-Type': 'application/json' }),
       })
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.success) {
-            // 換路由..注意寫法.不是用 "=""
-            vm.$router.push(`/cart/${res.orderId}`);
-            // this.step += 1;  不能在子層改父層的值
-            // this.$emit('nextStep',2); // 父層step更改
-            this.$store.commit('cartStepModules/NOWSTEP', 2);
-          }
-        })
-        .catch((error) => { console.error('api error'); });
-      // 之前這邊總是會跳過.後來解決了
+      .then((response) => {
+        if(response.data.success) {
+          // 換路由..注意寫法.不是用 "=""
+          vm.$router.push(`/cart/${response.data.orderId}`);
+          // this.step += 1;  不能在子層改父層的值
+          // this.$emit('nextStep',2); // 父層step更改
+          this.$store.commit('cartStepModules/NOWSTEP', 2);
+        }
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
     validateBootstrap2() {
       const vm = this;

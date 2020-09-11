@@ -125,10 +125,6 @@ export default {
       couponCode: 'DTJ00001',
     };
   },
-  mounted() {
-    // 這個無法用 created 測試是因為 created 時.子元件還沒掛進來
-    // this.alertBus('yhhh');
-  },
   methods: {
     copyInput() {
       const txt = $('#codyId').select();
