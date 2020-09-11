@@ -21,7 +21,7 @@
           <input type="text" v-model.trim="selectNum2" />
           <i class="fas fa-plus" @click="changeNum(1)"></i>
         </div>
-        <a href="#" class="addCart" @click.prevent="addCartProductIn"><i class="fa fa-heart mr-2" aria-hidden="true"></i>加入購物車</a>
+        <a href="#" class="addCart" @click.prevent="addCartBtn"><i class="fa fa-heart mr-2" aria-hidden="true"></i>加入購物車</a>
       </div>
     </div>
 
@@ -187,7 +187,7 @@ export default {
       } // 注意傳入的值.不要使function壞掉
       return txt.split('@');
     },
-    ...mapActions('addCartModules', ['addCartProductIn']),
+    ...mapActions('addCartModules', ['addCartBtn']),
   },
   created() {
     this.getProduct2();

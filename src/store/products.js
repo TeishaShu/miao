@@ -1,5 +1,5 @@
-import axios from 'axios';
 import _ from 'lodash';
+import {productOne, productAll} from '@/api/api.js';
 
 export default {
   strict: true,
@@ -55,7 +55,6 @@ export default {
   },
   actions: {
     changeNum(context, num) {
-      // const orNum = Number(this.selectNum2);
       const orNum = Number(context.state.selectNum2);
       if (num < 0 && orNum <= 1) {
         context.commit('SELECTNUM2', 1);
@@ -68,18 +67,21 @@ export default {
     },
     async getProduct2(context, id) { // Product2.vue
       context.commit('LOADING', true, { root: true });
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
-      await axios.get(api).then((response) => {
+      await productOne(id)
+      .then((response) => {
         context.commit('LOADING', false, { root: true });
         if (response.data.success) {
           context.commit('DATAPRODUCT2', response.data.product);
         }
-      });
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
     async getProduct(context, categoryStyle) { // Product.vue
       context.commit('LOADING', true, { root: true });
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/products/all`;
-      await axios.get(api).then((response) => {
+      productAll()
+      .then((response) => {
         context.commit('LOADING', false, { root: true });
         if (response.data.success) {
           // 過濾未啟用的產品資訊
@@ -100,7 +102,10 @@ export default {
             isPageClick: false,
           });
         }
-      });
+      })
+      .catch((err) => {
+        console.error('api err')
+      })
     },
     selectCategory(context, {style, isPageClick}) {
       context.commit('PRODUCTS', []);

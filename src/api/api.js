@@ -88,13 +88,29 @@ export function adminUpload(data) {
   })
 }
 
-// frontend cart step1
+// frontend cart
 export function cart() {
   return axios({
     url: `${base.longUrl}/cart`,
     method: 'get',
   })
 }
+export function addCartApi(data) {
+  return axios({
+    url: `${base.longUrl}/cart`,
+    method: 'post',
+    data: data
+  })
+}
+export function addCartBtnApi(data) {
+  return axios({
+    url: `${base.longUrl}/cart`,
+    method: 'post',
+    data: data
+  })
+}
+
+// frontend cart step1
 export const cartDel = (id) => `${base.longUrl}/cart/${id}`;
 export function cartCoupon(data) {
   return axios({
@@ -122,5 +138,19 @@ export function cart2Pay(id) {
   return axios({
     url: `${base.longUrl}/pay/${id}`,
     method: 'post',
+  })
+}
+
+// frontend product
+export function productOne(id) {
+  return axios({
+    url: `${base.longUrl}/product/${id}`,
+    method: 'get',
+  })
+}
+export function productAll() {
+  return axios({
+    url: `${base.longUrl}/products/all`,
+    method: 'get',
   })
 }
