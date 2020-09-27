@@ -6,7 +6,7 @@
           <div class="col-md-12 header">
             <nav class="navbar navbar-expand-lg navbar-light ">
               <button
-                class="navbar-toggler"
+                class="navbar-toggler smNav"
                 type="button"
                 data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1"
@@ -63,7 +63,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped>  
   @import "@/assets/scss/variables.scss";
   .header {
     color: $or;
@@ -86,11 +86,17 @@
       cursor: pointer;
     }
   }
+  .smNav {
+    position: absolute;
+    left: 0;
+    top: 30px;
+  }
   .logoA {
     background: transparent;
     padding: 0;
+    text-align: center;
   }
-  .logoName{
+  .logoName {
     color: $or;
     letter-spacing: 8px;
   }

@@ -27,7 +27,7 @@
   @import "@/assets/scss/variables.scss";
   h3{
     height: 84px;
-    color: $or;
+    color: darken($or,10%);
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -39,7 +39,7 @@
     cursor: pointer;
   }
   a{
-      box-shadow: 0 0 5px #ababab;
+      box-shadow: 0 0 5px lighten($txt,45%);
       display: block;
       padding: 0;
       border: 2px solid #fff;
@@ -70,8 +70,8 @@
 
     }
     i{
-      color: $pink;
-      border: 1px solid $pink;
+      color: lighten($red, 10%);
+      border: 1px solid lighten($red, 5%);
       padding: 11px 12px 11px 9px;
       border-radius: 100%;
       float: right;
@@ -83,7 +83,7 @@
       }
     }
     .type{
-      background:$pink;
+      background:lighten($red, 10%);
       color: #fff;
       font-size: 12px;
       padding:1px 10px;

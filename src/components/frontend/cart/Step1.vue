@@ -15,26 +15,24 @@
         <table class="table">
           <thead>
             <tr>
-              <th colspan="2">購物清單</th>
-              <th width="200px">單價</th>
-              <th width="200px">數量</th>
-              <th width="220px">小計</th>
-              <th width="120px">刪除</th>
+              <th><b>購物清單</b></th>
+              <th>單價</th>
+              <th>數量</th>
+              <th class="smNone">小計</th>
+              <th>刪除</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in dataAPI.carts" :key="item.id">
               <td>
-                <img :src="item.product.imageUrl" alt="" />
-              </td>
-              <td>
-                {{ item.product.title }}
+                <img :src="item.product.imageUrl" alt="" class="smNone" />
+                <p>{{ item.product.title }}</p>
               </td>
               <td>NT{{ item.product.price | currency }}</td>
               <td style="text-align:center">
-                {{ item.qty }}
+                x {{item.qty}}
               </td>
-              <td>NT{{ (item.product.price * item.qty) | currency }}</td>
+              <td class="smNone">NT{{ (item.product.price * item.qty) | currency }}</td>
               <td>
                 <a href="#" class="aBtn" @click.prevent="delOpen(item)"
                   ><i class="fas fa-trash-alt" @click="delOpen(item)"></i
@@ -43,11 +41,13 @@
             </tr>
 
             <tr class="total">
-              <td colspan="5">總計</td>
+              <td colspan="3"><b>總計</b></td>
+              <td class="smNone"></td>
               <td>NT{{ dataAPI.total | currency }}</td>
             </tr>
             <tr class="total cheep" v-show="dataCoupon.success">
-              <td colspan="3">折扣價</td>
+              <td>折扣價</td>
+              <td class="smNone"></td>
               <td colspan="2" style="text-align:right; white-space:nowrap;">
                 (省了 NT{{ dataAPI.total - dataCoupon.data.final_total | currency }})
               </td>
@@ -159,6 +159,7 @@
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   h5{
+    color: $or;
     margin-bottom: 25px;
     margin-top: 30px;
     font-weight: 600;
@@ -199,7 +200,6 @@
   input[type=number] {
     -moz-appearance: textfield;
   }
-
   .nothing {
     text-align: center;
     p {
@@ -227,21 +227,22 @@
     margin-bottom: 0;
     font-size: 16px;
     line-height: 35px;
-    width: 100%;
   }
   .table {
     img {
       width: 100px;
       border: 1px solid #ddd;
+      margin-right: 21px;
+    }
+    p {
+      display: inline-block;
+      max-width: calc(100% - 122px);
     }
     tr {
       border-bottom: 2px solid #ddd;
     }
     td {
       vertical-align: middle;
-      &:nth-child(1) {
-        width: 120px;
-      }
       &:nth-child(3) {
         color: $red;
       }
@@ -249,39 +250,13 @@
         text-align: center;
       }
     }
-    i {
-      color: $or;
-      border: 1px solid $or;
-      padding: 6px 7px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    input {
-      border-radius: 5px;
-      text-align: center;
-      width: 30px;
-      border: 1.5px solid rgb(173, 173, 173);
-      font-size: 14px;
-    }
   }
-  .info {
-    margin-top:30px;
-    input {
-      width: 100%;
-      display: block;
-      border-radius: 30px;
-      border: 1px solid #ddd;
-      padding: 5px 15px;
-      margin: 10px 0;
-    }
-    textarea {
-      width: 100%;
-      display: block;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      padding: 10px 15px;
-      margin: 10px 0;
-    }
+  .aBtn i{
+    color: $or;
+    border: 1px solid $or;
+    padding: 6px 7px;
+    border-radius: 5px;
+    cursor: pointer;
   }
   .send,.send:focus{
     background: $red;
@@ -340,26 +315,31 @@
     margin-left: 15px;
     margin-bottom: -2px;
   }
-  label{
-    width: 130px;
-  }
   .formInput{
     input,textarea{
-      width: calc(100% - 130px);
-      border: 1px solid #ced4da;
+      border: 1px solid lighten($txt,60%);
       padding: 10px;
       border-radius: 0.25rem;
       display: inline-block;
     }
   }
-  @media(max-width: 768px) {
-    label{
-      width: 100px;
+  textarea {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+  }
+  label {
+    margin-bottom:0;
+  }
+  @media (max-width:768px){
+    .smNone{
+      display:none;
     }
-    .formInput{
-    input,textarea{
-        width: calc(100% - 100px);
-      }
+    .table p{
+      max-width: unset;
     }
   }
 </style>

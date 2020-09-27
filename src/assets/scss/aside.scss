@@ -16,14 +16,19 @@
     vertical-align: middle;
     text-align: center;
     &:hover{
-      background: $or;
+      background: lighten($red, 10%);
       color: #fff;
-      border-color: #ffd7b4 #ffd7b4 #ffa8a8 #ffa8a8;
+      // border-color: #ffd7b4 #ffd7b4 #ffa8a8 #ffa8a8;
       transition-property: background, color, border-color;
       transition-duration: 0.4s, 0.5s, 1s;
       transition-timing-function: ease-in, ease-out, linear;
     }
   }
+}
+.asideBox .asideActive{
+  border-color: #ffd7b4 #ffd7b4 #ffa8a8 #ffa8a8;
+  background: $or !important;
+  color: #fff;
 }
 @media(max-width:768px){
   .asideBox{

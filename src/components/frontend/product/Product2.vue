@@ -53,7 +53,7 @@
     padding-left: 60px;
   }
   img {
-    box-shadow: 0 0 5px #c3c3c3;
+    box-shadow: 0 0 5px lighten($txt, 45%);
     width: 90%;
     padding: 5%;
     margin: 0 auto;
@@ -86,7 +86,6 @@
     margin-bottom: 30px;
   }
   .price {
-    color: $txt;
     line-height: 30px;
     display: inline-block;
     font-size: 27px;
@@ -97,11 +96,11 @@
     em {
       font-size: 18px;
       text-decoration: line-through;
-      color:$txt;
+      color:lighten($txt,30%);
     }
   }
   .add{
-    border:1px solid $light_gray;
+    border:1px solid lighten($txt,50%);
     border-radius: 20px;
     display: inline-block;
     overflow: hidden;
@@ -112,7 +111,7 @@
       font-size: 14px;
       text-align: center;
       color: #fff;
-      background: $light_gray;
+      background: lighten($txt,50%);
     }
     input{
       border: none;
@@ -138,6 +137,12 @@
     }
     .type{
       display: none;
+    }
+    .box{
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding-right: 10px;
+      padding-left: 10px;
     }
   }
 </style>

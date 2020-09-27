@@ -44,7 +44,7 @@
       border: none;
       padding: 10px 15px;
       font-size: 16px;
-      color: rgb(131, 131, 131);
+      color: $txt;
       font-weight: bold;
       vertical-align: middle;
     }
