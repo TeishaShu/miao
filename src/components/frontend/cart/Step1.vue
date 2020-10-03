@@ -1,16 +1,24 @@
 <template>
   <div class="row justify-content-center">
-    <AlertMessage/>
+    <AlertMessage />
     <!--沒東西-->
     <div
-      class="col-md-12 nothing"
       v-if="dataAPI.carts && dataAPI.carts.length === 0"
+      class="col-md-12 nothing"
     >
       <p>您的購物車內還沒有任何商品!</p>
-      <router-link :to="{name:'product'}"><i class="fa fa-angle-double-right pr-2" aria-hidden="true"></i> 快來逛逛</router-link>
+      <router-link :to="{name:'product'}">
+        <i
+          class="fa fa-angle-double-right pr-2"
+          aria-hidden="true"
+        /> 快來逛逛
+      </router-link>
     </div>
     <!--有東西  v-if="dataAPI.carts.length !== 0"-->
-    <div class="col-md-10" v-if="dataAPI.carts && dataAPI.carts.length !== 0">
+    <div
+      v-if="dataAPI.carts && dataAPI.carts.length !== 0"
+      class="col-md-10"
+    >
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -18,37 +26,61 @@
               <th><b>購物清單</b></th>
               <th>單價</th>
               <th>數量</th>
-              <th class="smNone">小計</th>
+              <th class="smNone">
+                小計
+              </th>
               <th>刪除</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in dataAPI.carts" :key="item.id">
+            <tr
+              v-for="item in dataAPI.carts"
+              :key="item.id"
+            >
               <td>
-                <img :src="item.product.imageUrl" alt="" class="smNone" />
+                <img
+                  :src="item.product.imageUrl"
+                  alt=""
+                  class="smNone"
+                >
                 <p>{{ item.product.title }}</p>
               </td>
               <td>NT{{ item.product.price | currency }}</td>
               <td style="text-align:center">
-                x {{item.qty}}
+                x {{ item.qty }}
               </td>
-              <td class="smNone">NT{{ (item.product.price * item.qty) | currency }}</td>
+              <td class="smNone">
+                NT{{ (item.product.price * item.qty) | currency }}
+              </td>
               <td>
-                <a href="#" class="aBtn" @click.prevent="delOpen(item)"
-                  ><i class="fas fa-trash-alt" @click="delOpen(item)"></i
-                ></a>
+                <a
+                  href="#"
+                  class="aBtn"
+                  @click.prevent="delOpen(item)"
+                ><i
+                  class="fas fa-trash-alt"
+                  @click="delOpen(item)"
+                /></a>
               </td>
             </tr>
 
             <tr class="total">
-              <td colspan="3"><b>總計</b></td>
-              <td class="smNone"></td>
+              <td colspan="3">
+                <b>總計</b>
+              </td>
+              <td class="smNone" />
               <td>NT{{ dataAPI.total | currency }}</td>
             </tr>
-            <tr class="total cheep" v-show="dataCoupon.success">
+            <tr
+              v-show="dataCoupon.success"
+              class="total cheep"
+            >
               <td>折扣價</td>
-              <td class="smNone"></td>
-              <td colspan="2" style="text-align:right; white-space:nowrap;">
+              <td class="smNone" />
+              <td
+                colspan="2"
+                style="text-align:right; white-space:nowrap;"
+              >
                 (省了 NT{{ dataAPI.total - dataCoupon.data.final_total | currency }})
               </td>
               <td>
@@ -59,33 +91,42 @@
         </table>
       </div>
     </div>
-    <div class="col-md-6" v-if="dataAPI.carts && dataAPI.carts.length !== 0">
+    <div
+      v-if="dataAPI.carts && dataAPI.carts.length !== 0"
+      class="col-md-6"
+    >
       <div class="coupon">
         <input
+          v-model.trim="textCoupon.code"
           type="text"
           placeholder="請輸入優惠碼"
-          v-model.trim="textCoupon.code"
           @keyup.13="sendCoupon"
-        /><a href="#" @click.prevent="sendCoupon">送出</a>
+        ><a
+          href="#"
+          @click.prevent="sendCoupon"
+        >送出</a>
       </div>
     </div>
     <!--v-if="dataAPI.carts.length !== 0"-->
     <div class="col-md-10 mt-3">
-      <form class="needs-validation formInput" novalidate>
+      <form
+        class="needs-validation formInput"
+        novalidate
+      >
         <div
-          class="form-row"
           v-if="dataAPI.carts && dataAPI.carts.length !== 0"
+          class="form-row"
         >
           <div class="col-md-12 mb-3">
             <h5>收件人資訊</h5>
             <label for="name">*收件人姓名</label>
             <input
               id="name"
+              v-model="user.name"
               class="form-control"
               type="text"
-              v-model="user.name"
               required
-            />
+            >
             <div class="valid-feedback">
               正確!
             </div>
@@ -97,11 +138,11 @@
             <label for="phone">*收件人電話</label>
             <input
               id="phone"
+              v-model="user.tel"
               class="form-control"
               type="number"
-              v-model="user.tel"
               required
-            />
+            >
             <div class="valid-feedback">
               正確!
             </div>
@@ -113,11 +154,11 @@
             <label for="email">*E-mail</label>
             <input
               id="email"
+              v-model="user.email"
               class="form-control"
               type="email"
-              v-model="user.email"
               required
-            />
+            >
             <div class="valid-feedback">
               正確!
             </div>
@@ -129,11 +170,11 @@
             <label for="address">*收件人地址</label>
             <input
               id="address"
+              v-model="user.address"
               class="form-control"
               type="text"
-              v-model="user.address"
               required
-            />
+            >
             <div class="valid-feedback">
               正確!
             </div>
@@ -144,16 +185,25 @@
           <div class="col-md-12 mb-3">
             <label>留言備註</label>
             <textarea
-              rows="4"
               v-model="message"
-            ></textarea>
-            <button class="send" type="submit">送出訂單</button>
+              rows="4"
+            />
+            <button
+              class="send"
+              type="submit"
+            >
+              送出訂單
+            </button>
           </div>
         </div>
       </form>
     </div>
 
-    <DelModal titleType="產品" :api="delApi" :productName="deleteProductName" />
+    <DelModal
+      title-type="產品"
+      :api="delApi"
+      :product-name="deleteProductName"
+    />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -344,23 +394,17 @@
   }
 </style>
 <script>
-import AlertMessage from '@/alert/AlertMessage.vue';
-import DelModal from '@/components/frontend/modal/DelModal.vue';
-import $ from 'jquery';
-import {cart, cartDel, cartCoupon, cartOrder} from '@/api/api.js';
+import AlertMessage from '@/alert/AlertMessage.vue'
+import DelModal from '@/components/frontend/modal/DelModal.vue'
+import $ from 'jquery'
+import { cart, cartDel, cartCoupon, cartOrder } from '@/api/api.js'
 
 export default {
   components: {
     DelModal,
-    AlertMessage,
+    AlertMessage
   },
-  created() {
-    this.api();
-  },
-  mounted() {
-    this.validateBootstrap2();
-  },
-  data() {
+  data () {
     return {
       dataAPI: {
         // carts:[] 加這個或是上面的v-if要多一個條件
@@ -369,107 +413,113 @@ export default {
       dataCoupon: {
         success: false,
         data: {
-          final_total: 0,
-        },
+          final_total: 0
+        }
       },
       userStyle: {
         name: false,
         email: false,
         tel: false,
-        address: false,
+        address: false
       },
       user: {
         name: '',
         email: '',
         tel: '',
-        address: '',
+        address: ''
       },
       message: '',
       delItem: '',
       delApi: '',
-      deleteProductName: '',
-    };
+      deleteProductName: ''
+    }
+  },
+  created () {
+    this.api()
+  },
+  mounted () {
+    this.validateBootstrap2()
   },
   methods: {
-    api() {
-      this.$store.dispatch('updateLoading', true);
+    api () {
+      this.$store.dispatch('updateLoading', true)
       cart()
-      .then((response) => {
-        this.$store.dispatch('updateLoading', false);
-        if (response.data.success) {
-          this.dataAPI = response.data.data;
-          this.$store.commit('cartStepModules/NOWSTEP', 1);
-        }
-      })
-      .catch((err) => {
-        console.error('api err')
-      })
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          if (response.data.success) {
+            this.dataAPI = response.data.data
+            this.$store.commit('cartStepModules/NOWSTEP', 1)
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
     },
-    delOpen(item) {
-      this.delApi = cartDel(item.id);
-      this.deleteProductName = item.product.title;
-      $('#delModal').modal('show');
+    delOpen (item) {
+      this.delApi = cartDel(item.id)
+      this.deleteProductName = item.product.title
+      $('#delModal').modal('show')
     },
-    sendCoupon() {
-      this.$store.dispatch('updateLoading', true);
+    sendCoupon () {
+      this.$store.dispatch('updateLoading', true)
       cartCoupon({ data: this.textCoupon })
-      .then((response) => {
-        this.$store.dispatch('updateLoading', false);
-        if (response.data.success) {
-          this.dataCoupon = response.data;
-          this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check');
-        } else {
-          this.$bus.$emit('message:push', response.data.message, 'danger', 'fa-times');
-        }
-      })
-      .catch((err) => {
-        console.error('api err')
-      })
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          if (response.data.success) {
+            this.dataCoupon = response.data
+            this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check')
+          } else {
+            this.$bus.$emit('message:push', response.data.message, 'danger', 'fa-times')
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
     },
-    async sentStep1() {
-      const vm = this;
+    async sentStep1 () {
+      const vm = this
       await cartOrder({
         data: {
           user: vm.user,
-          message: vm.message,
-        },
-      })
-      .then((response) => {
-        if(response.data.success) {
-          // 換路由..注意寫法.不是用 "=""
-          vm.$router.push(`/cart/${response.data.orderId}`);
-          // this.step += 1;  不能在子層改父層的值
-          // this.$emit('nextStep',2); // 父層step更改
-          this.$store.commit('cartStepModules/NOWSTEP', 2);
+          message: vm.message
         }
       })
-      .catch((err) => {
-        console.error('api err')
-      })
+        .then((response) => {
+          if (response.data.success) {
+          // 換路由..注意寫法.不是用 "=""
+            vm.$router.push(`/cart/${response.data.orderId}`)
+            // this.step += 1;  不能在子層改父層的值
+            // this.$emit('nextStep',2); // 父層step更改
+            this.$store.commit('cartStepModules/NOWSTEP', 2)
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
     },
-    validateBootstrap2() {
-      const vm = this;
+    validateBootstrap2 () {
+      const vm = this
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      const forms = document.getElementsByClassName('needs-validation');
+      const forms = document.getElementsByClassName('needs-validation')
       // Loop over them and prevent submission
-      const validation = Array.prototype.filter.call(forms, (form) => {
+      Array.prototype.filter.call(forms, (form) => {
         form.addEventListener('submit', (event) => {
           if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+            event.preventDefault()
+            event.stopPropagation()
           } else {
-            event.preventDefault();
+            event.preventDefault()
             // 驗證過
             // 按鈕全部不能按
-            $('.aBtn').addClass('disabled');
-            $('button').prop('disabled', true);
-            vm.sentStep1();
+            $('.aBtn').addClass('disabled')
+            $('button').prop('disabled', true)
+            vm.sentStep1()
           }
-          form.classList.add('was-validated');
+          form.classList.add('was-validated')
         },
-        false);
-      });
-    },
-  },
-};
+        false)
+      })
+    }
+  }
+}
 </script>

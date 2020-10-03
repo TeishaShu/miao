@@ -1,8 +1,14 @@
 <template>
   <div>
     <a>
-      <div @click="clickProduct(item)" class="proImg">
-        <img :src="`${item.imageUrl}`" alt="" />
+      <div
+        class="proImg"
+        @click="clickProduct(item)"
+      >
+        <img
+          :src="`${item.imageUrl}`"
+          alt=""
+        >
       </div>
       <!--注意這邊style的寫法.backgroundImage、url裡面沒有''-->
       <div class="proTxt">
@@ -11,13 +17,12 @@
           {{ item.title }}
         </h3>
         <p>
-          <em>NT{{ item.origin_price | currency }}</em
-          ><br />NT{{ item.price | currency }}
+          <em>NT{{ item.origin_price | currency }}</em><br>NT{{ item.price | currency }}
         </p>
         <i
           class="fas fa-cart-plus"
           @click.prevent="addCart(item)"
-        ></i>
+        />
       </div>
     </a>
   </div>
@@ -106,17 +111,17 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => {},
-    },
+      default: () => {}
+    }
   },
   methods: {
-    clickProduct(item) {
-      const { id } = item;
-      this.$router.push({ path: `/product2/${id}` });
+    clickProduct (item) {
+      const { id } = item
+      this.$router.push({ path: `/product2/${id}` })
     },
-    addCart(item) {
-      this.$store.dispatch('addCartModules/addCart', item);
-    },
-  },
-};
+    addCart (item) {
+      this.$store.dispatch('addCartModules/addCart', item)
+    }
+  }
+}
 </script>

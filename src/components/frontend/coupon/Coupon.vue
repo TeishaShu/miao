@@ -1,18 +1,29 @@
 <template>
   <div class="minHeight">
-    <AlertMessage/>
+    <AlertMessage />
 
-    <img src="@/assets/images/coupon.png" class="animate__animated animate__bounceIn" alt="" />
+    <img
+      src="@/assets/images/coupon.png"
+      class="animate__animated animate__bounceIn"
+      alt=""
+    >
     <div class="coupon">
       <div>
         <h2>開幕慶優惠 !</h2>
-        <p>輸入以下代碼，即可獲得<br>
+        <p>
+          輸入以下代碼，即可獲得<br>
           <b style="font-size: 24px; color: red;">
-           全館 8折優惠</b>
+            全館 8折優惠</b>
         </p>
         <div class="box">
-          <input v-model="couponCode" id="codyId" readonly />
-          <button @click="copyInput">複製</button>
+          <input
+            id="codyId"
+            v-model="couponCode"
+            readonly
+          >
+          <button @click="copyInput">
+            複製
+          </button>
         </div>
       </div>
     </div>
@@ -111,33 +122,31 @@
 </style>
 
 <script>
-import cartBtn from '@/components/frontend/index/CartBtn.vue';
-import AlertMessage from '@/alert/AlertMessage.vue';
-import $ from 'jquery';
+import cartBtn from '@/components/frontend/index/CartBtn.vue'
+import AlertMessage from '@/alert/AlertMessage.vue'
 
 export default {
   components: {
     cartBtn,
-    AlertMessage,
+    AlertMessage
   },
-  data() {
+  data () {
     return {
-      couponCode: 'DTJ00001',
-    };
+      couponCode: 'DTJ00001'
+    }
   },
   methods: {
-    copyInput() {
-      const txt = $('#codyId').select();
-      document.execCommand('copy');
-      this.alertBus(`已經複製優惠碼: ${this.couponCode}`);
+    copyInput () {
+      document.execCommand('copy')
+      this.alertBus(`已經複製優惠碼: ${this.couponCode}`)
     },
-    dateFormat(num) {
-      const dd = new Date(num);
-      return `${dd.getFullYear()}年${dd.getMonth() + 1}月${dd.getDate()}日`;
+    dateFormat (num) {
+      const dd = new Date(num)
+      return `${dd.getFullYear()}年${dd.getMonth() + 1}月${dd.getDate()}日`
     },
-    alertBus(content) {
-      this.$bus.$emit('message:push', content, 'success', 'fa-check');
-    },
-  },
-};
+    alertBus (content) {
+      this.$bus.$emit('message:push', content, 'success', 'fa-check')
+    }
+  }
+}
 </script>

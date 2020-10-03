@@ -1,27 +1,53 @@
 <template>
   <div class="container out">
-    <AlertMessage/>
+    <AlertMessage />
 
     <div class="row">
       <div class="col-md-5 text-center">
-        <img :src="dataProduct2.imageUrl" alt="" class="img-fluid" />
+        <img
+          :src="dataProduct2.imageUrl"
+          alt=""
+          class="img-fluid"
+        >
       </div>
       <div class="col-md-7 inner">
         <h3>{{ dataProduct2.title }}</h3>
-        <p class="type">{{ dataProduct2.category }}</p>
+        <p class="type">
+          {{ dataProduct2.category }}
+        </p>
         <ul class="detail">
-          <li v-for="(el,index) in detail(dataProduct2.description)" :key="index">{{ el }}</li>
+          <li
+            v-for="(el,index) in detail(dataProduct2.description)"
+            :key="index"
+          >
+            {{ el }}
+          </li>
         </ul>
         <p class="price">
-          <em>NT{{ dataProduct2.origin_price | currency }}</em
-          ><br />NT{{ dataProduct2.price | currency }}
+          <em>NT{{ dataProduct2.origin_price | currency }}</em><br>NT{{ dataProduct2.price | currency }}
         </p>
         <div class="add">
-          <i class="fas fa-minus" @click="changeNum(-1)"></i>
-          <input type="text" v-model.trim="selectNum2" />
-          <i class="fas fa-plus" @click="changeNum(1)"></i>
+          <i
+            class="fas fa-minus"
+            @click="changeNum(-1)"
+          />
+          <input
+            v-model.trim="selectNum2"
+            type="text"
+          >
+          <i
+            class="fas fa-plus"
+            @click="changeNum(1)"
+          />
         </div>
-        <a href="#" class="addCart" @click.prevent="addCartBtn"><i class="fa fa-heart mr-2" aria-hidden="true"></i>加入購物車</a>
+        <a
+          href="#"
+          class="addCart"
+          @click.prevent="addCartBtn"
+        ><i
+          class="fa fa-heart mr-2"
+          aria-hidden="true"
+        />加入購物車</a>
       </div>
     </div>
 
@@ -29,8 +55,12 @@
       <div class="col-md-12">
         <h3>相關產品推薦</h3>
       </div>
-      <div class="col-md-3 col-sm-6 box" v-for="(item,index) in similarProduct" :key="index">
-        <ProductModal :item = "item" />
+      <div
+        v-for="(item,index) in similarProduct"
+        :key="index"
+        class="col-md-3 col-sm-6 box"
+      >
+        <ProductModal :item="item" />
       </div>
     </div>
 
@@ -148,54 +178,54 @@
 </style>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import cartBtn from '@/components/frontend/index/CartBtn.vue';
-import ProductModal from '@/components/frontend/modal/ProductModal.vue';
-import AlertMessage from '@/alert/AlertMessage.vue';
+import { mapGetters, mapActions } from 'vuex'
+import cartBtn from '@/components/frontend/index/CartBtn.vue'
+import ProductModal from '@/components/frontend/modal/ProductModal.vue'
+import AlertMessage from '@/alert/AlertMessage.vue'
 
 export default {
   components: {
     cartBtn,
     AlertMessage,
-    ProductModal,
+    ProductModal
   },
-  data() {
+  data () {
     return {
       similarProductAll: [],
-      similarProductFilter: [],
-    };
+      similarProductFilter: []
+    }
   },
   computed: {
-    ...mapGetters('productModules', ['dataProduct2', 'selectNum2', 'similarProduct']),
+    ...mapGetters('productModules', ['dataProduct2', 'selectNum2', 'similarProduct'])
   },
   watch: {
     $route (to, from) {
-      const id = to.params.id;
-      this.$store.dispatch('productModules/getProduct2', id);
-      this.$store.dispatch('productModules/resetNum');
-      this.$store.dispatch('productModules/getProduct', 'all');
+      const id = to.params.id
+      this.$store.dispatch('productModules/getProduct2', id)
+      this.$store.dispatch('productModules/resetNum')
+      this.$store.dispatch('productModules/getProduct', 'all')
     }
   },
+  created () {
+    this.getProduct2()
+  },
   methods: {
-    getProduct2() {
-      const {id} = this.$route.params;
-      this.$store.dispatch('productModules/getProduct2', id);
-      this.$store.dispatch('productModules/resetNum');
-      this.$store.dispatch('productModules/getProduct', 'all');
+    getProduct2 () {
+      const { id } = this.$route.params
+      this.$store.dispatch('productModules/getProduct2', id)
+      this.$store.dispatch('productModules/resetNum')
+      this.$store.dispatch('productModules/getProduct', 'all')
     },
-    changeNum(num) {
-      this.$store.dispatch('productModules/changeNum', num);
+    changeNum (num) {
+      this.$store.dispatch('productModules/changeNum', num)
     },
-    detail(txt) {
+    detail (txt) {
       if (txt === undefined) {
-        return;
+        return
       } // 注意傳入的值.不要使function壞掉
-      return txt.split('@');
+      return txt.split('@')
     },
-    ...mapActions('addCartModules', ['addCartBtn']),
-  },
-  created() {
-    this.getProduct2();
-  },
-};
+    ...mapActions('addCartModules', ['addCartBtn'])
+  }
+}
 </script>

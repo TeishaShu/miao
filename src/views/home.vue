@@ -11,30 +11,39 @@
                 data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1"
               >
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon" />
               </button>
-              <router-link :to="{ name: 'index' }" class="logoA">
-                <img src="@/assets/images/logo.png" alt="" class="logo" />
-                <div class="logoName">來呷飽貓食堂</div>
+              <router-link
+                :to="{ name: 'index' }"
+                class="logoA"
+              >
+                <img
+                  src="@/assets/images/logo.png"
+                  alt=""
+                  class="logo"
+                >
+                <div class="logoName">
+                  來呷飽貓食堂
+                </div>
               </router-link>
               <div
-                class="collapse navbar-collapse"
                 id="bs-example-navbar-collapse-1"
+                class="collapse navbar-collapse"
               >
                 <ul class="navbar-nav nav">
                   <li class="nav-item">
                     <router-link to="/index">
-                      <i class="fas fa-home"></i>首頁
+                      <i class="fas fa-home" />首頁
                     </router-link>
                   </li>
                   <li class="nav-item">
                     <router-link to="/product/all">
-                      <i class="fas fa-cookie-bite"></i>商品列表
+                      <i class="fas fa-cookie-bite" />商品列表
                     </router-link>
                   </li>
                   <li class="nav-item">
                     <router-link to="/coupon">
-                      <i class="fas fa-bell"></i>好康活動
+                      <i class="fas fa-bell" />好康活動
                     </router-link>
                   </li>
                 </ul>
@@ -42,11 +51,13 @@
                 <ul class="navbar-nav ml-md-auto nav2">
                   <li class="nav-item cartBtn">
                     <router-link to="/cart">
-                      <i class="fas fa-shopping-cart"></i>購物車
+                      <i class="fas fa-shopping-cart" />購物車
                     </router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link to="/login">管理中心</router-link>
+                    <router-link to="/login">
+                      管理中心
+                    </router-link>
                   </li>
                 </ul>
               </div>
@@ -55,7 +66,7 @@
         </div>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view />
 
     <div class="container-fluid pd0">
       <footerStyle />
@@ -63,7 +74,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>  
+<style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   .header {
     color: $or;
@@ -182,13 +193,13 @@
 </style>
 
 <script>
-import footerStyle from '@/components/frontend/index/FooterStyle.vue';
+import footerStyle from '@/components/frontend/index/FooterStyle.vue'
 
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
-    footerStyle,
+    footerStyle
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>

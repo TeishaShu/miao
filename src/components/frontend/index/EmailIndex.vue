@@ -1,21 +1,42 @@
 <template>
   <div class="container">
-    <div class="row"><!-- animate__animated animate__fadeInUp animate__slow-->
-      <div class="col-md-6 title" id="email">
+    <div class="row">
+      <!-- animate__animated animate__fadeInUp animate__slow-->
+      <div
+        id="email"
+        class="col-md-6 title"
+      >
         <h2>
           掌握貓關鍵
         </h2>
         <p>
-        搶先得到更多新品、貓食訊息
+          搶先得到更多新品、貓食訊息
         </p>
-        <input type="email" placeholder="請輸入 E-mail 信箱訂閱電子報" v-model="email">
-        <div v-show="emailMsg" class="alert mt-3" :class="emailStyle ? 'alert-success':'alert-danger' " role="alert">
-            {{ emailMsg }}
+        <input
+          v-model="email"
+          type="email"
+          placeholder="請輸入 E-mail 信箱訂閱電子報"
+        >
+        <div
+          v-show="emailMsg"
+          class="alert mt-3"
+          :class="emailStyle ? 'alert-success':'alert-danger' "
+          role="alert"
+        >
+          {{ emailMsg }}
         </div>
-        <button type="button" @click="sendEmail()">送出資料</button>
+        <button
+          type="button"
+          @click="sendEmail()"
+        >
+          送出資料
+        </button>
       </div>
       <div class="col-md-6 EmailImg">
-        <img src="@/assets/images/index/email.png" alt="">
+        <img
+          src="@/assets/images/index/email.png"
+          alt=""
+        >
       </div>
     </div>
   </div>
@@ -137,29 +158,29 @@
 
 <script>
 export default {
-  name: 'email-index',
-  data() {
+  name: 'EmailIndex',
+  data () {
     return {
       email: '',
       emailStyle: true,
-      emailMsg: '',
-    };
+      emailMsg: ''
+    }
   },
   methods: {
-    sendEmail() {
-      const vm = this;
-      const isMail = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+    sendEmail () {
+      const vm = this
+      const isMail = /^\w+((-\w+)|(\.\w+))*[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
       if (!isMail.test(vm.email)) {
-        vm.emailStyle = false;
-        vm.emailMsg = 'email格式錯誤';
+        vm.emailStyle = false
+        vm.emailMsg = 'email格式錯誤'
       } else {
-        vm.emailStyle = true;
-        vm.emailMsg = '成功訂閱電子報!';
+        vm.emailStyle = true
+        vm.emailMsg = '成功訂閱電子報!'
       }
       setTimeout(() => {
-        vm.emailMsg = '';
-      }, 5000);
-    },
-  },
-};
+        vm.emailMsg = ''
+      }, 5000)
+    }
+  }
+}
 </script>

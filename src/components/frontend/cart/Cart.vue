@@ -4,13 +4,20 @@
       <!--步驟-->
       <div class="col-md-12">
         <div class="step">
-          <div class="line" :class="{'activeRound activeStep' : nowStep===1}" >  <!--拿到step------- 是用route拿值。(不是component方式.因為切換畫面方式')-->
+          <div
+            class="line"
+            :class="{'activeRound activeStep' : nowStep===1}"
+          >
+            <!--拿到step------- 是用route拿值。(不是component方式.因為切換畫面方式')-->
             <span>1</span>
             <p>
               訂單資料
             </p>
           </div>
-          <div class="line" :class="{'activeRound activeStep' : nowStep===2 }" >
+          <div
+            class="line"
+            :class="{'activeRound activeStep' : nowStep===2 }"
+          >
             <span>2</span>
             <p>
               確認訂單並付款
@@ -26,7 +33,7 @@
       </div>
     </div>
     <!--內容-->
-    <router-view :step="nowStep"></router-view>
+    <router-view :step="nowStep" />
   </div>
 </template>
 <style lang="scss">
@@ -114,9 +121,9 @@
 <script>
 export default {
   computed: {
-    nowStep() {
-      return this.$store.state.cartStepModules.nowStep;
-    },
-  },
-};
+    nowStep () {
+      return this.$store.state.cartStepModules.nowStep
+    }
+  }
+}
 </script>

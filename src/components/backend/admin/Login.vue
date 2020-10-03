@@ -1,37 +1,52 @@
 <template>
   <div>
     <body>
-      <AlertMessage/>
+      <AlertMessage />
 
       <form class="form-signin">
-        <img src="@/assets/images/logo.png" alt="" />
+        <img
+          src="@/assets/images/logo.png"
+          alt=""
+        >
         <h4>管理員登入</h4>
-        <label for="inputEmail" class="sr-only">Email address</label>
+        <label
+          for="inputEmail"
+          class="sr-only"
+        >Email address</label>
         <input
-          type="email"
           id="inputEmail"
+          v-model="user.username"
+          type="email"
           class="form-control"
           placeholder="Email address"
           required=""
           autofocus=""
-          v-model="user.username"
-        />
-        <label for="inputPassword" class="sr-only">Password</label>
+        >
+        <label
+          for="inputPassword"
+          class="sr-only"
+        >Password</label>
         <input
-          type="password"
           id="inputPassword"
+          v-model="user.password"
+          type="password"
           class="form-control"
           placeholder="Password"
           required=""
-          v-model="user.password"
           @keyup.13="send"
-        />
+        >
         <div class="checkbox mb-3">
           <label>
-            <input type="checkbox" value="remember-me" /> 記住帳號密碼
+            <input
+              type="checkbox"
+              value="remember-me"
+            > 記住帳號密碼
           </label>
         </div>
-        <button type="submit" @click.prevent="send">
+        <button
+          type="submit"
+          @click.prevent="send"
+        >
           登入
         </button>
       </form>
@@ -106,38 +121,38 @@
 </style>
 
 <script>
-import AlertMessage from '@/alert/AlertMessage.vue';
-import {signIn} from '@/api/api.js';
+import AlertMessage from '@/alert/AlertMessage.vue'
+import { signIn } from '@/api/api.js'
 
 export default {
   components: {
-    AlertMessage,
+    AlertMessage
   },
-  data() {
+  data () {
     return {
       user: {
         username: '',
-        password: '',
-      },
-    };
+        password: ''
+      }
+    }
   },
   methods: {
-    async send() {
-      this.$store.dispatch('updateLoading', true);
-      const api = `${process.env.VUE_APP_API_PATH}/admin/signin`;
+    async send () {
+      this.$store.dispatch('updateLoading', true)
+      // const api = `${process.env.VUE_APP_API_PATH}/admin/signin`
       signIn(this.user)
-      .then((response) => {
-        this.$store.dispatch('updateLoading', false);
-        if (response.data.success) {
-          this.$router.push('/admin');
-        } else {
-          this.$bus.$emit('message:push', `${response.data.message}: ${response.data.error.message}`, 'danger', 'fa-times');
-        }
-      })
-      .catch((err) => {
-        console.error('api err')
-      })
-    },
-  },
-};
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          if (response.data.success) {
+            this.$router.push('/admin')
+          } else {
+            this.$bus.$emit('message:push', `${response.data.message}: ${response.data.error.message}`, 'danger', 'fa-times')
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
+    }
+  }
+}
 </script>

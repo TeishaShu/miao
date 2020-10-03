@@ -1,21 +1,21 @@
 <template>
   <div>
-    <AlertMessage/>
+    <AlertMessage />
 
     <!--content-->
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-3">
-          <Aside :categoryItem = "categoryItem"/>
+          <Aside :category-item="categoryItem" />
         </div>
         <div class="col-md-9">
           <div class="row productStyle">
             <div
-              class="col-md-4 col-sm-6 col-6 proCol"
               v-for="item in pagination.pageAry[pagination.current_page - 1]"
               :key="item.id"
+              class="col-md-4 col-sm-6 col-6 proCol"
             >
-              <ProductModal :item = "item"/>
+              <ProductModal :item="item" />
             </div>
 
             <div class="col-md-12 pageOut">
@@ -27,8 +27,7 @@
                 :page-range="3"
                 :value="pagination.current_page"
                 @input="clickPage"
-              >
-              </paginate>
+              />
             </div>
           </div>
         </div>
@@ -63,12 +62,12 @@
 </style>
 
 <script>
-import ProductModal from '@/components/frontend/modal/ProductModal.vue';
-import cartBtn from '@/components/frontend/index/CartBtn.vue';
-import Paginate from 'vuejs-paginate';
-import AlertMessage from '@/alert/AlertMessage.vue';
-import { mapGetters } from 'vuex';
-import Aside from './Aside.vue';
+import ProductModal from '@/components/frontend/modal/ProductModal.vue'
+import cartBtn from '@/components/frontend/index/CartBtn.vue'
+import Paginate from 'vuejs-paginate'
+import AlertMessage from '@/alert/AlertMessage.vue'
+import { mapGetters } from 'vuex'
+import Aside from './Aside.vue'
 
 export default {
   components: {
@@ -76,29 +75,29 @@ export default {
     cartBtn,
     Paginate,
     AlertMessage,
-    Aside,
+    Aside
   },
   computed: { // 不適合太複雜的處理.資料處理
-    ...mapGetters('productModules', ['products', 'categoryItem', 'pagination']),
+    ...mapGetters('productModules', ['products', 'categoryItem', 'pagination'])
+  },
+  created () {
+    this.getProduct()
   },
   methods: {
-    getProduct() {
-      const categoryStyle = this.$route.params.id; // 當前的產品分類
-      this.$store.dispatch('productModules/getProduct', categoryStyle);
+    getProduct () {
+      const categoryStyle = this.$route.params.id // 當前的產品分類
+      this.$store.dispatch('productModules/getProduct', categoryStyle)
     },
-    selectCategory(style, isPageClick) {
-      this.$store.dispatch('productModules/selectCategory', { style, isPageClick });
+    selectCategory (style, isPageClick) {
+      this.$store.dispatch('productModules/selectCategory', { style, isPageClick })
       // 產品頁切換的話要換路由
       if (isPageClick) {
-        this.$router.push(`/product/${style}`);
+        this.$router.push(`/product/${style}`)
       }
     },
-    clickPage(event) {
-      this.$store.dispatch('productModules/clickPage', event);
-    },
-  },
-  created() {
-    this.getProduct();
-  },
-};
+    clickPage (event) {
+      this.$store.dispatch('productModules/clickPage', event)
+    }
+  }
+}
 </script>

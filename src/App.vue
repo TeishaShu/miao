@@ -1,7 +1,10 @@
 <template>
-  <div id="app" class="min-vh-100">
+  <div
+    id="app"
+    class="min-vh-100"
+  >
     <div class="vld-parent">
-      <loading :active.sync="isLoading"></loading>
+      <loading :active.sync="isLoading" />
     </div>
     <router-view />
   </div>
@@ -14,9 +17,9 @@
 <script>
 export default {
   computed: {
-    isLoading() {
-      return this.$store.state.isLoading;
-    },
-  },
-};
+    isLoading () {
+      return this.$store.state.isLoading
+    }
+  }
+}
 </script>

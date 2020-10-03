@@ -1,9 +1,9 @@
 <template>
   <div class="cart">
-  <em v-show="num!==0">{{ num }}</em>
-  <router-link :to="{name:'step1'}">
-    <i class="fas fa-shopping-cart"></i>
-    <p>購物車</p>
+    <em v-show="num!==0">{{ num }}</em>
+    <router-link :to="{name:'step1'}">
+      <i class="fas fa-shopping-cart" />
+      <p>購物車</p>
     </router-link>
   </div>
 </template>
@@ -69,17 +69,17 @@
 <script>
 export default {
   computed: {
-    num() {
-      return this.$store.state.addCartModules.cartBtnNum;
-    },
+    num () {
+      return this.$store.state.addCartModules.cartBtnNum
+    }
+  },
+  created () {
+    this.api()
   },
   methods: {
-    api() {
-      this.$store.dispatch('addCartModules/cartBtnApi');
-    },
-  },
-  created() {
-    this.api();
-  },
-};
+    api () {
+      this.$store.dispatch('addCartModules/cartBtnApi')
+    }
+  }
+}
 </script>

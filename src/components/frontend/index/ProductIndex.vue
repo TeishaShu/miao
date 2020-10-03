@@ -1,24 +1,36 @@
 <template>
-  <div class="product" :style="{backgroundImage:'url(' + require('@/assets/images/index/productBg.jpg') + ')'}">
+  <div
+    class="product"
+    :style="{backgroundImage:'url(' + require('@/assets/images/index/productBg.jpg') + ')'}"
+  >
     <div class="container">
       <div class="row">
         <div class="col-md-7 title">
           <h2>
-          <div>多項產品</div>挑嘴愛貓吃不膩
+            <div>多項產品</div>挑嘴愛貓吃不膩
           </h2>
-          <img src="@/assets/images/index/productCat.png" class="px-block" alt="" />
+          <img
+            src="@/assets/images/index/productCat.png"
+            class="px-block"
+            alt=""
+          >
         </div>
         <div class="col-md-5 categoryBox">
-          <div class="row"><!-- animate__animated animate__zoomIn-->
-            <div class="col-md-6 col-sm-6 cell-6 product_animate"
-                  v-for="(item,index) in productImg"
-                  :key="index"
-                  >
+          <div class="row">
+            <!-- animate__animated animate__zoomIn-->
+            <div
+              v-for="(item,index) in productImg"
+              :key="index"
+              class="col-md-6 col-sm-6 cell-6 product_animate"
+            >
               <router-link
                 class="category"
                 :to="{ path:`/product/${item.en}`}"
               >
-                <img :src="item.img" alt="" />
+                <img
+                  :src="item.img"
+                  alt=""
+                >
                 <h4>
                   {{ item.category }}
                 </h4>
@@ -112,16 +124,16 @@
 
 <script>
 export default {
-  name: 'product-index', // 注意不能大寫
+  name: 'ProductIndex', // 注意不能大寫
   props: {
     productImg: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     backgroundImage: {
       type: String,
-      default: '',
-    },
-  },
-};
+      default: ''
+    }
+  }
+}
 </script>

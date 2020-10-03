@@ -1,18 +1,28 @@
 <template>
   <div>
     <!--這頁的page有紅字、日期的部分-->
-    <AlertMessage/>
+    <AlertMessage />
 
     <div class="table-responsive">
       <table>
         <thead>
           <tr>
-            <th width="30"></th>
-            <th width="120">購買人資訊</th>
-            <th width="120">修改訂單</th>
-            <th width="120">訂購產品</th>
-            <th width="120">應付金額</th>
-            <th width="150">是否付款</th>
+            <th width="30" />
+            <th width="120">
+              購買人資訊
+            </th>
+            <th width="120">
+              修改訂單
+            </th>
+            <th width="120">
+              訂購產品
+            </th>
+            <th width="120">
+              應付金額
+            </th>
+            <th width="150">
+              是否付款
+            </th>
             <!--<th width="120">購買時間</th>-->
           </tr>
         </thead>
@@ -32,16 +42,26 @@
                 <li>備註: {{ item.message }}</li>
               </ul>
             </td>
-            <td><i class="fas fa-pencil-alt" @click="openModel(item)"></i></td>
+            <td>
+              <i
+                class="fas fa-pencil-alt"
+                @click="openModel(item)"
+              />
+            </td>
             <td>
               <ul>
                 <!--訂購產品項目的顯示...-->
-                <li v-for="(pro, key) in item.products" :key="pro.id">
+                <li
+                  v-for="(pro) in item.products"
+                  :key="pro.id"
+                >
                   {{ pro.product.title }} * {{ pro.qty }}
                 </li>
               </ul>
             </td>
-            <td style="text-align:right">{{ item.total | currency }}</td>
+            <td style="text-align:right">
+              {{ item.total | currency }}
+            </td>
             <td :class="{ okGreen: item.is_paid }">
               {{ item.is_paid ? "已付款" : "未付款" }}
             </td>
@@ -59,23 +79,28 @@
         :page-range="3"
         :value="dataPage.current_page"
         @input="changePage"
-      >
-      </paginate>
+      />
     </div>
 
     <!--model-->
     <div
-      class="modal fade"
       id="editModal"
+      class="modal fade"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg" role="document">
+      <div
+        class="modal-dialog modal-lg"
+        role="document"
+      >
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">
-            <h5 class="modal-title" id="exampleModalLabel">
+            <h5
+              id="exampleModalLabel"
+              class="modal-title"
+            >
               <span>修改訂單</span>
             </h5>
             <button
@@ -85,7 +110,10 @@
               aria-label="Close"
               @click="cancelEdit"
             >
-              <span aria-hidden="true" style="color:#fff">&times;</span>
+              <span
+                aria-hidden="true"
+                style="color:#fff"
+              >&times;</span>
             </button>
           </div>
           <div class="modal-body">
@@ -103,24 +131,29 @@
                         </tr>
                       </thead>
                       <tbody class="pro">
-                        <tr v-for="(item, key) in newEdit.products" :key="item.id">
+                        <tr
+                          v-for="(item, key) in newEdit.products"
+                          :key="item.id"
+                        >
                           <td>{{ item.product.title }}</td>
                           <td>${{ item.product.price }}</td>
                           <td>
                             <input
+                              v-model.trim="item.qty"
                               autocomplete="on"
                               pattern="\d*"
                               type="number"
-                              v-model.trim="item.qty"
                               min="1"
                               @change="updateTotal(key, item.qty, item.product.price)"
                               @keyup="keyupUpdateTotal(item.qty)"
-                            />
+                            >
                           </td>
                           <td>${{ item.total }}</td>
                         </tr>
                         <tr>
-                          <td colspan="3">總金額</td>
+                          <td colspan="3">
+                            總金額
+                          </td>
                           <td>
                             $ {{ newEdit.total }}
                           </td>
@@ -134,32 +167,46 @@
                     <table class="table model ">
                       <thead>
                         <tr>
-                          <th colspan="2">購買人資訊</th>
+                          <th colspan="2">
+                            購買人資訊
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td>姓名</td>
                           <td>
-                            <input type="text" v-model.trim="newEdit.user.name" />
+                            <input
+                              v-model.trim="newEdit.user.name"
+                              type="text"
+                            >
                           </td>
                         </tr>
                         <tr>
                           <td>電話</td>
                           <td>
-                            <input type="text" v-model.trim="newEdit.user.tel" />
+                            <input
+                              v-model.trim="newEdit.user.tel"
+                              type="text"
+                            >
                           </td>
                         </tr>
                         <tr>
                           <td>E-mail</td>
                           <td>
-                            <input type="text" v-model.trim="newEdit.user.email" />
+                            <input
+                              v-model.trim="newEdit.user.email"
+                              type="text"
+                            >
                           </td>
                         </tr>
                         <tr>
                           <td>地址</td>
                           <td>
-                            <input type="text" v-model.trim="newEdit.user.address" />
+                            <input
+                              v-model.trim="newEdit.user.address"
+                              type="text"
+                            >
                           </td>
                         </tr>
                       </tbody>
@@ -212,7 +259,7 @@
     th {
       text-align: left;
     }
-    input,
+    input
     ,
     textarea {
       border: 1px solid #ced4da;
@@ -233,17 +280,17 @@
 </style>
 
 <script>
-import AlertMessage from '@/alert/AlertMessage.vue';
-import $ from 'jquery';
-import Paginate from 'vuejs-paginate';
-import {bookGet, bookUpdate} from '@/api/api.js';
+import AlertMessage from '@/alert/AlertMessage.vue'
+import $ from 'jquery'
+import Paginate from 'vuejs-paginate'
+import { bookGet, bookUpdate } from '@/api/api.js'
 
 export default {
   components: {
     Paginate,
-    AlertMessage,
+    AlertMessage
   },
-  data() {
+  data () {
     return {
       tempProduct: [],
       dataPage: {},
@@ -254,7 +301,7 @@ export default {
         num: 1,
         products: {},
         total: 1,
-        user: {},
+        user: {}
       },
       newEdit: {
         create_at: 1585625169,
@@ -263,87 +310,87 @@ export default {
         num: 1,
         products: {},
         total: 1,
-        user: {},
+        user: {}
       },
       status: {
-        fileUpLoading: false,
-      },
-    };
+        fileUpLoading: false
+      }
+    }
+  },
+  created () {
+    this.getBook()
   },
   methods: {
-    updateTotal(key, qty, price) { // wow!!正則判斷
-      const newEdit_products = this.newEdit.products;
-      newEdit_products[key].total = qty * price;
-      newEdit_products[key].final_total = qty * price;
-      let newTotal = 0;
-      for (const prop in newEdit_products) {
-        newTotal += newEdit_products[prop].total;
+    updateTotal (key, qty, price) { // wow!!正則判斷
+      const newEditProducts = this.newEdit.products
+      newEditProducts[key].total = qty * price
+      newEditProducts[key].final_total = qty * price
+      let newTotal = 0
+      for (const prop in newEditProducts) {
+        newTotal += newEditProducts[prop].total
       }
-      this.newEdit.total = newTotal;
+      this.newEdit.total = newTotal
     },
-    keyupUpdateTotal(qty) {
-      qty = qty.replace(/[^\d]/g, '');
+    keyupUpdateTotal (qty) {
+      qty = qty.replace(/[^\d]/g, '')
     },
-    cancelEdit() {//have red
-      this.newEdit = {};
-      this.editItem = {};
+    cancelEdit () { // have red
+      this.newEdit = {}
+      this.editItem = {}
     },
-    getBook(style, num) {
-      this.$store.dispatch('updateLoading', true);
-      let currentPage = 1;
-      if(style === 'changePage') {
-        currentPage = num;
+    getBook (style, num) {
+      this.$store.dispatch('updateLoading', true)
+      let currentPage = 1
+      if (style === 'changePage') {
+        currentPage = num
       }
       bookGet(currentPage)
-      .then((res) => {
-        this.$store.dispatch('updateLoading', false);
-        this.$store.dispatch('backSmToggle', false);
-        if (res.data.success) {
-          this.tempProduct = res.data.orders;
-          this.dataPage = res.data.pagination;
+        .then((res) => {
+          this.$store.dispatch('updateLoading', false)
+          this.$store.dispatch('backSmToggle', false)
+          if (res.data.success) {
+            this.tempProduct = res.data.orders
+            this.dataPage = res.data.pagination
           // console.log(num,res.data)
-        }
-      })
-      .catch((err) => {
-        console.error('bookGet api err')
-      })
+          }
+        })
+        .catch(() => {
+          console.error('bookGet api err')
+        })
     },
-    changePage(event) {
-      this.dataPage.current_page = event;
-      this.getBook('changePage', event);
+    changePage (event) {
+      this.dataPage.current_page = event
+      this.getBook('changePage', event)
     },
-    dateForm(num) {
-      const dd = new Date(num);
-      return `${dd.getFullYear()}/${dd.getMonth() + 1}/${dd.getDate()}`;
+    dateForm (num) {
+      const dd = new Date(num)
+      return `${dd.getFullYear()}/${dd.getMonth() + 1}/${dd.getDate()}`
     },
-    openModel(item) {
+    openModel (item) {
       if (item.is_paid) {
-        return;
+        return
       }
-      this.editItem = {};
-      this.newEdit = {};
-      this.editItem = item; // 保留原本的
-      this.newEdit = JSON.parse(JSON.stringify(item));
-      $('#editModal').modal('show');
+      this.editItem = {}
+      this.newEdit = {}
+      this.editItem = item // 保留原本的
+      this.newEdit = JSON.parse(JSON.stringify(item))
+      $('#editModal').modal('show')
     },
-    async updateProduct() {
-      this.$store.dispatch('updateLoading', true);
+    async updateProduct () {
+      this.$store.dispatch('updateLoading', true)
       bookUpdate(this.newEdit.id, { data: this.newEdit })
-      .then((response) => {
-        this.$store.dispatch('updateLoading', false);
-        if (response.data.success) {
-          this.getBook();
-          $('#editModal').modal('hide');
-          this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check');
-        }
-      })
-      .catch((err) => {
-        console.error('api err')
-      })
-    },
-  },
-  created() {
-    this.getBook();
-  },
-};
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          if (response.data.success) {
+            this.getBook()
+            $('#editModal').modal('hide')
+            this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check')
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
+    }
+  }
+}
 </script>

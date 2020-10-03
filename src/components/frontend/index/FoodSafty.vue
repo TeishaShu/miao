@@ -6,19 +6,35 @@
           <div>食安把關</div>健康營養別擔心
         </h2>
         <p>
-        嚴選產品嚴格控管<br>
-        多元創意貓口味<br>
-        天然原料檢驗超放心<br>
-        任君搭配貓開心!<br>
+          嚴選產品嚴格控管<br>
+          多元創意貓口味<br>
+          天然原料檢驗超放心<br>
+          任君搭配貓開心!<br>
         </p>
       </div>
       <div class="col-md-6 cookieImg">
-        <img src="@/assets/images/index/cookie1.png" class="parallax_level_1" alt="">
-        <img src="@/assets/images/index/cookie2.png" class="parallax_level_4" alt="">
-        <img src="@/assets/images/index/cookie3.png" class="parallax_level_3" alt="">
+        <img
+          src="@/assets/images/index/cookie1.png"
+          class="parallax_level_1"
+          alt=""
+        >
+        <img
+          src="@/assets/images/index/cookie2.png"
+          class="parallax_level_4"
+          alt=""
+        >
+        <img
+          src="@/assets/images/index/cookie3.png"
+          class="parallax_level_3"
+          alt=""
+        >
       </div>
     </div>
-    <img src="@/assets/images/index/cookie_cat.png" class="saftyCatBg" alt="">
+    <img
+      src="@/assets/images/index/cookie_cat.png"
+      class="saftyCatBg"
+      alt=""
+    >
   </div>
 </template>
 

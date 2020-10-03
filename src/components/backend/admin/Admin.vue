@@ -3,10 +3,16 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-2">
-          <nav class="col-md-2 d-none d-md-block sidebar" :class="{'smSet':backSmToggle}">
+          <nav
+            class="col-md-2 d-none d-md-block sidebar"
+            :class="{'smSet':backSmToggle}"
+          >
             <div class="sidebarSticky">
               <div class="navbar-brand logoA">
-                <img src="@/assets/images/logo.png" alt="" />
+                <img
+                  src="@/assets/images/logo.png"
+                  alt=""
+                >
                 <p>後臺設定管理</p>
               </div>
               <h6>
@@ -15,19 +21,19 @@
               <ul>
                 <li>
                   <router-link :to="{name:'admin_product'}">
-                    <i class="fas fa-boxes"></i>
+                    <i class="fas fa-boxes" />
                     產品列表
                   </router-link>
                 </li>
                 <li>
                   <router-link :to="{name:'admin_book'}">
-                    <i class="fas fa-tasks"></i>
+                    <i class="fas fa-tasks" />
                     訂單管理
                   </router-link>
                 </li>
                 <li>
                   <router-link :to="{name:'admin_coupon'}">
-                    <i class="fas fa-ticket-alt"></i>
+                    <i class="fas fa-ticket-alt" />
                     優惠卷
                   </router-link>
                 </li>
@@ -37,33 +43,41 @@
         </div>
         <div class="col-md-10 main">
           <div class="top">
-            <div class="toggle" @click="smToggle">
-              <i class="fas fa-bars"></i>
+            <div
+              class="toggle"
+              @click="smToggle"
+            >
+              <i class="fas fa-bars" />
             </div>
             <div class="name">
-              <i class="fas fa-user-tie"></i>
+              <i class="fas fa-user-tie" />
               <p>歡迎，管理員</p>
-              <a href="#" @click.prevent="signout">登出</a>
+              <a
+                href="#"
+                @click.prevent="signout"
+              >登出</a>
             </div>
-
           </div>
-          <div class="toggleUl" style="display:none">
+          <div
+            class="toggleUl"
+            style="display:none"
+          >
             <ul>
               <li>
                 <router-link :to="{name:'admin_product'}">
-                  <i class="fas fa-boxes"></i>
+                  <i class="fas fa-boxes" />
                   產品列表
                 </router-link>
               </li>
               <li>
                 <a href="#">
-                  <i class="fas fa-tasks"></i>
+                  <i class="fas fa-tasks" />
                   訂單管理
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <i class="fas fa-ticket-alt"></i>
+                  <i class="fas fa-ticket-alt" />
                   優惠卷
                 </a>
               </li>
@@ -71,7 +85,7 @@
           </div>
 
           <div class="inner">
-            <router-view></router-view>
+            <router-view />
           </div>
         </div>
       </div>
@@ -334,29 +348,29 @@
 </style>
 
 <script>
-import {signOut} from "@/api/api.js"; 
+import { signOut } from '@/api/api.js'
 
 export default {
   computed: {
-    backSmToggle() {
-      return this.$store.state.backSmToggle;
-    },
+    backSmToggle () {
+      return this.$store.state.backSmToggle
+    }
   },
   methods: {
-    signout() {
+    signout () {
       signOut()
-      .then((res) => {
-        if (res.data.success) {
-          this.$router.push('/login');
-        }
-      })
-      .catch((err) => {
-        console.error('err api');
-      })
+        .then((res) => {
+          if (res.data.success) {
+            this.$router.push('/login')
+          }
+        })
+        .catch(() => {
+          console.error('err api')
+        })
     },
-    smToggle() {
-      this.$store.dispatch('backSmToggle', !this.backSmToggle);
-    },
-  },
-};
+    smToggle () {
+      this.$store.dispatch('backSmToggle', !this.backSmToggle)
+    }
+  }
+}
 </script>
