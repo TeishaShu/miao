@@ -319,12 +319,16 @@ export default {
   methods: {
     api () {
       this.$store.dispatch('updateLoading', true)
+      console.log('0', this.dataPage.current_page)
       adminGet(this.dataPage.current_page)
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           this.$store.dispatch('backSmToggle', false)
           this.dataProdtct = response.data.products
           this.dataPage = response.data.pagination
+          console.log('0', response)
+          console.log('1', this.dataProdtct, response.data.products)
+          console.log('1', this.dataPage, response.data.pagination)
         })
         .catch(() => {
           console.error('api err')

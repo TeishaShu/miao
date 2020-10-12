@@ -174,6 +174,11 @@
       padding-right: 10px;
       padding-left: 10px;
     }
+    .add{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 </style>
 
