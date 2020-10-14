@@ -81,7 +81,6 @@
       &:hover{
         border:2px solid $or_light;
         box-shadow:0 0 5px $or;
-        transition-property: border, box-shadow;
         transition-duration: 0.1s, 0.1s;
         transition-timing-function: ease, ease-in;
         h4{
