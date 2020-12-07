@@ -27,17 +27,17 @@
         </div>
       </div>
     </div>
-    <cartBtn />
+    <CartBtn />
   </div>
 </template>
 
 <script>
-import cartBtn from '@/components/frontend/index/CartBtn.vue'
+import CartBtn from '@/components/frontend/index/CartBtn.vue'
 import AlertMessage from '@/alert/AlertMessage.vue'
 
 export default {
   components: {
-    cartBtn,
+    CartBtn,
     AlertMessage
   },
   data () {

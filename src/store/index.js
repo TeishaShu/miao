@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import productModules from './products'
-import addCartModules from './addCart'
-import cartStepModules from './cartStep'
+import ProductModules from './products'
+import AddCartModules from './addCart'
+import CartStepModules from './cartStep'
 
 Vue.use(Vuex) // 上面2段掛載.這邊啟用
 
@@ -30,8 +30,8 @@ export default new Vuex.Store({
     }
   },
   modules: { // 放其他類別
-    productModules,
-    addCartModules,
-    cartStepModules
+    ProductModules,
+    AddCartModules,
+    CartStepModules
   }
 })

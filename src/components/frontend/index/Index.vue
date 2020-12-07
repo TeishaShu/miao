@@ -1,41 +1,41 @@
 <template>
   <div>
-    <banner />
+    <Banner />
 
     <!--Food safety-->
-    <foodSafty />
+    <FoodSafty />
 
     <!--product-->
-    <productIndex
+    <ProductIndex
       :product-img="productImg"
       :background-image="productBackgroundImage"
     />
 
     <!--Email-->
-    <emailIndex />
+    <EmailIndex />
 
-    <cartBtn />
+    <CartBtn />
   </div>
 </template>
 
 <script>
-import cartBtn from '@/components/frontend/index/CartBtn.vue'
+import CartBtn from '@/components/frontend/index/CartBtn.vue'
 import $ from 'jquery'
 import { gsap, ScrollTrigger } from 'gsap/all'
-import banner from './Banner.vue'
-import foodSafty from './FoodSafty.vue'
-import productIndex from './ProductIndex.vue'
-import emailIndex from './EmailIndex.vue'
+import Banner from './Banner.vue'
+import FoodSafty from './FoodSafty.vue'
+import ProductIndex from './ProductIndex.vue'
+import EmailIndex from './EmailIndex.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.config({ nullTargetWarn: false }) // gsap 警告關掉
 export default {
   components: {
-    banner,
-    cartBtn,
-    productIndex,
-    emailIndex,
-    foodSafty
+    Banner,
+    CartBtn,
+    ProductIndex,
+    EmailIndex,
+    FoodSafty
   },
   data () {
     return {

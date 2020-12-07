@@ -210,7 +210,7 @@
 import AlertMessage from '@/alert/AlertMessage.vue'
 import DelModal from '@/components/frontend/modal/DelModal.vue'
 import $ from 'jquery'
-import { cart, cartDel, cartCoupon, cartOrder } from '@/api/api.js'
+import { Cart, CartDel, CartCoupon, CartOrder } from '@/api/api.js'
 
 export default {
   components: {
@@ -256,7 +256,7 @@ export default {
   methods: {
     api () {
       this.$store.dispatch('updateLoading', true)
-      cart()
+      Cart()
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {
@@ -269,13 +269,13 @@ export default {
         })
     },
     delOpen (item) {
-      this.delApi = cartDel(item.id)
+      this.delApi = CartDel(item.id)
       this.deleteProductName = item.product.title
       $('#delModal').modal('show')
     },
     sendCoupon () {
       this.$store.dispatch('updateLoading', true)
-      cartCoupon({ data: this.textCoupon })
+      CartCoupon({ data: this.textCoupon })
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {
@@ -291,7 +291,7 @@ export default {
     },
     async sentStep1 () {
       const vm = this
-      await cartOrder({
+      await CartOrder({
         data: {
           user: vm.user,
           message: vm.message

@@ -276,7 +276,7 @@ import Paginate from 'vuejs-paginate'
 import DelModal from '@/components/frontend/modal/DelModal.vue'
 import AlertMessage from '@/alert/AlertMessage.vue'
 import $ from 'jquery'
-import { adminGet, adminProduct, adminEdit, adminDel, adminUpload } from '@/api/api.js'
+import { AdminGet, AdminProduct, AdminEdit, AdminDel, AdminUpload } from '@/api/api.js'
 
 export default {
   components: {
@@ -319,7 +319,7 @@ export default {
     api () {
       this.$store.dispatch('updateLoading', true)
       console.log('0', this.dataPage.current_page)
-      adminGet(this.dataPage.current_page)
+      AdminGet(this.dataPage.current_page)
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           this.$store.dispatch('backSmToggle', false)
@@ -368,7 +368,7 @@ export default {
         return
       }
       if (this.addNew) {
-        adminProduct({ data: this.tempProduct })
+        AdminProduct({ data: this.tempProduct })
           .then((response) => {
           // this.tempProduct.imageUrl = ''; //新增資料會有舊的...兩個都丟圖片會消失.這個是新增的
             this.$store.dispatch('updateLoading', false)
@@ -378,7 +378,7 @@ export default {
             console.error('api err')
           })
       } else {
-        adminEdit(this.tempProduct.id, { data: this.tempProduct })
+        AdminEdit(this.tempProduct.id, { data: this.tempProduct })
           .then((response) => {
             if (response.data.success) {
               this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check')
@@ -393,7 +393,7 @@ export default {
       $('#productModal').modal('hide')
     },
     delOpen (item) {
-      this.delApi = adminDel(item.id)
+      this.delApi = AdminDel(item.id)
       this.deleteProductName = item.title
       $('#delModal').modal('show')
     },
@@ -404,7 +404,7 @@ export default {
       const formData = new FormData() // web api:這是一個物件要用formData傳送。用formData模擬傳統
       formData.append('file-to-upload', imgUrl)
 
-      adminUpload(formData)
+      AdminUpload(formData)
         .then((response) => {
           this.status.fileUpLoading = false
           if (response.data.success) {

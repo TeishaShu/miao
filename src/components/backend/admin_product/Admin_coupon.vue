@@ -217,7 +217,7 @@ import Datepicker from 'vuejs-datepicker'
 import Paginate from 'vuejs-paginate'
 import AlertMessage from '@/alert/AlertMessage.vue'
 import $ from 'jquery'
-import { couponGet, couponAdd, couponEdit } from '@/api/api.js'
+import { CouponGet, CouponAdd, CouponEdit } from '@/api/api.js'
 
 export default {
   components: {
@@ -260,7 +260,7 @@ export default {
   methods: {
     getCoupon () {
       this.$store.dispatch('updateLoading', true)
-      couponGet(this.dataPage.current_page)
+      CouponGet(this.dataPage.current_page)
         .then((response) => {
           if (response.data.success) {
             this.$store.dispatch('updateLoading', false)
@@ -305,7 +305,7 @@ export default {
       }
       vm.$store.dispatch('updateLoading', true)
       if (vm.modalStyle === 'add') {
-        couponAdd({ data: vm.addNew })
+        CouponAdd({ data: vm.addNew })
           .then((response) => {
             if (response.data.success) {
               vm.$store.dispatch('updateLoading', false)
@@ -317,7 +317,7 @@ export default {
             console.error('addNew api err')
           })
       } else if (vm.modalStyle === 'edit') {
-        couponEdit(vm.addNew.id, { data: vm.addNew })
+        CouponEdit(vm.addNew.id, { data: vm.addNew })
           .then((response) => {
             console.log('ok', response)
             if (response.data.success) {

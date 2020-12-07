@@ -243,7 +243,7 @@
 import AlertMessage from '@/alert/AlertMessage.vue'
 import $ from 'jquery'
 import Paginate from 'vuejs-paginate'
-import { bookGet, bookUpdate } from '@/api/api.js'
+import { BookGet, BookUpdate } from '@/api/api.js'
 
 export default {
   components: {
@@ -304,7 +304,7 @@ export default {
       if (style === 'changePage') {
         currentPage = num
       }
-      bookGet(currentPage)
+      BookGet(currentPage)
         .then((res) => {
           this.$store.dispatch('updateLoading', false)
           this.$store.dispatch('backSmToggle', false)
@@ -315,7 +315,7 @@ export default {
           }
         })
         .catch(() => {
-          console.error('bookGet api err')
+          console.error('BookGet api err')
         })
     },
     changePage (event) {
@@ -338,7 +338,7 @@ export default {
     },
     async updateProduct () {
       this.$store.dispatch('updateLoading', true)
-      bookUpdate(this.newEdit.id, { data: this.newEdit })
+      BookUpdate(this.newEdit.id, { data: this.newEdit })
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {

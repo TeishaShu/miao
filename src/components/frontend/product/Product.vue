@@ -34,13 +34,13 @@
       </div>
     </div>
 
-    <cartBtn />
+    <CartBtn />
   </div>
 </template>
 
 <script>
 import ProductModal from '@/components/frontend/modal/ProductModal.vue'
-import cartBtn from '@/components/frontend/index/CartBtn.vue'
+import CartBtn from '@/components/frontend/index/CartBtn.vue'
 import Paginate from 'vuejs-paginate'
 import AlertMessage from '@/alert/AlertMessage.vue'
 import { mapGetters } from 'vuex'
@@ -49,7 +49,7 @@ import Aside from './Aside.vue'
 export default {
   components: {
     ProductModal,
-    cartBtn,
+    CartBtn,
     Paginate,
     AlertMessage,
     Aside

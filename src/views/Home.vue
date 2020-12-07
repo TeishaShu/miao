@@ -69,17 +69,17 @@
     <router-view />
 
     <div class="container-fluid pd0">
-      <footerStyle />
+      <FooterStyle />
     </div>
   </div>
 </template>
 
 <script>
-import footerStyle from '@/components/frontend/index/FooterStyle.vue'
+import FooterStyle from '@/components/frontend/index/FooterStyle.vue'
 
 export default {
   components: {
-    footerStyle
+    FooterStyle
   },
   methods: {}
 }

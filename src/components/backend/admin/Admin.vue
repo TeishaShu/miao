@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { signOut } from '@/api/api.js'
+import { SignOut } from '@/api/api.js'
 
 export default {
   computed: {
@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     signout () {
-      signOut()
+      SignOut()
         .then((res) => {
           if (res.data.success) {
             this.$router.push('/login')

@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import { cart2Order, cart2Pay } from '@/api/api.js'
+import { Cart2Order, Cart2Pay } from '@/api/api.js'
 
 export default {
   data () {
@@ -139,7 +139,7 @@ export default {
   methods: {
     getApi () {
       this.$store.dispatch('updateLoading', true)
-      cart2Order(this.orderId)
+      Cart2Order(this.orderId)
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {
@@ -157,7 +157,7 @@ export default {
     },
     pay () {
       this.$store.dispatch('updateLoading', true)
-      cart2Pay(this.orderId)
+      Cart2Pay(this.orderId)
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {

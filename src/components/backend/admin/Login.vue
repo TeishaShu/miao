@@ -56,7 +56,7 @@
 
 <script>
 import AlertMessage from '@/alert/AlertMessage.vue'
-import { signIn } from '@/api/api.js'
+import { SignIn } from '@/api/api.js'
 
 export default {
   components: {
@@ -73,8 +73,7 @@ export default {
   methods: {
     async send () {
       this.$store.dispatch('updateLoading', true)
-      // const api = `${process.env.VUE_APP_API_PATH}/admin/signin`
-      signIn(this.user)
+      SignIn(this.user)
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {

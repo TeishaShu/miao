@@ -1,4 +1,4 @@
-import { cart, addCartApi, addCartBtnApi } from '@/api/api.js'
+import { Cart, AddCartApi, AddCartBtnApi } from '@/api/api.js'
 
 export default {
   strict: true,
@@ -13,7 +13,7 @@ export default {
   },
   actions: {
     async cartBtnApi (context) { // 購物車圓形按鈕
-      cart()
+      Cart()
         .then((response) => {
           if (response.data.success) {
             context.commit('CARTBRNNUM', response.data.data.carts.length)
@@ -23,13 +23,13 @@ export default {
           console.error('api err')
         })
     },
-    async addCart (context, item) {
+    async AddCart (context, item) {
       const addCartSend = {
         product_id: item.id,
         qty: 1
       }
       context.commit('LOADING', true, { root: true })
-      addCartApi({ data: addCartSend })
+      AddCartApi({ data: addCartSend })
         .then((response) => {
           if (response.data.success) {
             context.commit('LOADING', false, { root: true })
@@ -47,7 +47,7 @@ export default {
         product_id: context.rootState.productModules.dataProduct2.id,
         qty: context.rootState.productModules.selectNum2
       }
-      addCartBtnApi({ data: addCartSend2 })
+      AddCartBtnApi({ data: addCartSend2 })
         .then((response) => {
           context.commit('LOADING', false, { root: true })
           if (response.data.success) {

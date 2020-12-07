@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { productOne, productAll } from '@/api/api.js'
+import { ProductOne, ProductAll } from '@/api/api.js'
 
 export default {
   strict: true,
@@ -67,7 +67,7 @@ export default {
     },
     async getProduct2 (context, id) { // Product2.vue
       context.commit('LOADING', true, { root: true })
-      await productOne(id)
+      await ProductOne(id)
         .then((response) => {
           context.commit('LOADING', false, { root: true })
           if (response.data.success) {
@@ -80,7 +80,7 @@ export default {
     },
     async getProduct (context, categoryStyle) { // Product.vue
       context.commit('LOADING', true, { root: true })
-      productAll()
+      ProductAll()
         .then((response) => {
           context.commit('LOADING', false, { root: true })
           if (response.data.success) {
