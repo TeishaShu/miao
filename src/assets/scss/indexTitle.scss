@@ -3,7 +3,7 @@
   position: relative;
   h2{
     text-align: center;
-    color: $red;
+    color: $primary2;
     font-weight: bold;
     position: relative;
     z-index: 2;
@@ -16,7 +16,7 @@
       content: "";
       width: 330px;
       height: 20px;
-      border: 2px solid $or_light;
+      border: 2px solid $primary1_light;
       position: absolute;
       margin: 0 auto;
       left: 0;

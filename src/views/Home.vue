@@ -88,7 +88,7 @@ export default {
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   .header {
-    color: $or;
+    color: $primary1;
     margin-top: 10px;
     padding-bottom: 10px;
     font-weight: bold;
@@ -119,17 +119,17 @@ export default {
     text-align: center;
   }
   .logoName {
-    color: $or;
+    color: $primary1;
     letter-spacing: 8px;
   }
   .nav {
     a {
-      color: $or;
+      color: $primary1;
       display: block;
       padding: 5px 15px;
       border-radius: 20px;
       &:hover {
-        background: $pink;
+        background: $primary2_light;
         color: #fff;
         transition-property:background, color;
         transition-duration: 0.9s, 0.4s;
@@ -143,7 +143,7 @@ export default {
       padding: 5px 10px;
       &:nth-child(2) {
         a {
-          background: $or;
+          background: $primary1;
           color: #fff;
           border-radius: 20px;
           padding: 5px 15px;
@@ -157,12 +157,12 @@ export default {
   }
   .headBox {
     padding: 0;
-    box-shadow: 0 0 5px $or;
+    box-shadow: 0 0 5px $primary1;
   }
   .cartBtn {
     a {
       background: #fff;
-      color: $or !important;
+      color: $primary1 !important;
       padding: 0;
     }
   }

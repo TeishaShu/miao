@@ -144,7 +144,7 @@ export default {
     margin-top: 20px;
   }
   h3 {
-    color: $or;
+    color: $primary1;
     font-size: 25px;
     font-weight: bold;
     margin-top: 30px;
@@ -154,7 +154,7 @@ export default {
     cursor: pointer;
   }
   .type {
-    background: $pink;
+    background: $primary2_light;
     color: #fff;
     font-size: 16px;
     padding: 1px 10px;
@@ -176,7 +176,7 @@ export default {
     font-weight: bold;
     vertical-align: middle;
     margin-right: 30px;
-    color: $red;
+    color: $primary2;
     em {
       font-size: 18px;
       text-decoration: line-through;
@@ -203,7 +203,7 @@ export default {
     }
   }
   .addCart{
-    background: $or;
+    background: $primary1;
     border-radius: 20px;
     color: #fff;
     display: block;

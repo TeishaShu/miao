@@ -66,7 +66,7 @@ export default {
       margin: 0 20px;
     }
     span{
-      border: 2px solid $light_gray;
+      border: 2px solid $txt_light;
       border-radius: 100%;
       color: #a7a7a7;
       padding: 7px 13px;
@@ -83,10 +83,10 @@ export default {
     span{
       border: 2px solid #ffd2aa;
       color: #fff;
-      background: $red;
+      background: $primary2;
     }
     p{
-      color: $red;
+      color: $primary2;
       font-weight: bold;
     }
   }
@@ -94,7 +94,7 @@ export default {
     position: relative;
     &::after{
       content: '';
-      border-bottom: 2px solid $light_gray;
+      border-bottom: 2px solid $txt_light;
       width: 100px;
       position: absolute;
       top: 12px;
@@ -103,14 +103,14 @@ export default {
   }
   .activeRound {
     &::after{
-      border-bottom: 2px solid $red;
+      border-bottom: 2px solid $primary2;
     }
     &::before{
       content: '';
       width: 10px;
       height: 10px;
       position: absolute;
-      background: $red;
+      background: $primary2;
       border-radius:100%;
       z-index: -1;
       top: 8px;

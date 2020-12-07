@@ -191,7 +191,7 @@ export default {
   }
   /*  aside */
   .router-link-exact-active {
-    background: $red;
+    background: $primary2;
     color: #fff;
     border-radius: 0;
   }
@@ -208,7 +208,7 @@ export default {
       top: 0;
       width: 0;
       height: 100%;
-      background: $or;
+      background: $primary1;
       z-index: -1;
     }
     &:hover {
@@ -237,7 +237,7 @@ export default {
       margin-top: 10px;
     }
     p {
-      color: $or;
+      color: $primary1;
       font-size: 16px;
       letter-spacing: 10px;
       font-weight: bold;
@@ -317,7 +317,7 @@ export default {
     }
     li {
       &:hover {
-        background: $or;
+        background: $primary1;
       }
     }
   }

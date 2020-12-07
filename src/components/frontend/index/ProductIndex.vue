@@ -94,12 +94,12 @@ export default {
         width: 100%;
       }
       &:hover{
-        border:2px solid $or_light;
-        box-shadow:0 0 5px $or;
+        border:2px solid $primary1_light;
+        box-shadow:0 0 5px $primary1;
         transition-duration: 0.1s, 0.1s;
         transition-timing-function: ease, ease-in;
         h4{
-          background: $red;
+          background: $primary2;
           transition: background 0.5s ease;
         }
       }

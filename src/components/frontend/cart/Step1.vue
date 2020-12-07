@@ -340,7 +340,7 @@ export default {
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   h5{
-    color: $or;
+    color: $primary1;
     margin-bottom: 25px;
     margin-top: 30px;
     font-weight: 600;
@@ -348,14 +348,14 @@ export default {
   a.disabled{
     pointer-events: none;
     i{
-      color: lighten($or, 20%);
-      border: 1px solid lighten($or, 20%);
+      color: lighten($primary1, 20%);
+      border: 1px solid lighten($primary1, 20%);
     }
   }
   .coupon{
     a.disabled{
     pointer-events: none;
-    background: lighten($or, 20%);
+    background: lighten($primary1, 20%);
     }
   }
   .out {
@@ -390,7 +390,7 @@ export default {
       margin-bottom: 20px;
     }
     a {
-      background: $pink;
+      background: $primary2_light;
       padding: 10px 20px;
       border-radius: 30px;
       color: #fff;
@@ -398,7 +398,7 @@ export default {
       display: inline-block;
       font-weight: bold;
       &:hover {
-        background: $red;
+        background: $primary2;
       }
     }
   }
@@ -425,7 +425,7 @@ export default {
     td {
       vertical-align: middle;
       &:nth-child(3) {
-        color: $red;
+        color: $primary2;
       }
       &:last-child{
         text-align: center;
@@ -433,14 +433,14 @@ export default {
     }
   }
   .aBtn i{
-    color: $or;
-    border: 1px solid $or;
+    color: $primary1;
+    border: 1px solid $primary1;
     padding: 6px 7px;
     border-radius: 5px;
     cursor: pointer;
   }
   .send,.send:focus{
-    background: $red;
+    background: $primary2;
     text-align: center;
     border-radius: 3px;
     color: #fff;
@@ -456,7 +456,7 @@ export default {
   .coupon {
     position: relative;
     border-radius: 30px;
-    border: 1px solid $or;
+    border: 1px solid $primary1;
     overflow: hidden;
     padding: 0;
     margin-top: 10px;
@@ -470,7 +470,7 @@ export default {
       text-align:left;
     }
     a {
-      background: $or;
+      background: $primary1;
       color: #fff;
       text-align: center;
       width: 80px;

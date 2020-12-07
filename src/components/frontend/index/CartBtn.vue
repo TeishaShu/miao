@@ -29,8 +29,8 @@ export default {
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   .cart {
-    color: $or_light;
-    border: 2px solid $or_light;
+    color: $primary1_light;
+    border: 2px solid $primary1_light;
     padding: 16px 17px 10px 18px;
     border-radius: 100%;
     cursor: pointer;
@@ -42,8 +42,8 @@ export default {
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 0 3px #fff;
     &:hover{
-      color: $or;
-      border: 2px solid $or;
+      color: $primary1;
+      border: 2px solid $primary1;
       transition-property: color, border;
       transition-duration: 1s, 1s;
     }
@@ -57,7 +57,7 @@ export default {
     font-weight: bold;
   }
   em {
-    background: $red;
+    background: $primary2;
     color: #fff;
     position: absolute;
     right: 0;
@@ -68,7 +68,7 @@ export default {
     text-align: center;
   }
   a{
-    color: $or;
+    color: $primary1;
   }
   @media (max-width: 768px) {
     .cart {

@@ -31,7 +31,7 @@ a.disabled{
   background: #f1f1f1;
 }
 .confirm[disabled]{
-  background: lighten($red, 15%);
+  background: lighten($primary2, 15%);
 }
 button:focus {
   outline: none;
@@ -46,8 +46,8 @@ th{
   white-space: nowrap;
 }
 .form-control:focus{
-  box-shadow: 0 0 0 0.2rem lighten($or,30%) !important;
-  border: 1px solid $or !important;
+  box-shadow: 0 0 0 0.2rem lighten($primary1,30%) !important;
+  border: 1px solid $primary1 !important;
 }
 
 @media(max-width:768px){

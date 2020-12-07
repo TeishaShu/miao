@@ -74,7 +74,7 @@ export default {
       color: #fff;
       font-weight: bold;
       font-size: 30px;
-      background: $or;
+      background: $primary1;
       display: block;
       line-height: 40px;
       text-align: center;
@@ -90,7 +90,7 @@ export default {
       vertical-align: middle;
     }
     button{
-      background:$red;
+      background:$primary2;
       color: #fff;
       border: none;
       padding: 11.5px 19px 11.5px 15px;
@@ -109,7 +109,7 @@ export default {
     animation-duration: 1s;
   }
   .box{
-    border: 2px solid $red;
+    border: 2px solid $primary2;
     display: inline-block;
     border-radius: 30px;
     overflow: hidden;

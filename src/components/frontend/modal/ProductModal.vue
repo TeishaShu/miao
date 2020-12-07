@@ -52,7 +52,7 @@ export default {
   @import "@/assets/scss/variables.scss";
   h3{
     height: 84px;
-    color: darken($or,10%);
+    color: darken($primary1,10%);
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -69,13 +69,13 @@ export default {
       padding: 0;
       border: 2px solid #fff;
       &:hover{
-        border: 2px solid $or_light;
-        box-shadow: 0 0 5px $or;
+        border: 2px solid $primary1_light;
+        box-shadow: 0 0 5px $primary1;
         transition-property: all;
         transition-duration: 0.1s, 0.1s;
         transition-timing-function: ease, ease-in;
         h3{
-          color: $red;
+          color: $primary2;
           transition: color 0.5s ease;
           cursor: pointer;
         }
@@ -95,20 +95,20 @@ export default {
 
     }
     i{
-      color: lighten($red, 10%);
-      border: 1px solid lighten($red, 5%);
+      color: lighten($primary2, 10%);
+      border: 1px solid lighten($primary2, 5%);
       padding: 11px 12px 11px 9px;
       border-radius: 100%;
       float: right;
       vertical-align: middle;
       cursor: pointer;
       &:hover{
-        color: $red;
-        border: 1px solid $red;
+        color: $primary2;
+        border: 1px solid $primary2;
       }
     }
     .type{
-      background:lighten($red, 10%);
+      background:lighten($primary2, 10%);
       color: #fff;
       font-size: 12px;
       padding:1px 10px;

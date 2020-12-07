@@ -11,7 +11,7 @@
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   footer{
-    background: $or;
+    background: $primary1;
     text-align: center;
     color: #fff;
     padding: 20px;
@@ -24,12 +24,12 @@
   p{
     margin-bottom: 10px;
     a{
-      color:$red;
+      color:$primary2;
       font-weight:bold;
       background-color:rgba(255,255,255,.5);
       padding:0 5px;
       &:hover{
-        background:darken($or,10%);
+        background:darken($primary1,10%);
         color: #fff;
       }
     }

@@ -75,14 +75,14 @@ export default {
   @import "@/assets/scss/indexTitle.scss";
   input{
     border: none;
-    border-bottom: 3px solid $or;
+    border-bottom: 3px solid $primary1;
     text-align: center;
     min-width: 400px;
     font-size: 1.4rem;
     margin-top: 30px;
-    color: $or;
+    color: $primary1;
     &::placeholder{
-      color: $or;
+      color: $primary1;
     }
   }
   button{

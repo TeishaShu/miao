@@ -240,7 +240,7 @@ export default {
     }
   }
   .send {
-    background: $red;
+    background: $primary2;
     text-align: center;
     border-radius: 3px;
     color: #fff;
@@ -264,7 +264,7 @@ export default {
     display: inline-block;
     font-weight: bold;
     &:hover{
-      background: $red;
+      background: $primary2;
     }
   }
   @media(max-width:768px){

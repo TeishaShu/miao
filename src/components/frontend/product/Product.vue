@@ -85,7 +85,7 @@ export default {
   @import "@/assets/scss/aside.scss";
   h3{
     height: 84px;
-    color: $or;
+    color: $primary1;
     font-size: 18px;
     font-weight: bold;
     text-align: center;

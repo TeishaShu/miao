@@ -1,5 +1,5 @@
 .asideBox{
-  color: $or;
+  color: $primary1;
   i{
     font-size: 14px;
     margin-right: 8px;
@@ -7,7 +7,7 @@
   li{
     border-width: 2px;
     border-style: solid;
-    border-color: $or $or $red $red;
+    border-color: $primary1 $primary1 $primary2 $primary2;
     border-radius: 20px;
     padding: 5px 10px;
     cursor: pointer;
@@ -16,7 +16,7 @@
     vertical-align: middle;
     text-align: center;
     &:hover{
-      background: lighten($red, 10%);
+      background: lighten($primary2, 10%);
       color: #fff;
       // border-color: #ffd7b4 #ffd7b4 #ffa8a8 #ffa8a8;
       transition-property: background, color, border-color;
@@ -27,7 +27,7 @@
 }
 .asideBox .asideActive{
   border-color: #ffd7b4 #ffd7b4 #ffa8a8 #ffa8a8;
-  background: $or !important;
+  background: $primary1 !important;
   color: #fff;
 }
 @media(max-width:768px){
