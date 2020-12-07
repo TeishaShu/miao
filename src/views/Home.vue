@@ -19,7 +19,7 @@
               >
                 <img
                   src="@/assets/images/logo.png"
-                  alt=""
+                  alt="logo"
                   class="logo"
                 >
                 <div class="logoName">

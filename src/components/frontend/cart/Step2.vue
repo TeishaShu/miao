@@ -7,7 +7,7 @@
       >
         <img
           src="@/assets/images/finished_g.png"
-          alt=""
+          alt="訂單完成"
         >
         <div class="aStyle">
           <router-link :to="{name:'product'}">
@@ -35,7 +35,7 @@
               <td>
                 <img
                   :src="item.product.imageUrl"
-                  alt
+                  alt="訂單產品"
                 >
                 <p>
                   {{ item.product.title }}

@@ -6,7 +6,7 @@
       <form class="form-signin">
         <img
           src="@/assets/images/logo.png"
-          alt=""
+          alt="logo 圖片"
         >
         <h4>管理員登入</h4>
         <label

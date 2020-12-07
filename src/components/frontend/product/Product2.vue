@@ -6,7 +6,7 @@
       <div class="col-md-5 text-center">
         <img
           :src="dataProduct2.imageUrl"
-          alt=""
+          alt="產品圖"
           class="img-fluid"
         >
       </div>

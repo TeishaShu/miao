@@ -35,7 +35,7 @@
       <div class="col-md-6 EmailImg">
         <img
           src="@/assets/images/index/email.png"
-          alt=""
+          alt="信箱"
         >
       </div>
     </div>

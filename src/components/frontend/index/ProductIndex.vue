@@ -12,7 +12,7 @@
           <img
             src="@/assets/images/index/productCat.png"
             class="px-block"
-            alt=""
+            alt="首頁貓咪圖"
           >
         </div>
         <div class="col-md-5 categoryBox">
@@ -29,7 +29,7 @@
               >
                 <img
                   :src="item.img"
-                  alt=""
+                  alt="產品圖"
                 >
                 <h4>
                   {{ item.category }}

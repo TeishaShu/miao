@@ -5,7 +5,7 @@
     <img
       src="@/assets/images/coupon.png"
       class="animate__animated animate__bounceIn"
-      alt=""
+      alt="優惠形象圖"
     >
     <div class="coupon">
       <div>

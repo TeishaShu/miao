@@ -7,7 +7,7 @@
       >
         <img
           :src="`${item.imageUrl}`"
-          alt=""
+          alt="產品圖"
         >
       </div>
       <!--注意這邊style的寫法.backgroundImage、url裡面沒有''-->

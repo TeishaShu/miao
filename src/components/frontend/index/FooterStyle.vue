@@ -1,6 +1,9 @@
 <template>
   <footer>
-    <img src="@/assets/images/logo_ft.png">
+    <img
+      src="@/assets/images/logo_ft.png"
+      alt="logo"
+    >
     <p>資料、圖片來源皆來自網路，僅個人練習使用．不做商業用途。</p>
     <p>更多訊息: <a href="https://teishashu.github.io/blogger/">Teisha blogger</a></p>
   </footer>

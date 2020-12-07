@@ -16,24 +16,24 @@
         <img
           src="@/assets/images/index/cookie1.png"
           class="parallax_level_1"
-          alt=""
+          alt="餅乾背景圖"
         >
         <img
           src="@/assets/images/index/cookie2.png"
           class="parallax_level_4"
-          alt=""
+          alt="餅乾背景圖"
         >
         <img
           src="@/assets/images/index/cookie3.png"
           class="parallax_level_3"
-          alt=""
+          alt="餅乾背景圖"
         >
       </div>
     </div>
     <img
       src="@/assets/images/index/cookie_cat.png"
       class="saftyCatBg"
-      alt=""
+      alt="貓咪背景圖"
     >
   </div>
 </template>

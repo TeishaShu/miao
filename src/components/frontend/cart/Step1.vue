@@ -40,7 +40,7 @@
               <td>
                 <img
                   :src="item.product.imageUrl"
-                  alt=""
+                  alt="產品圖"
                   class="smNone"
                 >
                 <p>{{ item.product.title }}</p>
@@ -59,7 +59,6 @@
                   @click.prevent="delOpen(item)"
                 ><i
                   class="fas fa-trash-alt"
-                  @click="delOpen(item)"
                 /></a>
               </td>
             </tr>

@@ -11,7 +11,7 @@
               <div class="navbar-brand logoA">
                 <img
                   src="@/assets/images/logo.png"
-                  alt=""
+                  alt="logo 圖片"
                 >
                 <p>後臺設定管理</p>
               </div>
