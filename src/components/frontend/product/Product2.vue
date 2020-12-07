@@ -67,6 +67,60 @@
     <cartBtn />
   </div>
 </template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex'
+import cartBtn from '@/components/frontend/index/CartBtn.vue'
+import ProductModal from '@/components/frontend/modal/ProductModal.vue'
+import AlertMessage from '@/alert/AlertMessage.vue'
+
+export default {
+  components: {
+    cartBtn,
+    AlertMessage,
+    ProductModal
+  },
+  data () {
+    return {
+      similarProductAll: [],
+      similarProductFilter: []
+    }
+  },
+  computed: {
+    ...mapGetters('productModules', ['dataProduct2', 'selectNum2', 'similarProduct'])
+  },
+  watch: {
+    $route (to, from) {
+      const id = to.params.id
+      this.$store.dispatch('productModules/getProduct2', id)
+      this.$store.dispatch('productModules/resetNum')
+      this.$store.dispatch('productModules/getProduct', 'all')
+    }
+  },
+  created () {
+    this.getProduct2()
+  },
+  methods: {
+    getProduct2 () {
+      const { id } = this.$route.params
+      this.$store.dispatch('productModules/getProduct2', id)
+      this.$store.dispatch('productModules/resetNum')
+      this.$store.dispatch('productModules/getProduct', 'all')
+    },
+    changeNum (num) {
+      this.$store.dispatch('productModules/changeNum', num)
+    },
+    detail (txt) {
+      if (txt === undefined) {
+        return
+      } // 注意傳入的值.不要使function壞掉
+      return txt.split('@')
+    },
+    ...mapActions('addCartModules', ['addCartBtn'])
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   .recommend{
@@ -181,56 +235,3 @@
     }
   }
 </style>
-
-<script>
-import { mapGetters, mapActions } from 'vuex'
-import cartBtn from '@/components/frontend/index/CartBtn.vue'
-import ProductModal from '@/components/frontend/modal/ProductModal.vue'
-import AlertMessage from '@/alert/AlertMessage.vue'
-
-export default {
-  components: {
-    cartBtn,
-    AlertMessage,
-    ProductModal
-  },
-  data () {
-    return {
-      similarProductAll: [],
-      similarProductFilter: []
-    }
-  },
-  computed: {
-    ...mapGetters('productModules', ['dataProduct2', 'selectNum2', 'similarProduct'])
-  },
-  watch: {
-    $route (to, from) {
-      const id = to.params.id
-      this.$store.dispatch('productModules/getProduct2', id)
-      this.$store.dispatch('productModules/resetNum')
-      this.$store.dispatch('productModules/getProduct', 'all')
-    }
-  },
-  created () {
-    this.getProduct2()
-  },
-  methods: {
-    getProduct2 () {
-      const { id } = this.$route.params
-      this.$store.dispatch('productModules/getProduct2', id)
-      this.$store.dispatch('productModules/resetNum')
-      this.$store.dispatch('productModules/getProduct', 'all')
-    },
-    changeNum (num) {
-      this.$store.dispatch('productModules/changeNum', num)
-    },
-    detail (txt) {
-      if (txt === undefined) {
-        return
-      } // 注意傳入的值.不要使function壞掉
-      return txt.split('@')
-    },
-    ...mapActions('addCartModules', ['addCartBtn'])
-  }
-}
-</script>

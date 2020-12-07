@@ -28,6 +28,26 @@
   </div>
 </template>
 
+<script>
+export default {
+  props: {
+    item: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  methods: {
+    clickProduct (item) {
+      const { id } = item
+      this.$router.push({ path: `/product2/${id}` })
+    },
+    addCart (item) {
+      this.$store.dispatch('addCartModules/addCart', item)
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   h3{
@@ -105,23 +125,3 @@
     }
   }
 </style>
-
-<script>
-export default {
-  props: {
-    item: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  methods: {
-    clickProduct (item) {
-      const { id } = item
-      this.$router.push({ path: `/product2/${id}` })
-    },
-    addCart (item) {
-      this.$store.dispatch('addCartModules/addCart', item)
-    }
-  }
-}
-</script>

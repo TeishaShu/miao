@@ -8,6 +8,24 @@
   </div>
 </template>
 
+<script>
+export default {
+  computed: {
+    num () {
+      return this.$store.state.addCartModules.cartBtnNum
+    }
+  },
+  created () {
+    this.api()
+  },
+  methods: {
+    api () {
+      this.$store.dispatch('addCartModules/cartBtnApi')
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   .cart {
@@ -65,21 +83,3 @@
     }
   }
 </style>
-
-<script>
-export default {
-  computed: {
-    num () {
-      return this.$store.state.addCartModules.cartBtnNum
-    }
-  },
-  created () {
-    this.api()
-  },
-  methods: {
-    api () {
-      this.$store.dispatch('addCartModules/cartBtnApi')
-    }
-  }
-}
-</script>

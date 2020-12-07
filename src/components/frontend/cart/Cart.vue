@@ -36,6 +36,17 @@
     <router-view :step="nowStep" />
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    nowStep () {
+      return this.$store.state.cartStepModules.nowStep
+    }
+  }
+}
+</script>
+
 <style lang="scss">
   @import "@/assets/scss/variables.scss";
   .minHeight{
@@ -118,12 +129,3 @@
     }
   }
 </style>
-<script>
-export default {
-  computed: {
-    nowStep () {
-      return this.$store.state.cartStepModules.nowStep
-    }
-  }
-}
-</script>

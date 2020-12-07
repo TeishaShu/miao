@@ -239,46 +239,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-  @import "@/assets/scss/variables.scss";
-  @import "@/assets/scss/page.scss";
-  @import "@/assets/scss/adminPage.scss";
-  th {
-    padding: 0 5px;
-  }
-  td {
-    text-align: center;
-  }
-  i {
-    cursor: not-allowed;
-  }
-  .model {
-    td {
-      text-align: left;
-    }
-    th {
-      text-align: left;
-    }
-    input
-    ,
-    textarea {
-      border: 1px solid #ced4da;
-      border-radius: 0.25rem;
-      margin: 5px 0;
-      width: 100%;
-    }
-  }
-  .modelUser {
-    margin-top: 30px;
-  }
-  .pro {
-    input {
-      width: 50px;
-      text-align: center !important;
-    }
-  }
-</style>
-
 <script>
 import AlertMessage from '@/alert/AlertMessage.vue'
 import $ from 'jquery'
@@ -394,3 +354,43 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import "@/assets/scss/variables.scss";
+  @import "@/assets/scss/page.scss";
+  @import "@/assets/scss/adminPage.scss";
+  th {
+    padding: 0 5px;
+  }
+  td {
+    text-align: center;
+  }
+  i {
+    cursor: not-allowed;
+  }
+  .model {
+    td {
+      text-align: left;
+    }
+    th {
+      text-align: left;
+    }
+    input
+    ,
+    textarea {
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      margin: 5px 0;
+      width: 100%;
+    }
+  }
+  .modelUser {
+    margin-top: 30px;
+  }
+  .pro {
+    input {
+      width: 50px;
+      text-align: center !important;
+    }
+  }
+</style>

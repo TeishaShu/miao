@@ -54,6 +54,43 @@
   </div>
 </template>
 
+<script>
+import AlertMessage from '@/alert/AlertMessage.vue'
+import { signIn } from '@/api/api.js'
+
+export default {
+  components: {
+    AlertMessage
+  },
+  data () {
+    return {
+      user: {
+        username: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    async send () {
+      this.$store.dispatch('updateLoading', true)
+      // const api = `${process.env.VUE_APP_API_PATH}/admin/signin`
+      signIn(this.user)
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          if (response.data.success) {
+            this.$router.push('/admin')
+          } else {
+            this.$bus.$emit('message:push', `${response.data.message}: ${response.data.error.message}`, 'danger', 'fa-times')
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   body {
     display: flex;
@@ -119,40 +156,3 @@
     }
   }
 </style>
-
-<script>
-import AlertMessage from '@/alert/AlertMessage.vue'
-import { signIn } from '@/api/api.js'
-
-export default {
-  components: {
-    AlertMessage
-  },
-  data () {
-    return {
-      user: {
-        username: '',
-        password: ''
-      }
-    }
-  },
-  methods: {
-    async send () {
-      this.$store.dispatch('updateLoading', true)
-      // const api = `${process.env.VUE_APP_API_PATH}/admin/signin`
-      signIn(this.user)
-        .then((response) => {
-          this.$store.dispatch('updateLoading', false)
-          if (response.data.success) {
-            this.$router.push('/admin')
-          } else {
-            this.$bus.$emit('message:push', `${response.data.message}: ${response.data.error.message}`, 'danger', 'fa-times')
-          }
-        })
-        .catch(() => {
-          console.error('api err')
-        })
-    }
-  }
-}
-</script>

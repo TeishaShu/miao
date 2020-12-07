@@ -93,6 +93,34 @@
   </div>
 </template>
 
+<script>
+import { signOut } from '@/api/api.js'
+
+export default {
+  computed: {
+    backSmToggle () {
+      return this.$store.state.backSmToggle
+    }
+  },
+  methods: {
+    signout () {
+      signOut()
+        .then((res) => {
+          if (res.data.success) {
+            this.$router.push('/login')
+          }
+        })
+        .catch(() => {
+          console.error('err api')
+        })
+    },
+    smToggle () {
+      this.$store.dispatch('backSmToggle', !this.backSmToggle)
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   /* Navbar */
@@ -346,31 +374,3 @@
     }
   }
 </style>
-
-<script>
-import { signOut } from '@/api/api.js'
-
-export default {
-  computed: {
-    backSmToggle () {
-      return this.$store.state.backSmToggle
-    }
-  },
-  methods: {
-    signout () {
-      signOut()
-        .then((res) => {
-          if (res.data.success) {
-            this.$router.push('/login')
-          }
-        })
-        .catch(() => {
-          console.error('err api')
-        })
-    },
-    smToggle () {
-      this.$store.dispatch('backSmToggle', !this.backSmToggle)
-    }
-  }
-}
-</script>

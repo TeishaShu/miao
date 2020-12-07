@@ -5,11 +5,6 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-
-  {
-    path: '*',
-    redirect: '/' // 指向
-  },
   {
     path: '/', // 對應的虛擬路徑.有children.且第一個path是空的.因次外層會到這裡.外層的name就要刪除(重複了)
     component: () => import('../views/Home.vue'), // 對應到的文件
@@ -57,7 +52,6 @@ const routes = [
       }
     ]
   },
-
   {
     path: '/login',
     name: 'login',
@@ -87,6 +81,10 @@ const routes = [
         meta: { requiresAuth: true }
       }
     ]
+  },
+  {
+    path: '*',
+    redirect: '/' // 指向
   }
 ]
 

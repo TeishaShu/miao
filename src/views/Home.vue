@@ -74,6 +74,18 @@
   </div>
 </template>
 
+<script>
+import footerStyle from '@/components/frontend/index/FooterStyle.vue'
+
+export default {
+  name: 'Home',
+  components: {
+    footerStyle
+  },
+  methods: {}
+}
+</script>
+
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   .header {
@@ -191,15 +203,3 @@
     padding-right: 0;
   }
 </style>
-
-<script>
-import footerStyle from '@/components/frontend/index/FooterStyle.vue'
-
-export default {
-  name: 'Home',
-  components: {
-    footerStyle
-  },
-  methods: {}
-}
-</script>

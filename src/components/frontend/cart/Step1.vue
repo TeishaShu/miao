@@ -206,6 +206,138 @@
     />
   </div>
 </template>
+
+<script>
+import AlertMessage from '@/alert/AlertMessage.vue'
+import DelModal from '@/components/frontend/modal/DelModal.vue'
+import $ from 'jquery'
+import { cart, cartDel, cartCoupon, cartOrder } from '@/api/api.js'
+
+export default {
+  components: {
+    DelModal,
+    AlertMessage
+  },
+  data () {
+    return {
+      dataAPI: {
+        // carts:[] 加這個或是上面的v-if要多一個條件
+      },
+      textCoupon: { code: '' },
+      dataCoupon: {
+        success: false,
+        data: {
+          final_total: 0
+        }
+      },
+      userStyle: {
+        name: false,
+        email: false,
+        tel: false,
+        address: false
+      },
+      user: {
+        name: '',
+        email: '',
+        tel: '',
+        address: ''
+      },
+      message: '',
+      delItem: '',
+      delApi: '',
+      deleteProductName: ''
+    }
+  },
+  created () {
+    this.api()
+  },
+  mounted () {
+    this.validateBootstrap2()
+  },
+  methods: {
+    api () {
+      this.$store.dispatch('updateLoading', true)
+      cart()
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          if (response.data.success) {
+            this.dataAPI = response.data.data
+            this.$store.commit('cartStepModules/NOWSTEP', 1)
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
+    },
+    delOpen (item) {
+      this.delApi = cartDel(item.id)
+      this.deleteProductName = item.product.title
+      $('#delModal').modal('show')
+    },
+    sendCoupon () {
+      this.$store.dispatch('updateLoading', true)
+      cartCoupon({ data: this.textCoupon })
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          if (response.data.success) {
+            this.dataCoupon = response.data
+            this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check')
+          } else {
+            this.$bus.$emit('message:push', response.data.message, 'danger', 'fa-times')
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
+    },
+    async sentStep1 () {
+      const vm = this
+      await cartOrder({
+        data: {
+          user: vm.user,
+          message: vm.message
+        }
+      })
+        .then((response) => {
+          if (response.data.success) {
+          // 換路由..注意寫法.不是用 "=""
+            vm.$router.push(`/cart/${response.data.orderId}`)
+            // this.step += 1;  不能在子層改父層的值
+            // this.$emit('nextStep',2); // 父層step更改
+            this.$store.commit('cartStepModules/NOWSTEP', 2)
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
+    },
+    validateBootstrap2 () {
+      const vm = this
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.getElementsByClassName('needs-validation')
+      // Loop over them and prevent submission
+      Array.prototype.filter.call(forms, (form) => {
+        form.addEventListener('submit', (event) => {
+          if (form.checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+          } else {
+            event.preventDefault()
+            // 驗證過
+            // 按鈕全部不能按
+            $('.aBtn').addClass('disabled')
+            $('button').prop('disabled', true)
+            vm.sentStep1()
+          }
+          form.classList.add('was-validated')
+        },
+        false)
+      })
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   h5{
@@ -393,133 +525,3 @@
     }
   }
 </style>
-<script>
-import AlertMessage from '@/alert/AlertMessage.vue'
-import DelModal from '@/components/frontend/modal/DelModal.vue'
-import $ from 'jquery'
-import { cart, cartDel, cartCoupon, cartOrder } from '@/api/api.js'
-
-export default {
-  components: {
-    DelModal,
-    AlertMessage
-  },
-  data () {
-    return {
-      dataAPI: {
-        // carts:[] 加這個或是上面的v-if要多一個條件
-      },
-      textCoupon: { code: '' },
-      dataCoupon: {
-        success: false,
-        data: {
-          final_total: 0
-        }
-      },
-      userStyle: {
-        name: false,
-        email: false,
-        tel: false,
-        address: false
-      },
-      user: {
-        name: '',
-        email: '',
-        tel: '',
-        address: ''
-      },
-      message: '',
-      delItem: '',
-      delApi: '',
-      deleteProductName: ''
-    }
-  },
-  created () {
-    this.api()
-  },
-  mounted () {
-    this.validateBootstrap2()
-  },
-  methods: {
-    api () {
-      this.$store.dispatch('updateLoading', true)
-      cart()
-        .then((response) => {
-          this.$store.dispatch('updateLoading', false)
-          if (response.data.success) {
-            this.dataAPI = response.data.data
-            this.$store.commit('cartStepModules/NOWSTEP', 1)
-          }
-        })
-        .catch(() => {
-          console.error('api err')
-        })
-    },
-    delOpen (item) {
-      this.delApi = cartDel(item.id)
-      this.deleteProductName = item.product.title
-      $('#delModal').modal('show')
-    },
-    sendCoupon () {
-      this.$store.dispatch('updateLoading', true)
-      cartCoupon({ data: this.textCoupon })
-        .then((response) => {
-          this.$store.dispatch('updateLoading', false)
-          if (response.data.success) {
-            this.dataCoupon = response.data
-            this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check')
-          } else {
-            this.$bus.$emit('message:push', response.data.message, 'danger', 'fa-times')
-          }
-        })
-        .catch(() => {
-          console.error('api err')
-        })
-    },
-    async sentStep1 () {
-      const vm = this
-      await cartOrder({
-        data: {
-          user: vm.user,
-          message: vm.message
-        }
-      })
-        .then((response) => {
-          if (response.data.success) {
-          // 換路由..注意寫法.不是用 "=""
-            vm.$router.push(`/cart/${response.data.orderId}`)
-            // this.step += 1;  不能在子層改父層的值
-            // this.$emit('nextStep',2); // 父層step更改
-            this.$store.commit('cartStepModules/NOWSTEP', 2)
-          }
-        })
-        .catch(() => {
-          console.error('api err')
-        })
-    },
-    validateBootstrap2 () {
-      const vm = this
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      const forms = document.getElementsByClassName('needs-validation')
-      // Loop over them and prevent submission
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', (event) => {
-          if (form.checkValidity() === false) {
-            event.preventDefault()
-            event.stopPropagation()
-          } else {
-            event.preventDefault()
-            // 驗證過
-            // 按鈕全部不能按
-            $('.aBtn').addClass('disabled')
-            $('button').prop('disabled', true)
-            vm.sentStep1()
-          }
-          form.classList.add('was-validated')
-        },
-        false)
-      })
-    }
-  }
-}
-</script>

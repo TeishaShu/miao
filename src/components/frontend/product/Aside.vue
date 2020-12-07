@@ -13,11 +13,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-  @import "@/assets/scss/variables.scss";
-  @import "@/assets/scss/aside.scss";
-</style>
-
 <script>
 export default {
   props: {
@@ -46,3 +41,8 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import "@/assets/scss/variables.scss";
+  @import "@/assets/scss/aside.scss";
+</style>

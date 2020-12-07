@@ -211,15 +211,6 @@
   </div>
 </template>
 
-<style lang="scss">
-  @import "@/assets/scss/date.scss"; //裡面有date的css連結
-</style>
-<style lang="scss" scoped>
-  @import "@/assets/scss/variables.scss";
-  @import "@/assets/scss/page.scss";
-  @import "@/assets/scss/adminPage.scss";
-</style>
-
 <script>
 import DelModal from '@/components/frontend/modal/DelModal.vue'
 import Datepicker from 'vuejs-datepicker'
@@ -357,3 +348,12 @@ export default {
 
 }
 </script>
+
+<style lang="scss">
+  @import "@/assets/scss/date.scss"; //裡面有date的css連結
+</style>
+<style lang="scss" scoped>
+  @import "@/assets/scss/variables.scss";
+  @import "@/assets/scss/page.scss";
+  @import "@/assets/scss/adminPage.scss";
+</style>

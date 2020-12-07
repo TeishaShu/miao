@@ -38,29 +38,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-  @import "@/assets/scss/variables.scss";
-  @import "@/assets/scss/page.scss";
-  @import "@/assets/scss/aside.scss";
-  h3{
-    height: 84px;
-    color: $or;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-  }
-  .proCol{
-    margin: 15px 0;
-  }
-
-  @media(max-width:426px){
-    .proCol{
-      padding: 0 10px;
-      margin: 10px 0;
-    }
-  }
-</style>
-
 <script>
 import ProductModal from '@/components/frontend/modal/ProductModal.vue'
 import cartBtn from '@/components/frontend/index/CartBtn.vue'
@@ -101,3 +78,26 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import "@/assets/scss/variables.scss";
+  @import "@/assets/scss/page.scss";
+  @import "@/assets/scss/aside.scss";
+  h3{
+    height: 84px;
+    color: $or;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .proCol{
+    margin: 15px 0;
+  }
+
+  @media(max-width:426px){
+    .proCol{
+      padding: 0 10px;
+      margin: 10px 0;
+    }
+  }
+</style>

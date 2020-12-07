@@ -31,6 +31,36 @@
   </div>
 </template>
 
+<script>
+import cartBtn from '@/components/frontend/index/CartBtn.vue'
+import AlertMessage from '@/alert/AlertMessage.vue'
+
+export default {
+  components: {
+    cartBtn,
+    AlertMessage
+  },
+  data () {
+    return {
+      couponCode: 'DTJ00001'
+    }
+  },
+  methods: {
+    copyInput () {
+      document.execCommand('copy')
+      this.alertBus(`已經複製優惠碼: ${this.couponCode}`)
+    },
+    dateFormat (num) {
+      const dd = new Date(num)
+      return `${dd.getFullYear()}年${dd.getMonth() + 1}月${dd.getDate()}日`
+    },
+    alertBus (content) {
+      this.$bus.$emit('message:push', content, 'success', 'fa-check')
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   .minHeight{
@@ -120,33 +150,3 @@
     }
   }
 </style>
-
-<script>
-import cartBtn from '@/components/frontend/index/CartBtn.vue'
-import AlertMessage from '@/alert/AlertMessage.vue'
-
-export default {
-  components: {
-    cartBtn,
-    AlertMessage
-  },
-  data () {
-    return {
-      couponCode: 'DTJ00001'
-    }
-  },
-  methods: {
-    copyInput () {
-      document.execCommand('copy')
-      this.alertBus(`已經複製優惠碼: ${this.couponCode}`)
-    },
-    dateFormat (num) {
-      const dd = new Date(num)
-      return `${dd.getFullYear()}年${dd.getMonth() + 1}月${dd.getDate()}日`
-    },
-    alertBus (content) {
-      this.$bus.$emit('message:push', content, 'success', 'fa-check')
-    }
-  }
-}
-</script>

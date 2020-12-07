@@ -116,6 +116,63 @@
     </div>
   </div>
 </template>
+
+<script>
+import { cart2Order, cart2Pay } from '@/api/api.js'
+
+export default {
+  data () {
+    return {
+      orderId: '',
+      dataAPI: {
+        user: {
+          userL: ''
+        }
+      },
+      textCoupon: { code: '' }
+    }
+  },
+  created () {
+    this.orderId = this.$route.params.orderId // orderId 是對應到 router裡面路由id的名稱
+    this.getApi()
+  },
+  methods: {
+    getApi () {
+      this.$store.dispatch('updateLoading', true)
+      cart2Order(this.orderId)
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          if (response.data.success) {
+            this.dataAPI = response.data.order
+            if (!response.data.order.is_paid) {
+              this.$store.commit('cartStepModules/NOWSTEP', 2)
+            } else {
+              this.$store.commit('cartStepModules/NOWSTEP', 3)
+            }
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
+    },
+    pay () {
+      this.$store.dispatch('updateLoading', true)
+      cart2Pay(this.orderId)
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          if (response.data.success) {
+            this.getApi() // 注意要重新刷頁面
+            this.$store.commit('cartStepModules/NOWSTEP', 3)
+          }
+        })
+        .catch(() => {
+          console.error('api err')
+        })
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   .out {
@@ -218,58 +275,3 @@
     }
   }
 </style>
-<script>
-import { cart2Order, cart2Pay } from '@/api/api.js'
-
-export default {
-  data () {
-    return {
-      orderId: '',
-      dataAPI: {
-        user: {
-          userL: ''
-        }
-      },
-      textCoupon: { code: '' }
-    }
-  },
-  created () {
-    this.orderId = this.$route.params.orderId // orderId 是對應到 router裡面路由id的名稱
-    this.getApi()
-  },
-  methods: {
-    getApi () {
-      this.$store.dispatch('updateLoading', true)
-      cart2Order(this.orderId)
-        .then((response) => {
-          this.$store.dispatch('updateLoading', false)
-          if (response.data.success) {
-            this.dataAPI = response.data.order
-            if (!response.data.order.is_paid) {
-              this.$store.commit('cartStepModules/NOWSTEP', 2)
-            } else {
-              this.$store.commit('cartStepModules/NOWSTEP', 3)
-            }
-          }
-        })
-        .catch(() => {
-          console.error('api err')
-        })
-    },
-    pay () {
-      this.$store.dispatch('updateLoading', true)
-      cart2Pay(this.orderId)
-        .then((response) => {
-          this.$store.dispatch('updateLoading', false)
-          if (response.data.success) {
-            this.getApi() // 注意要重新刷頁面
-            this.$store.commit('cartStepModules/NOWSTEP', 3)
-          }
-        })
-        .catch(() => {
-          console.error('api err')
-        })
-    }
-  }
-}
-</script>

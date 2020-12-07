@@ -43,6 +43,22 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'ProductIndex', // 注意不能大寫
+  props: {
+    productImg: {
+      type: Array,
+      default: () => []
+    },
+    backgroundImage: {
+      type: String,
+      default: ''
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   @import "@/assets/scss/variables.scss";
   @import "@/assets/scss/indexTitle.scss";
@@ -120,19 +136,3 @@
   }
 
 </style>
-
-<script>
-export default {
-  name: 'ProductIndex', // 注意不能大寫
-  props: {
-    productImg: {
-      type: Array,
-      default: () => []
-    },
-    backgroundImage: {
-      type: String,
-      default: ''
-    }
-  }
-}
-</script>
