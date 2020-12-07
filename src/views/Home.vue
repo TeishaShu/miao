@@ -78,7 +78,6 @@
 import footerStyle from '@/components/frontend/index/FooterStyle.vue'
 
 export default {
-  name: 'Home',
   components: {
     footerStyle
   },

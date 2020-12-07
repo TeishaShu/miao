@@ -64,7 +64,6 @@
 import $ from 'jquery'
 
 export default {
-  name: 'DelModalComponent',
   props: {
     titleType: {
       type: String,

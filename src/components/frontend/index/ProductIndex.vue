@@ -45,7 +45,6 @@
 
 <script>
 export default {
-  name: 'ProductIndex', // 注意不能大寫
   props: {
     productImg: {
       type: Array,

@@ -44,7 +44,6 @@
 
 <script>
 export default {
-  name: 'EmailIndex',
   data () {
     return {
       email: '',
