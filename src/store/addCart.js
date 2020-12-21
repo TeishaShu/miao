@@ -44,14 +44,14 @@ export default {
     async addCartBtn (context) {
       context.commit('LOADING', true, { root: true })
       const addCartSend2 = {
-        product_id: context.rootState.productModules.dataProduct2.id,
-        qty: context.rootState.productModules.selectNum2
+        product_id: context.rootState.ProductModules.dataProduct2.id,
+        qty: context.rootState.ProductModules.selectNum2
       }
       AddCartBtnApi({ data: addCartSend2 })
         .then((response) => {
           context.commit('LOADING', false, { root: true })
           if (response.data.success) {
-            context.commit('productModules/DATAPRODUCT2', response.data.data.product, { root: true })
+            context.commit('ProductModules/DATAPRODUCT2', response.data.data.product, { root: true })
             context.dispatch('cartBtnApi')
           // this.$bus.$emit('message:push','成功加入購物車','success');
           }

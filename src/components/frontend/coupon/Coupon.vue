@@ -18,8 +18,9 @@
         <div class="box">
           <input
             id="codyId"
-            v-model="couponCode"
+            :value="couponCode"
             readonly
+            @input="updatecouponCode"
           >
           <button @click="copyInput">
             複製
@@ -40,22 +41,32 @@ export default {
     CartBtn,
     AlertMessage
   },
-  data () {
-    return {
-      couponCode: 'DTJ00001'
+  computed: {
+    couponCode () {
+      return this.$store.state.Coupon.couponCode
     }
   },
   methods: {
-    copyInput () {
-      document.execCommand('copy')
-      this.alertBus(`已經複製優惠碼: ${this.couponCode}`)
+    updatecouponCode (e) {
+      this.$store.commit('Coupon/UPDATECOUPONCODE', e.target.value)
     },
     dateFormat (num) {
       const dd = new Date(num)
       return `${dd.getFullYear()}年${dd.getMonth() + 1}月${dd.getDate()}日`
     },
-    alertBus (content) {
-      this.$bus.$emit('message:push', content, 'success', 'fa-check')
+    copyInput () {
+      // copy
+      document.execCommand('copy') // 這行無法用
+
+      // alert
+      this.$store.dispatch('updateLoading', true)
+      const messageObj = {
+        fontawesome: 'fa-check',
+        message: `已經複製優惠碼: ${this.couponCode}`,
+        status: 'success'
+      }
+      this.$store.dispatch('AlertMessage/updateMsg', messageObj)
+      // this.$bus.$emit('message:push', content, 'success', 'fa-check')
     }
   }
 }

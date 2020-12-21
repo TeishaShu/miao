@@ -41,7 +41,7 @@
 export default {
   computed: {
     nowStep () {
-      return this.$store.state.cartStepModules.nowStep
+      return this.$store.state.CartStepModules.nowStep
     }
   }
 }

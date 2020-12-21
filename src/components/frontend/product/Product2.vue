@@ -87,14 +87,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('productModules', ['dataProduct2', 'selectNum2', 'similarProduct'])
+    ...mapGetters('ProductModules', ['dataProduct2', 'selectNum2', 'similarProduct'])
   },
   watch: {
     $route (to, from) {
       const id = to.params.id
-      this.$store.dispatch('productModules/getProduct2', id)
-      this.$store.dispatch('productModules/resetNum')
-      this.$store.dispatch('productModules/getProduct', 'all')
+      this.$store.dispatch('ProductModules/getProduct2', id)
+      this.$store.dispatch('ProductModules/resetNum')
+      this.$store.dispatch('ProductModules/getProduct', 'all')
     }
   },
   created () {
@@ -103,12 +103,12 @@ export default {
   methods: {
     getProduct2 () {
       const { id } = this.$route.params
-      this.$store.dispatch('productModules/getProduct2', id)
-      this.$store.dispatch('productModules/resetNum')
-      this.$store.dispatch('productModules/getProduct', 'all')
+      this.$store.dispatch('ProductModules/getProduct2', id)
+      this.$store.dispatch('ProductModules/resetNum')
+      this.$store.dispatch('ProductModules/getProduct', 'all')
     },
     changeNum (num) {
-      this.$store.dispatch('productModules/changeNum', num)
+      this.$store.dispatch('ProductModules/changeNum', num)
     },
     detail (txt) {
       if (txt === undefined) {
@@ -116,7 +116,7 @@ export default {
       } // 注意傳入的值.不要使function壞掉
       return txt.split('@')
     },
-    ...mapActions('addCartModules', ['addCartBtn'])
+    ...mapActions('AddCartModules', ['addCartBtn'])
   }
 }
 </script>

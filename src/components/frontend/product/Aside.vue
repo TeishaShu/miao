@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     selectCategory (style, isPageClick) {
-      this.$store.dispatch('productModules/selectCategory', { style, isPageClick })
+      this.$store.dispatch('ProductModules/selectCategory', { style, isPageClick })
       this.category = style
       // 產品頁切換的話要換路由
       if (isPageClick) {

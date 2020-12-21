@@ -12,7 +12,7 @@
 export default {
   computed: {
     num () {
-      return this.$store.state.addCartModules.cartBtnNum
+      return this.$store.state.AddCartModules.cartBtnNum
     }
   },
   created () {
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     api () {
-      this.$store.dispatch('addCartModules/cartBtnApi')
+      this.$store.dispatch('AddCartModules/cartBtnApi')
     }
   }
 }

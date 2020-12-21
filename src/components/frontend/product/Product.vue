@@ -55,7 +55,7 @@ export default {
     Aside
   },
   computed: { // 不適合太複雜的處理.資料處理
-    ...mapGetters('productModules', ['products', 'categoryItem', 'pagination'])
+    ...mapGetters('ProductModules', ['products', 'categoryItem', 'pagination'])
   },
   created () {
     this.getProduct()
@@ -63,17 +63,17 @@ export default {
   methods: {
     getProduct () {
       const categoryStyle = this.$route.params.id // 當前的產品分類
-      this.$store.dispatch('productModules/getProduct', categoryStyle)
+      this.$store.dispatch('ProductModules/getProduct', categoryStyle)
     },
     selectCategory (style, isPageClick) {
-      this.$store.dispatch('productModules/selectCategory', { style, isPageClick })
+      this.$store.dispatch('ProductModules/selectCategory', { style, isPageClick })
       // 產品頁切換的話要換路由
       if (isPageClick) {
         this.$router.push(`/product/${style}`)
       }
     },
     clickPage (event) {
-      this.$store.dispatch('productModules/clickPage', event)
+      this.$store.dispatch('ProductModules/clickPage', event)
     }
   }
 }

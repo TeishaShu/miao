@@ -145,9 +145,9 @@ export default {
           if (response.data.success) {
             this.dataAPI = response.data.order
             if (!response.data.order.is_paid) {
-              this.$store.commit('cartStepModules/NOWSTEP', 2)
+              this.$store.commit('CartStepModules/NOWSTEP', 2)
             } else {
-              this.$store.commit('cartStepModules/NOWSTEP', 3)
+              this.$store.commit('CartStepModules/NOWSTEP', 3)
             }
           }
         })
@@ -162,7 +162,7 @@ export default {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {
             this.getApi() // 注意要重新刷頁面
-            this.$store.commit('cartStepModules/NOWSTEP', 3)
+            this.$store.commit('CartStepModules/NOWSTEP', 3)
           }
         })
         .catch(() => {

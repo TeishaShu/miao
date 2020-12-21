@@ -42,7 +42,7 @@ export default {
       this.$router.push({ path: `/product2/${id}` })
     },
     addCart (item) {
-      this.$store.dispatch('addCartModules/addCart', item)
+      this.$store.dispatch('AddCartModules/AddCart', item)
     }
   }
 }

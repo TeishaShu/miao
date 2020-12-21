@@ -261,7 +261,7 @@ export default {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {
             this.dataAPI = response.data.data
-            this.$store.commit('cartStepModules/NOWSTEP', 1)
+            this.$store.commit('CartStepModules/NOWSTEP', 1)
           }
         })
         .catch(() => {
@@ -303,7 +303,7 @@ export default {
             vm.$router.push(`/cart/${response.data.orderId}`)
             // this.step += 1;  不能在子層改父層的值
             // this.$emit('nextStep',2); // 父層step更改
-            this.$store.commit('cartStepModules/NOWSTEP', 2)
+            this.$store.commit('CartStepModules/NOWSTEP', 2)
           }
         })
         .catch(() => {
