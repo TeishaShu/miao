@@ -19,9 +19,6 @@ export default {
             context.commit('CARTBRNNUM', response.data.data.carts.length)
           }
         })
-        .catch(() => {
-          console.error('api err')
-        })
     },
     async AddCart (context, item) {
       const addCartSend = {
@@ -36,9 +33,6 @@ export default {
             context.dispatch('cartBtnApi')
           // this.$bus.$emit('message:push',`已加入購物車: ${item.title}`,'success');
           }
-        })
-        .catch(() => {
-          console.error('api err')
         })
     },
     async addCartBtn (context) {
@@ -55,9 +49,6 @@ export default {
             context.dispatch('cartBtnApi')
           // this.$bus.$emit('message:push','成功加入購物車','success');
           }
-        })
-        .catch(() => {
-          console.error('api err')
         })
     }
   }

@@ -151,9 +151,6 @@ export default {
             }
           }
         })
-        .catch(() => {
-          console.error('api err')
-        })
     },
     pay () {
       this.$store.dispatch('updateLoading', true)
@@ -164,9 +161,6 @@ export default {
             this.getApi() // 注意要重新刷頁面
             this.$store.commit('CartStepModules/NOWSTEP', 3)
           }
-        })
-        .catch(() => {
-          console.error('api err')
         })
     }
   }

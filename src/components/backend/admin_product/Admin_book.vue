@@ -311,11 +311,7 @@ export default {
           if (res.data.success) {
             this.tempProduct = res.data.orders
             this.dataPage = res.data.pagination
-          // console.log(num,res.data)
           }
-        })
-        .catch(() => {
-          console.error('BookGet api err')
         })
     },
     changePage (event) {
@@ -346,9 +342,6 @@ export default {
             $('#editModal').modal('hide')
             this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check')
           }
-        })
-        .catch(() => {
-          console.error('api err')
         })
     }
   }

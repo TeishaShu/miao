@@ -264,9 +264,6 @@ export default {
             this.$store.commit('CartStepModules/NOWSTEP', 1)
           }
         })
-        .catch(() => {
-          console.error('api err')
-        })
     },
     delOpen (item) {
       this.delApi = CartDel(item.id)
@@ -285,9 +282,6 @@ export default {
             this.$bus.$emit('message:push', response.data.message, 'danger', 'fa-times')
           }
         })
-        .catch(() => {
-          console.error('api err')
-        })
     },
     async sentStep1 () {
       const vm = this
@@ -305,9 +299,6 @@ export default {
             // this.$emit('nextStep',2); // 父層step更改
             this.$store.commit('CartStepModules/NOWSTEP', 2)
           }
-        })
-        .catch(() => {
-          console.error('api err')
         })
     },
     validateBootstrap2 () {

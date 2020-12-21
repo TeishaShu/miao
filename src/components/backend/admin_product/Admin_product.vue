@@ -318,19 +318,12 @@ export default {
   methods: {
     api () {
       this.$store.dispatch('updateLoading', true)
-      console.log('0', this.dataPage.current_page)
       AdminGet(this.dataPage.current_page)
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           this.$store.dispatch('backSmToggle', false)
           this.dataProdtct = response.data.products
           this.dataPage = response.data.pagination
-          console.log('0', response)
-          console.log('1', this.dataProdtct, response.data.products)
-          console.log('1', this.dataPage, response.data.pagination)
-        })
-        .catch(() => {
-          console.error('api err')
         })
     },
     openModel (addNewStatus, item) {
@@ -374,9 +367,6 @@ export default {
             this.$store.dispatch('updateLoading', false)
             this.api()
           })
-          .catch(() => {
-            console.error('api err')
-          })
       } else {
         AdminEdit(this.tempProduct.id, { data: this.tempProduct })
           .then((response) => {
@@ -385,9 +375,6 @@ export default {
               this.$store.dispatch('updateLoading', false)
               this.api()
             }
-          })
-          .catch(() => {
-            console.error('api err')
           })
       }
       $('#productModal').modal('hide')
@@ -413,9 +400,6 @@ export default {
           } else {
             this.$bus.$emit('message:push', response.data.message, 'danger')
           }
-        })
-        .catch(() => {
-          console.error('api err')
         })
     }
   }

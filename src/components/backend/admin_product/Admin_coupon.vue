@@ -269,9 +269,6 @@ export default {
             this.dataPage = response.data.pagination
           }
         })
-        .catch(() => {
-          console.error('getCoupon api err')
-        })
     },
     keyupUpdatePercent (val) { // 正規式卡了一下.錯誤值要帶回去
       const regexp = /^\d{0,2}$/
@@ -313,22 +310,15 @@ export default {
               vm.getCoupon()
             }
           })
-          .catch(() => {
-            console.error('addNew api err')
-          })
       } else if (vm.modalStyle === 'edit') {
         CouponEdit(vm.addNew.id, { data: vm.addNew })
           .then((response) => {
-            console.log('ok', response)
             if (response.data.success) {
               vm.$store.dispatch('updateLoading', false)
               vm.couponsData = response.data.coupons
               vm.$bus.$emit('message:push', response.data.message, 'success', 'fa-check')
               vm.getCoupon()
             }
-          })
-          .catch(() => {
-            console.error('edit api err')
           })
       }
       $('#addModal').modal('hide')
@@ -337,7 +327,6 @@ export default {
       return +new Date(num)
     },
     delOpen (item) {
-      console.log('del')
       this.delId = item
       // this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon/${this.delId.id}`;
       this.delApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon/${this.delId.id}`

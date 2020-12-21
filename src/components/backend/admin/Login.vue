@@ -82,9 +82,6 @@ export default {
             this.$bus.$emit('message:push', `${response.data.message}: ${response.data.error.message}`, 'danger', 'fa-times')
           }
         })
-        .catch(() => {
-          console.error('api err')
-        })
     }
   }
 }

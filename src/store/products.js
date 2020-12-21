@@ -74,9 +74,6 @@ export default {
             context.commit('DATAPRODUCT2', response.data.product)
           }
         })
-        .catch(() => {
-          console.error('api err')
-        })
     },
     async getProduct (context, categoryStyle) { // Product.vue
       context.commit('LOADING', true, { root: true })
@@ -102,9 +99,6 @@ export default {
               isPageClick: false
             })
           }
-        })
-        .catch(() => {
-          console.error('api err')
         })
     },
     selectCategory (context, { style, isPageClick }) {

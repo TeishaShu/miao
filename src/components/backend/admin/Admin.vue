@@ -110,9 +110,6 @@ export default {
             this.$router.push('/login')
           }
         })
-        .catch(() => {
-          console.error('err api')
-        })
     },
     smToggle () {
       this.$store.dispatch('backSmToggle', !this.backSmToggle)
