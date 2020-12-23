@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import ProductModules from './products'
 import AddCartModules from './addCart'
 import CartStepModules from './cartStep'
-import BackendModules from './backend'
+import AdminProductModules from './adminProduct'
 import AlertMessage from './alertMessage'
 import Coupon from './coupon'
 
@@ -36,7 +36,7 @@ export default new Vuex.Store({
     ProductModules,
     AddCartModules,
     CartStepModules,
-    BackendModules,
+    AdminProductModules,
     AlertMessage,
     Coupon
   }

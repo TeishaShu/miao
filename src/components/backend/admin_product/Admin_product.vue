@@ -287,22 +287,6 @@ export default {
   },
   data () {
     return {
-      tempProduct: {
-        title: '',
-        category: '',
-        origin_price: 0,
-        price: 0,
-        unit: '',
-        image: '',
-        description: '',
-        content: '這是內容',
-        is_enabled: 0,
-        imageUrl: ''
-      }, // 新增
-      addNew: false, // 判斷modal是新增還是編輯
-      status: {
-        fileUpLoading: false
-      },
       delItem: {},
       delApi: '',
       deleteProductName: ''
@@ -314,6 +298,15 @@ export default {
     },
     adminProductPage () {
       return this.$store.state.BackendModules.adminProductPage
+    },
+    tempProduct () {
+      return this.$store.state.BackendModules.tempProduct
+    },
+    addNew () {
+      return this.$store.state.BackendModules.addNew
+    },
+    status () {
+      return this.$store.state.BackendModules.status
     }
   },
   created () {
@@ -331,9 +324,9 @@ export default {
         })
     },
     openModel (addNewStatus, item) {
-      this.addNew = addNewStatus
+      this.$store.commit('AdminProductModules/ADD_NEW', addNewStatus)
       if (this.addNew) {
-        this.tempProduct = {
+        const newItem = {
           title: '',
           category: '',
           origin_price: 0,
@@ -345,9 +338,10 @@ export default {
           is_enabled: 0,
           imageUrl: ''
         }
+        this.$store.commit('AdminProductModules/TEMP_PRODUCT', newItem)
       } else {
         // 把編輯前後的資料分開.注意物件特性
-        this.tempProduct = { ...item }
+        this.$store.commit('AdminProductModules/TEMP_PRODUCT', { ...item })
       }
       $('#productModal').modal('show')
     },
@@ -400,14 +394,14 @@ export default {
     },
     upImg () {
       // 用 console 查看 this.當圖片丟進來時看 $refs 的 files 裡面的 files 是個陣列
-      this.status.fileUpLoading = true
+      this.$store.commit('AdminProductModules/STATUS', true)
       const imgUrl = this.$refs.files.files[0]
       const formData = new FormData() // web api:這是一個物件要用formData傳送。用formData模擬傳統
       formData.append('file-to-upload', imgUrl)
 
       AdminUpload(formData)
         .then((response) => {
-          this.status.fileUpLoading = false
+          this.$store.commit('AdminProductModules/STATUS', false)
           if (response.data.success) {
           // console.log(this.tempProduct)//用這個看.發現沒有getter、setter雙向綁定
             this.$set(this.tempProduct, 'imageUrl', response.data.imageUrl) // 強制寫入
