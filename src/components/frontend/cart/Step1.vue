@@ -3,7 +3,7 @@
     <AlertMessage />
     <!--沒東西-->
     <div
-      v-if="dataAPI.carts && dataAPI.carts.length === 0"
+      v-if="step1DataAPI.carts && step1DataAPI.carts.length === 0"
       class="col-md-12 nothing"
     >
       <p>您的購物車內還沒有任何商品!</p>
@@ -14,9 +14,9 @@
         /> 快來逛逛
       </router-link>
     </div>
-    <!--有東西  v-if="dataAPI.carts.length !== 0"-->
+    <!--有東西  v-if="step1DataAPI.carts.length !== 0"-->
     <div
-      v-if="dataAPI.carts && dataAPI.carts.length !== 0"
+      v-if="step1DataAPI.carts && step1DataAPI.carts.length !== 0"
       class="col-md-10"
     >
       <div class="table-responsive">
@@ -34,7 +34,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="item in dataAPI.carts"
+              v-for="item in step1DataAPI.carts"
               :key="item.id"
             >
               <td>
@@ -68,7 +68,7 @@
                 <b>總計</b>
               </td>
               <td class="smNone" />
-              <td>NT{{ dataAPI.total | currency }}</td>
+              <td>NT{{ step1DataAPI.total | currency }}</td>
             </tr>
             <tr
               v-show="dataCoupon.success"
@@ -80,7 +80,7 @@
                 colspan="2"
                 style="text-align:right; white-space:nowrap;"
               >
-                (省了 NT{{ dataAPI.total - dataCoupon.data.final_total | currency }})
+                (省了 NT{{ step1DataAPI.total - dataCoupon.data.final_total | currency }})
               </td>
               <td>
                 NT{{ (dataCoupon.data.final_total) | currency }}
@@ -91,7 +91,7 @@
       </div>
     </div>
     <div
-      v-if="dataAPI.carts && dataAPI.carts.length !== 0"
+      v-if="step1DataAPI.carts && step1DataAPI.carts.length !== 0"
       class="col-md-6"
     >
       <div class="coupon">
@@ -106,14 +106,14 @@
         >送出</a>
       </div>
     </div>
-    <!--v-if="dataAPI.carts.length !== 0"-->
+    <!--v-if="step1DataAPI.carts.length !== 0"-->
     <div class="col-md-10 mt-3">
       <form
         class="needs-validation formInput"
         novalidate
       >
         <div
-          v-if="dataAPI.carts && dataAPI.carts.length !== 0"
+          v-if="step1DataAPI.carts && step1DataAPI.carts.length !== 0"
           class="form-row"
         >
           <div class="col-md-12 mb-3">
@@ -202,6 +202,7 @@
       title-type="產品"
       :api="delApi"
       :product-name="deleteProductName"
+      reload-api="Cart"
     />
   </div>
 </template>
@@ -219,9 +220,9 @@ export default {
   },
   data () {
     return {
-      dataAPI: {
-        // carts:[] 加這個或是上面的v-if要多一個條件
-      },
+      // step1DataAPI: {
+      //   // carts:[] 加這個或是上面的v-if要多一個條件
+      // },
       textCoupon: { code: '' },
       dataCoupon: {
         success: false,
@@ -247,6 +248,11 @@ export default {
       deleteProductName: ''
     }
   },
+  computed: {
+    step1DataAPI () {
+      return this.$store.state.CartStepModules.step1DataAPI
+    }
+  },
   created () {
     this.api()
   },
@@ -260,7 +266,7 @@ export default {
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {
-            this.dataAPI = response.data.data
+            this.$store.commit('CartStepModules/STEP1DATAAPI', response.data.data)
             this.$store.commit('CartStepModules/NOWSTEP', 1)
           }
         })

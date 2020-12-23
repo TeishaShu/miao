@@ -62,6 +62,7 @@
 
 <script>
 import $ from 'jquery'
+import { Cart } from '@/api/api.js'
 
 export default {
   props: {
@@ -76,17 +77,42 @@ export default {
     productName: {
       type: String,
       required: true
+    },
+    reloadApi: {
+      type: String,
+      required: true
     }
   },
   methods: {
     delSend () {
+      console.log('titleType', this.titleType, 'api', this.api, 'productName', this.productName, 'reloadApi', this.reloadApi)
       const vm = this
       $('#delModal button').prop('disabled', true)
       vm.$http.delete(vm.api).then((response) => {
-        window.location.reload() // 可以這樣重刷頁面
+        this.reloadPage()
         $('#delModal').modal('hide')
+        $('#delModal button').prop('disabled', false)
       })
+    },
+    reloadPage () {
+      switch (this.reloadApi) {
+        case 'Cart':
+          this.cartApi()
+          break
+      }
+    },
+    cartApi () {
+      Cart()
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          console.log('a')
+          if (response.data.success) {
+            this.$store.commit('CartStepModules/STEP1DATAAPI', response.data.data)
+            this.$store.commit('CartStepModules/NOWSTEP', 1)
+          }
+        })
     }
+
   }
 }
 </script>
