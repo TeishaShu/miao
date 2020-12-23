@@ -62,7 +62,7 @@
 
 <script>
 import $ from 'jquery'
-import { Cart } from '@/api/api.js'
+import { Cart, AdminGet, CouponGet } from '@/api/api.js'
 
 export default {
   props: {
@@ -98,6 +98,12 @@ export default {
         case 'Cart':
           this.cartApi()
           break
+        case 'AdminGet':
+          this.adminProductApi()
+          break
+        case 'CouponGet':
+          this.adminCoupon()
+          break
       }
     },
     cartApi () {
@@ -107,6 +113,26 @@ export default {
           if (response.data.success) {
             this.$store.commit('CartStepModules/STEP1DATAAPI', response.data.data)
             this.$store.commit('CartStepModules/NOWSTEP', 1)
+          }
+        })
+    },
+    adminProductApi () {
+      AdminGet(this.adminProductPage.current_page)
+        .then((response) => {
+          this.$store.dispatch('updateLoading', false)
+          this.$store.dispatch('backSmToggle', false)
+          this.$store.commit('BackendModules/ADMINPRODUCTDATA', response.data.products)
+          this.$store.commit('BackendModules/ADMINPRODUCTPAGE', response.data.pagination)
+        })
+    },
+    adminCoupon () {
+      CouponGet(this.dataPage.current_page)
+        .then((response) => {
+          if (response.data.success) {
+            this.$store.dispatch('updateLoading', false)
+            this.$store.dispatch('backSmToggle', false)
+            this.couponsData = response.data.coupons
+            this.dataPage = response.data.pagination
           }
         })
     }

@@ -207,6 +207,7 @@
       title-type="優惠劵"
       :api="delApi"
       :product-name="deleteProductName"
+      reload-api="CouponGet"
     />
   </div>
 </template>

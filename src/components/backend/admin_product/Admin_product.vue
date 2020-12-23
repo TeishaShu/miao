@@ -34,7 +34,7 @@
         </thead>
         <tbody>
           <tr
-            v-for="item in dataProdtct"
+            v-for="item in adminProductData"
             :key="item.id"
           >
             <td>{{ item.num }}</td>
@@ -254,9 +254,9 @@
 
     <div class="col-md-12 pageOut">
       <paginate
-        v-if="dataPage.current_page"
-        v-model="dataPage.current_page"
-        :page-count="dataPage.total_pages"
+        v-if="adminProductPage.current_page"
+        v-model="adminProductPage.current_page"
+        :page-count="adminProductPage.total_pages"
         :prev-text="'<'"
         :next-text="'>'"
         :page-range="3"
@@ -268,6 +268,7 @@
       title-type="產品"
       :api="delApi"
       :product-name="deleteProductName"
+      reload-api="AdminGet"
     />
   </div>
 </template>
@@ -286,11 +287,6 @@ export default {
   },
   data () {
     return {
-      dataProdtct: [],
-      dataPage: {
-        current_page: 1,
-        total_pages: 1
-      },
       tempProduct: {
         title: '',
         category: '',
@@ -312,18 +308,26 @@ export default {
       deleteProductName: ''
     }
   },
+  computed: {
+    adminProductData () {
+      return this.$store.state.BackendModules.adminProductData
+    },
+    adminProductPage () {
+      return this.$store.state.BackendModules.adminProductPage
+    }
+  },
   created () {
     this.api()
   },
   methods: {
     api () {
       this.$store.dispatch('updateLoading', true)
-      AdminGet(this.dataPage.current_page)
+      AdminGet(this.adminProductPage.current_page)
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           this.$store.dispatch('backSmToggle', false)
-          this.dataProdtct = response.data.products
-          this.dataPage = response.data.pagination
+          this.$store.commit('BackendModules/ADMIN_PRODUCT_DATA', response.data.products)
+          this.$store.commit('BackendModules/ADMIN_PRODUCT_PAGE', response.data.pagination)
         })
     },
     openModel (addNewStatus, item) {
