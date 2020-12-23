@@ -220,9 +220,6 @@ export default {
   },
   data () {
     return {
-      // step1DataAPI: {
-      //   // carts:[] 加這個或是上面的v-if要多一個條件
-      // },
       textCoupon: { code: '' },
       dataCoupon: {
         success: false,

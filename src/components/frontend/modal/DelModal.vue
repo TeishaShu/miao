@@ -85,7 +85,6 @@ export default {
   },
   methods: {
     delSend () {
-      console.log('titleType', this.titleType, 'api', this.api, 'productName', this.productName, 'reloadApi', this.reloadApi)
       const vm = this
       $('#delModal button').prop('disabled', true)
       vm.$http.delete(vm.api).then((response) => {
@@ -105,7 +104,6 @@ export default {
       Cart()
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
-          console.log('a')
           if (response.data.success) {
             this.$store.commit('CartStepModules/STEP1DATAAPI', response.data.data)
             this.$store.commit('CartStepModules/NOWSTEP', 1)

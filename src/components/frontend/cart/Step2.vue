@@ -158,7 +158,7 @@ export default {
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {
-            this.getApi() // 注意要重新刷頁面
+            this.getApi()
             this.$store.commit('CartStepModules/NOWSTEP', 3)
           }
         })

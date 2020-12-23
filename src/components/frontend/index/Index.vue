@@ -1,19 +1,12 @@
 <template>
   <div>
     <Banner />
-
-    <!--Food safety-->
     <FoodSafty />
-
-    <!--product-->
     <ProductIndex
       :product-img="productImg"
       :background-image="productBackgroundImage"
     />
-
-    <!--Email-->
     <EmailIndex />
-
     <CartBtn />
   </div>
 </template>

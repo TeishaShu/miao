@@ -8,8 +8,5 @@ export default {
     UPDATECOUPONCODE (state, code) {
       state.couponCode = code
     }
-  },
-  actions: {
-
   }
 }
