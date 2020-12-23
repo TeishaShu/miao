@@ -65,7 +65,7 @@ export default {
         message: `已經複製優惠碼: ${this.couponCode}`,
         status: 'success'
       }
-      this.$store.dispatch('AlertMessage/updateMsg', messageObj)
+      this.$store.dispatch('AlertMessageModules/updateMsg', messageObj)
     }
   }
 }

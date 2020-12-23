@@ -30,12 +30,12 @@
 export default {
   computed: {
     messages () {
-      return this.$store.state.AlertMessage.messages
+      return this.$store.state.AlertMessageModules.messages
     }
   },
   methods: {
     closeMessage (num) { // 自己手動按關掉
-      this.$store.commit('AlertMessage/CLOSEMESSAHE', num)
+      this.$store.commit('AlertMessageModules/CLOSEMESSAHE', num)
     }
   }
 }

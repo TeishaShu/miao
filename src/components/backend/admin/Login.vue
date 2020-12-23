@@ -84,7 +84,7 @@ export default {
               message: `${response.data.message}: ${response.data.error.message}`,
               status: 'danger'
             }
-            this.$store.dispatch('AlertMessage/updateMsg', messageObj)
+            this.$store.dispatch('AlertMessageModules/updateMsg', messageObj)
           }
         })
     }

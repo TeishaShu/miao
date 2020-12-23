@@ -285,14 +285,14 @@ export default {
               message: response.data.message,
               status: 'success'
             }
-            this.$store.dispatch('AlertMessage/updateMsg', messageObj)
+            this.$store.dispatch('AlertMessageModules/updateMsg', messageObj)
           } else {
             const messageObj = {
               fontawesome: 'fa-times',
               message: response.data.message,
               status: 'danger'
             }
-            this.$store.dispatch('AlertMessage/updateMsg', messageObj)
+            this.$store.dispatch('AlertMessageModules/updateMsg', messageObj)
           }
         })
     },

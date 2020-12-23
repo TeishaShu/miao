@@ -5,7 +5,7 @@ import ProductModules from './products'
 import AddCartModules from './addCart'
 import CartStepModules from './cartStep'
 import AdminProductModules from './adminProduct'
-import AlertMessage from './alertMessage'
+import AlertMessageModules from './alertMessage'
 import Coupon from './coupon'
 
 Vue.use(Vuex) // 上面2段掛載.這邊啟用
@@ -37,7 +37,7 @@ export default new Vuex.Store({
     AddCartModules,
     CartStepModules,
     AdminProductModules,
-    AlertMessage,
+    AlertMessageModules,
     Coupon
   }
 })

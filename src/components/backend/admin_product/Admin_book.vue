@@ -345,7 +345,7 @@ export default {
               message: response.data.message,
               status: 'success'
             }
-            this.$store.dispatch('AlertMessage/updateMsg', messageObj)
+            this.$store.dispatch('AlertMessageModules/updateMsg', messageObj)
           }
         })
     }

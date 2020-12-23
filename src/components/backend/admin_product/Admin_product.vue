@@ -359,7 +359,7 @@ export default {
           message: '請正確填寫資料',
           status: 'danger'
         }
-        this.$store.dispatch('AlertMessage/updateMsg', messageObj)
+        this.$store.dispatch('AlertMessageModules/updateMsg', messageObj)
         this.$store.dispatch('updateLoading', false)
         return
       }
@@ -379,7 +379,7 @@ export default {
                 message: response.data.message,
                 status: 'success'
               }
-              this.$store.dispatch('AlertMessage/updateMsg', messageObj)
+              this.$store.dispatch('AlertMessageModules/updateMsg', messageObj)
               this.$store.dispatch('updateLoading', false)
               this.api()
             }
@@ -411,7 +411,7 @@ export default {
               message: response.data.message,
               status: 'danger'
             }
-            this.$store.dispatch('AlertMessage/updateMsg', messageObj)
+            this.$store.dispatch('AlertMessageModules/updateMsg', messageObj)
           }
         })
     }
