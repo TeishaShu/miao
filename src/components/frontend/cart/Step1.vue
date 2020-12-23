@@ -283,9 +283,19 @@ export default {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {
             this.dataCoupon = response.data
-            this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check')
+            const messageObj = {
+              fontawesome: 'fa-check',
+              message: response.data.message,
+              status: 'success'
+            }
+            this.$store.dispatch('AlertMessage/updateMsg', messageObj)
           } else {
-            this.$bus.$emit('message:push', response.data.message, 'danger', 'fa-times')
+            const messageObj = {
+              fontawesome: 'fa-times',
+              message: response.data.message,
+              status: 'danger'
+            }
+            this.$store.dispatch('AlertMessage/updateMsg', messageObj)
           }
         })
     },

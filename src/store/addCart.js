@@ -31,7 +31,6 @@ export default {
           if (response.data.success) {
             context.commit('LOADING', false, { root: true })
             context.dispatch('cartBtnApi')
-          // this.$bus.$emit('message:push',`已加入購物車: ${item.title}`,'success');
           }
         })
     },
@@ -47,7 +46,6 @@ export default {
           if (response.data.success) {
             context.commit('ProductModules/DATAPRODUCT2', response.data.data.product, { root: true })
             context.dispatch('cartBtnApi')
-          // this.$bus.$emit('message:push','成功加入購物車','success');
           }
         })
     }

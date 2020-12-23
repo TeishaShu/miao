@@ -340,7 +340,12 @@ export default {
           if (response.data.success) {
             this.getBook()
             $('#editModal').modal('hide')
-            this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check')
+            const messageObj = {
+              fontawesome: 'fa-check',
+              message: response.data.message,
+              status: 'success'
+            }
+            this.$store.dispatch('AlertMessage/updateMsg', messageObj)
           }
         })
     }

@@ -66,7 +66,6 @@ export default {
         status: 'success'
       }
       this.$store.dispatch('AlertMessage/updateMsg', messageObj)
-      // this.$bus.$emit('message:push', content, 'success', 'fa-check')
     }
   }
 }

@@ -356,7 +356,12 @@ export default {
         this.tempProduct.price === '' ||
         this.tempProduct.imageUrl === ''
       ) {
-        this.$bus.$emit('message:push', '請正確填寫資料', 'danger', 'fa-times')
+        const messageObj = {
+          fontawesome: 'fa-times',
+          message: '請正確填寫資料',
+          status: 'danger'
+        }
+        this.$store.dispatch('AlertMessage/updateMsg', messageObj)
         this.$store.dispatch('updateLoading', false)
         return
       }
@@ -371,7 +376,12 @@ export default {
         AdminEdit(this.tempProduct.id, { data: this.tempProduct })
           .then((response) => {
             if (response.data.success) {
-              this.$bus.$emit('message:push', response.data.message, 'success', 'fa-check')
+              const messageObj = {
+                fontawesome: 'fa-check',
+                message: response.data.message,
+                status: 'success'
+              }
+              this.$store.dispatch('AlertMessage/updateMsg', messageObj)
               this.$store.dispatch('updateLoading', false)
               this.api()
             }
@@ -398,7 +408,12 @@ export default {
           // console.log(this.tempProduct)//用這個看.發現沒有getter、setter雙向綁定
             this.$set(this.tempProduct, 'imageUrl', response.data.imageUrl) // 強制寫入
           } else {
-            this.$bus.$emit('message:push', response.data.message, 'danger')
+            const messageObj = {
+              fontawesome: 'fa-times',
+              message: response.data.message,
+              status: 'danger'
+            }
+            this.$store.dispatch('AlertMessage/updateMsg', messageObj)
           }
         })
     }

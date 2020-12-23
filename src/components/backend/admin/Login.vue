@@ -79,7 +79,12 @@ export default {
           if (response.data.success) {
             this.$router.push('/admin')
           } else {
-            this.$bus.$emit('message:push', `${response.data.message}: ${response.data.error.message}`, 'danger', 'fa-times')
+            const messageObj = {
+              fontawesome: 'fa-times',
+              message: `${response.data.message}: ${response.data.error.message}`,
+              status: 'danger'
+            }
+            this.$store.dispatch('AlertMessage/updateMsg', messageObj)
           }
         })
     }
