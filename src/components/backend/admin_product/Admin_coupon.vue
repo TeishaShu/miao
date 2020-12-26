@@ -208,6 +208,7 @@
       :api="delApi"
       :product-name="deleteProductName"
       reload-api="CouponGet"
+      :admin-product-page="dataPage"
     />
   </div>
 </template>
