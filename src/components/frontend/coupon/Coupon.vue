@@ -18,13 +18,12 @@
         <div class="box">
           <input
             id="codyId"
-            :value="couponCode"
+            v-model="couponCode"
             readonly
-            @input="updatecouponCode"
           >
-          <button @click="copyInput">
+          <!--<button @click="copyInput">
             複製
-          </button>
+          </button>-->
         </div>
       </div>
     </div>
@@ -34,29 +33,26 @@
 
 <script>
 import CartBtn from '@/components/frontend/index/CartBtn.vue'
-import AlertMessage from '@/alert/AlertMessage.vue'
+import AlertMessage from '@/components/alert/AlertMessage.vue'
 
 export default {
   components: {
     CartBtn,
     AlertMessage
   },
-  computed: {
-    couponCode () {
-      return this.$store.state.Coupon.couponCode
+  data () {
+    return {
+      couponCode: 'DTJ00001'
     }
   },
   methods: {
-    updatecouponCode (e) {
-      this.$store.commit('Coupon/UPDATECOUPONCODE', e.target.value)
-    },
     dateFormat (num) {
       const dd = new Date(num)
       return `${dd.getFullYear()}年${dd.getMonth() + 1}月${dd.getDate()}日`
     },
     copyInput () {
       // copy
-      document.execCommand('copy') // 這行無法用
+      // document.execCommand('copy') // 這行無法用
 
       // alert
       this.$store.dispatch('updateLoading', true)
@@ -98,6 +94,7 @@ export default {
       color: $txt;
       font-weight: bold;
       vertical-align: middle;
+      text-align: center;
     }
     button{
       background:$primary2;

@@ -216,7 +216,7 @@
 import DelModal from '@/components/frontend/modal/DelModal.vue'
 import Datepicker from 'vuejs-datepicker'
 import Paginate from 'vuejs-paginate'
-import AlertMessage from '@/alert/AlertMessage.vue'
+import AlertMessage from '@/components/alert/AlertMessage.vue'
 import $ from 'jquery'
 import { CouponGet, CouponAdd, CouponEdit } from '@/api/api.js'
 

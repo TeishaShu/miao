@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import AlertMessage from '@/alert/AlertMessage.vue'
+import AlertMessage from '@/components/alert/AlertMessage.vue'
 import { SignIn } from '@/api/api.js'
 
 export default {

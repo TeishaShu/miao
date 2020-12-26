@@ -72,7 +72,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import CartBtn from '@/components/frontend/index/CartBtn.vue'
 import ProductModal from '@/components/frontend/modal/ProductModal.vue'
-import AlertMessage from '@/alert/AlertMessage.vue'
+import AlertMessage from '@/components/alert/AlertMessage.vue'
 
 export default {
   components: {

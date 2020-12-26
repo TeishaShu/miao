@@ -275,7 +275,7 @@
 <script>
 import Paginate from 'vuejs-paginate'
 import DelModal from '@/components/frontend/modal/DelModal.vue'
-import AlertMessage from '@/alert/AlertMessage.vue'
+import AlertMessage from '@/components/alert/AlertMessage.vue'
 import $ from 'jquery'
 import { AdminGet, AdminProduct, AdminEdit, AdminDel, AdminUpload } from '@/api/api.js'
 

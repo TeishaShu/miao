@@ -42,7 +42,7 @@
 import ProductModal from '@/components/frontend/modal/ProductModal.vue'
 import CartBtn from '@/components/frontend/index/CartBtn.vue'
 import Paginate from 'vuejs-paginate'
-import AlertMessage from '@/alert/AlertMessage.vue'
+import AlertMessage from '@/components/alert/AlertMessage.vue'
 import { mapGetters } from 'vuex'
 import Aside from './Aside.vue'
 

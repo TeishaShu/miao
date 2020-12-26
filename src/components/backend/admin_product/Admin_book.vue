@@ -240,7 +240,7 @@
 </template>
 
 <script>
-import AlertMessage from '@/alert/AlertMessage.vue'
+import AlertMessage from '@/components/alert/AlertMessage.vue'
 import $ from 'jquery'
 import Paginate from 'vuejs-paginate'
 import { BookGet, BookUpdate } from '@/api/api.js'
