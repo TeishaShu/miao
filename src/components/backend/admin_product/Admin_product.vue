@@ -269,6 +269,7 @@
       :api="delApi"
       :product-name="deleteProductName"
       reload-api="AdminGet"
+      :admin-product-page="adminProductPage"
     />
   </div>
 </template>
@@ -294,19 +295,19 @@ export default {
   },
   computed: {
     adminProductData () {
-      return this.$store.state.BackendModules.adminProductData
+      return this.$store.state.AdminProductModules.adminProductData
     },
     adminProductPage () {
-      return this.$store.state.BackendModules.adminProductPage
+      return this.$store.state.AdminProductModules.adminProductPage
     },
     tempProduct () {
-      return this.$store.state.BackendModules.tempProduct
+      return this.$store.state.AdminProductModules.tempProduct
     },
     addNew () {
-      return this.$store.state.BackendModules.addNew
+      return this.$store.state.AdminProductModules.addNew
     },
     status () {
-      return this.$store.state.BackendModules.status
+      return this.$store.state.AdminProductModules.status
     }
   },
   created () {
@@ -319,8 +320,8 @@ export default {
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           this.$store.dispatch('backSmToggle', false)
-          this.$store.commit('BackendModules/ADMIN_PRODUCT_DATA', response.data.products)
-          this.$store.commit('BackendModules/ADMIN_PRODUCT_PAGE', response.data.pagination)
+          this.$store.commit('AdminProductModules/ADMIN_PRODUCT_DATA', response.data.products)
+          this.$store.commit('AdminProductModules/ADMIN_PRODUCT_PAGE', response.data.pagination)
         })
     },
     openModel (addNewStatus, item) {

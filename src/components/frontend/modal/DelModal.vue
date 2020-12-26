@@ -81,17 +81,21 @@ export default {
     reloadApi: {
       type: String,
       required: true
+    },
+    adminProductPage: {
+      type: Object,
+      default: () => {}
     }
   },
   methods: {
-    delSend () {
+    async delSend () {
       const vm = this
       $('#delModal button').prop('disabled', true)
-      vm.$http.delete(vm.api).then((response) => {
+      await vm.$http.delete(vm.api).then((response) => {
         this.reloadPage()
-        $('#delModal').modal('hide')
-        $('#delModal button').prop('disabled', false)
       })
+      $('#delModal').modal('hide')
+      $('#delModal button').prop('disabled', false)
     },
     reloadPage () {
       switch (this.reloadApi) {
@@ -121,8 +125,8 @@ export default {
         .then((response) => {
           this.$store.dispatch('updateLoading', false)
           this.$store.dispatch('backSmToggle', false)
-          this.$store.commit('BackendModules/ADMINPRODUCTDATA', response.data.products)
-          this.$store.commit('BackendModules/ADMINPRODUCTPAGE', response.data.pagination)
+          this.$store.commit('AdminProductModules/ADMIN_PRODUCT_DATA', response.data.products)
+          this.$store.commit('AdminProductModules/ADMIN_PRODUCT_PAGE', response.data.pagination)
         })
     },
     adminCoupon () {
