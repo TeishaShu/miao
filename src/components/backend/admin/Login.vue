@@ -78,6 +78,9 @@ export default {
           this.$store.dispatch('updateLoading', false)
           if (response.data.success) {
             this.$router.push('/admin')
+            const token = response.data.token
+            const expired = response.data.expired
+            document.cookie = `hexToken=${token};expires=${new Date(expired)};`
           } else {
             const messageObj = {
               fontawesome: 'fa-times',

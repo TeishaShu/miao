@@ -102,6 +102,10 @@ export default {
       return this.$store.state.backSmToggle
     }
   },
+  created () {
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
+    this.$http.defaults.headers.common.Authorization = `${token}`
+  },
   methods: {
     signout () {
       SignOut()
